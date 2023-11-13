@@ -1,0 +1,13 @@
+node_modules
+package-lock.json
+
+*.zip
+.Ds_store
+*.tgz
+*.log
+.vscode
+.idea
+
+public/demos
+public/dist
+public/stats.html
