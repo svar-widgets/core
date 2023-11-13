@@ -1,0 +1,57 @@
+{
+	"name": "@wx/svelte-core",
+	"version": "1.0.0",
+	"productTag": "svelte-wx",
+	"scripts": {
+		"build": "rollup --config-production -c",
+		"build:trial": "rollup --config-production  --config-limited -c",
+		"build:demos": "rollup --config-demos --config-production --config-limited -c",
+		"build:site": "rollup --config-site --config-production --config-limited -c",
+		"watch": "rollup -c -w",
+		"watch:demos": "rollup --config-demos -c -w",
+		"watch:site": "rollup --config-site -c -w",
+		"lint": "yarn eslint ./demos ./src --ext .svelte,.js",
+		"dev": "run-p start:dev watch:demos",
+		"dev:site": "run-p start:site watch:site",
+		"start": "sirv public",
+		"start:dev": "sirv public --dev",
+		"start:site": "sirv public/site --dev"
+	},
+	"main": "public/dist/svelte-wx.js",
+	"source": "src/index.js",
+	"svelte": "src/index.js",
+	"license": "MIT",
+	"dependencies": {
+		"@wx/lib-dom": "^0.5.0",
+		"@wx/core-locales": "^1.0.0",
+		"svelte-spa-router": "^3.2.0"
+	},
+	"devDependencies": {
+		"@rollup/plugin-alias": "^3.1.2",
+		"@rollup/plugin-commonjs": "^13.0.0",
+		"@rollup/plugin-node-resolve": "^8.0.1",
+		"@rollup/plugin-replace": "^3.0.0",
+		"autoprefixer": "^10.4.16",
+		"eslint": "^7.2.0",
+		"eslint-plugin-svelte3": "^3.2.0",
+		"npm-run-all": "^4.1.5",
+		"postcss": "^8.3.6",
+		"rollup": "^2.15.0",
+		"rollup-plugin-dts": "^4.0.1",
+		"rollup-plugin-license": "^2.6.0",
+		"rollup-plugin-livereload": "^1.3.0",
+		"rollup-plugin-postcss": "^4.0.1",
+		"rollup-plugin-svelte": "^6.1.1",
+		"rollup-plugin-terser": "^7.0.2",
+		"rollup-plugin-visualizer": "^5.9.0",
+		"sirv-cli": "^0.3.1",
+		"svelte": "^3.42.3",
+		"svelte-preprocess": "^4.7.3"
+	},
+	"files": [
+		"public/dist",
+		"src",
+		"README.md",
+		"license.txt"
+	]
+}
