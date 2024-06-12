@@ -16,11 +16,11 @@
 
 <svelte:head>
 	{#if fonts}
-		<link rel="preconnect" href="https://cdn.svar.dev" crossorigin />
+		<link rel="preconnect" href="https://cdn.webix.com" crossorigin />
 		<RobotoFont />
 		<link
 			rel="stylesheet"
-			href="https://cdn.svar.dev/fonts/wxi/wx-icons.css" />
+			href="https://webix.io/dev/fonts/wxi/wx-icons.css" />
 	{/if}
 </svelte:head>
 
@@ -62,6 +62,8 @@
 		--wx-line-height: 20px;
 		--wx-font-size-md: 16px;
 		--wx-line-height-md: 24px;
+		--wx-font-size-hd: 16px;
+		--wx-line-height-hd: 30px;
 		--wx-font-size-sm: 12px;
 		--wx-line-height-sm: 16px;
 		--wx-font-weight: 400;
@@ -83,6 +85,7 @@
 		--wx-border-medium: 1px solid #eaedf5;
 
 		--wx-shadow-light: 0px 4px 20px rgba(44, 47, 60, 0.12);
+		--wx-shadow-medium: 0px 2px 4px rgba(0, 0, 0, 0.15);
 		--wx-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 		--wx-box-shadow-strong: 0px 2px 5px rgba(0, 0, 0, 0.3);
 
@@ -226,7 +229,7 @@
 		/* popup and dropdown */
 		--wx-popup-z-index: 100;
 		--wx-popup-background: var(--wx-background);
-		--wx-popup-shadow: var(--wx-box-shadow);
+		--wx-popup-shadow: var(--wx-shadow-light);
 		--wx-popup-border: none;
 		--wx-popup-border-radius: var(--wx-border-radius);
 		/* end popup and dropdown */
@@ -234,7 +237,7 @@
 		/* modal */
 		--wx-modal-z-index: 1000;
 		--wx-modal-background: var(--wx-background);
-		--wx-modal-shadow: var(--wx-box-shadow-strong);
+		--wx-modal-shadow: var(--wx-shadow-medium);
 		--wx-modal-border: none;
 		--wx-modal-border-radius: var(--wx-border-radius);
 		--wx-modal-width: 280px;
@@ -242,16 +245,16 @@
 		--wx-modal-gutter: 14px;
 		--wx-modal-backdrop: rgba(0, 0, 0, 0.5);
 		--wx-modal-header-font-family: var(--wx-font-family);
-		--wx-modal-header-font-size: var(--wx-font-size-md);
-		--wx-modal-header-line-height: var(--wx-line-height-md);
-		--wx-modal-header-font-weight: var(--wx-font-weight-b);
+		--wx-modal-header-font-size: var(--wx-font-size-hd);
+		--wx-modal-header-line-height: var(--wx-line-height-hd);
+		--wx-modal-header-font-weight: var(--wx-font-weight);
 		--wx-modal-header-font-color: #000;
 		/* end modal */
 
 		/* notice */
 		--wx-notice-z-index: 1010;
 		--wx-notice-background: var(--wx-background);
-		--wx-notice-shadow: var(--wx-box-shadow-strong);
+		--wx-notice-shadow: var(--wx-shadow-medium);
 		--wx-notice-border: none;
 		--wx-notice-border-radius: var(--wx-border-radius);
 		--wx-notice-margin: 6px 12px;
@@ -311,8 +314,11 @@
 		color: var(--wx-color-font);
 		background: var(--wx-background);
 	}
-	:global(.wx-material-theme *, .wx-material-theme
-			*:before, .wx-material-theme *:after) {
+	:global(
+			.wx-material-theme *,
+			.wx-material-theme *:before,
+			.wx-material-theme *:after
+		) {
 		box-sizing: border-box;
 	}
 

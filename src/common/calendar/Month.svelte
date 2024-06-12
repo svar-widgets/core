@@ -32,7 +32,7 @@
 				? [
 						value.start ? dv(value.start).valueOf() : 0,
 						value.end ? dv(value.end).valueOf() : 0,
-				  ]
+					]
 				: [0, 0];
 
 		const start = getStart();
@@ -98,7 +98,6 @@
 		}
 		if (cancel) cancel();
 	}
-
 </script>
 
 <div>
@@ -182,5 +181,4 @@
 	.day.inactive {
 		pointer-events: none;
 	}
-
 </style>

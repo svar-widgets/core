@@ -1,3 +1,5 @@
-import Demos from "./Index.svelte";
+import Demos from "./common/Index.svelte";
 
-export { Demos };
+new Demos({
+	target: document.querySelector("#wx_demo_area") || document.body,
+});

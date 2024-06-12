@@ -40,11 +40,10 @@ export { default as Material } from "./themes/Material.svelte";
 export { default as Willow } from "./themes/Willow.svelte";
 export { default as WillowDark } from "./themes/WillowDark.svelte";
 
-export { default as Locale } from "./locales/Locale.svelte";
+export { default as Locale } from "./Locale.svelte";
 export { locale } from "@wx/lib-dom";
 
 export { popupContainer } from "./common/helpers";
 export { default as SuggestDropdown } from "./common/helpers/SuggestDropdown.svelte";
 
-import en from "./locales/en";
-export { en };
+export { en } from "@wx/core-locales";

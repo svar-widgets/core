@@ -7,10 +7,18 @@
 	export let title = "";
 	export let disabled = false;
 	export let error = false;
-
+	export let readonly = false;
 </script>
 
-<textarea bind:value {id} {disabled} {placeholder} class:error {title} />
+<textarea
+	bind:value
+	{id}
+	{disabled}
+	{placeholder}
+	{readonly}
+	class:error
+	{title}
+/>
 
 <style>
 	textarea {
@@ -53,5 +61,4 @@
 		border-color: var(--wx-color-danger);
 		color: var(--wx-color-danger);
 	}
-
 </style>

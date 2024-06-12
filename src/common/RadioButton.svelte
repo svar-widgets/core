@@ -12,7 +12,6 @@
 	function handlerChange(ev) {
 		if (ev.target.checked) groupValue = value;
 	}
-
 </script>
 
 <div>
@@ -23,7 +22,8 @@
 		{disabled}
 		{name}
 		{checked}
-		on:change={handlerChange} />
+		on:change={handlerChange}
+	/>
 	<label for={id}>
 		<span />
 		{#if label}<span>{label}</span>{/if}
@@ -126,5 +126,4 @@
 	input[disabled]:checked ~ label span:first-child:before {
 		background: var(--wx-checkbox-border-color-disabled);
 	}
-
 </style>

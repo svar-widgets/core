@@ -5,13 +5,10 @@ module.exports = {
 		node: true,
 		es6: true,
 	},
-	extends: ["eslint:recommended", "prettier"],
+	extends: ["plugin:cypress/recommended", "eslint:recommended", "prettier"],
 	parserOptions: {
 		ecmaVersion: 2020,
 		sourceType: "module",
-
-		project: "./tsconfig.json",
-		tsconfigRootDir: __dirname,
 		extraFileExtensions: [".svelte"],
 	},
 	plugins: ["svelte3"],

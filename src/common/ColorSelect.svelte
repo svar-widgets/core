@@ -40,7 +40,6 @@
 		if (disabled) return false;
 		popup = true;
 	}
-
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -53,7 +52,8 @@
 		{placeholder}
 		{disabled}
 		class:error
-		class:focus={popup} />
+		class:focus={popup}
+	/>
 
 	{#if clear && value && !disabled}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -63,7 +63,8 @@
 	{#if value}
 		<div
 			class="color selected"
-			style="background-color: {value || '#00a037'}" />
+			style="background-color: {value || '#00a037'}"
+		/>
 	{:else}
 		<div class="empty selected" />
 	{/if}
@@ -74,13 +75,15 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					class="empty"
-					on:click|stopPropagation={() => selectColor('')} />
+					on:click|stopPropagation={() => selectColor("")}
+				/>
 				{#each colors as color}
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<div
 						class="color"
 						style="background-color: {color}"
-						on:click|stopPropagation={() => selectColor(color)} />
+						on:click|stopPropagation={() => selectColor(color)}
+					/>
 				{/each}
 			</div>
 		</Dropdown>
@@ -198,5 +201,4 @@
 	.clear:hover {
 		background: var(--wx-background-hover);
 	}
-
 </style>

@@ -37,7 +37,6 @@
 
 		cancel();
 	}
-
 </script>
 
 <div class="years" use:delegateClick={selectYears}>
@@ -47,7 +46,8 @@
 			class:current={year == y}
 			class:prev-decade={i === 0}
 			class:next-decade={i === 11}
-			data-id={y}>
+			data-id={y}
+		>
 			{y}
 		</div>
 	{/each}
@@ -94,5 +94,4 @@
 		justify-content: center;
 		margin-top: var(--wx-calendar-gap);
 	}
-
 </style>

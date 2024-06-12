@@ -1,0 +1,58 @@
+{
+	"name": "@wx/lib-dom",
+	"version": "0.5.0",
+	"main": "./dist/dom.umd.js",
+	"module": "./dist/dom.es.js",
+	"types": "./dist/types/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/dom.es.js",
+			"require": "./dist/dom.umd.js",
+			"types": "./dist/types/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"license": "MIT",
+	"scripts": {
+		"lint": "eslint ./src/ --ext .ts,.js",
+		"lint:types": "tsc --noEmit",
+		"lint:test": "eslint ./test/ --ext .ts,.js",
+		"dev": "vite build --watch",
+		"build": "vite build",
+		"test": "vitest --run",
+		"test:watch": "vitest",
+		"coverage": "vitest --run --coverage",
+		"prepare": "husky install"
+	},
+	"files": [
+		"dist"
+	],
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^6.2.0",
+		"@typescript-eslint/parser": "^6.2.0",
+		"@vitest/coverage-c8": "^0.33.0",
+		"eslint": "^8.27.0",
+		"eslint-config-prettier": "^8.5.0",
+		"husky": "^8.0.1",
+		"jsdom": "^22.1.0",
+		"lint-staged": "^13.2.3",
+		"prettier": "^3.0.0",
+		"typescript": "^5.1.6",
+		"vite": "^4.4.7",
+		"vite-plugin-dts": "^3.3.1",
+		"vitest": "^0.33.0"
+	},
+	"publishConfig": {
+		"registry": "https://npm.svar.dev"
+	},
+	"lint-staged": {
+		"*.{ts,js}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{css,md,json}": [
+			"prettier --write"
+		]
+	}
+}

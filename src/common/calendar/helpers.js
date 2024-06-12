@@ -30,6 +30,7 @@ function prevMonth(current) {
 }
 function nextMonth(current) {
 	current = new Date(current);
+	current.setDate(1);
 	current.setMonth(current.getMonth() + 1);
 	return current;
 }

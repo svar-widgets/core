@@ -16,11 +16,11 @@
 
 <svelte:head>
 	{#if fonts}
-		<link rel="preconnect" href="https://cdn.svar.dev" crossorigin />
+		<link rel="preconnect" href="https://cdn.webix.com" crossorigin />
 		<FontOpenSans />
 		<link
 			rel="stylesheet"
-			href="https://cdn.svar.dev/fonts/wxi/wx-icons.css" />
+			href="https://webix.io/dev/fonts/wxi/wx-icons.css" />
 	{/if}
 </svelte:head>
 
@@ -57,8 +57,10 @@
 		--wx-font-family: "Open Sans", Arial, Helvetica, sans-serif;
 		--wx-font-size: 14px;
 		--wx-line-height: 20px;
-		--wx-font-size-md: 16px;
+		--wx-font-size-md: 14px;
 		--wx-line-height-md: 24px;
+		--wx-font-size-hd: 16px;
+		--wx-line-height-hd: 30px;
 		--wx-font-size-sm: 12px;
 		--wx-line-height-sm: 16px;
 		--wx-font-weight: 400;
@@ -79,7 +81,8 @@
 		--wx-border-light: 1px solid #384047;
 		--wx-border-medium: 1px solid #384047;
 
-		--wx-shadow-light: none;
+		--wx-shadow-light: 0px 4px 20px 0px rgba(44, 47, 60, 0.12);
+		--wx-shadow-medium: none;
 		--wx-box-shadow: 0px 4px 48px rgba(44, 47, 60, 0.18);
 		--wx-box-shadow-strong: 0px 4px 48px rgba(44, 47, 60, 0.18),
 			0px 4px 8px rgba(14, 14, 15, 0.3);
@@ -161,7 +164,7 @@
 		--wx-button-height: 32px;
 		--wx-button-padding: 5px 16px;
 		--wx-button-icon-indent: 5px;
-		--wx-button-icon-size: 22px;
+		--wx-button-icon-size: 20px;
 		/* end button */
 
 		/* segmented */
@@ -196,7 +199,7 @@
 		--wx-slider-thumb-size: var(--wx-slider-height);
 		--wx-slider-thumb-border: none;
 		--wx-slider-thumb-border-disabled: 1px solid var(--wx-color-disabled);
-		--wx-slider-thumb-shadow: var(--wx-box-shadow-strong);
+		--wx-slider-thumb-shadow: none;
 		--wx-slider-label-margin: 0 0 5px;
 		--wx-slider-label-font-family: var(--wx-font-family);
 		--wx-slider-label-font-size: var(--wx-font-size);
@@ -224,7 +227,7 @@
 		/* popup and dropdown */
 		--wx-popup-z-index: 100;
 		--wx-popup-background: var(--wx-background);
-		--wx-popup-shadow: var(--wx-box-shadow);
+		--wx-popup-shadow: var(--wx-shadow-light);
 		--wx-popup-border: 1px solid rgba(255, 255, 255, 0.26);
 		--wx-popup-border-radius: var(--wx-border-radius);
 		/* end popup and dropdown */
@@ -232,7 +235,7 @@
 		/* modal */
 		--wx-modal-z-index: 1000;
 		--wx-modal-background: var(--wx-background);
-		--wx-modal-shadow: none;
+		--wx-modal-shadow: var(--wx-shadow-medium);
 		--wx-modal-border: 1px solid #ffffff42;
 		--wx-modal-border-radius: var(--wx-border-radius);
 		--wx-modal-width: 280px;
@@ -240,8 +243,8 @@
 		--wx-modal-gutter: 14px;
 		--wx-modal-backdrop: rgba(108, 114, 131, 0.2);
 		--wx-modal-header-font-family: var(--wx-font-family);
-		--wx-modal-header-font-size: var(--wx-font-size-md);
-		--wx-modal-header-line-height: var(--wx-line-height-md);
+		--wx-modal-header-font-size: var(--wx-font-size-hd);
+		--wx-modal-header-line-height: var(--wx-line-height-hd);
 		--wx-modal-header-font-weight: var(--wx-font-weight-b);
 		--wx-modal-header-font-color: #fff;
 		/* end modal */
@@ -249,7 +252,7 @@
 		/* notice */
 		--wx-notice-z-index: 1010;
 		--wx-notice-background: var(--wx-background-alt);
-		--wx-notice-shadow: none;
+		--wx-notice-shadow: var(--wx-shadow-medium);
 		--wx-notice-border: none;
 		--wx-notice-border-radius: 0 var(--wx-border-radius)
 			var(--wx-border-radius) 0;
@@ -310,8 +313,11 @@
 		color: var(--wx-color-font);
 		background: var(--wx-background);
 	}
-	:global(.wx-willow-dark-theme *, .wx-willow-dark-theme
-			*:before, .wx-willow-dark-theme *:after) {
+	:global(
+			.wx-willow-dark-theme *,
+			.wx-willow-dark-theme *:before,
+			.wx-willow-dark-theme *:after
+		) {
 		box-sizing: border-box;
 	}
 

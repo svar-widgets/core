@@ -29,11 +29,10 @@
 			if (select && input) input.select();
 		}, 1);
 	});
-
 </script>
 
 <div class="input {css}" class:error class:disabled>
-	{#if type == 'password'}
+	{#if type == "password"}
 		<input
 			bind:value
 			bind:this={input}
@@ -44,8 +43,10 @@
 			type="password"
 			style={inputStyle}
 			{title}
-			on:input={() => dispatch('input', { value })} />
-	{:else if type == 'number'}
+			on:input={() => dispatch("change", { value, input: true })}
+			on:change={() => dispatch("change", { value })}
+		/>
+	{:else if type == "number"}
 		<input
 			bind:value
 			bind:this={input}
@@ -56,7 +57,9 @@
 			type="number"
 			style={inputStyle}
 			{title}
-			on:input={() => dispatch('input', { value })} />
+			on:input={() => dispatch("change", { value, input: true })}
+			on:change={() => dispatch("change", { value })}
+		/>
 	{:else}
 		<input
 			bind:value
@@ -67,7 +70,9 @@
 			{placeholder}
 			{title}
 			style={inputStyle}
-			on:input={() => dispatch('input', { value })} />
+			on:input={() => dispatch("change", { value, input: true })}
+			on:change={() => dispatch("change", { value })}
+		/>
 	{/if}
 
 	{#if icon}<i class="icon {icon}" />{/if}
@@ -176,5 +181,4 @@
 	.title:hover:not([disabled]) input {
 		border: var(--wx-input-border-focus);
 	}
-
 </style>

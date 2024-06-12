@@ -8,13 +8,13 @@
 	export let type = "";
 
 	let id = uid();
-
 </script>
 
 <div
 	class="field {position}"
 	class:error
-	style={width ? `width: ${width}` : ''}>
+	style={width ? `width: ${width}` : ""}
+>
 	{#if label}<label for={id}>{label}</label>{/if}
 	<div class="field-control {type}">
 		<slot {id} />
@@ -88,5 +88,4 @@
 		position: relative;
 		width: 100%;
 	}
-
 </style>

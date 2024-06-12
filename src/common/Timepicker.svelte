@@ -51,9 +51,10 @@
 			(value && (value.getHours() !== h || value.getMinutes() !== m)) ||
 			(!value && (h || m))
 		) {
-			value = new Date(value);
-			value.setMinutes(m);
-			value.setHours(h);
+			const next = new Date(value);
+			next.setMinutes(m);
+			next.setHours(h);
+			value = next;
 		}
 	}
 
@@ -90,7 +91,6 @@
 	function cancel() {
 		popup = null;
 	}
-
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -104,21 +104,24 @@
 		{disabled}
 		{error}
 		icon="wxi-clock"
-		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);" />
+		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);"
+	/>
 
 	{#if popup && !disabled}
-		<Dropdown {cancel} width={'unset'}>
+		<Dropdown {cancel} width={"unset"}>
 			<div class="wrapper">
 				<div class="timer">
 					<input
 						class="digit"
 						bind:value={hText}
-						on:blur={() => (h = updateH(hText, maxH))} />
+						on:blur={() => (h = updateH(hText, maxH))}
+					/>
 					<div class="separator">:</div>
 					<input
 						class="digit"
 						bind:value={mText}
-						on:blur={() => (m = update(mText, maxM))} />
+						on:blur={() => (m = update(mText, maxM))}
+					/>
 					{#if h12}
 						<TwoState value={pm} click={togglePM}>
 							<span>am</span>
@@ -126,19 +129,21 @@
 						</TwoState>
 					{/if}
 				</div>
-				<Field width={'unset'}>
+				<Field width={"unset"}>
 					<Slider
 						label={_.hours}
-						width={'unset'}
+						width={"unset"}
 						bind:value={h}
-						max={maxH} />
+						max={maxH}
+					/>
 				</Field>
-				<Field width={'unset'}>
+				<Field width={"unset"}>
 					<Slider
 						label={_.minutes}
-						width={'unset'}
+						width={"unset"}
 						bind:value={m}
-						max={maxM} />
+						max={maxM}
+					/>
 				</Field>
 			</div>
 		</Dropdown>
@@ -186,5 +191,4 @@
 		font-size: 24px;
 		line-height: 38px;
 	}
-
 </style>
