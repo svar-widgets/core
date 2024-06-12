@@ -1,0 +1,15 @@
+{
+	"useTabs": true,
+	"semi": true,
+	"singleQuote": false,
+	"quoteProps": "as-needed",
+	"trailingComma": "es5",
+	"bracketSpacing": true,
+	"arrowParens": "avoid",
+	"svelteSortOrder": "options-scripts-markup-styles",
+	"vueIndentScriptAndStyle": true,
+	"plugins": [
+		"prettier-plugin-svelte"
+	],
+    "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
+}

@@ -19,6 +19,7 @@
 	export let format = "%m/%d/%Y";
 	export let months = 2;
 	export let buttons;
+	export let editable = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -35,19 +36,47 @@
 	$: formattedValue = value
 		? value.start
 			? dateFormat(value.start) +
-			  (value.end ? ` - ${dateFormat(value.end)}` : "")
+				(value.end ? ` - ${dateFormat(value.end)}` : "")
 			: dateFormat(value)
 		: "";
 
-	function doChange(ev) {
-		const d = ev.detail;
+	function doChange(d) {
 		value = d.start || d.end ? { start: d.start, end: d.end } : null;
 
 		// fire after on-click finished
 		if ((d.start && d.end) || (!d.start && !d.end)) {
+			// FIXME - select event will trigger even if the same value
 			dispatch("select", { selected: value });
 			setTimeout(cancel, 1);
 		}
+	}
+
+	function doInputChange(ev) {
+		if (!editable) return;
+
+		const { value: v, input } = ev.detail;
+		if (input) return;
+
+		// reset formatted value to ensure that text in the input will be repainted
+		formattedValue = "";
+
+		const [s, e] = v.split(" -").map((a, i) => {
+			const av = a.trim();
+			let date =
+				typeof editable === "function"
+					? editable(av)
+					: av
+						? new Date(av)
+						: null;
+
+			// if date is invalid ( incorrect text input ) then use old value
+			// else use the entered date
+			// in any case fallback to null, to prevent undefined as value
+			let value = i === 0 ? start : end;
+			return isNaN(date) ? (value ? value : null) : date || null;
+		});
+
+		doChange({ start: s, end: e });
 	}
 
 	let start, end;
@@ -59,7 +88,6 @@
 			end = value.end || null;
 		}
 	}
-
 </script>
 
 <svelte:window on:scroll={cancel} />
@@ -69,18 +97,21 @@
 	class="datepicker"
 	class:disabled
 	class:error
-	on:click={() => (popup = true)}>
+	on:click={() => (popup = true)}
+>
 	<Text
 		{css}
 		{title}
 		value={formattedValue}
 		{id}
-		readonly={true}
+		readonly={!editable}
 		{disabled}
 		{placeholder}
 		{error}
+		on:change={doInputChange}
 		icon="wxi-calendar"
-		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);" />
+		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);"
+	/>
 
 	{#if popup && !disabled}
 		<Dropdown {cancel} {width} {align} autoFit={!!align}>
@@ -91,7 +122,8 @@
 				{start}
 				{end}
 				{months}
-				on:change={doChange} />
+				on:change={e => doChange(e.detail)}
+			/>
 		</Dropdown>
 	{/if}
 </div>
@@ -101,5 +133,4 @@
 		position: relative;
 		width: var(--wx-input-width);
 	}
-
 </style>

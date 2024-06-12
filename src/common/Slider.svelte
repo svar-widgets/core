@@ -27,14 +27,19 @@
 		if (isNaN(value)) value = 0;
 
 		if (previous !== value) {
-			dispatch("change", { value, previous });
+			dispatch("change", { value, previous, input: true });
 			previous = value;
 		}
 	}
 
+	function onChange({ target }) {
+		const v = target.value * 1;
+		dispatch("change", { value: v });
+		value = v;
+	}
 </script>
 
-<div class="slider" style={width ? `width: ${width}` : ''} {title}>
+<div class="slider" style={width ? `width: ${width}` : ""} {title}>
 	{#if label}<label for={id}>{label}</label>{/if}
 	<div>
 		<input
@@ -45,7 +50,9 @@
 			{step}
 			{disabled}
 			bind:value
-			style={bgStyle} />
+			on:change={onChange}
+			style={bgStyle}
+		/>
 	</div>
 </div>
 
@@ -232,5 +239,4 @@
 	input[disabled]:focus::-ms-fill-upper {
 		background: var(--wx-color-disabled);
 	}
-
 </style>

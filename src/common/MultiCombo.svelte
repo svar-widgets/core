@@ -7,7 +7,7 @@
 	export let options = [];
 	export let textField = "label";
 	export let placeholder = "";
-	export let title;
+	export let title = "";
 	export let disabled = false;
 	export let error = false;
 	export let checkboxes = false;
@@ -34,7 +34,7 @@
 		filterOptions = text
 			? options.filter(i =>
 					i[textField].toLowerCase().includes(text.toLowerCase())
-			  )
+				)
 			: options;
 		if (filterOptions.length) navigate(0);
 		else navigate(null);
@@ -71,7 +71,6 @@
 		value && value.length
 			? filterOptions.findIndex(i => i.id === value[0])
 			: 0;
-
 </script>
 
 <div
@@ -81,8 +80,9 @@
 	class:disabled
 	class:not-empty={selected.length}
 	class:focus={focus && !disabled}
-	on:click={() => navigate(index())}
-	on:keydown={ev => keydown(ev, index())}>
+	on:click={() => !disabled && navigate(index())}
+	on:keydown={ev => keydown(ev, index())}
+>
 	<div class="wrapper">
 		<div class="tags">
 			{#each selected as tag (tag.id)}
@@ -92,7 +92,8 @@
 						<!-- svelte-ignore a11y-click-events-have-key-events -->
 						<i
 							class="wxi-close"
-							on:click|stopPropagation={() => remove(tag.id)} />
+							on:click|stopPropagation={() => remove(tag.id)}
+						/>
 					{/if}
 				</div>
 			{/each}
@@ -103,7 +104,8 @@
 				bind:value={text}
 				on:input={input}
 				{placeholder}
-				{disabled} />
+				{disabled}
+			/>
 			<i class="icon wxi-angle-down" />
 		</div>
 	</div>
@@ -113,12 +115,14 @@
 			let:option
 			items={filterOptions}
 			on:ready={ready}
-			on:select={select}>
+			on:select={select}
+		>
 			{#if checkboxes}
 				<Checkbox
 					style="margin-right: 8px; pointer-events: none;"
 					name={option.id}
-					value={value && value.includes(option.id)} />
+					value={value && value.includes(option.id)}
+				/>
 			{/if}
 			<slot {option}>{option.name}</slot>
 		</List>
@@ -272,5 +276,4 @@
 	.icon:before {
 		display: block;
 	}
-
 </style>

@@ -5,19 +5,20 @@
 
 	const dispatch = createEventDispatcher();
 	export let position = "right";
-
 </script>
 
 <div
 	class="window pos-{position}"
-	use:clickOutside={() => dispatch('close')}
-	transition:fly={{ x: 650, opacity: 1 }}>
+	use:clickOutside={() => dispatch("close")}
+	transition:fly={{ x: 650, opacity: 1 }}
+>
 	<slot />
 </div>
 
 <style>
 	.window {
 		position: absolute;
+		z-index: var(--wx-popup-z-index);
 		background: var(--wx-modal-background);
 		box-shadow: var(--wx-modal-shadow);
 		border: var(--wx-modal-border);
@@ -29,5 +30,4 @@
 		right: 0;
 		top: 0;
 	}
-
 </style>

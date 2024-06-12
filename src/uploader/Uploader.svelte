@@ -127,7 +127,6 @@
 	function open() {
 		input.click();
 	}
-
 </script>
 
 <div
@@ -136,14 +135,16 @@
 	on:dragenter={dragenter}
 	on:dragleave={dragleave}
 	on:dragover|preventDefault
-	on:drop|preventDefault={drop}>
+	on:drop|preventDefault={drop}
+>
 	<input
 		type="file"
 		bind:this={input}
 		on:change={add}
 		{accept}
 		{disabled}
-		{multiple} />
+		{multiple}
+	/>
 	<slot {open}>
 		<div class="dropzone">
 			<span>
@@ -186,5 +187,4 @@
 		color: var(--wx-color-link);
 		text-decoration: underline;
 	}
-
 </style>

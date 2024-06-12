@@ -9,7 +9,6 @@
 	export let error = false;
 
 	export let id = uid();
-
 </script>
 
 <div>
@@ -122,5 +121,4 @@
 	.icon:before {
 		display: block;
 	}
-
 </style>

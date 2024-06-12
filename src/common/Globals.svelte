@@ -37,7 +37,6 @@
 		showNotice,
 		showModal,
 	});
-
 </script>
 
 <slot />
@@ -46,7 +45,8 @@
 		title={modal.title}
 		buttons={modal.buttons}
 		ok={modal.resolve}
-		cancel={modal.reject}>
+		cancel={modal.reject}
+	>
 		{modal.message}
 	</Modal>
 {/if}

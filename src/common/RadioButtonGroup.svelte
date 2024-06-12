@@ -7,7 +7,6 @@
 	export let type;
 
 	const name = uid();
-
 </script>
 
 <div class="group {type}">
@@ -18,7 +17,8 @@
 				value={option.value}
 				checked={value === option.value}
 				bind:groupValue={value}
-				{name} />
+				{name}
+			/>
 		</div>
 	{/each}
 </div>
@@ -47,5 +47,4 @@
 		max-width: 50%;
 		padding-right: var(--wx-field-gutter);
 	}
-
 </style>

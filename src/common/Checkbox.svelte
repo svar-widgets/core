@@ -15,7 +15,6 @@
 		value = target.checked;
 		dispatch("change", { value, name });
 	}
-
 </script>
 
 <div {style}>
@@ -25,7 +24,8 @@
 		{disabled}
 		checked={value}
 		value={name}
-		on:change={handlerChange} />
+		on:change={handlerChange}
+	/>
 	<label for={id}>
 		<span />
 		{#if label}<span>{label}</span>{/if}
@@ -129,5 +129,4 @@
 	input[disabled] ~ label span:first-child:after {
 		border-color: var(--wx-input-background);
 	}
-
 </style>

@@ -8,9 +8,10 @@
 	export let options = [];
 	export let textField = "label";
 	export let placeholder = "";
-	export let title;
+	export let title = "";
 	export let disabled = false;
 	export let error = false;
+	export let clearButton = false;
 
 	const dispatch = createEventDispatcher();
 
@@ -43,12 +44,17 @@
 
 	function selectByText(text) {
 		if (!options.length) return;
+		if (text === "" && clearButton) {
+			doUnselect();
+			return;
+		}
 
 		let res = options.find(i => i[textField] === text);
-		if (!res)
+		if (!res) {
 			res = options.find(i =>
 				i[textField].toLowerCase().includes(text.toLowerCase())
 			);
+		}
 
 		const id = res ? res.id : prevValue || options[0].id;
 		doSelect(id, false);
@@ -71,11 +77,17 @@
 		if (!hasFocus && effects) inputElement.focus();
 	}
 
+	function doUnselect() {
+		text = value = "";
+		filterOptions = options;
+		dispatch("select", { selected: null });
+	}
+
 	function input() {
 		filterOptions = text
 			? options.filter(i =>
 					i[textField].toLowerCase().includes(text.toLowerCase())
-			  )
+				)
 			: options;
 		if (filterOptions.length) navigate(0);
 		else navigate(null);
@@ -95,14 +107,14 @@
 	}
 
 	const index = () => filterOptions.findIndex(a => a.id === value);
-
 </script>
 
 <div
 	class="combo"
 	on:click={() => navigate(index())}
 	on:keydown={e => keydown(e, index())}
-	{title}>
+	{title}
+>
 	<input
 		{id}
 		bind:this={inputElement}
@@ -112,16 +124,21 @@
 		{placeholder}
 		on:focus={onFocus}
 		on:blur={onBlur}
-		on:input={input} />
+		on:input={input}
+	/>
 
-	<i class="icon wxi-angle-down" />
+	{#if clearButton && !disabled && value}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<i class="icon wxi-close" on:click|stopPropagation={doUnselect} />
+	{:else}<i class="icon wxi-angle-down" />{/if}
 
 	{#if !disabled}
 		<List
 			let:option
 			items={filterOptions}
 			on:ready={ready}
-			on:select={selectByEvent}>
+			on:select={selectByEvent}
+		>
 			<slot {option}>{option.name}</slot>
 		</List>
 	{/if}
@@ -201,4 +218,11 @@
 		display: block;
 	}
 
+	.icon.wxi-close {
+		pointer-events: all;
+	}
+
+	.icon.wxi-close:hover {
+		color: var(--wx-color-danger);
+	}
 </style>

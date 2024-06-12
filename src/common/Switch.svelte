@@ -4,7 +4,6 @@
 	export let id = uid();
 	export let value;
 	export let disabled = false;
-
 </script>
 
 <label>
@@ -86,5 +85,4 @@
 		border: var(--wx-switch-thumb-border-disabled);
 		background: var(--wx-switch-thumb-background-disabled);
 	}
-
 </style>

@@ -38,7 +38,6 @@
 
 		cancel();
 	}
-
 </script>
 
 <div class="months" use:delegateClick={selectMonths}>
@@ -87,5 +86,4 @@
 		justify-content: center;
 		margin-top: var(--wx-calendar-gap);
 	}
-
 </style>

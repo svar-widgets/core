@@ -1,31 +1,34 @@
-import Area from "./common/Area.svelte";
-import Buttons from "./common/Buttons.svelte";
-import Calendar from "./common/Calendar.svelte";
-import Month from "./common/Month.svelte";
-import RangeCalendar from "./common/RangeCalendar.svelte";
-import Checkbox from "./common/Checkbox.svelte";
-import ColorSelect from "./common/ColorSelect.svelte";
-import ColorPicker from "./common/ColorPicker.svelte";
-import Combo from "./common/Combo.svelte";
-import DatePicker from "./common/DatePicker.svelte";
-import DateRangePicker from "./common/DateRangePicker.svelte";
-import Locales from "./common/Locales.svelte";
-import Messages from "./common/Messages.svelte";
-import TwoState from "./common/TwoState.svelte";
-import Text from "./common/Text.svelte";
-import MultiCombo from "./common/MultiCombo.svelte";
-import Popup from "./common/Popup.svelte";
-import Radio from "./common/Radio.svelte";
-import RichSelect from "./common/RichSelect.svelte";
-import Select from "./common/Select.svelte";
-import Slider from "./common/Slider.svelte";
-import Tabs from "./common/Tabs.svelte";
-import Switch from "./common/Switch.svelte";
-import Pager from "./common/Pager.svelte";
-import Timepicker from "./common/Timepicker.svelte";
-import Field from "./common/Field.svelte";
-import Segmented from "./common/Segmented.svelte";
-import Upload from "./uploader/Upload.svelte";
+import Area from "./cases/Area.svelte";
+import Buttons from "./cases/Buttons.svelte";
+import Calendar from "./cases/Calendar.svelte";
+import Month from "./cases/Month.svelte";
+import RangeCalendar from "./cases/RangeCalendar.svelte";
+import Checkbox from "./cases/Checkbox.svelte";
+import ColorSelect from "./cases/ColorSelect.svelte";
+import ColorPicker from "./cases/ColorPicker.svelte";
+import Combo from "./cases/Combo.svelte";
+import DatePicker from "./cases/DatePicker.svelte";
+import DateRangePicker from "./cases/DateRangePicker.svelte";
+import Locales from "./cases/Locales.svelte";
+import Messages from "./cases/Messages.svelte";
+import TwoState from "./cases/TwoState.svelte";
+import Text from "./cases/Text.svelte";
+import MultiCombo from "./cases/MultiCombo.svelte";
+import Popup from "./cases/Popup.svelte";
+import Radio from "./cases/Radio.svelte";
+import RichSelect from "./cases/RichSelect.svelte";
+import Select from "./cases/Select.svelte";
+import Slider from "./cases/Slider.svelte";
+import Tabs from "./cases/Tabs.svelte";
+import Switch from "./cases/Switch.svelte";
+import Pager from "./cases/Pager.svelte";
+import Timepicker from "./cases/Timepicker.svelte";
+import Field from "./cases/Field.svelte";
+import Segmented from "./cases/Segmented.svelte";
+import Upload from "./cases/Upload.svelte";
+import Icon from "./cases/Icon.svelte";
+import SideArea from "./cases/SideArea.svelte";
+import ModalArea from "./cases/ModalArea.svelte";
 
 export const links = [
 	["/area/:skin", "Area", Area],
@@ -56,4 +59,7 @@ export const links = [
 	["/timepicker/:skin", "Timepicker", Timepicker],
 	["/twostate/:skin", "Two State", TwoState],
 	["/uploader/:skin", "Upload", Upload],
+	["/icon/:skin", "Icon", Icon],
+	["/sidearea/:skin", "Side Area", SideArea],
+	["/modalarea/:skin", "Modal Area", ModalArea],
 ];

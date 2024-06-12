@@ -6,7 +6,7 @@
 	export let value = "";
 	export let id = uid();
 	export let placeholder = "";
-	export let title;
+	export let title = "";
 	export let disabled = false;
 	export let error = false;
 
@@ -21,7 +21,6 @@
 		value = ev.detail.value;
 		popup = null;
 	}
-
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -34,7 +33,8 @@
 		{placeholder}
 		{disabled}
 		class:error
-		class:focus={popup} />
+		class:focus={popup}
+	/>
 	<div class="color" style="background: {value}" />
 
 	{#if popup}
@@ -107,5 +107,4 @@
 		border-color: var(--wx-color-danger);
 		color: var(--wx-color-danger);
 	}
-
 </style>
