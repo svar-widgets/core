@@ -34,6 +34,7 @@
 <div class="input {css}" class:error class:disabled>
 	{#if type == "password"}
 		<input
+			{...$$restProps}
 			bind:value
 			bind:this={input}
 			{id}
@@ -48,6 +49,7 @@
 		/>
 	{:else if type == "number"}
 		<input
+			{...$$restProps}
 			bind:value
 			bind:this={input}
 			{id}
@@ -62,6 +64,7 @@
 		/>
 	{:else}
 		<input
+			{...$$restProps}
 			bind:value
 			bind:this={input}
 			{id}
