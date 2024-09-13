@@ -1,5 +1,5 @@
 <script>
-	import { Button, SideArea } from "../../src/index";
+	import { Button, ColorPicker, Field, SideArea } from "../../src/index";
 	let show = false;
 </script>
 
@@ -9,15 +9,20 @@
 	<Button on:click={() => (show = !show)}>Click me</Button>
 	{#if show}
 		<SideArea on:close={() => (show = false)}>
-			<span class="descr">
+			<div class="descr">
 				<h3>Some content</h3>
-			</span>
+				<Field label="Color">
+					<ColorPicker />
+				</Field>
+			</div>
 		</SideArea>
 	{/if}
 </div>
 
 <style>
 	.descr {
-		text-align: center;
+		text-align: left;
+		width: 400px;
+		padding: 20px;
 	}
 </style>

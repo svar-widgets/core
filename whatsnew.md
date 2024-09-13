@@ -1,3 +1,20 @@
+### 1.2.3
+
+-   [fix] closing menu and popup when clicking on disabled control
+
+### 1.2.1
+
+-   [fix] regression in popup closing in some cases
+
+### 1.2.0
+
+-   [add] common logic for click-outside tracking for popup and side-area
+-   [add] counter widget added
+-   [update] css styles corrected ( wx prefixes, names of top classes for each widget, error state )
+-   [update] uploader removed ( @wx/svelte-uploader )
+-   [update] date formats used from locale
+-   [fix] change event in DatePicker / Calendar
+
 ### 1.1.4
 
 -   [fix] compatibility with svelte-kit ( typescript )

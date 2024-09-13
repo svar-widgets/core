@@ -26,12 +26,12 @@
 	Value:
 	{v1}
 	<p>
-		<Checkbox label="Check" value="1" bind:checked={v1} />
+		<Checkbox label="Check" bind:value={v1} />
 	</p>
 	Value:
 	{v2}
 	<p>
-		<Checkbox label="Uncheck" value="2" bind:checked={v2} />
+		<Checkbox label="Uncheck" bind:value={v2} />
 	</p>
 </div>
 

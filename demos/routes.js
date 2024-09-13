@@ -13,6 +13,7 @@ import Locales from "./cases/Locales.svelte";
 import Messages from "./cases/Messages.svelte";
 import TwoState from "./cases/TwoState.svelte";
 import Text from "./cases/Text.svelte";
+import Counter from "./cases/Counter.svelte";
 import MultiCombo from "./cases/MultiCombo.svelte";
 import Popup from "./cases/Popup.svelte";
 import Radio from "./cases/Radio.svelte";
@@ -25,13 +26,11 @@ import Pager from "./cases/Pager.svelte";
 import Timepicker from "./cases/Timepicker.svelte";
 import Field from "./cases/Field.svelte";
 import Segmented from "./cases/Segmented.svelte";
-import Upload from "./cases/Upload.svelte";
 import Icon from "./cases/Icon.svelte";
 import SideArea from "./cases/SideArea.svelte";
 import ModalArea from "./cases/ModalArea.svelte";
 
 export const links = [
-	["/area/:skin", "Area", Area],
 	["/button/:skin", "Button", Buttons],
 	["/calendar/:skin", "Calendar", Calendar],
 	["/month/:skin", "Month", Month],
@@ -56,9 +55,10 @@ export const links = [
 	["/switch/:skin", "Switch", Switch],
 	["/tabs/:skin", "Tabs", Tabs],
 	["/inputs/:skin", "Text Inputs", Text],
+	["/area/:skin", "Textarea", Area],
+	["/counter/:skin", "Counter Number Input", Counter],
 	["/timepicker/:skin", "Timepicker", Timepicker],
 	["/twostate/:skin", "Two State", TwoState],
-	["/uploader/:skin", "Upload", Upload],
 	["/icon/:skin", "Icon", Icon],
 	["/sidearea/:skin", "Side Area", SideArea],
 	["/modalarea/:skin", "Modal Area", ModalArea],

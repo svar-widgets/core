@@ -5,7 +5,6 @@
 	export let fonts = true;
 	const SLOTS = $$props.$$slots;
 	setContext("wx-theme", "material");
-
 </script>
 
 {#if SLOTS && SLOTS.default}
@@ -20,7 +19,8 @@
 		<RobotoFont />
 		<link
 			rel="stylesheet"
-			href="https://webix.io/dev/fonts/wxi/wx-icons.css" />
+			href="https://webix.io/dev/fonts/wxi/wx-icons.css"
+		/>
 	{/if}
 </svelte:head>
 
@@ -42,6 +42,7 @@
 		--wx-color-info: #37a9ef;
 		--wx-color-danger: #ff5252;
 		--wx-color-disabled: #ededed;
+		--wx-color-disabled-alt: #e9e9e9;
 
 		--wx-color-font: rgba(0, 0, 0, 0.7);
 		--wx-color-font-alt: rgba(0, 0, 0, 0.5);
@@ -101,7 +102,7 @@
 		--wx-input-font-family: var(--wx-font-family);
 		--wx-input-font-size: var(--wx-font-size);
 		--wx-input-line-height: var(--wx-line-height);
-		--wx-input-font-weigth: var(--wx-font-weight);
+		--wx-input-font-weight: var(--wx-font-weight);
 		--wx-input-text-align: left;
 		--wx-input-font-color: var(--wx-color-font);
 		--wx-input-background: var(--wx-background);
@@ -156,7 +157,7 @@
 		--wx-button-font-family: var(--wx-font-family);
 		--wx-button-font-size: var(--wx-font-size);
 		--wx-button-line-height: var(--wx-line-height);
-		--wx-button-font-weigth: var(--wx-font-weight-md);
+		--wx-button-font-weight: var(--wx-font-weight-md);
 		--wx-button-text-transform: none;
 		--wx-button-font-color: var(--wx-color-font);
 		--wx-button-danger-font-color: #fff;
@@ -275,10 +276,6 @@
 		--wx-notice-type-close-hover-opacity: 0.3;
 		/* end notice */
 
-		/* uploader */
-		--wx-uploader-background: var(--wx-background-alt);
-		/* end uploader */
-
 		/* calendar */
 		--wx-calendar-padding: 16px;
 		--wx-calendar-cell-size: 32px;
@@ -298,7 +295,7 @@
 		--wx-calendar-controls-font-family: var(--wx-button-font-family);
 		--wx-calendar-controls-font-size: var(--wx-button-font-size);
 		--wx-calendar-controls-line-height: var(--wx-button-line-height);
-		--wx-calendar-controls-font-weight: var(--wx-button-font-weigth);
+		--wx-calendar-controls-font-weight: var(--wx-button-font-weight);
 		--wx-calendar-controls-font-color: var(--wx-color-link);
 		/* end calendar */
 	}
@@ -321,5 +318,4 @@
 		) {
 		box-sizing: border-box;
 	}
-
 </style>

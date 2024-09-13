@@ -1,5 +1,5 @@
 <script>
-	import { Button, ModalArea } from "../../src/index";
+	import { Button, Field, ColorPicker, ModalArea } from "../../src/index";
 	let show = false;
 </script>
 
@@ -10,7 +10,11 @@
 	{#if show}
 		<ModalArea on:close={() => (show = false)}>
 			<div class="descr">
-				<h3>Some content</h3>
+				<Field label="Color">
+					<ColorPicker />
+				</Field>
+			</div>
+			<div class="descr center">
 				<p>To close the modal, click the button below</p>
 				<Button on:click={() => (show = false)}>Close</Button>
 			</div>
@@ -20,7 +24,9 @@
 
 <style>
 	.descr {
-		text-align: center;
 		padding: 40px;
+	}
+	.center {
+		text-align: center;
 	}
 </style>

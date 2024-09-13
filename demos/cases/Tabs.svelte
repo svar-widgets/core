@@ -37,7 +37,7 @@
 		{:else}
 			<div class="body">Check</div>
 		{/if}
-		<Tabs options={tabs} bind:value={active} type={"bottom"} />
+		<Tabs options={tabs} bind:value={active} type="bottom" />
 	</div>
 
 	<h3>on:change</h3>

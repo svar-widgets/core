@@ -6,7 +6,7 @@
 		Globals,
 		Locale,
 		popupContainer,
-	} from "../../src/index.js";
+	} from "@wx/svelte-core";
 
 	import Router from "./Router.svelte";
 	import Link from "./Link.svelte";

@@ -30,7 +30,12 @@
 
 <div class="demo-box">
 	<h3>12-hour TimePicker</h3>
-	<Locale words={{ calendar: { timeFormat: 12 } }}>
+	<Locale
+		words={{
+			formats: { timeFormat: "%g:%i %a" },
+			calendar: { clockFormat: 12 },
+		}}
+	>
 		<Timepicker {value} />
 	</Locale>
 </div>

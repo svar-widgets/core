@@ -5,7 +5,6 @@
 	export let fonts = true;
 	const SLOTS = $$props.$$slots;
 	setContext("wx-theme", "willow");
-
 </script>
 
 {#if SLOTS && SLOTS.default}
@@ -20,7 +19,8 @@
 		<FontOpenSans />
 		<link
 			rel="stylesheet"
-			href="https://webix.io/dev/fonts/wxi/wx-icons.css" />
+			href="https://webix.io/dev/fonts/wxi/wx-icons.css"
+		/>
 	{/if}
 </svelte:head>
 
@@ -42,6 +42,7 @@
 		--wx-color-info: #37a9ef;
 		--wx-color-danger: #fe6158;
 		--wx-color-disabled: #f2f3f7;
+		--wx-color-disabled-alt: #e9e9e9;
 
 		--wx-color-font: #2c2f3c;
 		--wx-color-font-alt: #9fa1ae;
@@ -102,7 +103,7 @@
 		--wx-input-font-family: var(--wx-font-family);
 		--wx-input-font-size: var(--wx-font-size);
 		--wx-input-line-height: var(--wx-line-height);
-		--wx-input-font-weigth: var(--wx-font-weight);
+		--wx-input-font-weight: var(--wx-font-weight);
 		--wx-input-text-align: left;
 		--wx-input-font-color: var(--wx-color-font);
 		--wx-input-background: var(--wx-background);
@@ -157,7 +158,7 @@
 		--wx-button-font-family: var(--wx-font-family);
 		--wx-button-font-size: var(--wx-font-size-md);
 		--wx-button-line-height: var(--wx-line-height);
-		--wx-button-font-weigth: var(--wx-font-weight-md);
+		--wx-button-font-weight: var(--wx-font-weight-md);
 		--wx-button-text-transform: none;
 		--wx-button-font-color: var(--wx-color-font);
 		--wx-button-danger-font-color: #fff;
@@ -277,10 +278,6 @@
 		--wx-notice-type-close-hover-opacity: 1;
 		/* end notice */
 
-		/* uploader */
-		--wx-uploader-background: var(--wx-background-hover);
-		/* end uploader */
-
 		/* calendar */
 		--wx-calendar-padding: 16px;
 		--wx-calendar-cell-size: 32px;
@@ -323,5 +320,4 @@
 		) {
 		box-sizing: border-box;
 	}
-
 </style>
