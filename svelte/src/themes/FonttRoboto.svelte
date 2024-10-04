@@ -1,19 +1,2 @@
 <!-- prettier-ignore -->
-{@html `<style>
-@font-face {
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-src: local(''),
-    url('https://cdn.svar.dev/fonts/roboto/regular.woff2') format('woff2'),
-    url('https://cdn.svar.dev/fonts/roboto/regular.woff') format('woff');
-}
-@font-face {
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 500;
-src: local(''),
-    url('https://cdn.svar.dev/fonts/roboto/500.woff2') format('woff2'),
-    url('https://cdn.svar.dev/fonts/roboto/500.woff') format('woff');
-}
-</style>`}
+{@html `<style ✂prettier:content✂="CkBmb250LWZhY2Ugewpmb250LWZhbWlseTogJ1JvYm90byc7CmZvbnQtc3R5bGU6IG5vcm1hbDsKZm9udC13ZWlnaHQ6IDQwMDsKc3JjOiBsb2NhbCgnJyksCiAgICB1cmwoJ2h0dHBzOi8vY2RuLnN2YXIuZGV2L2ZvbnRzL3JvYm90by9yZWd1bGFyLndvZmYyJykgZm9ybWF0KCd3b2ZmMicpLAogICAgdXJsKCdodHRwczovL2Nkbi5zdmFyLmRldi9mb250cy9yb2JvdG8vcmVndWxhci53b2ZmJykgZm9ybWF0KCd3b2ZmJyk7Cn0KQGZvbnQtZmFjZSB7CmZvbnQtZmFtaWx5OiAnUm9ib3RvJzsKZm9udC1zdHlsZTogbm9ybWFsOwpmb250LXdlaWdodDogNTAwOwpzcmM6IGxvY2FsKCcnKSwKICAgIHVybCgnaHR0cHM6Ly9jZG4uc3Zhci5kZXYvZm9udHMvcm9ib3RvLzUwMC53b2ZmMicpIGZvcm1hdCgnd29mZjInKSwKICAgIHVybCgnaHR0cHM6Ly9jZG4uc3Zhci5kZXYvZm9udHMvcm9ib3RvLzUwMC53b2ZmJykgZm9ybWF0KCd3b2ZmJyk7Cn0K"></style>`}
