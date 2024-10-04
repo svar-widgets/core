@@ -1,32 +1,48 @@
 {
-	"name": "@wx/svelte-core",
-	"version": "1.2.3",
-	"productTag": "core",
-	"type": "module",
+	"private": true,
+	"name": "wx-core",
+	"workspaces": [
+		"locales",
+		"svelte",
+		"site"
+	],
 	"scripts": {
-		"build": "vite build",
-		"build:dist": "vite build --mode dist",
-		"build:tests": "vite build --mode test",
-		"lint": "yarn eslint ./demos ./src --ext .svelte,.ts,.js",
-		"start": "vite --open=/demos/",
-		"start:tests": "vite --open=/tests/ --mode test"
+		"prepare": "husky",
+		"build": "cd svelte && yarn build",
+		"build:deps": "true",
+		"build:tests": "cd svelte && yarn build:tests",
+		"start": "cd svelte && yarn start",
+		"start:tests": "cd svelte && yarn start:tests",
+		"lint": "yarn eslint ./svelte/src ./svelte/demos ./locales --ext .svelte,.js",
+		"test": "true",
+		"test:cypress": "cd svelte && yarn test:cypress"
 	},
-	"svelte": "src/index.js",
-	"exports": {
-		".": {
-			"svelte": "./src/index.js"
-		},
-		"./package.json": "./package.json"
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "3.0.2",
+		"autoprefixer": "10.4.13",
+		"cypress": "13.6.4",
+		"eslint": "8.33.0",
+		"eslint-config-prettier": "9.1.0",
+		"eslint-plugin-cypress": "2.12.1",
+		"eslint-plugin-svelte3": "4.0.0",
+		"husky": "9.0.10",
+		"lint-staged": "15.2.2",
+		"npm-run-all": "4.1.5",
+		"postcss": "8.4.35",
+		"prettier": "3.2.5",
+		"prettier-plugin-svelte": "3.2.0",
+		"rollup-plugin-visualizer": "5.12.0",
+		"svelte": "4.2.9",
+		"svelte-spa-router": "4.0.1",
+		"vite": "5.1.1"
 	},
-	"license": "MIT",
-	"dependencies": {
-		"@wx/core-locales": "1.2.3",
-		"@wx/lib-dom": "0.5.3"
-	},
-	"files": [
-		"src",
-		"readme.md",
-		"whatsnew.md",
-		"license.txt"
-	]
+	"lint-staged": {
+		"*.{ts,js,svelte}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{css,md,json}": [
+			"prettier --write"
+		]
+	}
 }

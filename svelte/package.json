@@ -1,0 +1,35 @@
+{
+	"name": "wx-svelte-core",
+	"version": "1.3.0",
+	"productTag": "core",
+	"productTrial": false,
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"build:dist": "vite build --mode dist",
+		"build:tests": "vite build --mode test",
+		"lint": "yarn eslint ./demos ./src --ext .svelte,.ts,.js",
+		"start": "vite --open",
+		"start:tests": "vite --open=/tests/ --host 0.0.0.0  --port 5100 --mode test",
+		"test": "true",
+		"test:cypress": "cypress run -P ./ --config \"baseUrl=http://localhost:5100/tests\""
+	},
+	"svelte": "src/index.js",
+	"exports": {
+		".": {
+			"svelte": "./src/index.js"
+		},
+		"./package.json": "./package.json"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"wx-core-locales": "1.3.0",
+		"wx-lib-dom": "0.6.0"
+	},
+	"files": [
+		"src",
+		"readme.md",
+		"whatsnew.md",
+		"license.txt"
+	]
+}

@@ -1,0 +1,138 @@
+<script>
+	import {
+		RichSelect,
+		Button,
+		Text,
+		Segmented,
+		Field,
+		DatePicker,
+	} from "wx-svelte-core";
+	import LockIcon from "./Icons/LockIcon.svelte";
+
+	import { getData } from "../data";
+
+	const { segmentedOptions, location, positions } = getData();
+
+	let value = 1;
+</script>
+
+<div class="column">
+	<div class="segmented">
+		<Segmented options={segmentedOptions} bind:value let:option>
+			{#if option.icon}
+				<i class="icon {option.icon}" />
+			{:else}
+				<span class="icon">
+					<LockIcon />
+				</span>
+			{/if}
+			<span class="bottom">{option.name}</span>
+		</Segmented>
+	</div>
+	<div class="form">
+		{#if value === 1}
+			<Field label="First name" position="top" let:id>
+				<Text value={"Bethany"} {id} />
+			</Field>
+			<Field label="Last name" position="top" let:id>
+				<Text value={"Williams"} {id} />
+			</Field>
+			<Field label="Birthday" let:id>
+				<DatePicker value={new Date(2005, 9, 10)} width="100%" {id} />
+			</Field>
+			<Field label="Location" position="top" let:id>
+				<RichSelect options={location} let:option value={1}>
+					{option.name}
+				</RichSelect>
+			</Field>
+			<Field label="Position" position="top" let:id>
+				<RichSelect options={positions} let:option value={1}>
+					{option.name}
+				</RichSelect>
+			</Field>
+		{:else}
+			<Field label="Username" position="top" let:id>
+				<Text value={"williams.b"} {id} />
+			</Field>
+			<Field label="Phone number" position="top" let:id>
+				<Text value={"978548753974"} {id} />
+			</Field>
+			<Field label="Email" let:id>
+				<Text value={"williams.bethany@mail.com"} {id} />
+			</Field>
+			<Field label="Current password" position="top" let:id>
+				<Text
+					value={"123456789"}
+					{id}
+					type={"password"}
+					icon={"wxi-eye"}
+					css="wx-icon-right"
+				/>
+			</Field>
+			<Field label="New password" position="top" let:id>
+				<Text
+					value={"987654321"}
+					{id}
+					type={"password"}
+					icon={"wxi-eye"}
+					css="wx-icon-right"
+				/>
+			</Field>
+		{/if}
+		<Button type={"primary"} text={"Save"} />
+	</div>
+</div>
+
+<style>
+	.column {
+		border-radius: var(--wx-border-radius, 3px);
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		width: 354px;
+		min-width: 240px;
+		border-radius: var(--wx-border-radius, 3px);
+		gap: 12px;
+	}
+	.segmented {
+		height: 40px;
+		padding: 4px 2px;
+		width: 100%;
+		background-color: var(--wx-segmented-background);
+		border-radius: var(--wx-segmented-border-radius);
+	}
+	.segmented :global(div button .icon) {
+		margin-right: 4px;
+		opacity: 1;
+	}
+	.segmented .icon {
+		height: 16px;
+		font-size: 16px;
+		line-height: 16px;
+		margin-right: 4px;
+	}
+	.segmented :global(div) {
+		width: 100%;
+	}
+	.segmented :global(div button) {
+		width: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.segmented :global(div button .bottom) {
+		white-space: nowrap;
+	}
+	.form {
+		padding: 20px;
+		border: var(--wx-input-border);
+		border-radius: var(--wx-border-radius, 3px);
+	}
+	.form :global(.wx-field) {
+		margin-bottom: 12px;
+	}
+	.form :global(button) {
+		width: 100%;
+		margin-top: 8px;
+	}
+</style>

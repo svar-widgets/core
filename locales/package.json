@@ -1,0 +1,17 @@
+{
+	"name": "wx-core-locales",
+	"version": "1.3.0",
+	"description": "Locales for WX Core widgets",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"build": "true",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"wx",
+		"locales"
+	],
+	"author": "",
+	"license": "MIT"
+}
