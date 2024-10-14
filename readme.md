@@ -1,21 +1,29 @@
-### :star: SVAR Core for Svelte
+<div align="center">
+	
+# SVAR Svelte Core | UI Library
+
+</div>
+
+<div align="center">
+
+:globe_with_meridians: [Website](https://svar.dev/svelte/core/) • :bulb: [Getting Started](https://docs.svar.dev/svelte/core/getting_started/) • :eyes: [Demos](https://docs.svar.dev/svelte/core/samples/#/calendar/willow)
+
+</div>
+
+<div align="center">
+
+[![npm](https://img.shields.io/npm/v/wx-svelte-core.svg)](https://www.npmjs.com/package/wx-svelte-core)
+[![License](https://img.shields.io/github/license/svar-widgets/core)](https://github.com/svar-widgets/core/blob/main/license.txt)
+[![npm downloads](https://img.shields.io/npm/dm/wx-svelte-core.svg)](https://www.npmjs.com/package/wx-svelte-core)
+
+</div>
 
 SVAR Core library offers a set of 20+ ready made UI components written in Svelte: form controls, popups, date and time picker, file uploader, and more.
 All components are lightweight, responsive, fast-performing and available in light and dark skins.
 
 <img src="https://cdn.svar.dev/public/core-ui-dark.jpg" alt="SVAR Core Library - Dark Skin" style="width: 600px;">
 
-### :link: Useful Links
-
--   [Documentation](https://docs.svar.dev/svelte/core/overview)
--   [How to start guide](https://docs.svar.dev/svelte/core/getting_started/)
--   [Demos](https://docs.svar.dev/svelte/core/samples/#/calendar/willow)
-
-### :page_with_curl: License
-
-SVAR Core for Svelte is available under MIT license.
-
-### How to Use
+### :hammer_and_wrench: How to Use
 
 To use any of the widgets, simply import the package and include the desired component in your Svelte file:
 
@@ -27,14 +35,14 @@ To use any of the widgets, simply import the package and include the desired com
 <Button>Click me</Button>
 ```
 
-### How to Modify
+### :computer: How to Modify
 
 Typically, you don't need to modify the code. However, if you wish to do so, follow these steps:
 
 1. Run `yarn` to install dependencies. Note that this project is a monorepo using `yarn` workspaces, so npm will not work
 2. Start the project in development mode with `yarn start`
 
-### Run Tests
+### :white_check_mark: Run Tests
 
 To run the test:
 
@@ -46,3 +54,6 @@ To run the test:
     ```sh
     yarn test:cypress
     ```
+### :speech_balloon: Need Help?
+
+[Post an Issue](https://github.com/svar-widgets/core/issues/) or use our [community forum](https://forum.svar.dev). 
