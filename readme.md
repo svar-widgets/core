@@ -18,14 +18,19 @@
 
 </div>
 
-SVAR Core library offers a set of 20+ ready made UI components written in Svelte: form controls, popups, date and time picker, file uploader, and more.
-All components are lightweight, responsive, fast-performing and available in light and dark skins.
+SVAR Core library offers a set of 20+ ready-made Svelte UI components: form controls, popups, date and time picker, toast notifications, and more.
+All components are lightweight, responsive, fast-performing, and available in light and dark skins.
 
 <img src="https://cdn.svar.dev/public/core-ui-dark.jpg" alt="SVAR Core Library - Dark Skin" style="width: 600px;">
 
+In addition to the Core library, you can use the following SVAR components to build unified app UIs:
+- [Menu](https://github.com/svar-widgets/menu)
+- [Toolbar](https://github.com/svar-widgets/toolbar)
+- [File uploader](https://github.com/svar-widgets/uploader)
+
 ### :hammer_and_wrench: How to Use
 
-To use any of the widgets, simply import the package and include the desired component in your Svelte file:
+To use any of the Core components, simply import the package and include the desired component in your Svelte file:
 
 ```svelte
 <script>
@@ -34,6 +39,8 @@ To use any of the widgets, simply import the package and include the desired com
 
 <Button>Click me</Button>
 ```
+
+See the [getting started guide](https://docs.svar.dev/svelte/core/getting_started/) to quickly set up and begin using SVAR Core components in your Svelte projects.
 
 ### :computer: How to Modify
 
