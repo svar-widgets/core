@@ -1,3 +1,5 @@
+const lang = "ja-JP";
+
 const calendar = {
 	monthFull: [
 		"1月",
@@ -61,6 +63,7 @@ const data = {
 	core,
 	calendar,
 	formats,
+	lang,
 };
 
 export default data;

@@ -1,19 +1,19 @@
 <script>
-	import { createEventDispatcher } from "svelte";
 	import { uid } from "wx-lib-dom";
 
-	const dispatch = createEventDispatcher();
-
-	export let id = uid();
-	export let label = "";
-	export let name = "";
-	export let value = false;
-	export let style = "";
-	export let disabled = false;
+	let {
+		id = uid(),
+		label = "",
+		name = "",
+		value = $bindable(false),
+		style = "",
+		disabled = false,
+		onchange,
+	} = $props();
 
 	function handlerChange({ target }) {
 		value = target.checked;
-		dispatch("change", { value, name });
+		onchange && onchange({ value, name });
 	}
 </script>
 
@@ -24,10 +24,10 @@
 		{disabled}
 		checked={value}
 		value={name}
-		on:change={handlerChange}
+		onchange={handlerChange}
 	/>
 	<label for={id}>
-		<span />
+		<span></span>
 		{#if label}<span>{label}</span>{/if}
 	</label>
 </div>
@@ -120,7 +120,7 @@
 		color: var(--wx-checkbox-border-color-disabled);
 		cursor: not-allowed;
 	}
-	input[disabled]:not(:checked) ~ label span:first-child:before {
+	input[disabled]:not(:global(:checked)) ~ label span:first-child:before {
 		border-color: var(--wx-checkbox-border-color-disabled);
 	}
 	input[disabled]:checked ~ label span:first-child:before {

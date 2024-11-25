@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher, onMount } from "svelte";
+	import { onMount } from "svelte";
 	import Button from "./Button.svelte";
 
 	//helpers
@@ -7,21 +7,21 @@
 	import colorTransformator from "./helpers/colorTransformator";
 	import { parseColor } from "./helpers/colorValidation.js";
 
-	const dispatch = createEventDispatcher();
-
-	export let value = "#65D3B3";
-	export let button = false;
-
-	let color;
-	$: color = parseColor(value) || "#65D3B3";
+	let { value = $bindable("#65D3B3"), button = false, onchange } = $props();
 
 	let block;
-	let blockTop;
-	let blockLeft;
-	let blockColor;
 
-	let colorLine;
-	let lineLeft;
+	const BLOCK = "Block";
+	const LINE = "Line";
+
+	let blockTop = $state();
+	let blockLeft = $state();
+	let hueColor = $state();
+	let colorLine = $state();
+	let lineLeft = $state();
+
+	let color = $derived(parseColor(value) || "#65D3B3");
+	let blockColor = $derived(colorTransformator.hvsToHex(hueColor, 1, 1));
 
 	function moveBlockSlider(dx, dy) {
 		const { width, height } = block.getBoundingClientRect();
@@ -55,9 +55,6 @@
 
 		value = colorTransformator.hvsToHex(hueColor, _sValue, _vValue);
 	}
-
-	let hueColor;
-	$: blockColor = colorTransformator.hvsToHex(hueColor, 1, 1);
 
 	function moveLineSlider(dx) {
 		const width = colorLine.getBoundingClientRect().width;
@@ -94,7 +91,7 @@
 	function handleChange({ target }) {
 		const newColor = parseColor(target.value);
 
-		value = color = newColor;
+		value = newColor;
 		if (newColor) {
 			setSlidersPosition();
 		}
@@ -102,11 +99,8 @@
 
 	function handleSelect(ev) {
 		ev.stopPropagation();
-		dispatch("change", { value: color });
+		onchange && onchange({ value: color });
 	}
-
-	const BLOCK = "Block";
-	const LINE = "Line";
 
 	function keydown(ev) {
 		const slider = ev.target;
@@ -161,40 +155,37 @@
 		bind:this={block}
 		use:sliderMove={{ moveBlockSlider }}
 	>
-		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class="wx-color-block-slider wx-slider"
 			style="background: {color}; top: {blockTop}px; left:{blockLeft}px;"
 			tabindex="0"
 			data-slider={BLOCK}
-			on:keydown={keydown}
-		/>
+			onkeydown={keydown}
+		></div>
 	</div>
 	<div
 		class="wx-color-line"
 		bind:this={colorLine}
 		use:sliderMove={{ moveLineSlider }}
 	>
-		<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class="wx-color-line-slider wx-slider"
 			style="background: {blockColor}; left: {lineLeft}px;"
 			tabindex="0"
 			data-slider={LINE}
-			on:keydown={keydown}
-		/>
+			onkeydown={keydown}
+		></div>
 	</div>
 	<div class="wx-color-controls">
-		<div class="wx-color" style="background: {color}" />
-		<input
-			type="text"
-			class="wx-text"
-			bind:value
-			on:change={handleChange}
-		/>
+		<div class="wx-color" style="background: {color}"></div>
+		<input type="text" class="wx-text" bind:value onchange={handleChange} />
 	</div>
 	{#if button}
-		<Button click={handleSelect} type="secondary">Select</Button>
+		<Button onclick={handleSelect} type="secondary">Select</Button>
 	{/if}
 </div>
 

@@ -1,9 +1,9 @@
 <script>
 	import { onMount, getContext, onDestroy } from "svelte";
 
-	let portal;
-	export let theme = "";
-	export let target = undefined;
+	let portal = null;
+
+	let { theme = $bindable(""), target, children } = $props();
 
 	let handlers = [];
 	export const mount = h => {
@@ -31,7 +31,7 @@
 
 <div class="wx-portal">
 	<div class="wx-{theme}-theme" bind:this={portal}>
-		<slot {mount} />
+		{@render children?.({ mount })}
 	</div>
 </div>
 

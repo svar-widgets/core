@@ -1,39 +1,38 @@
 <script>
-	import { createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
+	let {
+		total = 0,
+		pageSize = $bindable(20),
+		value = $bindable(1),
+		onchange,
+	} = $props();
 
-	export let pageSize = 20;
-	export let total = 0;
-	export let value = 1;
+	const pageCount = $derived(Math.ceil(total / pageSize));
+	const from = $derived((value - 1) * pageSize);
+	const to = $derived(Math.min(value * pageSize, total));
 
-	let pageCount = 0,
-		from = 0,
-		to = 0;
-	$: pageCount = Math.ceil(total / pageSize);
-	$: {
-		from = (value - 1) * pageSize;
-		to = Math.min(value * pageSize, total);
+	const setValue = v => {
+		value = v;
 		setTimeout(() => {
-			dispatch("change", { value, from, to });
-		}, 1);
-	}
+			onchange && onchange({ value, from, to });
+		});
+	};
 
 	function setActivePage(id) {
 		switch (id) {
 			case "first":
-				value = 1;
+				setValue(1);
 				break;
 
 			case "prev":
-				value = Math.max(1, value - 1);
+				setValue(Math.max(1, value - 1));
 				break;
 
 			case "next":
-				value = Math.min(+value + 1, pageCount);
+				setValue(Math.min(+value + 1, pageCount));
 				break;
 
 			case "last":
-				value = pageCount;
+				setValue(pageCount);
 				break;
 
 			default:
@@ -49,27 +48,27 @@
 	</div>
 
 	<div class="wx-center">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<i
 			class="wx-icon wxi-angle-dbl-left"
-			on:click={() => setActivePage("first")}
-		/>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<i
-			class="wx-icon wxi-angle-left"
-			on:click={() => setActivePage("prev")}
-		/>
+			onclick={() => setActivePage("first")}
+		></i>
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wx-icon wxi-angle-left" onclick={() => setActivePage("prev")}
+		></i>
 		<input type="text" bind:value />
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<i
-			class="wx-icon wxi-angle-right"
-			on:click={() => setActivePage("next")}
-		/>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wx-icon wxi-angle-right" onclick={() => setActivePage("next")}
+		></i>
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<i
 			class="wx-icon wxi-angle-dbl-right"
-			on:click={() => setActivePage("last")}
-		/>
+			onclick={() => setActivePage("last")}
+		></i>
 	</div>
 
 	<div class="wx-right">Total pages: {pageCount}</div>

@@ -1,17 +1,18 @@
 <script>
-	import { createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
-
+	import { untrack } from "svelte";
 	import Panel from "./calendar/Panel.svelte";
 	import { configs } from "./calendar/helpers";
 
-	export let start;
-	export let end;
-	export let done;
-	export let current;
-	export let months = 2;
-	export let markers = null;
-	export let buttons = true;
+	let {
+		start = $bindable(),
+		end = $bindable(),
+		done = false,
+		current,
+		months = 2,
+		markers = null,
+		buttons = true,
+		onchange,
+	} = $props();
 
 	function addMonth(l, diff, rPrev) {
 		const r = new Date(l);
@@ -20,38 +21,42 @@
 		return r;
 	}
 
-	let leftCurrent, rightCurrent;
-	function setInitCurrents(s) {
-		leftCurrent = s ? new Date(s) : current || new Date();
-	}
-	$: setInitCurrents(start);
+	let leftCurrent = $state(),
+		rightCurrent = $state();
 
-	function onLeft() {
+	$effect.pre(() => {
+		start;
+		current;
+		untrack(() => {
+			onLeft(start ? new Date(start) : current || new Date());
+		});
+	});
+
+	function onLeft(v) {
+		leftCurrent = v;
 		if (leftCurrent) rightCurrent = addMonth(leftCurrent, 1);
 	}
-	function onRight() {
+	function onRight(v) {
+		rightCurrent = v;
 		if (rightCurrent) leftCurrent = addMonth(rightCurrent, -1);
 	}
-
-	$: onLeft(leftCurrent);
-	$: onRight(rightCurrent);
 
 	function doShift({ diff, type }) {
 		const obj = configs[type];
 		if (diff > 0) {
-			rightCurrent = obj.next(rightCurrent);
+			onRight(obj.next(rightCurrent));
 		} else if (diff < 0) {
-			leftCurrent = obj.prev(leftCurrent);
+			onLeft(obj.prev(leftCurrent));
 		}
 	}
 
 	function doChangeStart(v) {
 		selectChange(v);
-		if (start) leftCurrent = new Date(start);
+		if (start) onLeft(new Date(start));
 	}
 	function doChangeEnd(v) {
 		selectChange(v);
-		if (end) rightCurrent = new Date(end);
+		if (end) onRight(new Date(end));
 	}
 	function selectChange(ev) {
 		const v = ev.value;
@@ -79,7 +84,7 @@
 			}
 		}
 
-		if (final || !done) dispatch("change", { start, end });
+		if (final || !done) onchange && onchange({ start, end });
 	}
 </script>
 
@@ -91,8 +96,8 @@
 		{done}
 		{buttons}
 		part="both"
-		on:shift={ev => doShift(ev.detail)}
-		on:change={ev => doChangeStart(ev.detail)}
+		onshift={doShift}
+		onchange={doChangeStart}
 	/>
 {:else}
 	<div class="wx-rangecalendar">
@@ -103,8 +108,8 @@
 				{markers}
 				buttons={false}
 				part="left"
-				on:shift={ev => doShift(ev.detail)}
-				on:change={ev => doChangeStart(ev.detail)}
+				onshift={doShift}
+				onchange={doChangeStart}
 			/>
 		</div>
 		<div class="wx-half">
@@ -115,8 +120,8 @@
 				{done}
 				{buttons}
 				part="right"
-				on:shift={ev => doShift(ev.detail)}
-				on:change={ev => doChangeEnd(ev.detail)}
+				onshift={doShift}
+				onchange={doChangeEnd}
 			/>
 		</div>
 	</div>

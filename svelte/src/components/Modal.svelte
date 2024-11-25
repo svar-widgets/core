@@ -5,10 +5,15 @@
 
 	const _ = getContext("wx-i18n").getGroup("core");
 
-	export let title = "";
-	export let ok;
-	export let cancel;
-	export let buttons = ["cancel", "ok"];
+	const {
+		title = "",
+		ok,
+		cancel,
+		buttons = ["cancel", "ok"],
+		header,
+		children,
+		footer,
+	} = $props();
 
 	function keydown(e) {
 		switch (e.code) {
@@ -30,24 +35,27 @@
 	});
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="wx-modal"
 	bind:this={modal}
 	transition:fade={{ duration: 100 }}
 	tabindex="0"
-	on:keydown={keydown}
+	onkeydown={keydown}
 >
 	<div class="wx-window">
-		<slot name="title">
-			{#if title}
-				<div class="wx-header">{title}</div>
-			{/if}
-		</slot>
+		{#if header}
+			{@render header()}
+		{:else if title}
+			<div class="wx-header">{title}</div>
+		{/if}
 		<div>
-			<slot />
+			{@render children()}
 		</div>
-		<slot name="buttons">
+		{#if footer}
+			{@render footer()}
+		{:else}
 			<div class="wx-buttons">
 				{#each buttons as button}
 					<div class="wx-button">
@@ -55,14 +63,14 @@
 							type="block {button === 'ok'
 								? 'primary'
 								: 'secondary'}"
-							click={() => (button === "ok" ? ok() : cancel())}
+							onclick={() => (button === "ok" ? ok() : cancel())}
 						>
 							{_(button)}
 						</Button>
 					</div>
 				{/each}
 			</div>
-		</slot>
+		{/if}
 	</div>
 </div>
 

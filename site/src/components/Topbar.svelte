@@ -5,12 +5,12 @@
 
 	import { getData } from "../data";
 
-	export let skin;
+	let { skin = $bindable() } = $props();
 
 	const { employees, countries } = getData();
 
 	function selectSkin(ev) {
-		skin = ev.detail.selected.id;
+		skin = ev.selected.id;
 	}
 </script>
 
@@ -21,10 +21,11 @@
 			<Combo
 				options={countries}
 				textField="name"
-				let:option
 				placeholder="Click to select"
 			>
-				{option.name}
+				{#snippet children({ option })}
+					{option.name}
+				{/snippet}
 			</Combo>
 		</div>
 		<div class="avatars" style="width: 128px">
@@ -47,7 +48,7 @@
 			<Pager value={2} total={100} />
 		</div>
 		<div class="switch" style="width: 48px">
-			<CustomThemeSelect bind:value={skin} on:select={selectSkin} />
+			<CustomThemeSelect bind:value={skin} onchange={selectSkin} />
 		</div>
 	</div>
 </div>

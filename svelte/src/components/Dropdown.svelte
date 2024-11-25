@@ -1,16 +1,17 @@
 <script>
 	import { clickOutside } from "wx-lib-dom";
-	import { afterUpdate } from "svelte";
 
-	export let position = "bottom";
-	export let align = "start";
-	export let autoFit = true;
-	export let cancel = null;
-	export let width = "100%";
+	let {
+		position = "bottom",
+		align = "start",
+		autoFit = true,
+		cancel = null,
+		width = "100%",
+		children,
+	} = $props();
 
 	let node;
-
-	afterUpdate(() => {
+	$effect(() => {
 		if (autoFit) {
 			const nodeCoords = node.getBoundingClientRect();
 			const bodyCoords = document.body.getBoundingClientRect();
@@ -37,7 +38,7 @@
 	class="wx-dropdown {`wx-${position}-${align}`}"
 	style="width:{width}"
 >
-	<slot />
+	{@render children?.()}
 </div>
 
 <style>

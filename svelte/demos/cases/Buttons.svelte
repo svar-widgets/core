@@ -4,7 +4,7 @@
 
 	const { showNotice } = getContext("wx-helpers");
 
-	function click() {
+	function onclick() {
 		showNotice({
 			text: "Button clicked",
 		});
@@ -13,38 +13,38 @@
 
 <div class="demo-box">
 	<h3>Default button</h3>
-	<Button {click} title="Click me and I will do nothing">Click Me</Button>
-	<Button disabled={true} {click}>Click Me</Button>
+	<Button {onclick} title="Click me and I will do nothing">Click Me</Button>
+	<Button disabled={true} {onclick}>Click Me</Button>
 </div>
 
 <div class="demo-box">
 	<h3>Primary button</h3>
-	<Button type="primary" {click}>Click Me</Button>
-	<Button type="primary" disabled={true} {click}>Click Me</Button>
+	<Button type="primary" {onclick}>Click Me</Button>
+	<Button type="primary" disabled={true} {onclick}>Click Me</Button>
 </div>
 
 <div class="demo-box">
 	<h3>Secondary button</h3>
-	<Button type="secondary" {click}>Click Me</Button>
-	<Button type="secondary" disabled={true} {click}>Click Me</Button>
+	<Button type="secondary" {onclick}>Click Me</Button>
+	<Button type="secondary" disabled={true} {onclick}>Click Me</Button>
 </div>
 
 <div class="demo-box">
 	<h3>Danger button</h3>
-	<Button type="danger" {click}>Click Me</Button>
-	<Button type="danger" disabled={true} {click}>Click Me</Button>
+	<Button type="danger" {onclick}>Click Me</Button>
+	<Button type="danger" disabled={true} {onclick}>Click Me</Button>
 </div>
 
 <div class="demo-box">
 	<h3>Link button</h3>
 	<p>
-		<Button type="link" icon="wxi-alert" {click}>Click Me</Button>
+		<Button type="link" icon="wxi-alert" {onclick}>Click Me</Button>
 	</p>
 	<p>
-		<Button type="link" {click}>Click Me</Button>
+		<Button type="link" {onclick}>Click Me</Button>
 	</p>
 	<p>
-		<Button type="link" disabled={true} {click}>Click Me</Button>
+		<Button type="link" disabled={true} {onclick}>Click Me</Button>
 	</p>
 </div>
 

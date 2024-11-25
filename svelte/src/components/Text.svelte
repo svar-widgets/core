@@ -1,26 +1,28 @@
 <script>
 	import { uid } from "wx-lib-dom";
-	import { onMount, createEventDispatcher } from "svelte";
+	import { onMount } from "svelte";
 
-	export let value = "";
-	export let id = uid();
-	export let readonly = false;
-	export let focus = false;
-	export let select = false;
-	export let type = "text";
-	export let placeholder = "";
-	export let disabled = false;
-	export let error = false;
-	export let inputStyle = "";
-	export let title = "";
-	export let css = "";
-	export let icon = "";
-
-	const dispatch = createEventDispatcher();
+	let {
+		value = $bindable(""),
+		id = uid(),
+		readonly = false,
+		focus = false,
+		select = false,
+		type = "text",
+		placeholder = "",
+		disabled = false,
+		error = false,
+		inputStyle = "",
+		title = "",
+		css = $bindable(""),
+		icon,
+		onchange: change,
+	} = $props();
 
 	if (icon && css.indexOf("wx-icon-left") === -1)
 		css = "wx-icon-right " + css;
 
+	// svelte-ignore non_reactive_update
 	let input;
 	onMount(() => {
 		// wait till the source click processing will end
@@ -29,6 +31,9 @@
 			if (select && input) input.select();
 		}, 1);
 	});
+
+	const oninput = () => change && change({ value, input: true });
+	const onchange = () => change && change({ value });
 </script>
 
 <div class="wx-text {css}" class:wx-error={error} class:wx-disabled={disabled}>
@@ -43,8 +48,8 @@
 			type="password"
 			style={inputStyle}
 			{title}
-			on:input={() => dispatch("change", { value, input: true })}
-			on:change={() => dispatch("change", { value })}
+			{oninput}
+			{onchange}
 		/>
 	{:else if type == "number"}
 		<input
@@ -57,8 +62,8 @@
 			type="number"
 			style={inputStyle}
 			{title}
-			on:input={() => dispatch("change", { value, input: true })}
-			on:change={() => dispatch("change", { value })}
+			{oninput}
+			{onchange}
 		/>
 	{:else}
 		<input
@@ -70,12 +75,12 @@
 			{placeholder}
 			{title}
 			style={inputStyle}
-			on:input={() => dispatch("change", { value, input: true })}
-			on:change={() => dispatch("change", { value })}
+			{oninput}
+			{onchange}
 		/>
 	{/if}
 
-	{#if icon}<i class="wx-icon {icon}" />{/if}
+	{#if icon}<i class="wx-icon {icon}"></i>{/if}
 </div>
 
 <style>
@@ -165,21 +170,5 @@
 	.wx-error input {
 		border-color: var(--wx-color-danger);
 		color: var(--wx-color-danger);
-	}
-
-	.wx-title input {
-		border: 1px solid transparent;
-		font-weight: var(--wx-font-weight-md);
-		font-size: var(--wx-font-size-md);
-		line-height: var(--wx-line-height-md);
-		color: var(--wx-color-secondary-font);
-		margin-left: -8px;
-		width: calc(100% + 8px);
-	}
-	.wx-title:focus:not([disabled]) input {
-		border: var(--wx-input-border-focus);
-	}
-	.wx-title:hover:not([disabled]) input {
-		border: var(--wx-input-border-focus);
 	}
 </style>

@@ -4,7 +4,7 @@
 	import { getContext } from "svelte";
 	const wh = getContext("wx-helpers");
 	function showChanges(ev) {
-		wh.showNotice({ text: `Date changed to ${ev.detail.selected}` });
+		wh.showNotice({ text: `Date changed to ${ev.selected}` });
 	}
 
 	function parseDate(string) {
@@ -15,34 +15,58 @@
 
 <div class="demo-box">
 	<h3>Datepicker</h3>
-	<Field label="Wide" let:id>
-		<DatePicker width="100%" {id} on:select={showChanges} />
+	<Field label="Wide">
+		{#snippet children({ id })}
+			<DatePicker width="100%" {id} onchange={showChanges} />
+		{/snippet}
 	</Field>
-	<Field label="Align auto" let:id>
-		<DatePicker {id} />
+	<Field label="Align auto">
+		{#snippet children({ id })}
+			<DatePicker {id} />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" let:id>
-		<DatePicker disabled {id} />
+	<Field label="Disabled">
+		{#snippet children({ id })}
+			<DatePicker disabled {id} />
+		{/snippet}
 	</Field>
-	<Field label="Editable (new Date())" let:id>
-		<DatePicker editable {id} />
+	<Field label="Editable (new Date())">
+		{#snippet children({ id })}
+			<DatePicker editable {id} />
+		{/snippet}
 	</Field>
-	<Field label="Editable custom format (MMDDYYYY)" let:id>
-		<DatePicker editable={parseDate} {id} format={"%m%d%Y"} />
+	<Field label="Editable custom format (MMDDYYYY)">
+		{#snippet children({ id })}
+			<DatePicker editable={parseDate} {id} format={"%m%d%Y"} />
+		{/snippet}
 	</Field>
-	<Field label="Align center" error let:id>
-		<DatePicker error {id} align="center" title="Invalid date" />
+	<Field label="Align center" error>
+		{#snippet children({ id })}
+			<DatePicker error {id} align="center" title="Invalid date" />
+		{/snippet}
 	</Field>
-	<Field label="Without buttons" let:id>
-		<DatePicker {id} buttons={false} value={new Date(2022, 4, 10, 16, 0)} />
+	<Field label="Without buttons">
+		{#snippet children({ id })}
+			<DatePicker
+				{id}
+				buttons={false}
+				value={new Date(2022, 4, 10, 16, 0)}
+			/>
+		{/snippet}
 	</Field>
-	<Field label="Default format" let:id>
-		<DatePicker {id} value={new Date()} />
+	<Field label="Default format">
+		{#snippet children({ id })}
+			<DatePicker {id} value={new Date()} />
+		{/snippet}
 	</Field>
-	<Field label="Custom format" let:id>
-		<DatePicker {id} value={new Date()} format="%d %F, %Y" />
+	<Field label="Custom format">
+		{#snippet children({ id })}
+			<DatePicker {id} value={new Date()} format="%d %F, %Y" />
+		{/snippet}
 	</Field>
-	<Field label="Custom icon position" let:id>
-		<DatePicker {id} value={new Date()} css="wx-icon-left" />
+	<Field label="Custom icon position">
+		{#snippet children({ id })}
+			<DatePicker {id} value={new Date()} css="wx-icon-left" />
+		{/snippet}
 	</Field>
 </div>

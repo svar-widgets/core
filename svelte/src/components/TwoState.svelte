@@ -1,51 +1,53 @@
 <script>
 	import Button from "./Button.svelte";
 
-	export let value = false;
-	export let type = "";
-	export let icon = null;
-	export let disabled = null;
-	export let iconActive = null;
-	export let click;
-	export let title = "";
-	export let css = "";
-	export let text = "";
-	export let textActive = "";
+	let {
+		value = false,
+		type = "",
+		icon = null,
+		disabled = null,
+		iconActive = null,
+		onclick,
+		title = "",
+		css = "",
+		text = "",
+		textActive = "",
+		children,
+		active,
+	} = $props();
 
-	let typeStr = type;
-	$: typeStr = (value ? "pressed" : "") + (type ? " " + type : "");
+	let typeStr = $derived((value ? "pressed" : "") + (type ? " " + type : ""));
 
 	function handleClick(ev) {
-		if (click) click(ev);
-		if (!ev.defaultPrevented) value = !value;
+		let next = !value;
+		if (onclick) onclick(ev);
+		if (!ev.defaultPrevented) value = next;
 	}
-
-	const SLOTS = $$props.$$slots;
 </script>
 
-{#if value && SLOTS && SLOTS.active}
+{#if value && active}
 	<Button
 		{title}
 		text={(value && textActive) || text}
 		{css}
 		type={typeStr}
 		icon={(value && iconActive) || icon}
-		click={handleClick}
+		onclick={handleClick}
 		{disabled}
 	>
-		<slot name="active" />
+		{@render active()}
 	</Button>
-{:else if SLOTS && SLOTS.default}
+{:else if children}
 	<Button
 		{title}
 		text={(value && textActive) || text}
 		{css}
 		type={typeStr}
 		icon={(value && iconActive) || icon}
-		click={handleClick}
+		onclick={handleClick}
 		{disabled}
 	>
-		<slot />
+		{@render children()}
 	</Button>
 {:else}
 	<Button
@@ -54,7 +56,7 @@
 		{css}
 		type={typeStr}
 		icon={(value && iconActive) || icon}
-		click={handleClick}
+		onclick={handleClick}
 		{disabled}
 	/>
 {/if}

@@ -1,8 +1,8 @@
 <script>
 	import { Switch, Field } from "../../src/index";
 
-	let v1 = false;
-	let v2 = false;
+	let v1 = $state(false);
+	let v2 = $state(false);
 </script>
 
 <div class="demo-box">
@@ -14,10 +14,14 @@
 
 <div class="demo-box">
 	<h3>Switch Button with a side label</h3>
-	<Field label="Switch: {v2}" position="left" type="switch" let:id>
-		<Switch bind:value={v2} {id} />
+	<Field label="Switch: {v2}" position="left" type="switch">
+		{#snippet children({ id })}
+			<Switch bind:value={v2} {id} />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" position="left" type="switch" let:id>
-		<Switch disabled {id} />
+	<Field label="Disabled" position="left" type="switch">
+		{#snippet children({ id })}
+			<Switch disabled {id} />
+		{/snippet}
 	</Field>
 </div>

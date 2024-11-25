@@ -9,12 +9,12 @@
 		{ value: 5, label: "Option 5" },
 	];
 
-	let v1 = true,
-		v2;
+	let v1 = $state(true),
+		v2 = $state(false);
 
-	let valueGroup1 = [1, 2];
-	let valueGroup2 = [2, 3];
-	let valueGroup3 = [3, 4];
+	let valueGroup1 = $state([1, 2]);
+	let valueGroup2 = $state([2, 3]);
+	let valueGroup3 = $state([3, 4]);
 
 	function print(v) {
 		return v.join(", ");
@@ -37,14 +37,20 @@
 
 <div class="demo-box">
 	<h3>Checkbox with a side label</h3>
-	<Field label="Checkbox" type="checkbox" position="left" let:id>
-		<Checkbox {id} />
+	<Field label="Checkbox" type="checkbox" position="left">
+		{#snippet children({ id })}
+			<Checkbox {id} />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" type="checkbox" position="left" let:id>
-		<Checkbox label="Default" disabled {id} />
+	<Field label="Disabled" type="checkbox" position="left">
+		{#snippet children({ id })}
+			<Checkbox label="Default" disabled {id} />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" type="checkbox" position="left" let:id>
-		<Checkbox label="Checked" disabled {id} />
+	<Field label="Disabled" type="checkbox" position="left">
+		{#snippet children({ id })}
+			<Checkbox label="Checked" disabled {id} />
+		{/snippet}
 	</Field>
 </div>
 

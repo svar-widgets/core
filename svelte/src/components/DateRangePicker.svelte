@@ -1,46 +1,48 @@
 <script>
-	import { getContext, createEventDispatcher } from "svelte";
+	import { getContext } from "svelte";
 	import { uid, dateToString } from "wx-lib-dom";
 
 	import Text from "./Text.svelte";
 	import Dropdown from "./Dropdown.svelte";
 	import RangeCalendar from "./RangeCalendar.svelte";
 
-	export let value;
-	export let id = uid();
-	export let disabled = false;
-	export let error = false;
-	export let done = false;
-	export let width = "unset";
-	export let align = "start";
-	export let placeholder = "";
-	export let css;
-	export let title;
-	export let format;
-	export let months = 2;
-	export let buttons;
-	export let editable = false;
-
-	const dispatch = createEventDispatcher();
+	let {
+		value = $bindable(),
+		id = uid(),
+		disabled = false,
+		error = false,
+		done = false,
+		width = "unset",
+		align = "start",
+		placeholder = "",
+		css = "",
+		title = "",
+		format = "",
+		months = 2,
+		buttons = true,
+		editable = false,
+		onchange,
+	} = $props();
 
 	const { calendar: calendarLocale, formats } =
 		getContext("wx-i18n").getRaw();
 	const f = format || formats?.dateFormat;
 	let dateFormat =
 		typeof f === "function" ? f : dateToString(f, calendarLocale);
-	let popup;
+	let popup = $state();
 
 	function cancel() {
 		popup = false;
 	}
 
-	let formattedValue;
-	$: formattedValue = value
-		? value.start
-			? dateFormat(value.start) +
-				(value.end ? ` - ${dateFormat(value.end)}` : "")
-			: dateFormat(value)
-		: "";
+	let formattedValue = $derived(
+		value
+			? value.start
+				? dateFormat(value.start) +
+					(value.end ? ` - ${dateFormat(value.end)}` : "")
+				: dateFormat(value)
+			: ""
+	);
 
 	function doChange(d) {
 		value = d.start || d.end ? { start: d.start, end: d.end } : null;
@@ -48,7 +50,7 @@
 		// fire after on-click finished
 		if ((d.start && d.end) || (!d.start && !d.end)) {
 			// FIXME - select event will trigger even if the same value
-			dispatch("select", { selected: value });
+			onchange && onchange({ selected: value });
 			setTimeout(cancel, 1);
 		}
 	}
@@ -56,11 +58,8 @@
 	function doInputChange(ev) {
 		if (!editable) return;
 
-		const { value: v, input } = ev.detail;
+		const { value: v, input } = ev;
 		if (input) return;
-
-		// reset formatted value to ensure that text in the input will be repainted
-		formattedValue = "";
 
 		const [s, e] = v.split(" -").map((a, i) => {
 			const av = a.trim();
@@ -81,25 +80,19 @@
 		doChange({ start: s, end: e });
 	}
 
-	let start, end;
-	$: {
-		if (!value) {
-			start = end = null;
-		} else {
-			start = value.start || null;
-			end = value.end || null;
-		}
-	}
+	const start = $derived(value ? value.start || null : null);
+	const end = $derived(value ? value.end || null : null);
 </script>
 
-<svelte:window on:scroll={cancel} />
+<svelte:window onscroll={cancel} />
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="wx-daterangepicker"
 	class:wx-disabled={disabled}
 	class:wx-error={error}
-	on:click={() => (popup = true)}
+	onclick={() => (popup = true)}
 >
 	<Text
 		{css}
@@ -110,7 +103,7 @@
 		{disabled}
 		{placeholder}
 		{error}
-		on:change={doInputChange}
+		onchange={doInputChange}
 		icon="wxi-calendar"
 		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);"
 	/>
@@ -124,7 +117,7 @@
 				{start}
 				{end}
 				{months}
-				on:change={e => doChange(e.detail)}
+				onchange={doChange}
 			/>
 		</Dropdown>
 	{/if}

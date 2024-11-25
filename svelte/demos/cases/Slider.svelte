@@ -1,61 +1,63 @@
 <script>
 	import { Field, Slider } from "../../src/index";
 
-	let valueA = 50;
-	let valueB = 50;
-	let valueC = 50;
+	let valueA = $state(50);
+	let valueB = $state(50);
+	let valueC = $state(50);
 
-	function onInput({ detail }) {
-		if (detail.input) {
-			console.log(
-				`Input change from ${detail.previous} to ${detail.value}`
-			);
-			valueB = detail.value;
+	function onInput({ input, value, previous }) {
+		if (input) {
+			console.log(`Input change from ${previous} to ${value}`);
+			valueB = value;
 		}
 	}
-	function onChange({ detail }) {
-		if (!detail.input) {
-			console.log(`Final input change to ${detail.value}`);
-			valueC = detail.value;
+	function onChange({ input, value }) {
+		if (!input) {
+			console.log(`Final input change to ${value}`);
+			valueC = value;
 		}
 	}
 </script>
 
 <div class="demo-box">
 	<h3>Slider</h3>
-	<Field label="Updates from binding" position="left" type="slider" let:id>
-		<Slider {id} label="Progress: {valueA}%" bind:value={valueA} />
+	<Field label="Updates from binding" position="left" type="slider">
+		{#snippet children({ id })}
+			<Slider {id} label="Progress: {valueA}%" bind:value={valueA} />
+		{/snippet}
 	</Field>
 	<Field
 		label="Updates from input `change` event"
 		position="left"
 		type="slider"
-		let:id
 	>
-		<Slider
-			{id}
-			label="Progress: {valueB}%"
-			value={valueB}
-			on:change={onInput}
-		/>
+		{#snippet children({ id })}
+			<Slider
+				{id}
+				label="Progress: {valueB}%"
+				value={valueB}
+				onchange={onInput}
+			/>
+		{/snippet}
 	</Field>
-	<Field
-		label="Updates from `change` event"
-		position="left"
-		type="slider"
-		let:id
-	>
-		<Slider
-			{id}
-			label="Progress: {valueC}%"
-			value={valueC}
-			on:change={onChange}
-		/>
+	<Field label="Updates from `change` event" position="left" type="slider">
+		{#snippet children({ id })}
+			<Slider
+				{id}
+				label="Progress: {valueC}%"
+				value={valueC}
+				onchange={onChange}
+			/>
+		{/snippet}
 	</Field>
-	<Field label="Disabled" position="left" type="slider" let:id>
-		<Slider disabled {id} value={20} />
+	<Field label="Disabled" position="left" type="slider">
+		{#snippet children({ id })}
+			<Slider disabled {id} value={20} />
+		{/snippet}
 	</Field>
-	<Field label="Unset value" position="left" type="slider" let:id>
-		<Slider {id} title="Default slider's value is 0" />
+	<Field label="Unset value" position="left" type="slider">
+		{#snippet children({ id })}
+			<Slider {id} title="Default slider's value is 0" />
+		{/snippet}
 	</Field>
 </div>

@@ -5,7 +5,16 @@
 
 	const { employees, positions } = getData();
 
-	let searchValue = "";
+	let searchValue = $state("");
+	let employeesFiltered = $derived(
+		searchValue
+			? employees.filter(e =>
+					e.firstName
+						.toLowerCase()
+						.includes(searchValue.toLowerCase())
+				)
+			: employees
+	);
 </script>
 
 <div class="column">
@@ -16,7 +25,7 @@
 		bind:value={searchValue}
 	/>
 	<div class="list">
-		{#each employees as employee (employee.id)}
+		{#each employeesFiltered as employee (employee.id)}
 			<div class="card">
 				<div class="avatar">
 					{#if employee.avatar}
@@ -47,7 +56,8 @@
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		justify-content: flex-start;
+		gap: 6px;
 		width: 380px;
 		min-width: 240px;
 		border: var(--wx-input-border);
@@ -66,7 +76,7 @@
 		padding-top: 6px;
 	}
 
-	.list .card:not(:first-child) {
+	.list .card:not(:global(:first-child)) {
 		border-top: var(--wx-input-border);
 		padding-top: 6px;
 		height: 46px;

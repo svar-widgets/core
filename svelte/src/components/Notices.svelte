@@ -1,7 +1,7 @@
 <script>
 	import Notice from "./Notice.svelte";
 
-	export let data;
+	let { data = [] } = $props();
 </script>
 
 <div class="wx-notices">

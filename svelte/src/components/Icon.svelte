@@ -1,18 +1,19 @@
 <script>
-	export let css = "";
-	export let title = "";
-
-	const SLOTS = $$props.$$slots;
+	let { css = "", title = "", children, onclick } = $props();
 </script>
 
-{#if SLOTS && SLOTS.default}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<i {title} role="icon" class="wx-icon {css}" on:click>
-		<slot />
+{#if children}
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<i {title} role="img" class="wx-icon {css}" {onclick}>
+		{@render children()}
 	</i>
 {:else}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<i {title} class="wx-icon {css}" on:click />
+	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<i {title} class="wx-icon {css}" {onclick}></i>
 {/if}
 
 <style>

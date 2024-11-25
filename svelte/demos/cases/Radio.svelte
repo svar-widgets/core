@@ -1,7 +1,7 @@
 <script>
 	import { RadioButton, RadioButtonGroup, Field } from "../../src/index";
 
-	let value = 1;
+	let value = $state(1);
 
 	let options = [
 		{ value: 1, label: "Option 1" },
@@ -22,17 +22,25 @@
 
 <div class="demo-box">
 	<h3>RadioButton with side label</h3>
-	<Field label="Radio 1" position="left" type="checkbox" let:id>
-		<RadioButton {id} name="a2" />
+	<Field label="Radio 1" position="left" type="checkbox">
+		{#snippet children({ id })}
+			<RadioButton {id} name="a2" />
+		{/snippet}
 	</Field>
-	<Field label="Radio 2" position="left" type="checkbox" let:id>
-		<RadioButton {id} name="a2" />
+	<Field label="Radio 2" position="left" type="checkbox">
+		{#snippet children({ id })}
+			<RadioButton {id} name="a2" />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" position="left" type="checkbox" let:id>
-		<RadioButton label="Default" disabled {id} name="a2" />
+	<Field label="Disabled" position="left" type="checkbox">
+		{#snippet children({ id })}
+			<RadioButton label="Default" disabled {id} name="a2" />
+		{/snippet}
 	</Field>
-	<Field label="Checked" position="left" type="checkbox" let:id>
-		<RadioButton label="Checked" checked={true} {id} name="a2" />
+	<Field label="Checked" position="left" type="checkbox">
+		{#snippet children({ id })}
+			<RadioButton label="Checked" checked={true} {id} name="a2" />
+		{/snippet}
 	</Field>
 </div>
 

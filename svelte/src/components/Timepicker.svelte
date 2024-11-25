@@ -8,24 +8,21 @@
 	import { getContext } from "svelte";
 	import { dateToString, uid } from "wx-lib-dom";
 
-	export let value = new Date(0, 0, 0, 0, 0);
-	export let id = uid();
-	export let title;
-	export let css;
-	export let disabled = false;
-	export let error = false;
-	export let format;
+	const defValue = new Date(0, 0, 0, 0, 0);
+
+	let {
+		value = $bindable(defValue),
+		id = uid(),
+		title = "",
+		css = "",
+		disabled = false,
+		error = false,
+		format = "",
+	} = $props();
 
 	const { calendar: calendarLocale, formats } =
 		getContext("wx-i18n").getRaw();
 	const h12 = calendarLocale.clockFormat == 12;
-	let f, timeFormat, zeroBased;
-	$: {
-		f = format || formats.timeFormat;
-		timeFormat =
-			typeof f === "function" ? f : dateToString(f, calendarLocale);
-		zeroBased = timeFormat(new Date(0, 0, 0, 1)).indexOf("01") != -1;
-	}
 
 	const maxH = 23;
 	const maxM = 59;
@@ -35,47 +32,39 @@
 		return Math.min(v, max);
 	};
 
-	let popup;
+	let popup = $state();
 
-	let hText = "",
-		mText = "";
-	let h = 0;
-	let m = 0;
-	let pm = false;
+	const safeValue = $derived(value || defValue);
+	let h = $derived(update(safeValue.getHours(), maxH));
+	let m = $derived(update(safeValue.getMinutes(), maxM));
 
-	$: initTime(value);
-	function initTime(value) {
-		if (value) {
-			h = update(value.getHours(), maxH);
-			m = update(value.getMinutes(), maxM);
-		}
-	}
-
-	let textValue;
-	$: updateTime(h, m);
-	function updateTime(h, m) {
-		pm = h > 11;
-		hText = formatH(h);
-		mText = formatM(m);
-		textValue = timeFormat(new Date(0, 0, 0, h, m));
-
-		if (
-			(value && (value.getHours() !== h || value.getMinutes() !== m)) ||
-			(!value && (h || m))
-		) {
-			const next = new Date(value);
-			next.setMinutes(m);
-			next.setHours(h);
-			value = next;
-		}
-	}
+	const pm = $derived(h > 12);
+	const hText = $derived(formatH(h));
+	const mText = $derived(formatM(m));
+	const textValue = $derived(timeFormat(new Date(0, 0, 0, h, m)));
 
 	function click() {
 		popup = true;
 	}
 
 	function togglePM() {
-		h = (h + 12) % 24;
+		const next = new Date(safeValue);
+		next.setHours(next.getHours() + (pm ? -12 : 12));
+		value = next;
+	}
+	function setHours({ value: v }) {
+		if (safeValue.getHours() === v) return;
+
+		const next = new Date(safeValue);
+		next.setHours(v);
+		value = next;
+	}
+	function setMinutes({ value: v }) {
+		if (safeValue.getMinutes() === v) return;
+
+		const next = new Date(safeValue);
+		next.setMinutes(v);
+		value = next;
 	}
 	function formatH(v) {
 		if (h12) {
@@ -109,14 +98,23 @@
 	function cancel() {
 		popup = null;
 	}
+
+	const timeFormat = $derived.by(() => {
+		const f = format || formats.timeFormat;
+		return typeof f === "function" ? f : dateToString(f, calendarLocale);
+	});
+	const zeroBased = $derived(
+		timeFormat(new Date(0, 0, 0, 1)).indexOf("01") != -1
+	);
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="wx-timepicker"
 	class:wx-error={error}
 	class:wx-disabled={disabled}
-	on:click={click}
+	onclick={click}
 >
 	<Text
 		{id}
@@ -136,19 +134,25 @@
 				<div class="wx-timer">
 					<input
 						class="wx-digit"
-						bind:value={hText}
-						on:blur={() => (h = updateH(hText))}
+						value={hText}
+						onblur={function () {
+							setHours({ value: updateH(this.value) });
+						}}
 					/>
 					<div class="wx-separator">:</div>
 					<input
 						class="wx-digit"
-						bind:value={mText}
-						on:blur={() => (m = update(mText, maxM))}
+						value={mText}
+						onblur={function () {
+							setMinutes({ value: update(this.value, maxM) });
+						}}
 					/>
 					{#if h12}
-						<TwoState value={pm} click={togglePM}>
+						<TwoState value={pm} onclick={togglePM}>
 							<span>am</span>
-							<span slot="active">pm</span>
+							{#snippet active()}
+								<span>pm</span>
+							{/snippet}
 						</TwoState>
 					{/if}
 				</div>
@@ -156,7 +160,8 @@
 					<Slider
 						label={calendarLocale.hours}
 						width={"unset"}
-						bind:value={h}
+						value={h}
+						onchange={setHours}
 						max={maxH}
 					/>
 				</Field>
@@ -164,7 +169,7 @@
 					<Slider
 						label={calendarLocale.minutes}
 						width={"unset"}
-						bind:value={m}
+						onchange={setMinutes}
 						max={maxM}
 					/>
 				</Field>

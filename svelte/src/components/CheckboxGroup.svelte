@@ -1,25 +1,22 @@
 <script>
 	import Checkbox from "./Checkbox.svelte";
 
-	export let options = [];
-	export let value = [];
-	export let type;
+	let { options = [], value = $bindable([]), type = "" } = $props();
 
-	function handleChange(ev) {
-		const obj = ev.detail;
+	function handleChange(obj) {
 		if (obj.value) value = [...value, obj.name];
 		else value = value.filter(a => a != obj.name);
 	}
 </script>
 
-<div class="wx-checkboxgroup wx-{type}">
+<div class="wx-checkboxgroup {type && `wx-${type}`}">
 	{#each options as option}
 		<div class="wx-item">
 			<Checkbox
 				label={option.label}
 				name={option.value}
 				value={value.includes(option.value)}
-				on:change={handleChange}
+				onchange={handleChange}
 			/>
 		</div>
 	{/each}

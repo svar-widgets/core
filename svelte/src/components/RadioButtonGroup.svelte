@@ -2,14 +2,12 @@
 	import { uid } from "wx-lib-dom";
 	import RadioButton from "./RadioButton.svelte";
 
-	export let options = [{}];
-	export let value;
-	export let type;
+	let { options = [{}], value = $bindable(""), type = "" } = $props();
 
 	const name = uid();
 </script>
 
-<div class="wx-radiogroup wx-{type}">
+<div class="wx-radiogroup {type && `wx-${type}`}">
 	{#each options as option}
 		<div class="wx-item">
 			<RadioButton

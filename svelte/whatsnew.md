@@ -1,6 +1,16 @@
+### 1.3.1
+
+-   [fix] locale object lacks language marker
+-   [fix] incorrect change event parameter in Tabbar
+-   [fix] required fields do not have marks in labels
+-   [fix] disabled Richselect throws an error on click/keydown
+-   [fix] current month of Calendar does not update correctly
+
 ### 1.3.0
 
 -   [update] improved popup positioning strategies
+-   [fix] incorrect styling of right selection marker in Calendar
+-   [fix] impossible to track input changes in Textarea
 
 ### 1.2.3
 

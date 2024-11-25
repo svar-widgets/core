@@ -8,35 +8,48 @@
 <div class="demo-box">
 	<h3>RichSelect with a simple list</h3>
 	<Field>
-		<RichSelect options={users} let:option value={104}>
-			{option.name}
+		<RichSelect options={users} value={104}>
+			{#snippet children(option)}
+				{option.name}
+			{/snippet}
 		</RichSelect>
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>RichSelect with a side label</h3>
-	<Field label="Owner" position="left" let:id>
-		<RichSelect options={users} {id} let:option value={104}>
-			{option.name}
-		</RichSelect>
+	<Field label="Owner" position="left">
+		{#snippet children({ id })}
+			<RichSelect options={users} {id} value={104}>
+				{#snippet children(option)}
+					{option.name}
+				{/snippet}
+			</RichSelect>
+		{/snippet}
 	</Field>
-	<Field label="Disabled" position="left" let:id>
-		<RichSelect options={users} {id} disabled let:option value={104}>
-			{option.name}
-		</RichSelect>
+	<Field label="Disabled" position="left">
+		{#snippet children({ id })}
+			<RichSelect options={users} {id} disabled value={104}>
+				{#snippet children(option)}
+					{option.name}
+				{/snippet}
+			</RichSelect>
+		{/snippet}
 	</Field>
-	<Field label="Error" position="left" error let:id>
-		<RichSelect
-			options={users}
-			{id}
-			error
-			let:option
-			value={104}
-			title="Invalid option"
-		>
-			{option.name}
-		</RichSelect>
+	<Field label="Error" position="left" error>
+		{#snippet children({ id })}
+			<RichSelect
+				options={users}
+				{id}
+				error
+				value={104}
+				title="Invalid option"
+			>
+				{#snippet children(option)}
+					{option.name}
+				{/snippet}
+			</RichSelect>
+		{/snippet}
 	</Field>
 </div>
 
@@ -45,8 +58,10 @@
 	<Field width="150px">
 		<RichSelect options={users} value={105} />
 		<br />
-		<RichSelect options={users} let:option value={105}>
-			{option.name}
+		<RichSelect options={users} value={105}>
+			{#snippet children(option)}
+				{option.name}
+			{/snippet}
 		</RichSelect>
 	</Field>
 </div>
@@ -54,8 +69,10 @@
 <div class="demo-box">
 	<h3>RichSelect with a template</h3>
 	<Field>
-		<RichSelect options={users} let:option value={104}>
-			<UserOption data={option} />
+		<RichSelect options={users} value={104}>
+			{#snippet children(option)}
+				<UserOption data={option} />
+			{/snippet}
 		</RichSelect>
 	</Field>
 </div>

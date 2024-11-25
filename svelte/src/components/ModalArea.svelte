@@ -1,10 +1,12 @@
 <script>
 	import { fade } from "svelte/transition";
+
+	let { children } = $props();
 </script>
 
 <div class="wx-modal" transition:fade={{ duration: 100 }}>
 	<div class="wx-window">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>
 

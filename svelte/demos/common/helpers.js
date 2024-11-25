@@ -18,7 +18,7 @@ function getRoutes(skinSettings, cb) {
 			(routes[a[0]] = wrap({
 				component: a[2],
 				userData: a,
-				props: { skinSettings },
+				props: { ...skinSettings },
 				conditions: x => {
 					cb(x.location);
 					return true;

@@ -9,7 +9,7 @@
 	} from "wx-svelte-core";
 	import CustomCoreWidgets from "./CustomCoreWidgets.svelte";
 
-	let skin = "willow";
+	let skin = $state("willow");
 </script>
 
 <Willow />

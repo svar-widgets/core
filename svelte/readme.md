@@ -6,7 +6,7 @@
 
 <div align="center">
 
-:globe_with_meridians: [Website](https://svar.dev/svelte/core/) • :bulb: [Getting Started](https://docs.svar.dev/svelte/core/getting_started/) • :eyes: [Demos](https://docs.svar.dev/svelte/core/samples/#/calendar/willow)
+[Website](https://svar.dev/svelte/core/) • [Getting Started](https://docs.svar.dev/svelte/core/getting_started/) • [Demos](https://docs.svar.dev/svelte/core/samples/#/calendar/willow)
 
 </div>
 
@@ -18,18 +18,18 @@
 
 </div>
 
-SVAR Core library offers a set of 20+ ready-made Svelte UI components: form controls, popups, date and time picker, toast notifications, and more.
+[SVAR Core library](https://svar.dev/svelte/core/) offers a set of 20+ ready-made Svelte UI components: form controls, popups, date and time picker, toast notifications, and more.
 All components are lightweight, responsive, fast-performing, and available in light and dark skins.
 
 <img src="https://cdn.svar.dev/public/core-ui-dark.jpg" alt="SVAR Core Library - Dark Skin" style="width: 600px;">
 
 In addition to the Core library, you can use the following SVAR components to build unified app UIs:
 
--   [Menu](https://github.com/svar-widgets/menu)
--   [Toolbar](https://github.com/svar-widgets/toolbar)
--   [File uploader](https://github.com/svar-widgets/uploader)
+-   [Menu](https://www.npmjs.com/package/wx-svelte-menu)
+-   [Toolbar](https://www.npmjs.com/package/wx-svelte-toolbar)
+-   [File uploader](https://www.npmjs.com/package/wx-svelte-uploader)
 
-### :hammer_and_wrench: How to Use
+# :hammer_and_wrench: How to Use
 
 To use any of the Core components, simply import the package and include the desired component in your Svelte file:
 
@@ -65,4 +65,4 @@ To run the test:
 
 ### :speech_balloon: Need Help?
 
-[Post an Issue](https://github.com/svar-widgets/core/issues/) or use our [community forum](https://forum.svar.dev).
+Join our [community forum](https://forum.svar.dev) to get help or submit feature requests.

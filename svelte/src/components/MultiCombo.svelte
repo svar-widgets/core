@@ -1,46 +1,49 @@
 <script>
-	import { createEventDispatcher } from "svelte";
+	import { uid } from "wx-lib-dom";
 	import List from "./helpers/SuggestDropdown.svelte";
 	import Checkbox from "./Checkbox.svelte";
 
-	export let value;
-	export let options = [];
-	export let textField = "label";
-	export let placeholder = "";
-	export let title = "";
-	export let disabled = false;
-	export let error = false;
-	export let checkboxes = false;
+	let {
+		id = uid(),
+		value = $bindable([]),
+		options = [],
+		textField = "label",
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		checkboxes = false,
+		onchange: change,
+		onselect: select,
+		children,
+	} = $props();
 
-	const dispatch = createEventDispatcher();
-
-	let text = "";
-	let selected = [];
-	let filterOptions;
-	let focus = false;
-
-	$: filterOptions = options;
-
-	let navigate;
-	let keydown;
-	function ready(ev) {
-		navigate = ev.detail.navigate;
-		keydown = ev.detail.keydown;
-	}
-
-	$: selected = value ? options.filter(i => value.includes(i.id)) : [];
-
-	function input() {
-		filterOptions = text
+	let text = $state("");
+	let selected = $derived(
+		value ? options.filter(i => value.includes(i.id)) : []
+	);
+	let filterOptions = $derived(
+		text
 			? options.filter(i =>
 					i[textField].toLowerCase().includes(text.toLowerCase())
 				)
-			: options;
+			: options
+	);
+	let focus = false;
+
+	let navigate = null;
+	let keydown = null;
+	function onready(ev) {
+		navigate = ev.navigate;
+		keydown = ev.keydown;
+	}
+
+	function input() {
 		if (filterOptions.length) navigate(0);
 		else navigate(null);
 	}
-	function select(ev) {
-		const { id } = ev.detail;
+	function onselect(ev) {
+		const { id } = ev;
 
 		if (id) {
 			let next;
@@ -55,16 +58,16 @@
 			}
 
 			value = next;
-			selected = options.filter(i => value.includes(i.id));
-
-			dispatch("select", { selected });
-			dispatch("change", { value });
+			select && select({ selected });
+			change && change({ value });
 		}
 	}
 
-	function remove(id) {
+	function remove(id, ev) {
+		if (ev) ev.stopPropagation();
+
 		value = value.filter(i => i !== id);
-		dispatch("change", { value });
+		change && change({ value });
 	}
 
 	const index = () =>
@@ -73,6 +76,7 @@
 			: 0;
 </script>
 
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	{title}
 	class="wx-multicombo"
@@ -80,51 +84,52 @@
 	class:wx-disabled={disabled}
 	class:wx-not-empty={selected.length}
 	class:wx-focus={focus && !disabled}
-	on:click={() => !disabled && navigate(index())}
-	on:keydown={ev => keydown(ev, index())}
+	onclick={() => !disabled && navigate(index())}
+	onkeydown={ev => keydown(ev, index())}
 >
 	<div class="wx-wrapper">
 		<div class="wx-tags">
 			{#each selected as tag (tag.id)}
 				<div class="wx-tag">
-					<slot option={tag}>{tag[textField]}</slot>
+					{#if children}{@render children({
+							option: tag,
+						})}{:else}{tag[textField]}{/if}
 					{#if !disabled}
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<i
-							class="wxi-close"
-							on:click|stopPropagation={() => remove(tag.id)}
-						/>
+						<!-- svelte-ignore a11y_click_events_have_key_events -->
+						<!-- svelte-ignore a11y_no_static_element_interactions -->
+						<i class="wxi-close" onclick={ev => remove(tag.id, ev)}
+						></i>
 					{/if}
 				</div>
 			{/each}
 		</div>
 		<div class="wx-select">
 			<input
+				{id}
 				type="text"
 				bind:value={text}
-				on:input={input}
+				oninput={input}
 				{placeholder}
 				{disabled}
 			/>
-			<i class="wx-icon wxi-angle-down" />
+			<i class="wx-icon wxi-angle-down"></i>
 		</div>
 	</div>
 
 	{#if !disabled}
-		<List
-			let:option
-			items={filterOptions}
-			on:ready={ready}
-			on:select={select}
-		>
-			{#if checkboxes}
-				<Checkbox
-					style="margin-right: 8px; pointer-events: none;"
-					name={option.id}
-					value={value && value.includes(option.id)}
-				/>
-			{/if}
-			<slot {option}>{option.name}</slot>
+		<List items={filterOptions} {onready} {onselect}>
+			{#snippet children({ option })}
+				{#if checkboxes}
+					<Checkbox
+						style="margin-right: 8px; pointer-events: none;"
+						name={option.id}
+						value={value && value.includes(option.id)}
+					/>
+				{/if}
+				{#if children}{@render children({
+						option,
+					})}{:else}{option.name}{/if}
+			{/snippet}
 		</List>
 	{/if}
 </div>
@@ -145,7 +150,7 @@
 		background: var(--wx-color-disabled);
 		color: var(--wx-color-font-disabled);
 	}
-	.wx-multicombo:not(.wx-disabled) .wx-tag {
+	.wx-multicombo:not(:global(.wx-disabled)) .wx-tag {
 		padding-right: calc(
 			var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2
 		);

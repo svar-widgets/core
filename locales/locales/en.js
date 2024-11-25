@@ -1,3 +1,5 @@
+const lang = "en-US";
+
 const calendar = {
 	monthFull: [
 		"January",
@@ -63,6 +65,7 @@ const data = {
 	core,
 	calendar,
 	formats,
+	lang,
 };
 
 export default data;

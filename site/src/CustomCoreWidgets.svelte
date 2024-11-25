@@ -5,7 +5,7 @@
 	import RadioCheckboxes from "./components/RadioCheckboxes.svelte";
 	import Topbar from "./components/Topbar.svelte";
 
-	export let skin;
+	let { skin = $bindable() } = $props();
 </script>
 
 <div class="demo" style="padding: 20px;">

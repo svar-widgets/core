@@ -2,7 +2,7 @@
 	import { Timepicker, Field, Locale } from "../../src/index";
 	import { cn } from "wx-core-locales";
 
-	let value = null;
+	let value = $state(null);
 </script>
 
 <div class="demo-box">
@@ -17,14 +17,20 @@
 
 <div class="demo-box">
 	<h3>TimePicker with a side label</h3>
-	<Field label="Time" position="left" let:id>
-		<Timepicker {value} {id} />
+	<Field label="Time" position="left">
+		{#snippet children({ id })}
+			<Timepicker {value} {id} />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" position="left" let:id>
-		<Timepicker {value} disabled {id} />
+	<Field label="Disabled" position="left">
+		{#snippet children({ id })}
+			<Timepicker {value} disabled {id} />
+		{/snippet}
 	</Field>
-	<Field label="Error" position="left" error let:id>
-		<Timepicker {value} error {id} title="Invalid option" />
+	<Field label="Error" position="left" error>
+		{#snippet children({ id })}
+			<Timepicker {value} error {id} title="Invalid option" />
+		{/snippet}
 	</Field>
 </div>
 

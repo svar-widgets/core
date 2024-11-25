@@ -1,6 +1,6 @@
 {
 	"name": "wx-core-locales",
-	"version": "1.3.0",
+	"version": "2.0.0-beta-1",
 	"description": "Locales for WX Core widgets",
 	"type": "module",
 	"main": "index.js",

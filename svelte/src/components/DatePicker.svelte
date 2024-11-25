@@ -1,32 +1,34 @@
 <script>
-	import { getContext, createEventDispatcher } from "svelte";
+	import { getContext } from "svelte";
 	import { uid, dateToString } from "wx-lib-dom";
 
 	import Text from "./Text.svelte";
 	import Dropdown from "./Dropdown.svelte";
 	import Calendar from "./Calendar.svelte";
 
-	export let value;
-	export let id = uid();
-	export let disabled = false;
-	export let error = false;
-	export let width = "unset";
-	export let align = "start";
-	export let placeholder = "";
-	export let format;
-	export let buttons = true;
-	export let css = "";
-	export let title = "";
-	export let editable = false;
-
-	const dispatch = createEventDispatcher();
+	let {
+		value = $bindable(),
+		id = uid(),
+		disabled = false,
+		error = false,
+		width = "unset",
+		align = "start",
+		placeholder = "",
+		format = "",
+		buttons = true,
+		css = "",
+		title = "",
+		editable = false,
+		onchange: change,
+	} = $props();
 
 	const { calendar: calendarLocale, formats } =
 		getContext("wx-i18n").getRaw();
 	const f = format || formats.dateFormat;
 	let dateFormat =
 		typeof f === "function" ? f : dateToString(f, calendarLocale);
-	let popup;
+
+	let popup = $state();
 
 	function cancel() {
 		popup = false;
@@ -42,24 +44,18 @@
 
 		value = v;
 		if (!skipEvent) {
-			dispatch("select", { selected: v });
+			change && change({ selected: v });
 		}
 
 		// fire after on-click finished
 		setTimeout(cancel, 1);
 	}
 
-	let formattedValue;
-	$: formattedValue = value ? dateFormat(value) : "";
+	const formattedValue = $derived(value ? dateFormat(value) : "");
 
-	function doChangeInput(ev) {
+	function onchange({ value: v, input }) {
 		if (!editable) return;
-
-		const { value: v, input } = ev.detail;
 		if (input) return;
-
-		// ensure that text in the input will be repainted
-		formattedValue = "";
 
 		// convert to date, but ignore empty string input
 		let date =
@@ -77,10 +73,11 @@
 	}
 </script>
 
-<svelte:window on:scroll={cancel} />
+<svelte:window onscroll={cancel} />
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="wx-datepicker" on:click={() => (popup = true)}>
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="wx-datepicker" onclick={() => (popup = true)}>
 	<Text
 		{css}
 		{title}
@@ -90,19 +87,15 @@
 		{disabled}
 		{error}
 		{placeholder}
-		on:input={cancel}
-		on:change={doChangeInput}
+		oninput={cancel}
+		{onchange}
 		icon="wxi-calendar"
 		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);"
 	/>
 
 	{#if popup && !disabled}
 		<Dropdown {cancel} {width} {align} autoFit={!!align}>
-			<Calendar
-				{buttons}
-				{value}
-				on:change={e => doChange(e.detail.value)}
-			/>
+			<Calendar {buttons} {value} onchange={e => doChange(e.value)} />
 		</Dropdown>
 	{/if}
 </div>

@@ -1,6 +1,6 @@
 <script>
 	import { fade } from "svelte/transition";
-	export let notice = {};
+	let { notice = {} } = $props();
 
 	function onRemove() {
 		if (notice.remove) notice.remove();
@@ -14,9 +14,10 @@
 	transition:fade
 >
 	<div class="wx-text">{notice.text}</div>
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="wx-button">
-		<i class="wx-close wxi-close" on:click={onRemove} />
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wx-close wxi-close" onclick={onRemove}></i>
 	</div>
 </div>
 

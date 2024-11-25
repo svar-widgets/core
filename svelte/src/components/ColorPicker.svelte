@@ -3,28 +3,32 @@
 	import Dropdown from "./Dropdown.svelte";
 	import ColorBoard from "./ColorBoard.svelte";
 
-	export let value = "";
-	export let id = uid();
-	export let placeholder = "";
-	export let title = "";
-	export let disabled = false;
-	export let error = false;
+	let {
+		value = $bindable(""),
+		id = uid(),
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		onchange,
+	} = $props();
 
-	let popup;
+	let popup = $state(false);
 
 	function handlePopup() {
 		if (disabled) return false;
 		popup = true;
 	}
 
-	function selectColor(ev) {
-		value = ev.detail.value;
-		popup = null;
+	function selectColor({ value }) {
+		popup = false;
+		onchange && onchange({ value });
 	}
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="wx-colorpicker" on:click={handlePopup}>
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="wx-colorpicker" onclick={handlePopup}>
 	<input
 		{title}
 		{value}
@@ -35,11 +39,11 @@
 		class:wx-error={error}
 		class:wx-focus={popup}
 	/>
-	<div class="wx-color" style="background: {value}" />
+	<div class="wx-color" style="background: {value}"></div>
 
 	{#if popup}
-		<Dropdown cancel={() => (popup = null)}>
-			<ColorBoard {value} button="true" on:change={selectColor} />
+		<Dropdown cancel={() => (popup = false)}>
+			<ColorBoard {value} button="true" onchange={selectColor} />
 		</Dropdown>
 	{/if}
 </div>

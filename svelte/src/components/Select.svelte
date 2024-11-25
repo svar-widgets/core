@@ -1,14 +1,16 @@
 <script>
 	import { uid } from "wx-lib-dom";
-	export let label = "label";
-	export let value = "";
-	export let options = [];
-	export let placeholder = "";
-	export let title;
-	export let disabled = false;
-	export let error = false;
 
-	export let id = uid();
+	let {
+		label = "label",
+		value = $bindable(""),
+		options = [],
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		id = uid(),
+	} = $props();
 </script>
 
 <div class="wx-select">
@@ -20,7 +22,7 @@
 	{#if !value && value !== 0}
 		<div class="wx-placeholder">{placeholder}</div>
 	{/if}
-	<i class="wx-icon wxi-angle-down" />
+	<i class="wx-icon wxi-angle-down"></i>
 </div>
 
 <style>

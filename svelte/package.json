@@ -1,6 +1,7 @@
 {
 	"name": "wx-svelte-core",
-	"version": "1.3.0",
+	"version": "2.0.0-beta-1",
+	"description": "SVAR Svelte Core library, a collection of form controls and UI components",
 	"productTag": "core",
 	"productTrial": false,
 	"type": "module",
@@ -8,7 +9,7 @@
 		"build": "vite build",
 		"build:dist": "vite build --mode dist",
 		"build:tests": "vite build --mode test",
-		"lint": "yarn eslint ./demos ./src --ext .svelte,.ts,.js",
+		"lint": "yarn eslint ./demos ./src",
 		"start": "vite --open",
 		"start:tests": "vite --open=/tests/ --host 0.0.0.0  --port 5100 --mode test",
 		"test": "true",
@@ -23,7 +24,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"wx-core-locales": "1.3.0",
+		"wx-core-locales": "2.0.0-beta-1",
 		"wx-lib-dom": "0.6.0"
 	},
 	"files": [
@@ -31,5 +32,19 @@
 		"readme.md",
 		"whatsnew.md",
 		"license.txt"
+	],
+	"keywords": [
+		"svelte",
+		"svelte library",
+		"svelte ui components",
+		"svelte-ui-library",
+		"component-library",
+		"components library",
+		"ui library",
+		"ui-library",
+		"ui components",
+		"ui components",
+		"svelte ui library",
+		"svar widgets"
 	]
 }

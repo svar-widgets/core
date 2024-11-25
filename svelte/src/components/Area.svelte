@@ -1,16 +1,16 @@
 <script>
-	import { createEventDispatcher } from "svelte";
 	import { uid } from "wx-lib-dom";
 
-	export let value = "";
-	export let id = uid();
-	export let placeholder = "";
-	export let title = "";
-	export let disabled = false;
-	export let error = false;
-	export let readonly = false;
-
-	const dispatch = createEventDispatcher();
+	let {
+		value = $bindable(""),
+		id = uid(),
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		readonly = false,
+		onchange,
+	} = $props();
 </script>
 
 <textarea
@@ -22,9 +22,9 @@
 	{placeholder}
 	{readonly}
 	{title}
-	on:input={() => dispatch("change", { value, input: true })}
-	on:change={() => dispatch("change", { value })}
-/>
+	oninput={() => onchange && onchange({ value, input: true })}
+	onchange={() => onchange && onchange({ value })}
+></textarea>
 
 <style>
 	.wx-textarea {

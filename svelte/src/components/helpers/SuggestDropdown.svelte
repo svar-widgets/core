@@ -1,32 +1,37 @@
 <script>
-	import { createEventDispatcher, onMount } from "svelte";
+	import { onMount } from "svelte";
 	import { getListHandlers } from "./listnav";
 	import Dropdown from "../Dropdown.svelte";
 
-	export let items = [];
+	let { items = [], children, onselect, onready } = $props();
 
-	let list;
-	let navIndex = null;
+	let list = $state();
+	let navIndex = $state(null);
 
-	const dispatch = createEventDispatcher();
 	const { move, keydown, init, navigate } = getListHandlers();
 
-	const select = () => dispatch("select", { id: items[navIndex]?.id });
-	$: init(list, items, i => (navIndex = i), select);
+	const selectItem = ev => {
+		if (ev) ev.stopPropagation();
+		onselect && onselect({ id: items[navIndex]?.id });
+	};
 
+	$effect(() => {
+		init(list, items, i => (navIndex = i), selectItem);
+	});
 	onMount(() => {
-		dispatch("ready", { navigate, keydown, move });
+		onready && onready({ navigate, keydown, move });
 	});
 </script>
 
 {#if navIndex !== null}
 	<Dropdown cancel={() => navigate(null)}>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class="wx-list"
 			bind:this={list}
-			on:click|stopPropagation={select}
-			on:mousemove={move}
+			onclick={selectItem}
+			onmousemove={move}
 		>
 			{#if items.length}
 				{#each items as data, index (data.id)}
@@ -35,7 +40,9 @@
 						class:wx-focus={index === navIndex}
 						data-id={data.id}
 					>
-						<slot option={data}>{data.name}</slot>
+						{#if children}{@render children({
+								option: data,
+							})}{:else}{data.name}{/if}
 					</div>
 				{/each}
 			{:else}

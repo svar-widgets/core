@@ -1,21 +1,38 @@
 <script>
-	import { Calendar, Segmented, Locale } from "../../src/index";
+	import { Calendar, Segmented, Locale, Text } from "../../src/index";
 	import { en, cn, de, es, fr, it, ja, pt, ru } from "wx-core-locales";
 
-	let lang = "en";
+	let lang = $state("en");
+	let numValue = $state(1256790.567);
+
 	const options = [
-		{ id: "en", name: "EN" },
-		{ id: "cn", name: "CN" },
-		{ id: "de", name: "DE" },
-		{ id: "es", name: "ES" },
-		{ id: "fr", name: "FR" },
-		{ id: "it", name: "IT" },
-		{ id: "ja", name: "JA" },
-		{ id: "pt", name: "PT" },
-		{ id: "ru", name: "RU" },
+		{ id: "en", name: "EN", locale: en },
+		{ id: "cn", name: "CN", locale: cn },
+		{ id: "de", name: "DE", locale: de },
+		{ id: "es", name: "ES", locale: es },
+		{ id: "fr", name: "FR", locale: fr },
+		{ id: "it", name: "IT", locale: it },
+		{ id: "ja", name: "JA", locale: ja },
+		{ id: "pt", name: "PT", locale: pt },
+		{ id: "ru", name: "RU", locale: ru },
 	];
 
-	const value = new Date(2022, 2, 18);
+	function getWords(lang) {
+		const op = options.find(op => op.id == lang);
+		return op?.locale || en;
+	}
+
+	function getFormattedNumber(l, n) {
+		const locale = getWords(l);
+		const localeName = locale.lang || "en-US";
+		return new Intl.NumberFormat(localeName, {
+			minimumFractionDigits: 2,
+			style: "currency",
+			currency: "EUR",
+		}).format(n);
+	}
+
+	const value = new Date(2024, 2, 18);
 </script>
 
 <div class="demo-box">
@@ -23,41 +40,36 @@
 </div>
 
 <div class="demo-box" style="width: 300px">
-	{#if lang === "en"}
-		<Locale words={en}>
-			<Calendar {value} />
+	{#key lang}
+		<Locale words={getWords(lang)}>
+			<div class="calendar">
+				<Calendar {value} />
+			</div>
+
+			<div class="bar">
+				<div class="text">
+					<Text bind:value={numValue} />
+				</div>
+				{getFormattedNumber(lang, numValue)}
+			</div>
 		</Locale>
-	{:else if lang === "cn"}
-		<Locale words={cn}>
-			<Calendar {value} />
-		</Locale>
-	{:else if lang === "de"}
-		<Locale words={de}>
-			<Calendar {value} />
-		</Locale>
-	{:else if lang === "es"}
-		<Locale words={es}>
-			<Calendar {value} />
-		</Locale>
-	{:else if lang === "fr"}
-		<Locale words={fr}>
-			<Calendar {value} />
-		</Locale>
-	{:else if lang === "it"}
-		<Locale words={it}>
-			<Calendar {value} />
-		</Locale>
-	{:else if lang === "ja"}
-		<Locale words={ja}>
-			<Calendar {value} />
-		</Locale>
-	{:else if lang === "pt"}
-		<Locale words={pt}>
-			<Calendar {value} />
-		</Locale>
-	{:else if lang === "ru"}
-		<Locale words={ru}>
-			<Calendar {value} />
-		</Locale>
-	{/if}
+	{/key}
 </div>
+
+<style>
+	.demo-box {
+	}
+	.calendar {
+		border: var(--wx-border);
+		border-radius: 3px;
+	}
+	.bar {
+		display: flex;
+		margin-top: 20px;
+		gap: 20px;
+		align-items: center;
+	}
+	.text {
+		width: 150px;
+	}
+</style>

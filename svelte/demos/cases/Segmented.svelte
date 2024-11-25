@@ -15,7 +15,7 @@
 	const optionsIcons = options.map(a => ({ ...a, name: null }));
 	const optionsText = options.map(a => ({ ...a, icon: null }));
 
-	let value = 2;
+	let value = $state(2);
 </script>
 
 <div class="demo-box">
@@ -35,17 +35,25 @@
 	<h3>Custom templates</h3>
 
 	<h4>Segmented Button</h4>
-	<Segmented {options} {value} let:option>{option.name}</Segmented>
+	<Segmented {options} {value}
+		>{#snippet children({ option })}
+			{option.name}
+		{/snippet}
+	</Segmented>
 
 	<h4>Segmented Button with icons</h4>
-	<Segmented {options} let:option value={1}>
-		<i class="icon {option.icon}" />
+	<Segmented {options} value={1}>
+		{#snippet children({ option })}
+			<i class="icon {option.icon}"></i>
+		{/snippet}
 	</Segmented>
 
 	<h4>Segmented Button with a mixed content</h4>
-	<Segmented {options} value={2} let:option>
-		<i class="icon {option.icon}" />
-		<span class="bottom">{option.name}</span>
+	<Segmented {options} value={2}>
+		{#snippet children({ option })}
+			<i class="icon {option.icon}"></i>
+			<span class="bottom">{option.name}</span>
+		{/snippet}
 	</Segmented>
 </div>
 

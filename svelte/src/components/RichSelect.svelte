@@ -1,67 +1,68 @@
 <script>
-	import { createEventDispatcher } from "svelte";
 	import List from "./helpers/SuggestDropdown.svelte";
 
-	export let value = "";
-	export let options = [];
-	export let placeholder = "Click to select";
-	export let disabled = false;
-	export let error = false;
-	export let title = "";
+	let {
+		value = $bindable(""),
+		options = [],
+		placeholder = "Click to select",
+		disabled = false,
+		error = false,
+		title = "",
+		children: kids,
+		onchange,
+	} = $props();
 
-	const dispatch = createEventDispatcher();
-	const SLOTS = $$props.$$slots;
-
-	let selected = null;
 	let navigate;
 	let keydown;
 	function ready(ev) {
-		navigate = ev.detail.navigate;
-		keydown = ev.detail.keydown;
+		navigate = ev.navigate;
+		keydown = ev.keydown;
 	}
 
-	$: selected =
-		value || value === 0 ? options.find(a => a.id === value) : null;
+	let selected = $derived(
+		value || value === 0 ? options.find(a => a.id === value) : null
+	);
 
-	function select(ev) {
-		const { id } = ev.detail;
-
+	function select({ id }) {
 		if (id || id === 0) {
 			value = id;
 			const obj = options.find(a => a.id === id);
 
 			navigate(null);
-			dispatch("select", { selected: obj });
+			onchange && onchange({ value: obj });
 		}
 	}
 
 	const index = () => options.findIndex(a => a.id === value);
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="wx-richselect"
 	{title}
 	class:wx-error={error}
 	class:wx-disabled={disabled}
-	class:wx-nowrap={!SLOTS}
-	on:click={() => navigate(index())}
-	on:keydown={ev => keydown(ev, index())}
+	class:wx-nowrap={!kids}
+	onclick={() => navigate?.(index())}
+	onkeydown={ev => keydown?.(ev, index())}
 	tabindex="0"
 >
 	<div class="wx-label">
 		{#if selected}
-			<slot option={selected}>{selected.name || ""}</slot>
+			{#if kids}{@render kids(selected)}{:else}{selected.name}{/if}
 		{:else if placeholder}
 			<span class="wx-placeholder">{placeholder}</span>
 		{:else}&nbsp;{/if}
 	</div>
 
-	<i class="wx-icon wxi-angle-down" />
+	<i class="wx-icon wxi-angle-down"></i>
 
 	{#if !disabled}
-		<List let:option items={options} on:ready={ready} on:select={select}>
-			<slot {option}>{option.name}</slot>
+		<List items={options} onready={ready} onselect={select}>
+			{#snippet children({ option })}
+				{#if kids}{@render kids(option)}{:else}{option.name}{/if}
+			{/snippet}
 		</List>
 	{/if}
 </div>

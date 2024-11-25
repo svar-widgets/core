@@ -1,4 +1,5 @@
 <!-- prettier-ignore -->
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 {@html `<style>
 @font-face {
 font-family: 'Roboto';

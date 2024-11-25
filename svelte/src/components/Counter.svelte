@@ -1,27 +1,28 @@
 <script>
-	import { createEventDispatcher } from "svelte";
 	import { uid } from "wx-lib-dom";
 
-	export let value = 0;
-	export let step = 1;
-	export let min = 0;
-	export let max = Infinity;
-	export let error = false;
-	export let disabled = false;
-	export let readonly = false;
-
-	const dispatch = createEventDispatcher();
+	let {
+		id = uid(),
+		value = $bindable(0),
+		step = 1,
+		min = 0,
+		max = Infinity,
+		error = false,
+		disabled = false,
+		readonly = false,
+		onchange,
+	} = $props();
 
 	function dec() {
 		if (readonly || value <= min) return;
 		value -= step;
-		dispatch("change", { value });
+		onchange && onchange({ value });
 	}
 
 	function inc() {
 		if (readonly || value >= max) return;
 		value += step;
-		dispatch("change", { value });
+		onchange && onchange({ value });
 	}
 
 	function blur() {
@@ -29,15 +30,13 @@
 			const tValue =
 				Math.round(Math.min(max, Math.max(value, min)) / step) * step;
 			value = isNaN(tValue) ? Math.max(min, 0) : tValue;
-			dispatch("change", { value });
+			onchange && onchange({ value });
 		}
 	}
 
 	function input(e) {
-		dispatch("change", { value: e.target.value * 1, input: true });
+		onchange && onchange({ value: e.target.value * 1, input: true });
 	}
-
-	const id = uid();
 </script>
 
 <div
@@ -46,7 +45,7 @@
 	class:wx-readonly={readonly}
 	class:wx-error={error}
 >
-	<button class="wx-btn wx-btn-dec" {disabled} on:click={dec}>
+	<button aria-label="-" class="wx-btn wx-btn-dec" {disabled} onclick={dec}>
 		<svg
 			class="wx-dec"
 			width="12"
@@ -66,10 +65,10 @@
 		{readonly}
 		required
 		bind:value
-		on:blur={blur}
-		on:input={input}
+		onblur={blur}
+		oninput={input}
 	/>
-	<button class="wx-btn wx-btn-inc" {disabled} on:click={inc}>
+	<button aria-label="-" class="wx-btn wx-btn-inc" {disabled} onclick={inc}>
 		<svg
 			class="wx-inc"
 			width="12"
@@ -94,7 +93,7 @@
 		border-radius: var(--wx-input-border-radius);
 	}
 
-	.wx-counter:not(.wx-readonly):has(.wx-input:focus) {
+	.wx-counter:not(:global(.wx-readonly)):has(:global(.wx-input:focus)) {
 		border: var(--wx-input-border-focus);
 	}
 
@@ -130,7 +129,8 @@
 		cursor: pointer;
 	}
 
-	.wx-counter:not(.wx-readonly):not(.wx-disabled) .wx-btn:active {
+	.wx-counter:not(:global(.wx-readonly)):not(:global(.wx-disabled))
+		.wx-btn:active {
 		background-color: var(--wx-background-hover);
 	}
 
@@ -147,7 +147,7 @@
 	}
 
 	.wx-error,
-	.wx-counter.wx-error:has(.wx-input:focus) {
+	.wx-counter.wx-error:has(:global(.wx-input:focus)) {
 		border: 1px solid var(--wx-color-danger);
 	}
 

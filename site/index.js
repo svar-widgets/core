@@ -1,5 +1,6 @@
 import Demo from "./src/Demo.svelte";
+import { mount } from "svelte";
 
-new Demo({
+mount(Demo, {
 	target: document.querySelector("#wx_demo_area") || document.body,
 });
