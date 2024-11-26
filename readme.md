@@ -28,6 +28,24 @@ In addition to the Core library, you can use the following SVAR components to bu
 - [Toolbar](https://github.com/svar-widgets/toolbar)
 - [File uploader](https://github.com/svar-widgets/uploader)
 
+### Versions for Svelte 4 and 5
+
+There are two versions of the library: 
+- version **1.x** was designed to work with Svelte 4
+- version **2.x** is created for Svelte 5 (please note that this version is in beta and may contain some instabilities)
+
+To use the SVAR Core beta for Svelte 5, install it as follows:
+
+```
+npm install wx-svelte-core
+```
+
+To use the SVAR Core for Svelte 4:
+
+```
+npm install wx-svelte-core@1.3.0
+```
+
 ### :hammer_and_wrench: How to Use
 
 To use any of the Core components, simply import the package and include the desired component in your Svelte file:
