@@ -1,6 +1,6 @@
 {
 	"name": "wx-svelte-core",
-	"version": "2.0.0-beta-1",
+	"version": "2.0.0-beta-2",
 	"description": "SVAR Svelte Core library, a collection of form controls and UI components",
 	"productTag": "core",
 	"productTrial": false,
@@ -24,7 +24,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"wx-core-locales": "2.0.0-beta-1",
+		"wx-core-locales": "2.0.0-beta-2",
 		"wx-lib-dom": "0.6.0"
 	},
 	"files": [

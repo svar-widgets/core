@@ -29,6 +29,22 @@ In addition to the Core library, you can use the following SVAR components to bu
 -   [Toolbar](https://www.npmjs.com/package/wx-svelte-toolbar)
 -   [File uploader](https://www.npmjs.com/package/wx-svelte-uploader)
 
+### Svelte 4 and Svelte 5 versions
+
+There are two versions of the library: the 1.x version, designed to work with Svelte 4, and the 2.x version, created for Svelte 5. Please note that the 2.x version is in beta and may contain some instabilities.
+
+To use the SVAR Core beta for Svelte 5, install it as follows:
+
+```
+npm install wx-svelte-core
+```
+
+To use the SVAR Core for Svelte 4:
+
+```
+npm install wx-svelte-core@1.3.0
+```
+
 # :hammer_and_wrench: How to Use
 
 To use any of the Core components, simply import the package and include the desired component in your Svelte file:
