@@ -1,4 +1,4 @@
-### 2.0.0
+### 2.0.1
 
 -   [add] Svelte 5 support
 -   [update] controls with options define them as `id, label`

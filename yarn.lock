@@ -4780,15 +4780,15 @@ wrappy@1:
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
 
-wx-lib-dom@0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/wx-lib-dom/-/wx-lib-dom-0.7.0.tgz#f60441e4b098b6e4c2a760032060d03ec38bc248"
-  integrity sha512-HdyQC5i2V+NqacPJqLDagMbZKdqvgSM8USml4RAhP2jt1tjyHuNjWplUkpFQCjLpYO6xKnKQvwitfTyy6zR9ug==
+wx-lib-dom@0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/wx-lib-dom/-/wx-lib-dom-0.7.1.tgz#6cbd29f198c132ed81a50ba5f98671c1de334f42"
+  integrity sha512-ja1iQcTVaZHYDrvrxC2mUfU6e0u6YyFXP4FmY8mM6v4tQCgXoWLIaEn2uJxs0czugmm5LVJ/FdDc3A8AtHWmvw==
 
-wx-lib-svelte@0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/wx-lib-svelte/-/wx-lib-svelte-0.5.0.tgz#24b286f73a14543fb2d160dea82122be5c0a74e0"
-  integrity sha512-6y3AE8M05hqjQL1gT+qYh+a4FHHTJYiG7JUoeBG9PwxjMl1Iwy3urVpPqmcXI1o3e20jxzUQ3xfLNPy9dWHbjg==
+wx-lib-svelte@0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/wx-lib-svelte/-/wx-lib-svelte-0.5.1.tgz#0d2cc90ccc8b777e81df8be1b2b005818274d534"
+  integrity sha512-zYfkAv5r0zQ3KFyCPPusC8EkMXUC3I0L1QsK+An0rNlRkY/iocPTOcaouyycg48BdmsBK8fSL0vK0B4oZuujrQ==
 
 wx-vite-tools@1.0.5:
   version "1.0.5"
