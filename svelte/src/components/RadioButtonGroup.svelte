@@ -2,22 +2,30 @@
 	import { uid } from "wx-lib-dom";
 	import RadioButton from "./RadioButton.svelte";
 
-	export let options = [{}];
-	export let value;
-	export let type;
+	let {
+		options = [{}],
+		value = $bindable(""),
+		type = "",
+		onchange,
+	} = $props();
 
 	const name = uid();
+
+	function handleChange(ev) {
+		value = ev.inputValue;
+		onchange && onchange({ value });
+	}
 </script>
 
-<div class="wx-radiogroup wx-{type}">
+<div class="wx-radiogroup {type && `wx-${type}`}">
 	{#each options as option}
 		<div class="wx-item">
 			<RadioButton
 				label={option.label}
-				value={option.value}
-				checked={value === option.value}
-				bind:groupValue={value}
+				inputValue={option.id}
+				value={value === option.id}
 				{name}
+				onchange={handleChange}
 			/>
 		</div>
 	{/each}

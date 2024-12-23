@@ -11,10 +11,10 @@
 		{ id: 3, label: "", icon: "wxi-check" },
 	];
 
-	let active = 2;
+	let active = $state(2);
 
-	function changeHandler(ev) {
-		active = ev.detail;
+	function onchange({ value }) {
+		active = value;
 		showNotice({
 			type: "info",
 			expire: 2000,
@@ -40,8 +40,8 @@
 		<Tabs options={tabs} bind:value={active} type="bottom" />
 	</div>
 
-	<h3>on:change</h3>
-	<Tabs options={tabs} value={0} on:change={changeHandler} />
+	<h3>onchange</h3>
+	<Tabs options={tabs} value={0} {onchange} />
 </div>
 
 <style>

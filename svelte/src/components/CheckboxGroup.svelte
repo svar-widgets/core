@@ -1,25 +1,23 @@
 <script>
 	import Checkbox from "./Checkbox.svelte";
 
-	export let options = [];
-	export let value = [];
-	export let type;
+	let { options = [], value = $bindable([]), type = "", onchange } = $props();
 
-	function handleChange(ev) {
-		const obj = ev.detail;
-		if (obj.value) value = [...value, obj.name];
-		else value = value.filter(a => a != obj.name);
+	function handleChange(obj) {
+		if (obj.value) value = [...value, obj.inputValue];
+		else value = value.filter(a => a != obj.inputValue);
+		onchange && onchange({ value });
 	}
 </script>
 
-<div class="wx-checkboxgroup wx-{type}">
+<div class="wx-checkboxgroup {type && `wx-${type}`}">
 	{#each options as option}
 		<div class="wx-item">
 			<Checkbox
 				label={option.label}
-				name={option.value}
-				value={value.includes(option.value)}
-				on:change={handleChange}
+				inputValue={option.id}
+				value={value.includes(option.id)}
+				onchange={handleChange}
 			/>
 		</div>
 	{/each}
@@ -44,7 +42,7 @@
 		padding-right: var(--wx-field-gutter);
 	}
 
-	.wx-checkboxgroup.grid .wx-item {
+	.wx-checkboxgroup.wx-grid .wx-item {
 		flex: 0 0 50%;
 		max-width: 50%;
 		padding-right: var(--wx-field-gutter);

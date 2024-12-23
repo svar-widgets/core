@@ -1,145 +1,142 @@
 <script>
-	import { createEventDispatcher } from "svelte";
 	import List from "./helpers/SuggestDropdown.svelte";
 	import { uid } from "wx-lib-dom";
 
-	export let value = "";
-	export let id = uid();
-	export let options = [];
-	export let textField = "label";
-	export let placeholder = "";
-	export let title = "";
-	export let disabled = false;
-	export let error = false;
-	export let clearButton = false;
+	let {
+		value = $bindable(""),
+		id = uid(),
+		options = [],
+		textField = "label",
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		clear = false,
+		children: kids,
+		onchange,
+	} = $props();
 
-	const dispatch = createEventDispatcher();
+	let filterActive = $state(false);
+	let textInput = $state("");
 
-	let text = "";
-	let filterOptions = [];
+	let text = $derived.by(() => {
+		return filterActive
+			? textInput
+			: value || value === 0
+				? options.find(a => a.id === value)[textField]
+				: "";
+	});
 
-	let navigate;
-	let keydown;
+	let filteredOptions = $derived.by(() => {
+		if (!text || !filterActive) return options;
+
+		return options.filter(i =>
+			i[textField].toLowerCase().includes(text.toLowerCase())
+		);
+	});
+
+	let navigate, keydown;
 	function ready(ev) {
-		navigate = ev.detail.navigate;
-		keydown = ev.detail.keydown;
+		navigate = ev.navigate;
+		keydown = ev.keydown;
 	}
+	const index = () => filteredOptions.findIndex(a => a.id === value);
+	const onclick = () => navigate(index());
+	const onkeydown = e => keydown(e, index());
 
-	let prevValue;
-	$: {
-		if (prevValue != value) {
-			text =
-				value || value === 0
-					? options.find(a => a.id === value)[textField]
-					: "";
-			prevValue = value;
-		}
-	}
-	$: filterOptions = options;
-
-	function selectByEvent(ev) {
-		const id = ev.detail.id;
+	function selectByEvent({ id }) {
 		doSelect(id, true);
 	}
 
-	function selectByText(text) {
+	function selectByText(chunk) {
 		if (!options.length) return;
-		if (text === "" && clearButton) {
+		if (chunk === "" && clear) {
 			doUnselect();
 			return;
 		}
 
-		let res = options.find(i => i[textField] === text);
+		let res = options.find(i => i[textField] === chunk);
 		if (!res) {
 			res = options.find(i =>
-				i[textField].toLowerCase().includes(text.toLowerCase())
+				i[textField].toLowerCase().includes(chunk.toLowerCase())
 			);
 		}
 
-		const id = res ? res.id : prevValue || options[0].id;
+		const id = res ? res.id : value || options[0].id;
 		doSelect(id, false);
 	}
 
 	function doSelect(id, effects) {
 		if (id || id === 0) {
 			let selected = options.find(a => a.id === id);
-			text = selected[textField];
-			filterOptions = options;
+			filterActive = false;
 
 			if (effects) navigate(null);
 
 			if (value !== selected.id) {
 				value = selected.id;
-				dispatch("select", { selected });
+				onchange && onchange({ value });
 			}
 		}
 
 		if (!hasFocus && effects) inputElement.focus();
 	}
 
-	function doUnselect() {
-		text = value = "";
-		filterOptions = options;
-		dispatch("select", { selected: null });
+	function doUnselect(ev) {
+		if (ev) ev.stopPropagation();
+
+		value = "";
+		filterActive = false;
+		onchange && onchange({ value });
 	}
 
-	function input() {
-		filterOptions = text
-			? options.filter(i =>
-					i[textField].toLowerCase().includes(text.toLowerCase())
-				)
-			: options;
-		if (filterOptions.length) navigate(0);
+	function oninput() {
+		textInput = inputElement.value;
+		filterActive = true;
+
+		if (filteredOptions.length) navigate(0);
 		else navigate(null);
 	}
 
-	let inputElement,
-		hasFocus,
-		blurTimer = null;
-	function onFocus() {
+	let inputElement, hasFocus;
+	function onfocus() {
 		hasFocus = true;
 	}
-	function onBlur() {
+	function onblur() {
 		hasFocus = false;
-		blurTimer = setTimeout(() => {
+		setTimeout(() => {
 			if (!hasFocus) selectByText(text);
 		}, 200);
 	}
-
-	const index = () => filterOptions.findIndex(a => a.id === value);
 </script>
 
-<div
-	class="wx-combo"
-	on:click={() => navigate(index())}
-	on:keydown={e => keydown(e, index())}
-	{title}
->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="wx-combo" {onclick} {onkeydown} {title}>
 	<input
 		{id}
 		bind:this={inputElement}
-		bind:value={text}
+		value={text}
 		class:wx-error={error}
 		{disabled}
 		{placeholder}
-		on:focus={onFocus}
-		on:blur={onBlur}
-		on:input={input}
+		{onfocus}
+		{onblur}
+		{oninput}
 	/>
 
-	{#if clearButton && !disabled && value}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<i class="wx-icon wxi-close" on:click|stopPropagation={doUnselect} />
-	{:else}<i class="wx-icon wxi-angle-down" />{/if}
+	{#if clear && !disabled && value}
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wx-icon wxi-close" onclick={doUnselect}></i>
+	{:else}<i class="wx-icon wxi-angle-down"></i>{/if}
 
 	{#if !disabled}
-		<List
-			let:option
-			items={filterOptions}
-			on:ready={ready}
-			on:select={selectByEvent}
-		>
-			<slot {option}>{option.name}</slot>
+		<List items={filteredOptions} onready={ready} onselect={selectByEvent}>
+			{#snippet children({ option })}
+				{#if kids}{@render kids({ option })}{:else}{option[
+						textField
+					]}{/if}
+			{/snippet}
 		</List>
 	{/if}
 </div>
@@ -220,9 +217,11 @@
 
 	.wx-icon.wxi-close {
 		pointer-events: all;
+		cursor: pointer;
 	}
 
 	.wx-icon.wxi-close:hover {
-		color: var(--wx-color-danger);
+		background: var(--wx-background-hover);
+		border-radius: var(--wx-icon-border-radius);
 	}
 </style>

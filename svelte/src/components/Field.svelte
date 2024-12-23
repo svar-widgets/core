@@ -1,11 +1,15 @@
 <script>
 	import { uid } from "wx-lib-dom";
 
-	export let label = "";
-	export let position = "";
-	export let width = "";
-	export let error = false;
-	export let type = "";
+	let {
+		label = "",
+		position = "",
+		width = "",
+		error = false,
+		type = "",
+		required = false,
+		children,
+	} = $props();
 
 	let id = uid();
 </script>
@@ -13,11 +17,12 @@
 <div
 	class="wx-field wx-{position}"
 	class:wx-error={error}
+	class:wx-required={required}
 	style={width ? `width: ${width}` : ""}
 >
 	{#if label}<label for={id}>{label}</label>{/if}
 	<div class="wx-field-control wx-{type}">
-		<slot {id} />
+		{@render children?.({ id })}
 	</div>
 </div>
 
@@ -82,6 +87,11 @@
 		line-height: var(--wx-label-line-height);
 		font-weight: var(--wx-label-font-weight);
 		color: var(--wx-label-font-color);
+	}
+
+	.wx-required label::after {
+		content: " *";
+		color: var(--wx-color-danger);
 	}
 
 	.wx-field-control {

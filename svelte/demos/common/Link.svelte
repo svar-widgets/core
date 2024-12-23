@@ -2,8 +2,7 @@
 	import { link } from "svelte-spa-router";
 	import active from "svelte-spa-router/active";
 
-	export let data;
-	export let skin;
+	let { data, skin } = $props();
 </script>
 
 <a use:link={data[0].replace(":skin", skin)} use:active href="/" class="demo">

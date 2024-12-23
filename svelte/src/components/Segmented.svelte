@@ -1,14 +1,15 @@
 <script>
-	import { createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
-
-	export let options;
-	export let value;
-	export let css;
+	let {
+		options = [],
+		value = $bindable(""),
+		css = "",
+		children,
+		onchange,
+	} = $props();
 
 	function handleClick(id) {
 		value = id;
-		dispatch("select", { id });
+		onchange && onchange({ value });
 	}
 </script>
 
@@ -16,21 +17,21 @@
 	{#each options as option (option.id)}
 		<button
 			css={option.css}
-			title={option.title || option.name}
+			title={option.title || option.label}
 			class:wx-selected={option.id == value}
-			on:click={handleClick(option.id)}
+			onclick={() => handleClick(option.id)}
 		>
-			<slot {option}>
+			{#if children}{@render children({ option })}{:else}
 				{#if option.icon}
 					<i
-						class="wx-icon {option.icon} {!option.name
+						class="wx-icon {option.icon} {!option.label
 							? 'wx-only'
 							: ''}"
-					/>
+					></i>
 				{/if}
-				{#if option.name}<span class="wx-label">{option.name}</span
+				{#if option.label}<span class="wx-label">{option.label}</span
 					>{/if}
-			</slot>
+			{/if}
 		</button>
 	{/each}
 </div>

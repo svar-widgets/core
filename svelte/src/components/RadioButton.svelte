@@ -1,16 +1,19 @@
 <script>
 	import { uid } from "wx-lib-dom";
 
-	export let id = uid();
-	export let label = "";
-	export let value = "";
-	export let groupValue;
-	export let name;
-	export let disabled = false;
-	export let checked = false;
+	let {
+		id = uid(),
+		label = "",
+		value = $bindable(""),
+		name = "",
+		inputValue = "",
+		disabled = false,
+		onchange,
+	} = $props();
 
 	function handlerChange(ev) {
-		if (ev.target.checked) groupValue = value;
+		value = ev.target.checked;
+		if (value) onchange && onchange({ value: true, inputValue });
 	}
 </script>
 
@@ -18,14 +21,14 @@
 	<input
 		type="radio"
 		{id}
-		{value}
 		{disabled}
 		{name}
-		{checked}
-		on:change={handlerChange}
+		value={inputValue}
+		checked={value}
+		onchange={handlerChange}
 	/>
 	<label for={id}>
-		<span />
+		<span></span>
 		{#if label}<span>{label}</span>{/if}
 	</label>
 </div>
@@ -120,7 +123,7 @@
 		color: var(--wx-checkbox-border-color-disabled);
 		cursor: not-allowed;
 	}
-	input[disabled]:not(:checked) ~ label span:first-child:before {
+	input[disabled]:not(:global(:checked)) ~ label span:first-child:before {
 		border-color: var(--wx-checkbox-border-color-disabled);
 	}
 	input[disabled]:checked ~ label span:first-child:before {

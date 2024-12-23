@@ -2,20 +2,24 @@
 	import { clickOutside, calculatePosition } from "wx-lib-dom";
 	import { onMount } from "svelte";
 
-	export let left = 0;
-	export let top = 0;
-	export let at = "bottom";
-	export let parent = null;
-	export let cancel;
-	export let mount;
+	let {
+		left = 0,
+		top = 0,
+		at = "bottom",
+		parent = null,
+		oncancel,
+		mount,
+		children,
+	} = $props();
 
-	let self;
-
-	let x = 0;
-	let y = 0;
-	let width;
+	let self = null;
+	let x = $state(0);
+	let y = $state(0);
+	let width = $state("auto");
 
 	function updatePosition() {
+		if (!self) return;
+
 		const result = calculatePosition(self, parent, at, left, top);
 		x = result.x || x;
 		y = result.y || y;
@@ -24,10 +28,12 @@
 
 	if (mount) mount(updatePosition);
 	onMount(updatePosition);
-	$: updatePosition(parent);
+	$effect(() => {
+		updatePosition(parent);
+	});
 
 	function down(e) {
-		if (cancel) cancel(e);
+		oncancel && oncancel(e);
 	}
 </script>
 
@@ -37,7 +43,7 @@
 	class="wx-popup"
 	style="top:{y}px;left:{x}px;width:{width};"
 >
-	<slot />
+	{@render children?.()}
 </div>
 
 <style>

@@ -10,7 +10,7 @@
 	const wh = getContext("wx-helpers");
 	function showChanges(ev) {
 		wh.showNotice({
-			text: `Date changed to ${JSON.stringify(ev.detail.selected)}`,
+			text: `Date changed to ${JSON.stringify(ev.value)}`,
 		});
 	}
 
@@ -22,37 +22,60 @@
 
 <div class="demo-box">
 	<h3>DateRangePicker</h3>
-	<Field label="Date range" let:id>
-		<DateRangePicker value={date} {id} on:select={showChanges} />
+	<Field label="Date range">
+		{#snippet children({ id })}
+			<DateRangePicker value={date} {id} onchange={showChanges} />
+		{/snippet}
 	</Field>
-	<Field label="DateRangePicker with the Done button" let:id>
-		<DateRangePicker value={date} {id} done={true} />
+	<Field label="DateRangePicker with the Done button">
+		{#snippet children({ id })}
+			<DateRangePicker value={date} {id} done={true} />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" let:id>
-		<DateRangePicker disabled value={date} {id} />
+	<Field label="Disabled">
+		{#snippet children({ id })}
+			<DateRangePicker disabled value={date} {id} />
+		{/snippet}
 	</Field>
-	<Field label="Editable (new Date())" let:id>
-		<DateRangePicker editable value={date} {id} />
+	<Field label="Editable (new Date())">
+		{#snippet children({ id })}
+			<DateRangePicker editable value={date} {id} />
+		{/snippet}
 	</Field>
-	<Field label="Editable, custom format (MMDDYYYY - MMDDYYYY)" let:id>
-		<DateRangePicker
-			editable={parseDate}
-			value={date}
-			format={"%m%d%Y"}
-			{id}
-		/>
+	<Field label="Editable, custom format (MMDDYYYY - MMDDYYYY)">
+		{#snippet children({ id })}
+			<DateRangePicker
+				editable={parseDate}
+				value={date}
+				format={"%m%d%Y"}
+				{id}
+			/>
+		{/snippet}
 	</Field>
-	<Field label="Error" error let:id>
-		<DateRangePicker error value={date} {id} title="Invalid date" />
+	<Field label="Error" error>
+		{#snippet children({ id })}
+			<DateRangePicker error value={date} {id} title="Invalid date" />
+		{/snippet}
 	</Field>
 
-	<Field label="Custom format" let:id>
-		<DateRangePicker format="%d %F, %Y" value={date} {id} />
+	<Field label="Custom format">
+		{#snippet children({ id })}
+			<DateRangePicker format="%d %F, %Y" value={date} {id} />
+		{/snippet}
 	</Field>
-	<Field label="Custom icon position" let:id>
-		<DateRangePicker {id} value={date} css="wx-icon-left" />
+	<Field label="Custom icon position">
+		{#snippet children({ id })}
+			<DateRangePicker {id} value={date} css="wx-icon-left" />
+		{/snippet}
 	</Field>
-	<Field label="Single month" let:id>
-		<DateRangePicker {id} months={1} />
+	<Field label="Single month">
+		{#snippet children({ id })}
+			<DateRangePicker {id} months={1} />
+		{/snippet}
+	</Field>
+	<Field label="Clear button">
+		{#snippet children({ id })}
+			<DateRangePicker value={date} {id} clear />
+		{/snippet}
 	</Field>
 </div>

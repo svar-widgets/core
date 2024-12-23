@@ -1,6 +1,4 @@
-import Area from "./components/Area.svelte";
-export { Area, Area as Textarea };
-
+export { default as TextArea } from "./components/TextArea.svelte";
 export { default as Button } from "./components/Button.svelte";
 export { default as Checkbox } from "./components/Checkbox.svelte";
 export { default as CheckboxGroup } from "./components/CheckboxGroup.svelte";
@@ -30,7 +28,7 @@ export { default as Field } from "./components/Field.svelte";
 export { default as Calendar } from "./components/Calendar.svelte";
 export { default as Month } from "./components/calendar/Month.svelte";
 export { default as RangeCalendar } from "./components/RangeCalendar.svelte";
-export { default as Timepicker } from "./components/Timepicker.svelte";
+export { default as TimePicker } from "./components/TimePicker.svelte";
 export { default as TwoState } from "./components/TwoState.svelte";
 export { default as Modal } from "./components/Modal.svelte";
 export { default as ModalArea } from "./components/ModalArea.svelte";
@@ -48,3 +46,7 @@ export { popupContainer } from "./components/helpers";
 export { default as SuggestDropdown } from "./components/helpers/SuggestDropdown.svelte";
 
 export { en } from "wx-core-locales";
+
+import { setEnv } from "wx-lib-dom";
+import { env } from "wx-lib-svelte";
+setEnv(env);

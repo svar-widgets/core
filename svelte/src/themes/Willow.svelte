@@ -2,14 +2,13 @@
 	import { setContext } from "svelte";
 	import FontOpenSans from "./FontOpenSans.svelte";
 
-	export let fonts = true;
-	const SLOTS = $$props.$$slots;
+	let { fonts = true, children } = $props();
 	setContext("wx-theme", "willow");
 </script>
 
-{#if SLOTS && SLOTS.default}
+{#if children}
 	<div class="wx-willow-theme" style="height:100%">
-		<slot />
+		{@render children()}
 	</div>
 {/if}
 
@@ -72,6 +71,7 @@
 		/* icons */
 		--wx-icon-color: #9fa1ae;
 		--wx-icon-size: var(--wx-line-height);
+		--wx-icon-border-radius: 2px;
 		/* end icons */
 
 		/* other */

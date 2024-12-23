@@ -1,7 +1,7 @@
 <script>
 	import { Pager } from "../../src/index";
 
-	let v1 = 2;
+	let v1 = $state(2);
 </script>
 
 <div class="demo-box">

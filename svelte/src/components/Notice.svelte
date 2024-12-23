@@ -1,6 +1,6 @@
 <script>
 	import { fade } from "svelte/transition";
-	export let notice = {};
+	let { notice = {} } = $props();
 
 	function onRemove() {
 		if (notice.remove) notice.remove();
@@ -14,9 +14,10 @@
 	transition:fade
 >
 	<div class="wx-text">{notice.text}</div>
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="wx-button">
-		<i class="wx-close wxi-close" on:click={onRemove} />
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wxi-close" onclick={onRemove}></i>
 	</div>
 </div>
 
@@ -81,7 +82,7 @@
 		);
 	}
 
-	.wx-close {
+	.wxi-close {
 		position: relative;
 		display: flex;
 		justify-content: center;
@@ -93,11 +94,11 @@
 		color: var(--wx-notice-type-icon-color);
 		cursor: pointer;
 	}
-	.wx-close:before {
+	.wxi-close:before {
 		display: block;
 		z-index: 1;
 	}
-	.wx-close:after {
+	.wxi-close:after {
 		content: "";
 		display: block;
 		position: absolute;
@@ -106,9 +107,9 @@
 		transform: translate(-50%, -50%);
 		width: calc(100% + 4px);
 		height: calc(100% + 4px);
-		border-radius: 50%;
+		border-radius: var(--wx-icon-border-radius);
 	}
-	.wx-close:hover:after {
+	.wxi-close:hover:after {
 		background: var(--wx-background-hover);
 	}
 
@@ -136,10 +137,10 @@
 		background: var(--wx-color-danger);
 	}
 
-	.wx-notice.wx-info .wx-close:after,
-	.wx-notice.wx-warning .wx-close:after,
-	.wx-notice.wx-success .wx-close:after,
-	.wx-notice.wx-danger .wx-close:after {
+	.wx-notice.wx-info .wxi-close:after,
+	.wx-notice.wx-warning .wxi-close:after,
+	.wx-notice.wx-success .wxi-close:after,
+	.wx-notice.wx-danger .wxi-close:after {
 		opacity: var(--wx-notice-type-close-hover-opacity);
 	}
 </style>

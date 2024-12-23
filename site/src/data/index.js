@@ -104,20 +104,20 @@ export const getData = () => {
 	];
 
 	const SVR = [
-		{ value: 1, label: "React", name: "React", id: 1 },
-		{ value: 2, label: "Svelte", name: "Svelte", id: 2 },
-		{ value: 3, label: "Vue", name: "Vue", id: 3 },
+		{ label: "React", id: 1 },
+		{ label: "Svelte", id: 2 },
+		{ label: "Vue", id: 3 },
 	];
 
 	const core = [
-		{ value: 1, label: "Calendar" },
-		{ value: 2, label: "Input" },
-		{ value: 3, label: "Button" },
-		{ value: 4, label: "Uploader" },
-		{ value: 5, label: "Tabs" },
-		{ value: 6, label: "Notice" },
-		{ value: 7, label: "Timepicker" },
-		{ value: 8, label: "Slider" },
+		{ id: 1, label: "Calendar" },
+		{ id: 2, label: "Input" },
+		{ id: 3, label: "Button" },
+		{ id: 4, label: "Uploader" },
+		{ id: 5, label: "Tabs" },
+		{ id: 6, label: "Notice" },
+		{ id: 7, label: "Timepicker" },
+		{ id: 8, label: "Slider" },
 	];
 
 	const countries = [

@@ -1,14 +1,28 @@
 <script>
 	import { uid } from "wx-lib-dom";
 
-	export let id = uid();
-	export let value;
-	export let disabled = false;
+	let {
+		id = uid(),
+		value = $bindable(false),
+		disabled = false,
+		onchange,
+	} = $props();
+
+	function onChange(event) {
+		value = event.target.checked;
+		onchange && onchange({ value });
+	}
 </script>
 
 <label class="wx-switch">
-	<input type="checkbox" {disabled} bind:checked={value} {id} />
-	<span />
+	<input
+		type="checkbox"
+		checked={value}
+		onchange={onChange}
+		{disabled}
+		{id}
+	/>
+	<span></span>
 </label>
 
 <style>

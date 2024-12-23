@@ -1,4 +1,5 @@
 <!-- prettier-ignore -->
+<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 {@html `<style>
 @font-face {
 font-family: 'Open Sans';
@@ -33,4 +34,3 @@ src: local(''),
       url('https://cdn.svar.dev/fonts/open-sans/700.woff') format('woff');
 }
   </style>`}
-    

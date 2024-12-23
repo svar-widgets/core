@@ -1,3 +1,5 @@
+const lang = "zh-CN";
+
 const calendar = {
 	monthFull: [
 		"一月",
@@ -52,6 +54,8 @@ const calendar = {
 const core = {
 	ok: "确定",
 	cancel: "取消",
+	select: "选择",
+	"No data": "没有数据",
 };
 
 const formats = {
@@ -63,6 +67,7 @@ const data = {
 	core,
 	calendar,
 	formats,
+	lang,
 };
 
 export default data;

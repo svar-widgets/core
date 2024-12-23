@@ -2,39 +2,40 @@
 	import { uid } from "wx-lib-dom";
 	import Dropdown from "./Dropdown.svelte";
 
-	export let colors = [
+	const defaultColors = [
 		"#00a037",
-		"#df282f",
-		"#fd772c",
-		"#6d4bce",
-		"#b26bd3",
-		"#c87095",
-		"#90564d",
-		"#eb2f89",
-		"#ea77c0",
-		"#777676",
-		"#a9a8a8",
-		"#9bb402",
-		"#e7a90b",
-		"#0bbed7",
-		"#038cd9",
+		"#37a9ef",
+		"#f5a623",
+		"#ff4c3b",
+		"#a0a0a0",
+		"#000000",
+		"#ffffff",
 	];
-	export let value = "";
-	export let id = uid();
-	export let clear = true;
-	export let placeholder = "";
-	export let title;
-	export let disabled = false;
-	export let error = false;
 
-	let popup;
+	let {
+		colors = defaultColors,
+		value = $bindable(""),
+		id = uid(),
+		clear = false,
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		onchange,
+	} = $props();
 
-	function selectColor(color) {
+	let popup = $state(false);
+
+	function selectColor(ev, color) {
+		ev.stopPropagation();
 		value = color;
-		popup = null;
+		popup = false;
+		onchange && onchange({ value });
 	}
-	function handleClear() {
-		value = null;
+	function unselectColor(ev) {
+		ev.stopPropagation();
+		value = "";
+		onchange && onchange({ value });
 	}
 	function handlePopup() {
 		if (disabled) return false;
@@ -42,8 +43,9 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="wx-colorselect" on:click={handlePopup}>
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="wx-colorselect" onclick={handlePopup}>
 	<input
 		{title}
 		{value}
@@ -56,34 +58,34 @@
 	/>
 
 	{#if clear && value && !disabled}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<i class="wx-clear wxi-close" on:click|stopPropagation={handleClear} />
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wx-clear wxi-close" onclick={unselectColor}></i>
 	{/if}
 
 	{#if value}
 		<div
 			class="wx-color wx-selected"
 			style="background-color: {value || '#00a037'}"
-		/>
+		></div>
 	{:else}
-		<div class="wx-empty wx-selected" />
+		<div class="wx-empty wx-selected"></div>
 	{/if}
 
 	{#if popup}
-		<Dropdown cancel={() => (popup = null)}>
+		<Dropdown oncancel={() => (popup = false)}>
 			<div class="wx-colors">
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div
-					class="wx-empty"
-					on:click|stopPropagation={() => selectColor("")}
-				/>
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<div class="wx-empty" onclick={ev => selectColor(ev, "")}></div>
 				{#each colors as color}
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
 					<div
 						class="wx-color"
 						style="background-color: {color}"
-						on:click|stopPropagation={() => selectColor(color)}
-					/>
+						onclick={ev => selectColor(ev, color)}
+					></div>
 				{/each}
 			</div>
 		</Dropdown>
@@ -182,7 +184,7 @@
 		user-select: none;
 	}
 
-	.wx-clear {
+	.wxi-close {
 		position: absolute;
 		right: var(--wx-input-icon-indent);
 		top: 50%;
@@ -198,7 +200,8 @@
 		color: var(--wx-input-icon-color);
 		cursor: pointer;
 	}
-	.wx-clear:hover {
+	.wxi-close:hover {
 		background: var(--wx-background-hover);
+		border-radius: var(--wx-icon-border-radius);
 	}
 </style>

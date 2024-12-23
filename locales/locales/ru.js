@@ -1,3 +1,5 @@
+const lang = "ru-RU";
+
 const calendar = {
 	monthFull: [
 		"Январь",
@@ -50,6 +52,8 @@ const calendar = {
 const core = {
 	ok: "OK",
 	cancel: "Отмена",
+	select: "Выбрать",
+	"No data": "Нет данных",
 };
 
 const formats = {
@@ -61,6 +65,7 @@ const data = {
 	core,
 	calendar,
 	formats,
+	lang,
 };
 
 export default data;

@@ -5,22 +5,36 @@
 
 	const _ = getContext("wx-i18n").getGroup("core");
 
-	export let title = "";
-	export let ok;
-	export let cancel;
-	export let buttons = ["cancel", "ok"];
+	const {
+		title = "",
+		buttons = ["cancel", "ok"],
+		header,
+		children,
+		footer,
+		onconfirm,
+		oncancel,
+	} = $props();
 
-	function keydown(e) {
-		switch (e.code) {
+	function keydown(ev) {
+		switch (ev.code) {
 			case "Enter": {
-				const from = e.target.tagName;
+				const from = ev.target.tagName;
 				if (from === "TEXTAREA" || from === "BUTTON") return;
-				ok();
+				onconfirm && onconfirm({ ev });
 				break;
 			}
 			case "Escape":
-				cancel();
+				oncancel && oncancel({ ev });
 				break;
+		}
+	}
+
+	function onclick(ev, button) {
+		const pack = { ev, button };
+		if (button === "cancel") {
+			oncancel && oncancel(pack);
+		} else {
+			onconfirm && onconfirm(pack);
 		}
 	}
 
@@ -30,24 +44,27 @@
 	});
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	class="wx-modal"
 	bind:this={modal}
 	transition:fade={{ duration: 100 }}
 	tabindex="0"
-	on:keydown={keydown}
+	onkeydown={keydown}
 >
 	<div class="wx-window">
-		<slot name="title">
-			{#if title}
-				<div class="wx-header">{title}</div>
-			{/if}
-		</slot>
+		{#if header}
+			{@render header()}
+		{:else if title}
+			<div class="wx-header">{title}</div>
+		{/if}
 		<div>
-			<slot />
+			{@render children()}
 		</div>
-		<slot name="buttons">
+		{#if footer}
+			{@render footer()}
+		{:else}
 			<div class="wx-buttons">
 				{#each buttons as button}
 					<div class="wx-button">
@@ -55,14 +72,14 @@
 							type="block {button === 'ok'
 								? 'primary'
 								: 'secondary'}"
-							click={() => (button === "ok" ? ok() : cancel())}
+							onclick={ev => onclick(ev, button)}
 						>
 							{_(button)}
 						</Button>
 					</div>
 				{/each}
 			</div>
-		</slot>
+		{/if}
 	</div>
 </div>
 

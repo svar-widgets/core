@@ -1,80 +1,79 @@
 <script>
-	import { createEventDispatcher, getContext } from "svelte";
-	const dispatch = createEventDispatcher();
-
+	import { getContext } from "svelte";
 	import Header from "./Header.svelte";
 	import Button from "./Button.svelte";
 	import { configs } from "./helpers";
 
 	const _ = getContext("wx-i18n").getGroup("calendar");
 
-	export let value;
-	export let current;
-	export let done = false;
-	export let part = "normal";
-	export let markers = null;
-	export let buttons = true;
+	let {
+		value,
+		current = $bindable(),
+		done = false,
+		part = "normal",
+		markers = null,
+		buttons = true,
+		onshift: shift,
+		onchange: change,
+	} = $props();
 
-	let type = "month";
+	let type = $state("month");
 	function selectDate(ev, date) {
 		ev.preventDefault();
-		dispatch("change", { value: date });
+		change && change({ value: date });
 	}
-	function cancel() {
+	function oncancel() {
 		if (type === "duodecade") type = "year";
 		else if (type === "year") type = "month";
 	}
 
-	function doShift(ev) {
+	function onshift(ev) {
 		if (ev.diff == 0) {
 			if (type === "month") type = "year";
 			else if (type === "year") type = "duodecade";
 		} else {
-			dispatch("shift", ev);
+			shift && shift(ev);
 		}
 	}
 
-	function select(value) {
-		dispatch("change", { select: true, value });
+	function onchange(value) {
+		change && change({ select: true, value });
 	}
+
+	const SvelteComponent = $derived(configs[type].component);
 </script>
 
 <div
 	class="wx-calendar {part !== 'normal' && part !== 'both' ? 'wx-part' : ''}"
 >
 	<div class="wx-wrap">
-		<Header
-			date={current}
-			{part}
-			{type}
-			on:shift={ev => doShift(ev.detail)}
-		/>
+		<Header date={current} {part} {type} {onshift} />
 		<div>
-			<svelte:component
-				this={configs[type].component}
+			<SvelteComponent
 				{value}
-				{current}
+				bind:current
 				{part}
 				{markers}
-				{select}
-				{cancel}
+				{onchange}
+				{oncancel}
+				{onshift}
 			/>
 			{#if type === "month" && buttons}
 				<div class="wx-buttons">
 					{#if done}
 						<div class="wx-button-item">
-							<Button click={e => selectDate(e, -1)}>
+							<Button onclick={e => selectDate(e, -1)}>
 								{_("done")}
 							</Button>
 						</div>
 					{/if}
 					<div class="wx-button-item">
-						<Button click={e => selectDate(e, null)}>
+						<Button onclick={e => selectDate(e, null)}>
 							{_("clear")}
 						</Button>
 					</div>
 					<div class="wx-button-item">
-						<Button click={e => selectDate(e, new Date())}>
+						<Button onclick={e => selectDate(e, new Date())}>
 							{_("today")}
 						</Button>
 					</div>

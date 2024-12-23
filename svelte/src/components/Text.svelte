@@ -1,26 +1,33 @@
 <script>
 	import { uid } from "wx-lib-dom";
-	import { onMount, createEventDispatcher } from "svelte";
+	import { onMount } from "svelte";
 
-	export let value = "";
-	export let id = uid();
-	export let readonly = false;
-	export let focus = false;
-	export let select = false;
-	export let type = "text";
-	export let placeholder = "";
-	export let disabled = false;
-	export let error = false;
-	export let inputStyle = "";
-	export let title = "";
-	export let css = "";
-	export let icon = "";
+	let {
+		value = $bindable(""),
+		id = uid(),
+		readonly = false,
+		focus = false,
+		select = false,
+		type = "text",
+		placeholder = "",
+		disabled = false,
+		error = false,
+		inputStyle = "",
+		title = "",
+		css = "",
+		icon,
+		clear = false,
+		onchange: change,
+	} = $props();
 
-	const dispatch = createEventDispatcher();
+	let cssString = $derived(
+		icon && css.indexOf("wx-icon-left") === -1
+			? "wx-icon-right " + css
+			: css
+	);
+	let hasLeftIcon = $derived(icon && css.indexOf("wx-icon-left") !== -1);
 
-	if (icon && css.indexOf("wx-icon-left") === -1)
-		css = "wx-icon-right " + css;
-
+	// svelte-ignore non_reactive_update
 	let input;
 	onMount(() => {
 		// wait till the source click processing will end
@@ -29,9 +36,23 @@
 			if (select && input) input.select();
 		}, 1);
 	});
+
+	const oninput = () => change && change({ value, input: true });
+	const onchange = () => change && change({ value });
+
+	function clearValue(ev) {
+		ev.stopPropagation();
+		value = "";
+		change && change({ value });
+	}
 </script>
 
-<div class="wx-text {css}" class:wx-error={error} class:wx-disabled={disabled}>
+<div
+	class="wx-text {cssString}"
+	class:wx-error={error}
+	class:wx-disabled={disabled}
+	class:wx-clear={clear}
+>
 	{#if type == "password"}
 		<input
 			bind:value
@@ -43,8 +64,8 @@
 			type="password"
 			style={inputStyle}
 			{title}
-			on:input={() => dispatch("change", { value, input: true })}
-			on:change={() => dispatch("change", { value })}
+			{oninput}
+			{onchange}
 		/>
 	{:else if type == "number"}
 		<input
@@ -57,8 +78,8 @@
 			type="number"
 			style={inputStyle}
 			{title}
-			on:input={() => dispatch("change", { value, input: true })}
-			on:change={() => dispatch("change", { value })}
+			{oninput}
+			{onchange}
 		/>
 	{:else}
 		<input
@@ -70,12 +91,17 @@
 			{placeholder}
 			{title}
 			style={inputStyle}
-			on:input={() => dispatch("change", { value, input: true })}
-			on:change={() => dispatch("change", { value })}
+			{oninput}
+			{onchange}
 		/>
 	{/if}
 
-	{#if icon}<i class="wx-icon {icon}" />{/if}
+	{#if clear && !disabled && value}
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wx-icon wxi-close" onclick={clearValue}></i>
+		{#if hasLeftIcon}<i class="wx-icon {icon}"></i>{/if}
+	{:else if icon}<i class="wx-icon {icon}"></i>{/if}
 </div>
 
 <style>
@@ -109,9 +135,18 @@
 		display: block;
 	}
 
-	.wx-icon-left .wx-icon {
+	.wx-icon-left .wx-icon:not(.wxi-close) {
 		right: auto;
 		left: var(--wx-input-icon-indent);
+	}
+
+	.wx-icon.wxi-close {
+		pointer-events: all;
+		cursor: pointer;
+	}
+	.wx-icon.wxi-close:hover {
+		background: var(--wx-background-hover);
+		border-radius: var(--wx-icon-border-radius);
 	}
 
 	input {
@@ -145,7 +180,8 @@
 			var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2
 		);
 	}
-	.wx-icon-right input {
+	.wx-icon-right input,
+	.wx-text.wx-clear input {
 		padding-right: calc(
 			var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2
 		);
@@ -165,21 +201,5 @@
 	.wx-error input {
 		border-color: var(--wx-color-danger);
 		color: var(--wx-color-danger);
-	}
-
-	.wx-title input {
-		border: 1px solid transparent;
-		font-weight: var(--wx-font-weight-md);
-		font-size: var(--wx-font-size-md);
-		line-height: var(--wx-line-height-md);
-		color: var(--wx-color-secondary-font);
-		margin-left: -8px;
-		width: calc(100% + 8px);
-	}
-	.wx-title:focus:not([disabled]) input {
-		border: var(--wx-input-border-focus);
-	}
-	.wx-title:hover:not([disabled]) input {
-		border: var(--wx-input-border-focus);
 	}
 </style>

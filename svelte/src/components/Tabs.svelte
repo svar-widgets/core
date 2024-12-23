@@ -1,19 +1,19 @@
 <script>
-	import { createEventDispatcher } from "svelte";
-	export let options;
-	export let value;
-	export let type = "top";
-
-	const dispatch = createEventDispatcher();
+	let {
+		options = [],
+		value = $bindable(""),
+		type = "top",
+		onchange,
+	} = $props();
 </script>
 
 <div class="wx-tabs wx-{type}">
 	{#each options as option}
 		<button
 			class:wx-active={option.id == value}
-			on:click={() => {
+			onclick={() => {
 				value = option.id;
-				dispatch("change", value);
+				onchange && onchange({ value });
 			}}
 		>
 			{#if option.icon}
@@ -21,7 +21,7 @@
 					class="wx-icon {option.icon} {!option.label
 						? 'wx-only'
 						: ''}"
-				/>
+				></i>
 			{/if}
 			{#if option.label}<span class="wx-label">{option.label}</span>{/if}
 		</button>
@@ -126,7 +126,7 @@
 		border-bottom: 2px solid var(--wx-tabs-active-border);
 	}
 
-	button:not(.wx-active):hover:after {
+	button:not(:global(.wx-active)):hover:after {
 		border-bottom: 2px solid var(--wx-tabs-hover-border);
 	}
 

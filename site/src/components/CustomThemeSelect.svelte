@@ -1,6 +1,7 @@
 <script>
 	import { Switch } from "wx-svelte-core";
-	export let value = null;
+
+	let { value = $bindable() } = $props();
 
 	const skins = [
 		{
@@ -19,12 +20,14 @@
 		},
 	];
 
-	let swithValue = false;
-	$: value = skins[+swithValue].id;
+	const swithValue = () => {
+		const ind = (skins.findIndex(a => a.id === value) + 1) % skins.length;
+		value = skins[ind].id;
+	};
 </script>
 
-<div class="custom" class:dark={swithValue} style="width: 170px">
-	<Switch bind:value={swithValue} on:select />
+<div class="custom" class:dark={value === "willow-dark"} style="width: 170px">
+	<Switch value={value === "willow-dark"} onchange={swithValue} />
 </div>
 
 <style>

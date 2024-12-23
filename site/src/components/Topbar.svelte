@@ -1,16 +1,16 @@
 <script>
-	import { Slider, Combo, Button, Timepicker, Pager } from "wx-svelte-core";
+	import { Slider, Combo, Button, TimePicker, Pager } from "wx-svelte-core";
 
 	import CustomThemeSelect from "./CustomThemeSelect.svelte";
 
 	import { getData } from "../data";
 
-	export let skin;
+	let { skin = $bindable() } = $props();
 
 	const { employees, countries } = getData();
 
 	function selectSkin(ev) {
-		skin = ev.detail.selected.id;
+		skin = ev.selected.id;
 	}
 </script>
 
@@ -21,10 +21,11 @@
 			<Combo
 				options={countries}
 				textField="name"
-				let:option
 				placeholder="Click to select"
 			>
-				{option.name}
+				{#snippet children({ option })}
+					{option.name}
+				{/snippet}
 			</Combo>
 		</div>
 		<div class="avatars" style="width: 128px">
@@ -41,13 +42,13 @@
 			<Button type={"primary"} icon={"wxi-cat"}>Button</Button>
 		</div>
 		<div class="timepicker" style="width: 148px">
-			<Timepicker value={new Date(0, 0, 0, 14, 0, 0)} />
+			<TimePicker value={new Date(0, 0, 0, 14, 0, 0)} />
 		</div>
 		<div class="pager" style="width: 308px">
 			<Pager value={2} total={100} />
 		</div>
 		<div class="switch" style="width: 48px">
-			<CustomThemeSelect bind:value={skin} on:select={selectSkin} />
+			<CustomThemeSelect bind:value={skin} onchange={selectSkin} />
 		</div>
 	</div>
 </div>

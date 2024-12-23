@@ -1,6 +1,27 @@
+### 2.0.0
+
+-   [add] Svelte 5 support
+-   [update] controls with options define them as `id, label`
+-   [update] dropdown controls have change event with value instead of selected
+-   [update] Area renamed to TextArea
+-   [update] Timepicker renamed to TimePicker
+-   [update] Sidearea: close event renamed to cancel
+-   [update] ColorBoard: change event has extra input parameter
+-   [update] Modal boxes: cancel and ok properties renamed to cancel and confirm events
+
+### 1.3.1
+
+-   [fix] locale object lacks language marker
+-   [fix] incorrect change event parameter in Tabbar
+-   [fix] required fields do not have marks in labels
+-   [fix] disabled Richselect throws an error on click/keydown
+-   [fix] current month of Calendar does not update correctly
+
 ### 1.3.0
 
 -   [update] improved popup positioning strategies
+-   [fix] incorrect styling of right selection marker in Calendar
+-   [fix] impossible to track input changes in Textarea
 
 ### 1.2.3
 

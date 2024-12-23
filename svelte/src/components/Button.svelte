@@ -1,18 +1,16 @@
 <script>
-	import { createEventDispatcher } from "svelte";
+	let {
+		type = "",
+		css = "",
+		icon = "",
+		disabled = false,
+		title = "",
+		text = "",
+		children,
+		onclick,
+	} = $props();
 
-	export let type = "";
-	export let css = "";
-	export let click;
-	export let icon = "";
-	export let disabled = false;
-	export let title = "";
-	export let text = "";
-
-	const SLOTS = $$props.$$slots;
-
-	let buttonCss;
-	$: {
+	let buttonCss = $derived.by(() => {
 		let cssType = type
 			? type
 					.split(" ")
@@ -20,28 +18,23 @@
 					.map(x => "wx-" + x)
 					.join(" ")
 			: "";
-		buttonCss = css + (css ? " " : "") + cssType;
-	}
+		return css + (css ? " " : "") + cssType;
+	});
 
-	const dispatch = createEventDispatcher();
 	const handleClick = ev => {
-		if (disabled) return;
-		dispatch("click");
-		if (click) click(ev);
+		onclick && onclick(ev);
 	};
 </script>
 
 <button
 	{title}
 	class={`wx-button ${buttonCss}`}
-	class:wx-icon={icon && (!SLOTS || !SLOTS.default)}
+	class:wx-icon={icon && !children}
 	{disabled}
-	on:click={handleClick}
+	onclick={handleClick}
 >
-	{#if icon}<i class={icon} />{/if}
-	{#if SLOTS}
-		<slot />
-	{:else}{text}{/if}
+	{#if icon}<i class={icon}></i>{/if}
+	{#if children}{@render children()}{:else}{text}{/if}
 </button>
 
 <style>
@@ -85,7 +78,7 @@
 		outline: none;
 	}
 
-	.wx-button:active:not([disabled]) {
+	.wx-button:active:not(:global([disabled])) {
 		opacity: 0.8;
 	}
 
@@ -142,10 +135,10 @@
 		color: var(--wx-color-secondary-font);
 		border-color: var(--wx-color-secondary-border);
 	}
-	.wx-secondary:hover:not([disabled]),
-	.wx-secondary.wx-pressed:not([disabled]),
-	.wx-secondary.wx-pressed:hover:not([disabled]),
-	.wx-secondary.wx-pressed:active:not([disabled]) {
+	.wx-secondary:hover:not(:global([disabled])),
+	.wx-secondary.wx-pressed:not(:global([disabled])),
+	.wx-secondary.wx-pressed:hover:not(:global([disabled])),
+	.wx-secondary.wx-pressed:active:not(:global([disabled])) {
 		background: var(--wx-color-secondary-hover);
 		color: var(--wx-color-secondary-font-hover);
 	}

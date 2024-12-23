@@ -1,42 +1,41 @@
 <script>
-	import { createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
-
 	import Panel from "./calendar/Panel.svelte";
 	import { configs } from "./calendar/helpers";
 
-	export let value;
-	export let current;
-	export let markers = null;
-	export let buttons = true;
+	let {
+		value = $bindable(),
+		current = $bindable(),
+		markers = null,
+		buttons = true,
+		onchange: change,
+	} = $props();
 
-	function fixCurrent() {
-		if (!current) current = value ? new Date(value) : new Date();
+	function fixCurrent(force) {
+		if (!current || force) current = value ? new Date(value) : new Date();
+		current.setDate(1);
 	}
-	$: fixCurrent(value);
+	fixCurrent(value);
 
-	function doShift({ diff, type }) {
+	function onshift({ diff, type, month }) {
+		if (month || month === 0) {
+			current = new Date(current);
+			current.setMonth(month);
+			return;
+		}
 		const obj = configs[type];
 		current = diff > 0 ? obj.next(current) : obj.prev(current);
 	}
-	function doChange(v) {
+	function onchange(v) {
 		const x = v.value;
 		if (x) {
-			current = new Date(x);
 			value = new Date(x);
+			fixCurrent(true);
 		} else {
 			value = null;
 		}
 
-		dispatch("change", { value });
+		change && change({ value });
 	}
 </script>
 
-<Panel
-	{value}
-	{current}
-	{markers}
-	{buttons}
-	on:shift={ev => doShift(ev.detail)}
-	on:change={ev => doChange(ev.detail)}
-/>
+<Panel {value} bind:current {markers} {buttons} {onshift} {onchange} />

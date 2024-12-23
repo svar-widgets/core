@@ -4,7 +4,7 @@
 
 	const { showNotice } = getContext("wx-helpers");
 
-	function click() {
+	function onclick() {
 		showNotice({
 			text: "TwoState clicked",
 		});
@@ -13,26 +13,29 @@
 
 <div class="demo-box">
 	<h3>Default TwoState Button</h3>
-	<TwoState {click}>Click Me<span slot="active">Working...</span></TwoState>
-	<TwoState disabled={true} {click}>Click Me</TwoState>
+	{#snippet active()}
+		<span slot="active">Working...</span>
+	{/snippet}
+	<TwoState {onclick} {active}>Click Me</TwoState>
+	<TwoState disabled={true} {onclick}>Click Me</TwoState>
 </div>
 
 <div class="demo-box">
 	<h3>Primary TwoState Button</h3>
-	<TwoState type="primary" {click}>Click Me</TwoState>
-	<TwoState type="primary" disabled={true} {click}>Click Me</TwoState>
+	<TwoState type="primary" {onclick}>Click Me</TwoState>
+	<TwoState type="primary" disabled={true} {onclick}>Click Me</TwoState>
 </div>
 
 <div class="demo-box">
 	<h3>Secondary TwoState Button</h3>
-	<TwoState type="secondary" {click}>Click Me</TwoState>
-	<TwoState type="secondary" disabled={true} {click}>Click Me</TwoState>
+	<TwoState type="secondary" {onclick}>Click Me</TwoState>
+	<TwoState type="secondary" disabled={true} {onclick}>Click Me</TwoState>
 </div>
 
 <div class="demo-box">
 	<h3>Danger TwoState Button</h3>
-	<TwoState type="danger" {click}>Click Me</TwoState>
-	<TwoState type="danger" disabled={true} {click}>Click Me</TwoState>
+	<TwoState type="danger" {onclick}>Click Me</TwoState>
+	<TwoState type="danger" disabled={true} {onclick}>Click Me</TwoState>
 </div>
 
 <div class="demo-box">
@@ -52,14 +55,18 @@
 <div class="demo-box">
 	<h3>Inactive</h3>
 	<p>
-		<TwoState type="primary" value={true} click={ev => ev.preventDefault()}>
+		<TwoState
+			type="primary"
+			value={true}
+			onclick={ev => ev.preventDefault()}
+		>
 			Inactive
 		</TwoState>
 		<TwoState
 			type="primary"
 			value={true}
 			disabled
-			click={ev => ev.preventDefault()}
+			onclick={ev => ev.preventDefault()}
 		>
 			Inactive
 		</TwoState>
@@ -69,7 +76,7 @@
 			title="disabled button"
 			type="secondary"
 			value={true}
-			click={ev => ev.preventDefault()}
+			onclick={ev => ev.preventDefault()}
 		>
 			Inactive
 		</TwoState>
@@ -77,7 +84,7 @@
 			type="secondary"
 			value={true}
 			disabled
-			click={ev => ev.preventDefault()}
+			onclick={ev => ev.preventDefault()}
 		>
 			Inactive
 		</TwoState>

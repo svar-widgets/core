@@ -1,3 +1,5 @@
+const lang = "ja-JP";
+
 const calendar = {
 	monthFull: [
 		"1月",
@@ -55,12 +57,15 @@ const core = {
 const formats = {
 	timeFormat: "%H:%i",
 	dateFormat: "%Y年%m月%d日",
+	select: "選択 (せんたく",
+	"No data": "データなし (データなし",
 };
 
 const data = {
 	core,
 	calendar,
 	formats,
+	lang,
 };
 
 export default data;

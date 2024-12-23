@@ -2,14 +2,13 @@
 	import { setContext } from "svelte";
 	import RobotoFont from "./FonttRoboto.svelte";
 
-	export let fonts = true;
-	const SLOTS = $$props.$$slots;
+	let { fonts = true, children } = $props();
 	setContext("wx-theme", "material");
 </script>
 
-{#if SLOTS && SLOTS.default}
+{#if children}
 	<div class="wx-material-theme" style="height:100%">
-		<slot />
+		{@render children()}
 	</div>
 {/if}
 
@@ -75,6 +74,7 @@
 		/* icons */
 		--wx-icon-color: var(--wx-color-font-alt);
 		--wx-icon-size: var(--wx-line-height);
+		--wx-icon-border-radius: 2px;
 		/* end icons */
 
 		/* other */

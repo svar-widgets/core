@@ -1,41 +1,38 @@
 <script>
-	import { createEventDispatcher } from "svelte";
 	import { uid } from "wx-lib-dom";
 
-	const dispatch = createEventDispatcher();
+	let {
+		id = uid(),
+		label = "",
+		width = "",
+		min = 0,
+		max = 100,
+		value = $bindable(0),
+		step = 1,
+		title = "",
+		disabled = false,
+		onchange: change,
+	} = $props();
 
-	export let id = uid();
-	export let label = "";
-	export let width = "";
-	export let min = 0;
-	export let max = 100;
-	export let value = 0;
-	export let step = 1;
-	export let title = "";
-	export let disabled = false;
-
-	let progress = 0;
-	let bgStyle = "";
-
-	let previous;
-	$: {
-		progress = ((value - min) / (max - min)) * 100 + "%";
-		bgStyle = disabled
+	let bgStyle = $derived(() => {
+		return disabled
 			? ""
 			: `background: linear-gradient(90deg, var(--wx-slider-primary) 0% ${progress}, var(--wx-slider-background) ${progress} 100%);`;
+	});
 
-		if (isNaN(value)) value = 0;
+	let progress = $derived(((value - min) / (max - min)) * 100 + "%");
 
+	let previous = value;
+	function oninput({ target }) {
+		value = target.value || 0;
 		if (previous !== value) {
-			dispatch("change", { value, previous, input: true });
+			change && change({ value, previous, input: true });
 			previous = value;
 		}
 	}
-
-	function onChange({ target }) {
-		const v = target.value * 1;
-		dispatch("change", { value: v });
-		value = v;
+	function onchange({ target }) {
+		value = target.value * 1;
+		change && change({ value });
 	}
 </script>
 
@@ -49,9 +46,10 @@
 			{max}
 			{step}
 			{disabled}
-			bind:value
-			on:change={onChange}
-			style={bgStyle}
+			{value}
+			{oninput}
+			{onchange}
+			style={bgStyle()}
 		/>
 	</div>
 </div>

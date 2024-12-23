@@ -2,21 +2,20 @@
 	import { getContext } from "svelte";
 	import { delegateClick } from "wx-lib-dom";
 
-	export let value;
-	export let current;
-	export let cancel;
-	export let select;
-	export let part;
-	export let markers = null;
+	let {
+		value,
+		current = $bindable(),
+		part = "",
+		markers = null,
+		oncancel,
+		onchange,
+	} = $props();
 
 	const locale = getContext("wx-i18n").getRaw().calendar;
 	const weekStart = (locale.weekStart || 7) % 7;
 	const weekdays = locale.dayShort
 		.slice(weekStart)
 		.concat(locale.dayShort.slice(0, weekStart));
-
-	let days;
-	let date;
 
 	const dv = (d, dm, dd) =>
 		new Date(
@@ -25,20 +24,51 @@
 			d.getDate() + (dd || 0)
 		);
 	let ranges = part !== "normal";
-	$: {
-		if (part == "normal") date = [value ? dv(value).valueOf() : 0];
-		else
-			date = value
-				? [
-						value.start ? dv(value.start).valueOf() : 0,
-						value.end ? dv(value.end).valueOf() : 0,
-					]
-				: [0, 0];
 
+	function isWeekEnd(date) {
+		const d = date.getDay();
+		return d === 0 || d === 6;
+	}
+
+	function getStart() {
+		const start = dv(current, 0, 1 - current.getDate());
+		start.setDate(
+			start.getDate() - ((start.getDay() - (weekStart - 7)) % 7)
+		);
+		return start;
+	}
+	function getEnd() {
+		const end = dv(current, 1, -current.getDate());
+		end.setDate(end.getDate() + ((6 - end.getDay() + weekStart) % 7));
+		return end;
+	}
+
+	const selectDates = {
+		click: selectDate,
+	};
+
+	function selectDate(date, e) {
+		e.stopPropagation();
+		onchange && onchange(new Date(new Date(date)));
+		oncancel && oncancel();
+	}
+
+	const date = $derived.by(() => {
+		if (part == "normal") return [value ? dv(value).valueOf() : 0];
+		return value
+			? [
+					value.start ? dv(value.start).valueOf() : 0,
+					value.end ? dv(value.end).valueOf() : 0,
+				]
+			: [0, 0];
+	});
+
+	const days = $derived.by(() => {
 		const start = getStart();
 		const end = getEnd();
 		const curMonth = current.getMonth();
-		days = [];
+
+		let days = [];
 		for (let d = start; d <= end; d.setDate(d.getDate() + 1)) {
 			const day = {
 				day: d.getDate(),
@@ -68,37 +98,8 @@
 
 			days.push({ ...day, css });
 		}
-	}
-
-	function isWeekEnd(date) {
-		const d = date.getDay();
-		return d === 0 || d === 6;
-	}
-
-	function getStart() {
-		const start = dv(current, 0, 1 - current.getDate());
-		start.setDate(
-			start.getDate() - ((start.getDay() - (weekStart - 7)) % 7)
-		);
-		return start;
-	}
-	function getEnd() {
-		const end = dv(current, 1, -current.getDate());
-		end.setDate(end.getDate() + ((6 - end.getDay() + weekStart) % 7));
-		return end;
-	}
-
-	const selectDates = {
-		click: selectDate,
-	};
-
-	function selectDate(date, e) {
-		if (select) {
-			e.stopPropagation();
-			select(new Date(new Date(date)));
-		}
-		if (cancel) cancel();
-	}
+		return days;
+	});
 </script>
 
 <div>
@@ -155,32 +156,32 @@
 		justify-content: center;
 		text-align: center;
 	}
-	.wx-day:not(.wx-out):not(.wx-selected) {
+	.wx-day:not(:global(.wx-out)):not(:global(.wx-selected)) {
 		cursor: pointer;
 	}
-	.wx-day:not(.wx-out):not(.wx-selected):hover {
+	.wx-day:not(:global(.wx-out)):not(:global(.wx-selected)):hover {
 		background: var(--wx-background-hover);
 	}
 	.wx-day.wx-out {
 		color: var(--wx-color-font-disabled);
 	}
-	.wx-day.wx-selected:not(.wx-out) {
+	.wx-day.wx-selected:not(:global(.wx-out)) {
 		background: var(--wx-color-primary);
 		color: var(--wx-color-primary-font);
 	}
-	.wx-day.wx-selected.wx-left:not(.wx-out) {
+	.wx-day.wx-selected.wx-left:not(:global(.wx-out)) {
 		border-radius: calc(var(--wx-calendar-border-radius)) 0 0
 			calc(var(--wx-calendar-border-radius));
 	}
-	.wx-day.wx-selected.wx-right:not(.wx-out) {
+	.wx-day.wx-selected.wx-right:not(:global(.wx-out)) {
 		border-radius: 0 calc(var(--wx-calendar-border-radius))
 			calc(var(--wx-calendar-border-radius)) 0;
 	}
-	.wx-day.wx-inrange:not(.wx-out) {
+	.wx-day.wx-inrange:not(:global(.wx-out)) {
 		border-radius: 0;
 		background: var(--wx-color-primary-selected);
 	}
-	.wx-day.wx-weekend:not(.wx-selected):not(.wx-out) {
+	.wx-day.wx-weekend:not(:global(.wx-selected)):not(:global(.wx-out)) {
 		color: var(--wx-color-primary);
 	}
 	.wx-day.wx-inactive {

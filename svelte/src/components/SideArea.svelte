@@ -1,18 +1,16 @@
 <script>
-	import { createEventDispatcher } from "svelte";
 	import { clickOutside } from "wx-lib-dom";
 	import { fly } from "svelte/transition";
 
-	const dispatch = createEventDispatcher();
-	export let position = "right";
+	let { position = "right", children, oncancel } = $props();
 </script>
 
 <div
 	class="wx-sidearea wx-pos-{position}"
-	use:clickOutside={() => dispatch("close")}
+	use:clickOutside={() => oncancel && oncancel()}
 	transition:fly={{ x: 650, opacity: 1 }}
 >
-	<slot />
+	{@render children?.()}
 </div>
 
 <style>

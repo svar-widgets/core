@@ -7,73 +7,55 @@
 
 <div class="demo-box">
 	<h3>MultiCombo with a simple list</h3>
-	<MultiCombo options={users} textField="name" let:option value={[104]}>
-		{option.name}
-	</MultiCombo>
+	<MultiCombo options={users} value={[104]} />
 </div>
 <div class="demo-box">
 	<h3>MultiCombo with checkboxes</h3>
-	<MultiCombo
-		checkboxes={true}
-		options={users}
-		textField="name"
-		let:option
-		value={[104]}
-	>
-		{option.name}
-	</MultiCombo>
+	<MultiCombo checkboxes={true} options={users} value={[104]} />
 </div>
 
 <div class="demo-box">
 	<h3>MultiCombo with a side label</h3>
-	<Field label="Owner" let:id position="left">
-		<MultiCombo
-			options={users}
-			textField="name"
-			{id}
-			let:option
-			value={[104]}
-		>
-			{option.name}
-		</MultiCombo>
+	<Field label="Owner" position="left">
+		{#snippet children({ id })}
+			<MultiCombo options={users} {id} value={[104]} />
+		{/snippet}
 	</Field>
-	<Field label="Disabled" let:id position="left">
-		<MultiCombo
-			options={users}
-			textField="name"
-			disabled
-			{id}
-			let:option
-			value={[104]}
-		>
-			{option.name}
-		</MultiCombo>
+	<Field label="Disabled" position="left">
+		{#snippet children({ id })}
+			<MultiCombo options={users} disabled {id} value={[104]} />
+		{/snippet}
 	</Field>
-	<Field label="Error" let:id error position="left">
-		<MultiCombo
-			title="Invalid option"
-			options={users}
-			textField="name"
-			error
-			{id}
-			let:option
-			value={[104]}
-		>
-			{option.name}
-		</MultiCombo>
+	<Field label="Error" error position="left">
+		{#snippet children({ id })}
+			<MultiCombo
+				title="Invalid option"
+				options={users}
+				error
+				{id}
+				value={[104]}
+			/>
+		{/snippet}
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>MultiCombo with a template</h3>
-	<MultiCombo options={users} textField="name" let:option value={[104]}>
-		<UserOption data={option} />
+	<MultiCombo options={users} value={[104]}>
+		{#snippet children({ option })}
+			<UserOption data={option} />
+		{/snippet}
 	</MultiCombo>
 </div>
 
 <div class="demo-box">
+	<h3>MultiCombo with a custom "textField"</h3>
+	<MultiCombo options={users} value={[104]} textField="email" />
+</div>
+
+<div class="demo-box">
 	<h3>MultiCombo without a value</h3>
-	<MultiCombo options={users} textField="name" />
+	<MultiCombo options={users} />
 </div>
 
 <div class="demo-box">

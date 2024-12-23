@@ -24,27 +24,10 @@ All components are lightweight, responsive, fast-performing, and available in li
 <img src="https://cdn.svar.dev/public/core-ui-dark.jpg" alt="SVAR Core Library - Dark Skin" style="width: 600px;">
 
 In addition to the Core library, you can use the following SVAR components to build unified app UIs:
-- [Menu](https://github.com/svar-widgets/menu)
-- [Toolbar](https://github.com/svar-widgets/toolbar)
-- [File uploader](https://github.com/svar-widgets/uploader)
 
-### Versions for Svelte 4 and 5
-
-There are two versions of the library: 
-- version **1.x** was designed to work with Svelte 4
-- version **2.x** is created for Svelte 5 (please note that this version is in beta and may contain some instabilities)
-
-To use SVAR Core v.2.0 beta for Svelte 5, install it as follows:
-
-```
-npm install wx-svelte-core
-```
-
-To use SVAR Core for Svelte 4:
-
-```
-npm install wx-svelte-core@1.3.0
-```
+-   [Menu](https://github.com/svar-widgets/menu)
+-   [Toolbar](https://github.com/svar-widgets/toolbar)
+-   [File uploader](https://github.com/svar-widgets/uploader)
 
 ### :hammer_and_wrench: How to Use
 
@@ -79,6 +62,7 @@ To run the test:
     ```sh
     yarn test:cypress
     ```
+
 ### :speech_balloon: Need Help?
 
-[Post an Issue](https://github.com/svar-widgets/core/issues/) or use our [community forum](https://forum.svar.dev). 
+[Post an Issue](https://github.com/svar-widgets/core/issues/) or use our [community forum](https://forum.svar.dev).

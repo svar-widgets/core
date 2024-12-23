@@ -1,10 +1,10 @@
 <script>
 	import { Button, Popup, Slider } from "../../src/index";
 
-	let node;
-	let isOpen = false;
-	let mode = "bottom";
-	let parent = null;
+	let node = null;
+	let isOpen = $state(false);
+	let mode = $state("bottom");
+	let parent = $state(null);
 
 	function showAt() {
 		isOpen = true;
@@ -22,7 +22,7 @@
 		parent = document.body;
 	}
 
-	function cancel() {
+	function oncancel() {
 		isOpen = false;
 	}
 </script>
@@ -31,20 +31,19 @@
 	<h3>Popup</h3>
 	<div class="toolbar">
 		<div>
-			<Button type="block" on:click={showAt}>Show at position</Button>
+			<Button type="block" onclick={showAt}>Show at position</Button>
 		</div>
 		<div bind:this={node}>
-			<Button type="block" on:click={showNext}>Show next to button</Button
-			>
+			<Button type="block" onclick={showNext}>Show next to button</Button>
 		</div>
 		<div>
-			<Button type="block" on:click={showCenter}>Show at center</Button>
+			<Button type="block" onclick={showCenter}>Show at center</Button>
 		</div>
 	</div>
 </div>
 
 {#if isOpen}
-	<Popup {cancel} at={mode} {parent} left={100} top={100}>
+	<Popup {oncancel} at={mode} {parent} left={100} top={100}>
 		<div class="popup">
 			<p>Some text here and there</p>
 			<p>Some text here and there</p>

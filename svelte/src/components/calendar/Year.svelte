@@ -3,26 +3,26 @@
 	import { delegateClick } from "wx-lib-dom";
 	import Button from "./Button.svelte";
 
-	export let value;
-	export let current;
-	export let cancel;
-	export let part;
+	let {
+		value = $bindable(),
+		current = $bindable(),
+		part,
+		oncancel,
+		onshift,
+	} = $props();
 
 	const locale = getContext("wx-i18n").getRaw().calendar;
 	const months = locale.monthShort;
 
-	let monthNum;
-	$: {
+	const monthNum = $derived.by(() => {
 		if (part !== "normal" && value) {
-			if (part === "left" && value.start)
-				monthNum = value.start.getMonth();
-			else if (part === "right" && value.end)
-				monthNum = value.end.getMonth();
-			else monthNum = current.getMonth();
+			if (part === "left" && value.start) return value.start.getMonth();
+			else if (part === "right" && value.end) return value.end.getMonth();
+			else return current.getMonth();
 		} else {
-			monthNum = current.getMonth();
+			return current.getMonth();
 		}
-	}
+	});
 
 	const selectMonths = {
 		click: selectMonth,
@@ -30,13 +30,12 @@
 	function selectMonth(month, e) {
 		if (month || month === 0) {
 			e.stopPropagation();
-			current.setMonth(month);
-			current = current;
+			onshift && onshift({ month });
 		}
 
 		if (part === "normal") value = new Date(current);
 
-		cancel();
+		oncancel && oncancel();
 	}
 </script>
 
@@ -48,7 +47,7 @@
 	{/each}
 </div>
 <div class="wx-buttons">
-	<Button click={cancel}>{locale.done}</Button>
+	<Button onclick={oncancel}>{locale.done}</Button>
 </div>
 
 <style>
@@ -75,7 +74,7 @@
 		background: var(--wx-color-primary);
 		color: var(--wx-color-primary-font);
 	}
-	.wx-month:not(.wx-current):hover {
+	.wx-month:not(:global(.wx-current)):hover {
 		background-color: var(--wx-background-hover);
 	}
 

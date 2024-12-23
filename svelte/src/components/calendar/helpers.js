@@ -21,16 +21,12 @@ export const configs = {
 };
 
 function prevMonth(current) {
-	let newCurrent = new Date(current);
-	newCurrent.setMonth(current.getMonth() - 1);
-	while (current.getMonth() === newCurrent.getMonth()) {
-		newCurrent.setDate(newCurrent.getDate() - 1);
-	}
-	return newCurrent;
+	current = new Date(current);
+	current.setMonth(current.getMonth() - 1);
+	return current;
 }
 function nextMonth(current) {
 	current = new Date(current);
-	current.setDate(1);
 	current.setMonth(current.getMonth() + 1);
 	return current;
 }

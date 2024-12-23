@@ -1,3 +1,5 @@
+const lang = "en-US";
+
 const calendar = {
 	monthFull: [
 		"January",
@@ -52,6 +54,8 @@ const calendar = {
 const core = {
 	ok: "OK",
 	cancel: "Cancel",
+	select: "Select",
+	"No data": "No data",
 };
 
 const formats = {
@@ -63,6 +67,7 @@ const data = {
 	core,
 	calendar,
 	formats,
+	lang,
 };
 
 export default data;

@@ -1,3 +1,5 @@
+const lang = "fr-FR";
+
 const calendar = {
 	monthFull: [
 		"Janvier",
@@ -55,12 +57,15 @@ const core = {
 const formats = {
 	timeFormat: "%H:%i",
 	dateFormat: "%d/%m/%Y",
+	select: "Sélectionner",
+	"No data": "Pas de données",
 };
 
 const data = {
 	core,
 	calendar,
 	formats,
+	lang,
 };
 
 export default data;

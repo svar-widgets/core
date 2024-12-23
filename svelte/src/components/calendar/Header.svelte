@@ -1,59 +1,53 @@
 <script>
-	import { getContext, createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
+	import { getContext } from "svelte";
 
 	const locale = getContext("wx-i18n").getRaw().calendar;
 	const monthNames = locale.monthFull;
 
-	export let date;
-	export let type;
+	let { date, type, part, onshift } = $props();
 
-	export let part;
-
-	let month, year, label;
-	$: {
-		month = date.getMonth();
-		year = date.getFullYear();
-
+	const month = $derived(date.getMonth());
+	const year = $derived(date.getFullYear());
+	const label = $derived.by(() => {
 		switch (type) {
 			case "month":
-				label = `${monthNames[month]} ${year}`;
-				break;
+				return `${monthNames[month]} ${year}`;
 			case "year":
-				label = year;
-				break;
+				return year;
 			case "duodecade": {
 				const start = year - (year % 10);
 				const end = start + 9;
 
-				label = `${start} - ${end}`;
-				break;
+				return `${start} - ${end}`;
 			}
 		}
-	}
+	});
 
 	function changeType() {
-		dispatch("shift", { diff: 0, type });
+		onshift && onshift({ diff: 0, type });
 	}
 </script>
 
 <div class="wx-header">
 	{#if part != "right"}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<i
 			class="wx-pager wxi-angle-left"
-			on:click={() => dispatch("shift", { diff: -1, type })}
-		/>
-	{:else}<span class="wx-spacer" />{/if}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<span class="wx-label" on:click={changeType}>{label}</span>
+			onclick={() => onshift && onshift({ diff: -1, type })}
+		></i>
+	{:else}<span class="wx-spacer"></span>{/if}
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<span class="wx-label" onclick={changeType}>{label}</span>
 	{#if part != "left"}
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<i
 			class="wx-pager wxi-angle-right"
-			on:click={() => dispatch("shift", { diff: 1, type })}
-		/>
-	{:else}<span class="wx-spacer" />{/if}
+			onclick={() => onshift && onshift({ diff: 1, type })}
+		></i>
+	{:else}<span class="wx-spacer"></span>{/if}
 </div>
 
 <style>

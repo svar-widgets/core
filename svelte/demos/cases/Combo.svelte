@@ -4,7 +4,7 @@
 
 	import UserOption from "../custom/UserOption.svelte";
 
-	let value = "";
+	let value = $state("");
 	const values = [104, 103, 102, ""];
 	function changeValue() {
 		value = values[(values.indexOf(value) + 1) % values.length];
@@ -14,61 +14,55 @@
 <div class="demo-box">
 	<h3>Combo with a simple list</h3>
 	<Field>
-		<Combo options={users} textField="name" let:option value={104}>
-			{option.name}
-		</Combo>
+		<Combo options={users} value={104} />
 	</Field>
 	<Field label="Disabled">
-		<Combo options={users} textField="name" disabled let:option value={104}>
-			{option.name}
-		</Combo>
+		<Combo options={users} disabled value={104} />
 	</Field>
 	<Field label="Error" error>
-		<Combo
-			options={users}
-			textField="name"
-			error
-			let:option
-			value={104}
-			title="Invalid option"
-		>
-			{option.name}
-		</Combo>
+		<Combo options={users} error value={104} title="Invalid option" />
 	</Field>
 </div>
 <div class="demo-box">
 	<h3>Combo with a dynamic value</h3>
 
-	<Button click={changeValue}>Change the value</Button>
+	<Button onclick={changeValue}>Change the value</Button>
 	<Field>
-		<Combo options={users} textField="name" let:option {value}>
-			{option.name}
-		</Combo>
+		<Combo options={users} {value} />
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Combo with a side label</h3>
-	<Field label="Owner" position="left" let:id>
-		<Combo options={users} textField="name" {id} let:option value={104}>
-			{option.name}
-		</Combo>
+	<Field label="Owner" position="left">
+		{#snippet children({ id })}
+			<Combo options={users} {id} value={104} />
+		{/snippet}
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Combo with a template</h3>
 	<Field>
-		<Combo options={users} textField="name" let:option value={104}>
-			<UserOption data={option} />
+		<Combo options={users} value={104}>
+			{#snippet children({ option })}
+				<UserOption data={option} />
+			{/snippet}
 		</Combo>
+	</Field>
+</div>
+
+<div class="demo-box">
+	<h3>Combo with a custom "textField"</h3>
+	<Field>
+		<Combo options={users} value={104} textField="email" />
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Combo without a value</h3>
 	<Field>
-		<Combo options={users} textField="name" />
+		<Combo options={users} />
 	</Field>
 </div>
 
@@ -82,6 +76,6 @@
 <div class="demo-box">
 	<h3>Combo with clear button</h3>
 	<Field>
-		<Combo options={users} value={104} textField="name" clearButton />
+		<Combo options={users} value={104} clear={true} />
 	</Field>
 </div>

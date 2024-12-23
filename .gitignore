@@ -7,3 +7,4 @@ package-lock.json
 *.log
 .vscode
 .idea
+.env.local

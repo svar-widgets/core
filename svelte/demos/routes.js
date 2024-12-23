@@ -1,4 +1,5 @@
-import Area from "./cases/Area.svelte";
+import Basic from "./cases/Basic.svelte";
+import TextArea from "./cases/TextArea.svelte";
 import Buttons from "./cases/Buttons.svelte";
 import Calendar from "./cases/Calendar.svelte";
 import Month from "./cases/Month.svelte";
@@ -23,7 +24,7 @@ import Slider from "./cases/Slider.svelte";
 import Tabs from "./cases/Tabs.svelte";
 import Switch from "./cases/Switch.svelte";
 import Pager from "./cases/Pager.svelte";
-import Timepicker from "./cases/Timepicker.svelte";
+import TimePicker from "./cases/TimePicker.svelte";
 import Field from "./cases/Field.svelte";
 import Segmented from "./cases/Segmented.svelte";
 import Icon from "./cases/Icon.svelte";
@@ -31,6 +32,7 @@ import SideArea from "./cases/SideArea.svelte";
 import ModalArea from "./cases/ModalArea.svelte";
 
 export const links = [
+	["/base/:skin", "Basic UI", Basic],
 	["/button/:skin", "Button", Buttons],
 	["/calendar/:skin", "Calendar", Calendar],
 	["/month/:skin", "Month", Month],
@@ -55,9 +57,9 @@ export const links = [
 	["/switch/:skin", "Switch", Switch],
 	["/tabs/:skin", "Tabs", Tabs],
 	["/inputs/:skin", "Text Inputs", Text],
-	["/area/:skin", "Textarea", Area],
-	["/counter/:skin", "Counter Number Input", Counter],
-	["/timepicker/:skin", "Timepicker", Timepicker],
+	["/textarea/:skin", "TextArea", TextArea],
+	["/counter/:skin", "Counter Input", Counter],
+	["/timepicker/:skin", "TimePicker", TimePicker],
 	["/twostate/:skin", "Two State", TwoState],
 	["/icon/:skin", "Icon", Icon],
 	["/sidearea/:skin", "Side Area", SideArea],

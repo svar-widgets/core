@@ -1,5 +1,5 @@
 <script>
-	export let data;
+	let { data } = $props();
 </script>
 
 <div class="item">
@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<div>
-		<div class="name">{data.name}</div>
+		<div class="name">{data.label}</div>
 		<div class="mail">{data.email || ""}</div>
 	</div>
 </div>

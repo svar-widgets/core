@@ -1,9 +1,9 @@
 <script>
-	export let click;
+	let { onclick, children } = $props();
 </script>
 
-<button on:click={click}>
-	<slot />
+<button {onclick}>
+	{@render children?.()}
 </button>
 
 <style>

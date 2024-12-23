@@ -1,26 +1,51 @@
 <script>
 	import { uid } from "wx-lib-dom";
-	export let label = "label";
-	export let value = "";
-	export let options = [];
-	export let placeholder = "";
-	export let title;
-	export let disabled = false;
-	export let error = false;
 
-	export let id = uid();
+	let {
+		value = $bindable(""),
+		options = [],
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		textField = "label",
+		clear = false,
+		id = uid(),
+		onchange,
+	} = $props();
+
+	function unselect() {
+		value = "";
+		onchange && onchange({ value });
+	}
+
+	function handleChange() {
+		onchange && onchange({ value });
+	}
 </script>
 
 <div class="wx-select">
-	<select {id} bind:value {disabled} class:wx-error={error} {title}>
+	<select
+		{id}
+		bind:value
+		{disabled}
+		class:wx-error={error}
+		{title}
+		onchange={handleChange}
+	>
 		{#each options as option (option.id)}
-			<option value={option.id}>{option[label]}</option>
+			<option value={option.id}>{option[textField]}</option>
 		{/each}
 	</select>
 	{#if !value && value !== 0}
 		<div class="wx-placeholder">{placeholder}</div>
 	{/if}
-	<i class="wx-icon wxi-angle-down" />
+
+	{#if clear && !disabled && value}
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<i class="wx-icon wxi-close" onclick={unselect}></i>
+	{:else}<i class="wx-icon wxi-angle-down"></i>{/if}
 </div>
 
 <style>
@@ -120,5 +145,13 @@
 	}
 	.wx-icon:before {
 		display: block;
+	}
+	.wx-icon.wxi-close {
+		pointer-events: all;
+		cursor: pointer;
+	}
+	.wx-icon.wxi-close:hover {
+		background: var(--wx-background-hover);
+		border-radius: var(--wx-icon-border-radius);
 	}
 </style>

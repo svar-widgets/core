@@ -3,14 +3,18 @@
 	import Dropdown from "./Dropdown.svelte";
 	import ColorBoard from "./ColorBoard.svelte";
 
-	export let value = "";
-	export let id = uid();
-	export let placeholder = "";
-	export let title = "";
-	export let disabled = false;
-	export let error = false;
+	let {
+		value = $bindable(""),
+		id = uid(),
+		placeholder = "",
+		title = "",
+		disabled = false,
+		error = false,
+		clear = false,
+		onchange,
+	} = $props();
 
-	let popup;
+	let popup = $state(false);
 
 	function handlePopup() {
 		if (disabled) return false;
@@ -18,13 +22,23 @@
 	}
 
 	function selectColor(ev) {
-		value = ev.detail.value;
-		popup = null;
+		if (ev.input) return;
+
+		popup = false;
+		value = ev.value;
+		onchange && onchange({ value });
+	}
+
+	function unselectColor(ev) {
+		ev.stopPropagation();
+		value = "";
+		onchange && onchange({ value });
 	}
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="wx-colorpicker" on:click={handlePopup}>
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="wx-colorpicker" onclick={handlePopup}>
 	<input
 		{title}
 		{value}
@@ -35,11 +49,15 @@
 		class:wx-error={error}
 		class:wx-focus={popup}
 	/>
-	<div class="wx-color" style="background: {value}" />
+	<div class="wx-color" style="background: {value}"></div>
+
+	{#if clear && !disabled && value}
+		<i class="wxi-close" onclick={unselectColor}></i>
+	{/if}
 
 	{#if popup}
-		<Dropdown cancel={() => (popup = null)}>
-			<ColorBoard {value} button="true" on:change={selectColor} />
+		<Dropdown oncancel={() => (popup = false)}>
+			<ColorBoard {value} button="true" onchange={selectColor} />
 		</Dropdown>
 	{/if}
 </div>
@@ -106,5 +124,29 @@
 	input.wx-error {
 		border-color: var(--wx-color-danger);
 		color: var(--wx-color-danger);
+	}
+
+	.wxi-close {
+		position: absolute;
+		right: var(--wx-input-icon-indent);
+		top: 50%;
+		transform: translateY(-50%);
+		font-size: var(--wx-input-icon-size);
+		line-height: 1;
+		width: var(--wx-input-icon-size);
+		height: var(--wx-input-icon-size);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		user-select: none;
+		color: var(--wx-input-icon-color);
+		cursor: pointer;
+	}
+	.wxi-close:before {
+		display: block;
+	}
+	.wxi-close:hover {
+		background: var(--wx-background-hover);
+		border-radius: var(--wx-icon-border-radius);
 	}
 </style>

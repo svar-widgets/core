@@ -53,11 +53,12 @@ export function getListHandlers() {
 	const keydown = (ev, position) => {
 		switch (ev.code) {
 			case "Enter":
-				isVisible ? selectCallback() : setNav(0);
+				if (isVisible) selectCallback();
+				else setNav(0);
 				break;
 
 			case "Space":
-				isVisible ? null : setNav(0);
+				if (!isVisible) setNav(0);
 				break;
 
 			case "Escape":

@@ -5,23 +5,23 @@
 
 	const _ = getContext("wx-i18n").getRaw().calendar;
 
-	export let value;
-	export let current;
-	export let cancel;
-	export let part;
+	let {
+		value = $bindable(),
+		current = $bindable(),
+		oncancel,
+		part,
+	} = $props();
 
-	let years;
-	let year;
-	$: {
-		year = current.getFullYear();
-
+	const year = $derived(current.getFullYear());
+	const years = $derived.by(() => {
 		const start = year - (year % 10) - 1;
 		const end = start + 12;
-		years = [];
+		const years = [];
 		for (let y = start; y < end; ++y) {
 			years.push(y);
 		}
-	}
+		return years;
+	});
 
 	const selectYears = {
 		click: selectYear,
@@ -29,13 +29,13 @@
 	function selectYear(year, e) {
 		if (year) {
 			e.stopPropagation();
+			current = new Date(current);
 			current.setFullYear(year);
-			current = current;
 		}
 
 		if (part === "normal") value = new Date(current);
 
-		cancel();
+		oncancel && oncancel();
 	}
 </script>
 
@@ -53,7 +53,7 @@
 	{/each}
 </div>
 <div class="wx-buttons">
-	<Button click={cancel}>{_.done}</Button>
+	<Button onclick={oncancel}>{_.done}</Button>
 </div>
 
 <style>
@@ -80,7 +80,7 @@
 		background: var(--wx-color-primary);
 		color: var(--wx-color-primary-font);
 	}
-	.wx-year:not(.wx-current):hover {
+	.wx-year:not(:global(.wx-current)):hover {
 		background-color: var(--wx-background-hover);
 	}
 	.wx-prev-decade,

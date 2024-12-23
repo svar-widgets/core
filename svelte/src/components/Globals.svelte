@@ -6,7 +6,9 @@
 
 	import { uid } from "wx-lib-dom";
 
-	let modal = null;
+	let { children } = $props();
+
+	let modal = $state(null);
 	function showModal(msg) {
 		modal = { ...msg };
 		return new Promise((res, rej) => {
@@ -21,7 +23,7 @@
 		});
 	}
 
-	let notices = [];
+	let notices = $state([]);
 	function showNotice(msg) {
 		msg = { ...msg };
 		msg.id = msg.id || uid();
@@ -39,13 +41,13 @@
 	});
 </script>
 
-<slot />
+{@render children?.()}
 {#if modal}
 	<Modal
 		title={modal.title}
 		buttons={modal.buttons}
-		ok={modal.resolve}
-		cancel={modal.reject}
+		onconfirm={modal.resolve}
+		oncancel={modal.reject}
 	>
 		{modal.message}
 	</Modal>
