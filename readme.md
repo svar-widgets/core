@@ -28,6 +28,8 @@ In addition to the Core library, you can use the following SVAR components to bu
 -   [Menu](https://github.com/svar-widgets/menu)
 -   [Toolbar](https://github.com/svar-widgets/toolbar)
 -   [File uploader](https://github.com/svar-widgets/uploader)
+-   [Tasklist](https://github.com/svar-widgets/tasklist)
+-   [Comments](https://github.com/svar-widgets/comments)
 
 ### :hammer_and_wrench: How to Use
 
