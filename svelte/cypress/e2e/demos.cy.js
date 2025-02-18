@@ -1,5 +1,5 @@
 const cases = [
-	"/area/:skin",
+	"/textarea/:skin",
 	"/button/:skin",
 	"/calendar/:skin",
 	"/month/:skin",

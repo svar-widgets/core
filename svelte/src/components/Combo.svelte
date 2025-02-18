@@ -6,6 +6,7 @@
 		value = $bindable(""),
 		id = uid(),
 		options = [],
+		textOptions = null,
 		textField = "label",
 		placeholder = "",
 		title = "",
@@ -23,7 +24,7 @@
 		return filterActive
 			? textInput
 			: value || value === 0
-				? options.find(a => a.id === value)[textField]
+				? (textOptions || options).find(a => a.id === value)[textField]
 				: "";
 	});
 
@@ -73,7 +74,7 @@
 
 			if (effects) navigate(null);
 
-			if (value !== selected.id) {
+			if (selected && value !== selected.id) {
 				value = selected.id;
 				onchange && onchange({ value });
 			}

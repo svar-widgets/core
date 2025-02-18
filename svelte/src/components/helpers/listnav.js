@@ -31,7 +31,7 @@ export function getListHandlers() {
 
 	const scrollTo = (navIndex, ev) => {
 		if (navIndex !== null && list) {
-			const next = list.querySelectorAll(`.list > .item`)[navIndex];
+			const next = list.querySelectorAll(`.wx-list > .wx-item`)[navIndex];
 			if (next) {
 				next.scrollIntoView({ block: "nearest" });
 				if (ev) ev.preventDefault();

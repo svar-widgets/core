@@ -1,24 +1,22 @@
 <script>
+	import { dateToString, getDuodecade } from "wx-lib-dom";
 	import { getContext } from "svelte";
 
-	const locale = getContext("wx-i18n").getRaw().calendar;
-	const monthNames = locale.monthFull;
+	const { calendar, formats } = getContext("wx-i18n").getRaw();
 
 	let { date, type, part, onshift } = $props();
 
-	const month = $derived(date.getMonth());
 	const year = $derived(date.getFullYear());
 	const label = $derived.by(() => {
 		switch (type) {
 			case "month":
-				return `${monthNames[month]} ${year}`;
+				return dateToString(formats.monthYearFormat, calendar)(date);
 			case "year":
-				return year;
+				return dateToString(formats.yearFormat, calendar)(date);
 			case "duodecade": {
-				const start = year - (year % 10);
-				const end = start + 9;
-
-				return `${start} - ${end}`;
+				const { start, end } = getDuodecade(year);
+				const yearFormat = dateToString(formats.yearFormat, calendar);
+				return `${yearFormat(new Date(start, 0, 1))} - ${yearFormat(new Date(end, 11, 31))}`;
 			}
 		}
 	});

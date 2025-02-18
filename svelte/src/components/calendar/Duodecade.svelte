@@ -1,7 +1,8 @@
 <script>
 	import { getContext } from "svelte";
-	import { delegateClick } from "wx-lib-dom";
+	import { delegateClick, getDuodecade } from "wx-lib-dom";
 	import Button from "./Button.svelte";
+	import { getPartValue } from "./helpers";
 
 	const _ = getContext("wx-i18n").getRaw().calendar;
 
@@ -9,15 +10,16 @@
 		value = $bindable(),
 		current = $bindable(),
 		oncancel,
+		onchange,
+		onshift,
 		part,
 	} = $props();
 
 	const year = $derived(current.getFullYear());
 	const years = $derived.by(() => {
-		const start = year - (year % 10) - 1;
-		const end = start + 12;
+		const { start, end } = getDuodecade(year);
 		const years = [];
-		for (let y = start; y < end; ++y) {
+		for (let y = start; y <= end; ++y) {
 			years.push(y);
 		}
 		return years;
@@ -29,13 +31,23 @@
 	function selectYear(year, e) {
 		if (year) {
 			e.stopPropagation();
-			current = new Date(current);
 			current.setFullYear(year);
+			current = new Date(current);
+
+			onshift && onshift({});
 		}
 
 		if (part === "normal") value = new Date(current);
 
 		oncancel && oncancel();
+	}
+
+	function done() {
+		const date = new Date(getPartValue(value, part) || current);
+
+		date.setFullYear(current.getFullYear());
+
+		onchange && onchange(date);
 	}
 </script>
 
@@ -53,7 +65,7 @@
 	{/each}
 </div>
 <div class="wx-buttons">
-	<Button onclick={oncancel}>{_.done}</Button>
+	<Button onclick={done}>{_.done}</Button>
 </div>
 
 <style>

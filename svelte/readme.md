@@ -28,6 +28,8 @@ In addition to the Core library, you can use the following SVAR components to bu
 -   [Menu](https://www.npmjs.com/package/wx-svelte-menu)
 -   [Toolbar](https://www.npmjs.com/package/wx-svelte-toolbar)
 -   [File uploader](https://www.npmjs.com/package/wx-svelte-uploader)
+-   [Comments](https://www.npmjs.com/package/wx-svelte-comments)
+-   [Tasklist](https://www.npmjs.com/package/wx-svelte-tasklist)
 
 ### Svelte 4 and Svelte 5 versions
 

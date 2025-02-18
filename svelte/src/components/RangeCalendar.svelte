@@ -1,7 +1,6 @@
 <script>
 	import { untrack } from "svelte";
 	import Panel from "./calendar/Panel.svelte";
-	import { configs } from "./calendar/helpers";
 
 	let {
 		start = $bindable(),
@@ -28,26 +27,21 @@
 		start;
 		current;
 		untrack(() => {
-			onLeft(start ? new Date(start) : current || new Date());
+			if (!leftCurrent) {
+				onLeft(start ? new Date(start) : current || new Date());
+			}
 		});
 	});
 
 	function onLeft(v) {
 		leftCurrent = v;
+		leftCurrent.setDate(1);
 		if (leftCurrent) rightCurrent = addMonth(leftCurrent, 1);
 	}
 	function onRight(v) {
 		rightCurrent = v;
+		rightCurrent.setDate(1);
 		if (rightCurrent) leftCurrent = addMonth(rightCurrent, -1);
-	}
-
-	function doShift({ diff, type }) {
-		const obj = configs[type];
-		if (diff > 0) {
-			onRight(obj.next(rightCurrent));
-		} else if (diff < 0) {
-			onLeft(obj.prev(leftCurrent));
-		}
 	}
 
 	function doChangeStart(v) {
@@ -90,37 +84,36 @@
 
 {#if months == 1}
 	<Panel
-		value={{ start: start, end: end }}
-		current={leftCurrent}
+		value={{ start, end }}
+		bind:current={leftCurrent}
 		{markers}
 		{done}
 		{buttons}
 		part="both"
-		onshift={doShift}
 		onchange={doChangeStart}
 	/>
 {:else}
 	<div class="wx-rangecalendar">
 		<div class="wx-half">
 			<Panel
-				value={{ start: start, end: end }}
-				current={leftCurrent}
+				value={{ start, end }}
+				bind:current={leftCurrent}
 				{markers}
 				buttons={false}
 				part="left"
-				onshift={doShift}
+				onshift={() => onLeft(leftCurrent)}
 				onchange={doChangeStart}
 			/>
 		</div>
 		<div class="wx-half">
 			<Panel
-				value={{ start: start, end: end }}
-				current={rightCurrent}
+				value={{ start, end }}
+				bind:current={rightCurrent}
 				{markers}
 				{done}
 				{buttons}
 				part="right"
-				onshift={doShift}
+				onshift={() => onRight(rightCurrent)}
 				onchange={doChangeEnd}
 			/>
 		</div>

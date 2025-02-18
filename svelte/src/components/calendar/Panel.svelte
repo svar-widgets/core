@@ -28,15 +28,22 @@
 	}
 
 	function onshift(ev) {
-		if (ev.diff == 0) {
+		const { diff } = ev;
+
+		if (diff == 0) {
 			if (type === "month") type = "year";
 			else if (type === "year") type = "duodecade";
-		} else {
-			shift && shift(ev);
+			return;
 		}
+		if (diff) {
+			const obj = configs[type];
+			current = diff > 0 ? obj.next(current) : obj.prev(current);
+		}
+		shift && shift();
 	}
 
 	function onchange(value) {
+		type = "month";
 		change && change({ select: true, value });
 	}
 

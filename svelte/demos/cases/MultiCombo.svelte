@@ -3,6 +3,21 @@
 	import { users } from "../data/userlist";
 
 	import UserOption from "../custom/UserOption.svelte";
+
+	const renderedUsers = [
+		{
+			id: 103,
+			label: "Ned Stark",
+			email: "winterhell@gmail.com",
+			avatar: "https://docs.webix.com/usermanager-backend/users/103/avatar/491902305.jpg",
+		},
+		{
+			id: 104,
+			label: "Lord Varys",
+			email: "little.birds@gmail.com",
+			avatar: "https://docs.webix.com/usermanager-backend/users/104/avatar/005471511.jpg",
+		},
+	];
 </script>
 
 <div class="demo-box">
@@ -61,4 +76,9 @@
 <div class="demo-box">
 	<h3>MultiCombo without options</h3>
 	<MultiCombo />
+</div>
+
+<div class="demo-box">
+	<h3>MultiCombo with hidden options</h3>
+	<MultiCombo textOptions={users} options={renderedUsers} value={[87]} />
 </div>

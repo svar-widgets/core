@@ -2,6 +2,7 @@
 	import { DatePicker, Field } from "../../src/index";
 
 	import { getContext } from "svelte";
+	const date = new Date(2025, 4, 1);
 	const wh = getContext("wx-helpers");
 	function showChanges(ev) {
 		wh.showNotice({ text: `Date changed to ${ev.value}` });
@@ -56,27 +57,27 @@
 	</Field>
 	<Field label="Default format">
 		{#snippet children({ id })}
-			<DatePicker {id} value={new Date()} />
+			<DatePicker {id} value={date} />
 		{/snippet}
 	</Field>
 	<Field label="Custom format">
 		{#snippet children({ id })}
-			<DatePicker {id} value={new Date()} format="%d %F, %Y" />
+			<DatePicker {id} value={date} format="%d %F, %Y" />
 		{/snippet}
 	</Field>
 	<Field label="Custom icon position">
 		{#snippet children({ id })}
-			<DatePicker {id} value={new Date()} css="wx-icon-left" />
+			<DatePicker {id} value={date} css="wx-icon-left" />
 		{/snippet}
 	</Field>
 	<Field label="With clear icon">
 		{#snippet children({ id })}
-			<DatePicker {id} value={new Date()} clear />
+			<DatePicker {id} value={date} clear />
 		{/snippet}
 	</Field>
 	<Field label="Custom clear icon position">
 		{#snippet children({ id })}
-			<DatePicker {id} value={new Date()} css="wx-icon-left" clear />
+			<DatePicker {id} value={date} css="wx-icon-left" clear />
 		{/snippet}
 	</Field>
 </div>

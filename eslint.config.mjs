@@ -1,5 +1,6 @@
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginSvelte from 'eslint-plugin-svelte';
+import * as svelteParser from 'svelte-eslint-parser';
 import tsLint from "typescript-eslint";
 import jsLint from "@eslint/js";
 import vitest from "eslint-plugin-vitest";
@@ -52,6 +53,19 @@ export default [{
                 files: ["**/*.svelte"],
                 rules: {
                         "@typescript-eslint/no-unused-expressions": "off"
+                }
+        },
+        {       
+                // temporarily ignore cypress folder
+                ignores: [
+                        "**/cypress/" 
+                ]
+        },
+        {
+
+                files: ["**/*.svelte.js"],
+                languageOptions: {
+                        parser: svelteParser,
                 }
         }
 ];

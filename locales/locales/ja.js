@@ -52,13 +52,15 @@ const calendar = {
 const core = {
 	ok: "OK",
 	cancel: "取り消す",
+	select: "選択",
+	"No data": "データが見つかりませんでした",
 };
 
 const formats = {
 	timeFormat: "%H:%i",
 	dateFormat: "%Y年%m月%d日",
-	select: "選択 (せんたく",
-	"No data": "データなし (データなし",
+	monthYearFormat: "%m月%Y年",
+	yearFormat: "%Y年",
 };
 
 const data = {

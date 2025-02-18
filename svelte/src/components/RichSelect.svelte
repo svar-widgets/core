@@ -4,6 +4,7 @@
 	let {
 		value = $bindable(""),
 		options = [],
+		textOptions = null,
 		placeholder = "",
 		disabled = false,
 		error = false,
@@ -22,7 +23,9 @@
 	}
 
 	let selected = $derived(
-		value || value === 0 ? options.find(a => a.id === value) : null
+		value || value === 0
+			? (textOptions || options).find(a => a.id === value)
+			: null
 	);
 
 	function select({ id }) {

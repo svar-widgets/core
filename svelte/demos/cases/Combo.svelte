@@ -9,6 +9,21 @@
 	function changeValue() {
 		value = values[(values.indexOf(value) + 1) % values.length];
 	}
+
+	const renderedUsers = [
+		{
+			id: 103,
+			label: "Ned Stark",
+			email: "winterhell@gmail.com",
+			avatar: "https://docs.webix.com/usermanager-backend/users/103/avatar/491902305.jpg",
+		},
+		{
+			id: 104,
+			label: "Lord Varys",
+			email: "little.birds@gmail.com",
+			avatar: "https://docs.webix.com/usermanager-backend/users/104/avatar/005471511.jpg",
+		},
+	];
 </script>
 
 <div class="demo-box">
@@ -77,5 +92,17 @@
 	<h3>Combo with clear button</h3>
 	<Field>
 		<Combo options={users} value={104} clear={true} />
+	</Field>
+</div>
+
+<div class="demo-box">
+	<h3>Combo with hidden options</h3>
+	<Field>
+		<Combo
+			textOptions={users}
+			options={renderedUsers}
+			value={87}
+			clearButton
+		/>
 	</Field>
 </div>

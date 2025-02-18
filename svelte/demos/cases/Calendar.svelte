@@ -23,12 +23,24 @@
 </div>
 
 <div class="demo-box" style="width: 300px">
-	<h3>Calendar with Locale</h3>
+	<h3>Calendar with Locale and Format</h3>
 	<div style="display: flex; flex-direction: row;">
 		<Locale words={de}>
 			<Calendar value={new Date(2022, 2, 18)} />
 		</Locale>
 		<Locale words={cn}>
+			<Calendar value={new Date(2022, 2, 18)} />
+		</Locale>
+		<Locale
+			words={{
+				...cn,
+				formats: {
+					...cn.formats,
+					monthYearFormat: "%Y年%F",
+					yearFormat: "%Y年",
+				},
+			}}
+		>
 			<Calendar value={new Date(2022, 2, 18)} />
 		</Locale>
 	</div>

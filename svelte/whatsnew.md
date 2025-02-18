@@ -1,56 +1,105 @@
-### 2.0.1
+## Version 2.1.0
 
--   [add] Svelte 5 support
--   [update] controls with options define them as `id, label`
--   [update] dropdown controls have change event with value instead of selected
--   [update] Area renamed to TextArea
--   [update] Timepicker renamed to TimePicker
--   [update] Sidearea: close event renamed to cancel
--   [update] ColorBoard: change event has extra input parameter
--   [update] Modal boxes: cancel and ok properties renamed to cancel and confirm events
+### New features
 
-### 1.3.1
+-   Month and year formats for locales to adjust Calendar header
+-   `textOptions` property for Combo, RichSelect and MultiCombo
 
--   [fix] locale object lacks language marker
--   [fix] incorrect change event parameter in Tabbar
--   [fix] required fields do not have marks in labels
--   [fix] disabled Richselect throws an error on click/keydown
--   [fix] current month of Calendar does not update correctly
+### Fixes
 
-### 1.3.0
+-   Dropdown lists of Combo, RichSelect and MultiCombo do not scroll during keys navigation
+-   Typos in locales
+-   Popup positioning close to screen edges
+-   Done button in Calendar does not invoke value change
+-   Parts in RangeCalendar are not synchronized
 
--   [update] improved popup positioning strategies
--   [fix] incorrect styling of right selection marker in Calendar
--   [fix] impossible to track input changes in Textarea
+## 2.0.1
 
-### 1.2.3
+### New features
 
--   [fix] closing menu and popup when clicking on disabled control
+-   Svelte 5 support
 
-### 1.2.1
+### Breaking changes
 
--   [fix] regression in popup closing in some cases
+-   Area renamed to TextArea
+-   Timepicker renamed to TimePicker
+-   Sidearea: close event renamed to `cancel`
+-   ColorBoard: `change` event has extra `input` parameter
+-   Modal boxes: cancel and ok properties renamed to `cancel` and `confirm` events
+-   Controls with options define them as `id, label`
+-   Dropdown controls have `change` event with `value` instead of `selected`
 
-### 1.2.0
+### Updates
 
--   [add] common logic for click-outside tracking for popup and side-area
--   [add] counter widget added
--   [update] css styles corrected ( wx prefixes, names of top classes for each widget, error state )
--   [update] uploader removed ( @wx/svelte-uploader )
--   [update] date formats used from locale
--   [fix] change event in DatePicker / Calendar
+-   ColorBoard: `change` event has extra input parameter
 
-### 1.1.4
+## 1.3.1
 
--   [fix] compatibility with svelte-kit ( typescript )
+### Fixes
 
-### 1.1.3
+-   Locale object lacks language marker
+-   Incorrect change event parameter in Tabbar
+-   Required fields do not have marks in labels
+-   Disabled Richselect throws an error on click/keydown
+-   Current month of Calendar does not update correctly
 
--   [fix] input in editable datepicker trigger immediate value reset
+## 1.3.0
 
-### 1.1.2
+### Updates
 
--   [fix] partial combobox clearing after clicking the "clean" button
+-   Improved popup positioning strategies
+
+### Fixes
+
+-   Incorrect styling of right selection marker in Calendar
+-   Impossible to track input changes in Textarea
+
+## 1.2.3
+
+### Fixes
+
+-   Closing menu and popup when clicking on disabled control
+
+## 1.2.1
+
+### Fixes
+
+-   Regression in popup closing in some cases
+
+## 1.2.0
+
+### New features
+
+-   Common logic for click-outside tracking for popup and side-area
+-   Counter widget added
+
+### Updates
+
+-   Css styles corrected ( wx prefixes, names of top classes for each widget, error state )
+-   Uploader removed ( moves to `@wx/svelte-uploader` )
+-   Date formats are stored in locale
+
+### Fixes
+
+-   `change` event in DatePicker / Calendar
+
+## 1.1.4
+
+### Fixes
+
+-   Compatibility with svelte-kit ( typescript )
+
+## 1.1.3
+
+### Fixes
+
+-   Input in editable datepicker trigger immediate value reset
+
+## 1.1.2
+
+### Fixes
+
+-   Partial combobox clearing after clicking the "clean" button
 
 #### 1.0.0-rc34
 

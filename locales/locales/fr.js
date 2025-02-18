@@ -52,13 +52,15 @@ const calendar = {
 const core = {
 	ok: "OK",
 	cancel: "Annuler",
+	select: "Sélectionner",
+	"No data": "Pas de données",
 };
 
 const formats = {
 	timeFormat: "%H:%i",
 	dateFormat: "%d/%m/%Y",
-	select: "Sélectionner",
-	"No data": "Pas de données",
+	monthYearFormat: "%F %Y",
+	yearFormat: "%Y",
 };
 
 const data = {

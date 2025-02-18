@@ -3,6 +3,21 @@
 	import { users } from "../data/userlist";
 
 	import UserOption from "../custom/UserOption.svelte";
+
+	const renderedUsers = [
+		{
+			id: 103,
+			label: "Ned Stark",
+			email: "winterhell@gmail.com",
+			avatar: "https://docs.webix.com/usermanager-backend/users/103/avatar/491902305.jpg",
+		},
+		{
+			id: 104,
+			label: "Lord Varys",
+			email: "little.birds@gmail.com",
+			avatar: "https://docs.webix.com/usermanager-backend/users/104/avatar/005471511.jpg",
+		},
+	];
 </script>
 
 <div class="demo-box">
@@ -63,7 +78,9 @@
 
 <div class="demo-box">
 	<h3>RichSelect with a custom "textField"</h3>
-	<RichSelect options={users} value={104} textField="email" />
+	<Field>
+		<RichSelect options={users} value={104} textField="email" />
+	</Field>
 </div>
 
 <div class="demo-box">
@@ -84,5 +101,12 @@
 	<h3>RichSelect with clear button</h3>
 	<Field>
 		<RichSelect options={users} value={104} clear />
+	</Field>
+</div>
+
+<div class="demo-box">
+	<h3>RichSelect with hidden options</h3>
+	<Field>
+		<RichSelect textOptions={users} options={renderedUsers} value={87} />
 	</Field>
 </div>

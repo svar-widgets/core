@@ -5,7 +5,7 @@
 
 	const helpers = getContext("wx-helpers");
 
-	const value = new Date();
+	const value = new Date(2025, 4, 1);
 	const addMonth = (date, n) => {
 		const next = new Date(date);
 		next.setMonth(next.getMonth() + n);

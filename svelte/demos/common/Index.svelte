@@ -234,7 +234,7 @@
 
 	.skins.move {
 		position: absolute;
-		top: 330px;
+		bottom: 92px;
 		right: -86px;
 		transform: rotate(-90deg);
 	}

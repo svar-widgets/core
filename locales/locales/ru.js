@@ -59,6 +59,8 @@ const core = {
 const formats = {
 	timeFormat: "%H:%i",
 	dateFormat: "%d.%m.%Y",
+	monthYearFormat: "%F %Y",
+	yearFormat: "%Y",
 };
 
 const data = {

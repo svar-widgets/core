@@ -2,27 +2,21 @@
 	import { getContext } from "svelte";
 	import { delegateClick } from "wx-lib-dom";
 	import Button from "./Button.svelte";
+	import { getPartValue } from "./helpers";
 
 	let {
 		value = $bindable(),
 		current = $bindable(),
 		part,
 		oncancel,
+		onchange,
 		onshift,
 	} = $props();
 
 	const locale = getContext("wx-i18n").getRaw().calendar;
 	const months = locale.monthShort;
 
-	const monthNum = $derived.by(() => {
-		if (part !== "normal" && value) {
-			if (part === "left" && value.start) return value.start.getMonth();
-			else if (part === "right" && value.end) return value.end.getMonth();
-			else return current.getMonth();
-		} else {
-			return current.getMonth();
-		}
-	});
+	const monthNum = $derived.by(() => current.getMonth());
 
 	const selectMonths = {
 		click: selectMonth,
@@ -30,12 +24,24 @@
 	function selectMonth(month, e) {
 		if (month || month === 0) {
 			e.stopPropagation();
-			onshift && onshift({ month });
+			current.setMonth(month);
+			current = new Date(current);
+
+			onshift && onshift({});
 		}
 
 		if (part === "normal") value = new Date(current);
 
 		oncancel && oncancel();
+	}
+
+	function done() {
+		const date = new Date(getPartValue(value, part) || current);
+
+		date.setMonth(current.getMonth());
+		date.setFullYear(current.getFullYear());
+
+		onchange && onchange(date);
 	}
 </script>
 
@@ -47,7 +53,7 @@
 	{/each}
 </div>
 <div class="wx-buttons">
-	<Button onclick={oncancel}>{locale.done}</Button>
+	<Button onclick={done}>{locale.done}</Button>
 </div>
 
 <style>

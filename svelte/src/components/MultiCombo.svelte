@@ -7,6 +7,7 @@
 		id = uid(),
 		value = $bindable([]),
 		options = [],
+		textOptions = null,
 		textField = "label",
 		placeholder = "",
 		title = "",
@@ -19,15 +20,16 @@
 
 	let text = $state("");
 	let selected = $derived(
-		value ? options.filter(i => value.includes(i.id)) : []
+		value ? (textOptions || options).filter(i => value.includes(i.id)) : []
 	);
-	let filterOptions = $derived(
-		text
-			? options.filter(i =>
+	let filterOptions = $derived.by(() => {
+		const o = options;
+		return text
+			? o.filter(i =>
 					i[textField].toLowerCase().includes(text.toLowerCase())
 				)
-			: options
-	);
+			: o;
+	});
 	let focus = false;
 
 	let navigate = null;

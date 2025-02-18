@@ -50,3 +50,16 @@ function nextDuodecade(current) {
 	current.setFullYear(current.getFullYear() + 10);
 	return current;
 }
+
+export function getPartValue(value, part) {
+	let date;
+	if (part === "normal") date = value;
+	else {
+		const { start, end } = value;
+		if (part === "left") date = start;
+		else if (part == "right") date = end;
+		else date = start ? end : start;
+	}
+
+	return date;
+}
