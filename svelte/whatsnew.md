@@ -1,3 +1,9 @@
+## Version 2.1.1
+
+### Fixes
+
+-   Minutes are displayed incorrectly in TimePicker
+
 ## Version 2.1.0
 
 ### New features

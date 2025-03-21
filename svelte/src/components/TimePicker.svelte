@@ -173,6 +173,7 @@
 					<Slider
 						label={calendarLocale.minutes}
 						width={"unset"}
+						value={m}
 						onchange={setMinutes}
 						max={maxM}
 					/>
