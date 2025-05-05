@@ -23,21 +23,22 @@ All components are lightweight, responsive, fast-performing, and available in li
 
 <div align="center">
 	
-<img src="https://cdn.svar.dev/public/core-ui-dark.jpg" alt="SVAR Core Library - Dark Skin" style="width: 600px;">
+<img src="https://svar.dev/images/github/github-core.png" alt="SVAR Core - Svelte UI Library" style="width: 752px;">
 
 </div>
 
+</br>
 In addition to the Core library, you can use the following SVAR components to build unified app interfaces:
 
 -   [Menu](https://github.com/svar-widgets/menu) - helps you create basic menu bar, actions or context menu;
--   [Toolbar](https://github.com/svar-widgets/toolbar) - allows you creating button and icon panels with configurable layouts;
+-   [Toolbar](https://github.com/svar-widgets/toolbar) - allows you to create button and icon panels with configurable layouts;
 -   [Tasklist](https://github.com/svar-widgets/tasklist) - task list component to add, edit, check or delete tasks;
 -   [Comments](https://github.com/svar-widgets/comments) - nice-looking comments section;
 -   [File uploader](https://github.com/svar-widgets/uploader) - simple file uploader component.
 
 ### :hammer_and_wrench: How to Use
 
-To use any component from the **Core** package, simply import the package and include the desired component in your Svelte file:
+To start using components from the **Core** package, simply import the package and include the desired component in your Svelte file:
 
 ```svelte
 <script>
