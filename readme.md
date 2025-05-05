@@ -18,22 +18,26 @@
 
 </div>
 
-SVAR Core library offers a set of 20+ ready-made Svelte UI components: form controls, popups, date and time picker, toast notifications, and more.
+**SVAR Svelte Core** library offers a set of 20+ ready-made Svelte UI components: form controls, popups, date and time picker, toast notifications, and more.
 All components are lightweight, responsive, fast-performing, and available in light and dark skins.
 
+<div align="center">
+	
 <img src="https://cdn.svar.dev/public/core-ui-dark.jpg" alt="SVAR Core Library - Dark Skin" style="width: 600px;">
 
-In addition to the Core library, you can use the following SVAR components to build unified app UIs:
+</div>
 
--   [Menu](https://github.com/svar-widgets/menu)
--   [Toolbar](https://github.com/svar-widgets/toolbar)
--   [File uploader](https://github.com/svar-widgets/uploader)
--   [Tasklist](https://github.com/svar-widgets/tasklist)
--   [Comments](https://github.com/svar-widgets/comments)
+In addition to the Core library, you can use the following SVAR components to build unified app interfaces:
+
+-   [Menu](https://github.com/svar-widgets/menu) - helps you create basic menu bar, actions or context menu;
+-   [Toolbar](https://github.com/svar-widgets/toolbar) - allows you creating button and icon panels with configurable layouts;
+-   [Tasklist](https://github.com/svar-widgets/tasklist) - task list component to add, edit, check or delete tasks;
+-   [Comments](https://github.com/svar-widgets/comments) - nice-looking comments section;
+-   [File uploader](https://github.com/svar-widgets/uploader) - simple file uploader component.
 
 ### :hammer_and_wrench: How to Use
 
-To use any of the Core components, simply import the package and include the desired component in your Svelte file:
+To use any component from the **Core** package, simply import the package and include the desired component in your Svelte file:
 
 ```svelte
 <script>
