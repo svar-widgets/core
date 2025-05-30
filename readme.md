@@ -28,8 +28,17 @@ All components are lightweight, responsive, fast-performing, and available in li
 </div>
 
 </br>
-In addition to the Core library, you can use the following SVAR components to build unified app interfaces:
 
+SVAR Core library includes the following components:
+- 	buttons & form controls, 
+- 	calendar (datepicker),
+- 	popups,
+- 	notifications,
+- 	sliding sidebar, 
+- 	tabs.
+
+
+Additionally, you can use these SVAR Svelte components to build unified app interfaces:
 -   [Menu](https://github.com/svar-widgets/menu) - helps you create basic menu bar, actions or context menu;
 -   [Toolbar](https://github.com/svar-widgets/toolbar) - allows you to create button and icon panels with configurable layouts;
 -   [Tasklist](https://github.com/svar-widgets/tasklist) - task list component to add, edit, check or delete tasks;
