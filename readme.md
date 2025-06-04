@@ -35,7 +35,7 @@ SVAR Core library includes the following components:
 - 	popups,
 - 	notifications,
 - 	sliding sidebar, 
-- 	tabs.
+- 	tabs, and more.
 
 
 Additionally, you can use these SVAR Svelte components to build unified app interfaces:
