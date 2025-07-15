@@ -30,12 +30,12 @@ All components are lightweight, responsive, fast-performing, and available in li
 </br>
 SVAR Core library includes the following components:
 
--           buttons & form controls,
--           calendar (datepicker),
--           popups,
--           notifications,
--           sliding sidebar,
--           tabs, and more.
+- buttons & form controls,
+- calendar (datepicker),
+- popups,
+- notifications,
+- sliding sidebar,
+- tabs, and more.
 
 Additionally, you can use these SVAR Svelte components to build unified app interfaces:
 
