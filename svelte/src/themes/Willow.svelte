@@ -169,6 +169,20 @@
 		--wx-button-padding: 5px 16px;
 		--wx-button-icon-indent: 5px;
 		--wx-button-icon-size: 20px;
+
+		--wx-button-pressed: #d7dde3;
+		--wx-button-danger-pressed: #cb4e46;
+		--wx-button-primary-pressed: #098cdc;
+
+		--wx-button-box-shadow: -2px -2px 4px 0px rgba(255, 255, 255, 0.56) inset,
+			2px 2px 3px 1px rgba(0, 0, 0, 0.12) inset;
+		--wx-button-primary-box-shadow: -2px -2px 4px 0px rgba(
+					255,
+					255,
+					255,
+					0.26
+				) inset,
+			2px 2px 3px 1px rgba(0, 0, 0, 0.16) inset;
 		/* end button */
 
 		/* segmented */

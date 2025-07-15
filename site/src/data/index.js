@@ -123,7 +123,7 @@ export const getData = () => {
 	const countries = [
 		{ id: 1, name: "Poland" },
 		{ id: 2, name: "Germany" },
-		{ id: 3, name: "United Stated" },
+		{ id: 3, name: "United States" },
 		{ id: 4, name: "Great Britain" },
 		{ id: 5, name: "France" },
 		{ id: 6, name: "Italy" },

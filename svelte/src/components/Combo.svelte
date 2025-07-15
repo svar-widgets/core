@@ -21,11 +21,12 @@
 	let textInput = $state("");
 
 	let text = $derived.by(() => {
-		return filterActive
-			? textInput
-			: value || value === 0
-				? (textOptions || options).find(a => a.id === value)[textField]
-				: "";
+		if (filterActive) return textInput;
+		if (value || value === 0) {
+			const option = (textOptions || options).find(a => a.id === value);
+			if (option) return option[textField];
+		}
+		return "";
 	});
 
 	let filteredOptions = $derived.by(() => {

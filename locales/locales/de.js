@@ -54,6 +54,8 @@ const core = {
 	cancel: "Abbrechen",
 	select: "Auswählen",
 	"No data": "Keine Daten",
+	"Rows per page": "Zeilen pro Seite",
+	"Total pages": "Gesamtseiten",
 };
 
 const formats = {

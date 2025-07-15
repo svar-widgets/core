@@ -78,10 +78,6 @@
 		outline: none;
 	}
 
-	.wx-button:active:not(:global([disabled])) {
-		opacity: 0.8;
-	}
-
 	.wx-button[disabled] {
 		cursor: not-allowed;
 		background: var(--wx-color-disabled);
@@ -130,17 +126,41 @@
 		color: var(--wx-color-primary-font);
 	}
 
+	.wx-pressed,
+	.wx-pressed:hover,
+	.wx-pressed:active,
+	.wx-pressed[disabled] {
+		background-color: var(--wx-button-pressed);
+		box-shadow: var(--wx-button-box-shadow);
+	}
+
+	.wx-primary.wx-pressed:not(:global([disabled])),
+	.wx-primary.wx-pressed:hover:not(:global([disabled])),
+	.wx-primary.wx-pressed:active:not(:global([disabled])) {
+		background-color: var(--wx-button-primary-pressed);
+		box-shadow: var(--wx-button-primary-box-shadow);
+	}
+
+	.wx-danger.wx-pressed:not(:global([disabled])),
+	.wx-danger.wx-pressed:hover:not(:global([disabled])),
+	.wx-danger.wx-pressed:active:not(:global([disabled])) {
+		background-color: var(--wx-button-danger-pressed);
+		box-shadow: var(--wx-button-primary-box-shadow);
+	}
+
 	.wx-secondary {
 		background: var(--wx-color-secondary);
 		color: var(--wx-color-secondary-font);
 		border-color: var(--wx-color-secondary-border);
 	}
-	.wx-secondary:hover:not(:global([disabled])),
+	.wx-secondary:hover:not(:global([disabled])) {
+		background: var(--wx-color-secondary-hover);
+	}
 	.wx-secondary.wx-pressed:not(:global([disabled])),
 	.wx-secondary.wx-pressed:hover:not(:global([disabled])),
 	.wx-secondary.wx-pressed:active:not(:global([disabled])) {
 		background: var(--wx-color-secondary-hover);
-		color: var(--wx-color-secondary-font-hover);
+		box-shadow: var(--wx-button-primary-box-shadow);
 	}
 	.wx-secondary[disabled] {
 		border-color: var(--wx-color-secondary-border-disabled);
@@ -164,17 +184,5 @@
 	}
 	.wx-link[disabled] {
 		color: var(--wx-color-font-disabled);
-	}
-
-	.wx-pressed,
-	.wx-pressed:hover,
-	.wx-pressed:active,
-	.wx-pressed[disabled] {
-		opacity: 0.8;
-		background-image: linear-gradient(
-			rgba(0, 0, 0, 0.1) 0%,
-			rgba(0, 0, 0, 0.1) 100%
-		);
-		box-shadow: inset 0 2px 2px 1px rgba(0, 0, 0, 0.15);
 	}
 </style>

@@ -29,7 +29,11 @@
 	</Field>
 	<Field label="DateRangePicker with the Done button">
 		{#snippet children({ id })}
-			<DateRangePicker value={date} {id} done={true} />
+			<DateRangePicker
+				value={date}
+				{id}
+				buttons={["done", "clear", "today"]}
+			/>
 		{/snippet}
 	</Field>
 	<Field label="Disabled">

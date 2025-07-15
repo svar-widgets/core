@@ -5,7 +5,10 @@
 
 	let { skin = $bindable(), onnewpage } = $props();
 	let page = $state(),
-		title;
+		title,
+		link;
+	const baseLink =
+		"https://github.com/svar-widgets/core/blob/main/svelte/demos/cases/";
 
 	$effect(() => {
 		if (skin && page) {
@@ -14,7 +17,7 @@
 	});
 
 	onMount(() => {
-		onnewpage && onnewpage({ page, skin, title });
+		onnewpage && onnewpage({ page, skin, title, link });
 	});
 
 	function onRouteChange(path) {
@@ -23,8 +26,11 @@
 		skin = parts[2];
 
 		const tPage = `/${page}/:skin`;
-		title = links.find(a => a[0] === tPage)[1];
-		onnewpage && onnewpage({ page, skin, title });
+		const matched = links.find(a => a[0] === tPage);
+		title = matched?.[3] ?? "";
+		link = `${baseLink}${title.replace(/\s+/g, "")}.svelte`;
+
+		onnewpage && onnewpage({ page, skin, title, link });
 	}
 
 	const links = getLinks();

@@ -56,6 +56,8 @@ const core = {
 	cancel: "取消",
 	select: "选择",
 	"No data": "没有数据",
+	"Rows per page": "每页行数",
+	"Total pages": "总页数",
 };
 
 const formats = {

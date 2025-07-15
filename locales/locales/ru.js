@@ -54,6 +54,8 @@ const core = {
 	cancel: "Отмена",
 	select: "Выбрать",
 	"No data": "Нет данных",
+	"Rows per page": "Строк на странице",
+	"Total pages": "Всего страниц",
 };
 
 const formats = {

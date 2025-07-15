@@ -10,27 +10,37 @@
 
 	import Router from "./Router.svelte";
 	import Link from "./Link.svelte";
+	import { Button, Segmented } from "../../src/index";
 	import { getLinks } from "./helpers";
+	import { GitHubLogoIcon, LogoIcon } from "../assets/icons/index";
 
 	const skins = [
 		{
-			id: "material",
-			name: "Material",
-			props: {},
-		},
-		{
 			id: "willow",
-			name: "Willow",
+			label: "Willow",
 			props: {},
 		},
 		{
 			id: "willow-dark",
-			name: "Dark",
+			label: "Dark",
 			props: {},
 		},
 	];
 
-	let skin = $state(null);
+	if (document.location.hostname !== "docs.svar.dev") {
+		skins.unshift({
+			id: "material",
+			label: "Material",
+			props: {},
+		});
+	}
+
+	let skin = $state("willow");
+	let title = $state("");
+	let link = $state("");
+	let show = $state(true);
+
+	const links = getLinks();
 
 	const skinSettings = $derived(
 		Object.assign(
@@ -39,36 +49,22 @@
 		)
 	);
 
-	function toggleSkin(e) {
-		e.stopPropagation();
-		const data = e.target.dataset;
-		if (data.role === "skin") {
-			skin = data.id;
-		}
+	function changeSkin({ value }) {
+		skin = value;
 	}
 
-	function hideSidebar(e) {
-		e.stopPropagation();
-		show = false;
-	}
-
-	let title = $state("");
-	let show = $state(false);
-	let noSidebar = document.location.search.indexOf("no-sidebar") !== -1;
-
-	function onClick() {
-		show = true;
+	function toggleSidebar() {
+		show = !show;
 	}
 
 	function updateInfo(ev) {
 		skin = ev.skin;
 		title = ev.title;
+		link = ev.link;
 	}
 
-	const links = getLinks();
-
 	$effect(() => {
-		document.body.className = `wx-${skin}-theme`;
+		document.body.className = `wx-willow-theme`;
 	});
 </script>
 
@@ -76,213 +72,260 @@
 <Willow />
 <WillowDark />
 
-<div class="layout" class:no-sidebar={noSidebar}>
+<div class="layout" class:active={show}>
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<!-- svelte-ignore a11y_interactive_supports_focus -->
-	<div class="sidebar" class:move={show} role="tabpanel" onclick={onClick}>
-		{#if show}
-			<div class="title">WX Demos</div>
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div class="icon" onclick={hideSidebar}>
-				<i class="wxi-angle-left"></i>
-			</div>
-		{/if}
-
-		<!-- svelte-ignore a11y_interactive_supports_focus -->
-		<div
-			role="toolbar"
-			class="skins"
-			class:move={!show}
-			onclick={toggleSkin}
-		>
-			{#each skins as data (data.id)}
-				<div
-					class="skin"
-					class:selected={data.id === skin}
-					data-role="skin"
-					data-id={data.id}
+	<div class="sidebar" class:active={show} role="tabpanel">
+		<div class="sidebar-header">
+			<div class="box-title">
+				<a
+					href="https://svar.dev/svelte/"
+					target="_blank"
+					rel="noopener noreferrer"
 				>
-					{data.name}
-				</div>
-			{/each}
+					<img src={LogoIcon} alt="Logo icon" /></a
+				>
+				<div class="separator"></div>
+				<a
+					href="https://svar.dev/svelte/core/"
+					target="_blank"
+					rel="noopener noreferrer"
+					><h1 class="title">Svelte Core</h1></a
+				>
+			</div>
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div class="btn-box">
+				<Button
+					type="secondary"
+					icon="wxi-angle-left"
+					css="toggle-btn"
+					onclick={toggleSidebar}
+				/>
+			</div>
 		</div>
-
-		{#if show}
+		<div class="box-links">
 			{#each links as data (data[0])}
 				<Link {data} {skin} />
 			{/each}
-		{:else}
-			<div class="hint">{title}</div>
-			<div class="vertical icon"><i class="wxi-angle-right"></i></div>
-		{/if}
+		</div>
 	</div>
+	<div class="page-content">
+		<div class="page-content-header">
+			<div class="header-title-box">
+				{#if !show}
+					<div class="btn-box">
+						<Button
+							type="secondary"
+							icon="wxi-angle-right"
+							css="toggle-btn"
+							onclick={toggleSidebar}
+						/>
+					</div>
+				{/if}
+				<div class="hint">{title}</div>
+			</div>
+			<div class="header-actions-container">
+				<div class="segmented-box">
+					<Segmented
+						value={skin}
+						options={skins}
+						css="segmented-themes"
+						onchange={changeSkin}
+					></Segmented>
+				</div>
 
-	<div
-		use:popupContainer
-		class="content wx-{skin}-theme"
-		class:move={show}
-		role="none"
-		onclick={() => (show = false)}
-	>
-		<Locale>
-			<Globals>
-				<Router onnewpage={updateInfo} {skin} />
-			</Globals>
-		</Locale>
+				<div class="btn-box">
+					<a href={link} target="_blank" rel="noopener noreferrer">
+						<Button type="secondary" css="toggle-btn">
+							<img src={GitHubLogoIcon} alt="GitHub icon" />
+							See code on GitHub
+						</Button></a
+					>
+				</div>
+			</div>
+		</div>
+		<div class="wrapper-content" onclick={() => (show = false)} role="none">
+			<div use:popupContainer class="content wx-{skin}-theme" role="none">
+				<Locale>
+					<Globals>
+						<Router onnewpage={updateInfo} {skin} />
+					</Globals>
+				</Locale>
+			</div>
+		</div>
 	</div>
 </div>
 
 <style>
 	.layout {
+		box-sizing: border-box;
+		display: flex;
 		height: 100%;
 		width: 100%;
-		overflow: hidden;
+
+		.page-content {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			overflow: auto;
+
+			.page-content-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 40px;
+				padding: 16px;
+				border-bottom: 1px solid #ebebeb;
+
+				.header-title-box {
+					display: flex;
+					align-items: center;
+					gap: 16px;
+				}
+
+				.header-actions-container {
+					display: flex;
+					align-items: center;
+					gap: 16px;
+				}
+			}
+		}
+	}
+
+	.layout.active {
+		flex-direction: row;
 	}
 
 	.sidebar {
+		width: 0;
+		height: 0;
 		font-family: Roboto, Arial, Helvetica, sans-serif;
 		font-size: 16px;
 		line-height: 20px;
-		box-sizing: border-box;
-		position: absolute;
-		height: 100%;
-		width: 300px;
 		background-color: #fbfbfb;
-		transform: translateX(-220px);
+		border-bottom: 1px solid #ebebeb;
+		overflow: hidden;
 		transition: 0.3s;
-		z-index: 1;
+
+		.sidebar-header {
+			display: flex;
+			justify-content: space-between;
+			position: sticky;
+			top: 0px;
+			background-color: #fff;
+			width: 284px;
+			padding: 20px 16px 20px 18px;
+			.box-title {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+
+				img {
+					&:hover,
+					&:focus {
+						opacity: 0.6;
+					}
+
+					&:active {
+						opacity: 0.8;
+					}
+				}
+
+				.separator {
+					width: 1px;
+					height: 20px;
+					background: #ebebeb;
+				}
+			}
+		}
+	}
+
+	.sidebar.active {
+		display: flex;
+		flex-direction: column;
+		width: 300px;
+		gap: 16px;
+		height: 100%;
 		border-right: 1px solid #ebebeb;
 		overflow-y: auto;
 	}
 
-	.sidebar.move {
-		transform: translateX(0);
+	.btn-box :global(button.toggle-btn) {
+		display: flex;
+		gap: 8px;
+		border: 1px solid #ebebeb;
+		color: #42454d;
+
+		&:hover,
+		&:focus {
+			border: 1px solid #ebebeb;
+			color: #42454d;
+			background: #f7f7f7;
+		}
+
+		&:active {
+			background: #f1f1f1;
+		}
+	}
+	a {
+		display: flex;
+		text-decoration: none;
 	}
 
-	.content {
-		height: 100%;
-		width: calc(100% - 80px);
-		transition:
-			transform 0.3s,
-			width 0.3s;
-		transform: translateX(80px);
-		overflow-y: auto;
-		position: relative;
+	.wrapper-content {
+		flex: 1;
+
+		.content {
+			width: 100%;
+			height: 100%;
+			transition:
+				transform 0.3s,
+				width 0.3s;
+			overflow-y: auto;
+		}
 	}
 
-	.content.move {
-		transform: translateX(300px);
-		width: calc(100% - 300px);
+	.box-links {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
 	}
 
 	.hint {
-		position: absolute;
-		top: 60px;
-		right: 30px;
 		font-size: 16px;
 		font-weight: 500;
-		color: #5f5f5f;
-		transform: rotate(180deg);
-		writing-mode: vertical-rl;
-	}
-	.icon {
-		width: 32px;
-		height: 32px;
-		cursor: pointer;
-		border-radius: 16px;
-		line-height: 32px;
-		background-color: #fff;
-		text-align: center;
-		position: absolute;
-		top: 12px;
-		right: 10px;
-		color: #5f5f5f;
-	}
-	.vertical.icon {
-		background-color: rgba(235, 235, 235, 0.61);
-		right: 22px;
-	}
-	.icon i {
-		font-size: 24px;
+		line-height: 24px;
+		color: #42454d;
 	}
 
 	.title {
-		height: 58px;
-		line-height: 58px;
-		margin-bottom: 30px;
-		text-align: center;
-		font-size: 16px;
+		margin: 0;
+		font-size: 18px;
 		font-weight: 500;
-		color: #5f5f5f;
-		background-color: rgba(235, 235, 235, 0.61);
+		line-height: 24px;
+		color: #42454d;
 	}
 
-	.skins {
-		box-sizing: border-box;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 250px;
-		height: 30px;
-		margin: 0 auto;
-		margin-bottom: 30px;
-		border-radius: 15px;
-		text-align: center;
-		background-color: #e6e6e6;
+	.segmented-box :global(div.segmented-themes) {
+		padding: 2px;
+		border-radius: 4px;
 	}
 
-	.skins.move {
-		position: absolute;
-		bottom: 92px;
-		right: -86px;
-		transform: rotate(-90deg);
-	}
-
-	.skin {
-		box-sizing: border-box;
-		width: 123px;
-		height: 26px;
-		line-height: 26px;
-		border-radius: 13px;
+	.segmented-box :global(div.segmented-themes button) {
+		font-size: 14px;
 		font-weight: 400;
-		text-transform: capitalize;
-		color: #1876d2;
-		cursor: pointer;
+		line-height: 18px;
+		color: #595b66;
+		background-color: transparent;
 	}
 
-	.skin.selected {
+	.segmented-box :global(div.segmented-themes button.wx-selected) {
+		border-radius: 2px;
 		font-weight: 500;
-		color: #fff;
-		background-color: #2095f3;
-	}
-
-	.demo {
-		height: 36px;
-		line-height: 36px;
-		padding-left: 24px;
-		border-left: 5px solid transparent;
-		color: #5f5f5f;
-		list-style: none;
-		cursor: pointer;
-		text-decoration: none;
-		display: block;
-	}
-
-	.demo.active,
-	.demo:hover {
-		border-left-color: #2095f3;
-		background-color: #ebebeb9c;
-		font-weight: 500;
-		cursor: pointer;
-	}
-
-	.no-sidebar .sidebar {
-		display: none;
-	}
-	.no-sidebar .content {
-		width: 100%;
-		transform: none;
+		color: #42454d;
+		background: #fff;
+		box-shadow: 0px 0px 7px 0px rgba(66, 69, 76, 0.07);
 	}
 
 	.content :global(h4) {

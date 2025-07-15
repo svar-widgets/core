@@ -18,12 +18,20 @@
 
 </div>
 
-[SVAR Core library](https://svar.dev/svelte/core/) offers a set of 20+ ready-made Svelte UI components: form controls, popups, date and time picker, toast notifications, and more.
-All components are lightweight, responsive, fast-performing, and available in light and dark skins.
+[SVAR Core library](https://svar.dev/svelte/core/) offers a set of 20+ ready-made Svelte UI components: form controls, popups, date and time picker, toast notifications, and more. All components are lightweight, responsive, fast-performing, and available in light and dark skins.
 
-<img src="https://cdn.svar.dev/public/core-ui-dark.jpg" alt="SVAR Core Library - Dark Skin" style="width: 600px;">
+<img src="https://svar.dev/images/github/github-core.png" alt="SVAR Core - Svelte UI Components Library" style="width: 752px;">
 
-In addition to the Core library, you can use the following SVAR components to build unified app UIs:
+SVAR Core library includes the following components:
+
+-           buttons & form controls,
+-           calendar (datepicker),
+-           popups,
+-           notifications,
+-           sliding sidebar,
+-           tabs, and more.
+
+Additionally, you can use these SVAR Svelte components to build unified app interfaces:
 
 -   [Menu](https://www.npmjs.com/package/wx-svelte-menu)
 -   [Toolbar](https://www.npmjs.com/package/wx-svelte-toolbar)
@@ -31,11 +39,11 @@ In addition to the Core library, you can use the following SVAR components to bu
 -   [Comments](https://www.npmjs.com/package/wx-svelte-comments)
 -   [Tasklist](https://www.npmjs.com/package/wx-svelte-tasklist)
 
-### Svelte 4 and Svelte 5 versions
+### :gear: Svelte 4 and Svelte 5 versions
 
-There are two versions of the library: the 1.x version, designed to work with Svelte 4, and the 2.x version, created for Svelte 5. Please note that the 2.x version is in beta and may contain some instabilities.
+There are two versions of the library: the 1.x version - designed to work with Svelte 4, and the 2.x version - created for Svelte 5.
 
-To use the SVAR Core beta for Svelte 5, install it as follows:
+To use the SVAR Core for Svelte 5, install it as follows:
 
 ```
 npm install wx-svelte-core
@@ -47,7 +55,7 @@ To use the SVAR Core for Svelte 4:
 npm install wx-svelte-core@1.3.0
 ```
 
-# :hammer_and_wrench: How to Use
+### :hammer_and_wrench: How to Use
 
 To use any of the Core components, simply import the package and include the desired component in your Svelte file:
 

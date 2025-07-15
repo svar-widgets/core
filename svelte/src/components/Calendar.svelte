@@ -1,11 +1,13 @@
 <script>
 	import Panel from "./calendar/Panel.svelte";
 
+	import Locale from "../Locale.svelte";
+
 	let {
 		value = $bindable(),
 		current = $bindable(),
 		markers = null,
-		buttons = true,
+		buttons = ["clear", "today"],
 		onchange: change,
 	} = $props();
 
@@ -28,4 +30,6 @@
 	}
 </script>
 
-<Panel {value} bind:current {markers} {buttons} {onchange} />
+<Locale>
+	<Panel {value} bind:current {markers} {buttons} {onchange} />
+</Locale>

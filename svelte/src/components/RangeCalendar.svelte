@@ -1,15 +1,15 @@
 <script>
 	import { untrack } from "svelte";
 	import Panel from "./calendar/Panel.svelte";
+	import Locale from "../Locale.svelte";
 
 	let {
 		start = $bindable(),
 		end = $bindable(),
-		done = false,
 		current,
 		months = 2,
 		markers = null,
-		buttons = true,
+		buttons = ["clear", "today"],
 		onchange,
 	} = $props();
 
@@ -78,47 +78,48 @@
 			}
 		}
 
-		if (final || !done) onchange && onchange({ start, end });
+		if (final || !buttons.includes("done"))
+			onchange && onchange({ start, end });
 	}
 </script>
 
-{#if months == 1}
-	<Panel
-		value={{ start, end }}
-		bind:current={leftCurrent}
-		{markers}
-		{done}
-		{buttons}
-		part="both"
-		onchange={doChangeStart}
-	/>
-{:else}
-	<div class="wx-rangecalendar">
-		<div class="wx-half">
-			<Panel
-				value={{ start, end }}
-				bind:current={leftCurrent}
-				{markers}
-				buttons={false}
-				part="left"
-				onshift={() => onLeft(leftCurrent)}
-				onchange={doChangeStart}
-			/>
+<Locale>
+	{#if months == 1}
+		<Panel
+			value={{ start, end }}
+			bind:current={leftCurrent}
+			{markers}
+			{buttons}
+			part="both"
+			onchange={doChangeStart}
+		/>
+	{:else}
+		<div class="wx-rangecalendar">
+			<div class="wx-half">
+				<Panel
+					value={{ start, end }}
+					bind:current={leftCurrent}
+					{markers}
+					buttons={false}
+					part="left"
+					onshift={() => onLeft(leftCurrent)}
+					onchange={doChangeStart}
+				/>
+			</div>
+			<div class="wx-half">
+				<Panel
+					value={{ start, end }}
+					bind:current={rightCurrent}
+					{markers}
+					{buttons}
+					part="right"
+					onshift={() => onRight(rightCurrent)}
+					onchange={doChangeEnd}
+				/>
+			</div>
 		</div>
-		<div class="wx-half">
-			<Panel
-				value={{ start, end }}
-				bind:current={rightCurrent}
-				{markers}
-				{done}
-				{buttons}
-				part="right"
-				onshift={() => onRight(rightCurrent)}
-				onchange={doChangeEnd}
-			/>
-		</div>
-	</div>
-{/if}
+	{/if}
+</Locale>
 
 <style>
 	.wx-rangecalendar {

@@ -46,7 +46,13 @@
 	</div>
 </div>
 
-<div class="demo-box" style="width: 300px">
-	<h3>Calendar without buttons</h3>
-	<Calendar value={new Date(2022, 2, 18)} buttons={false} />
+<div style="display: flex; flex-direction: row;">
+	<div class="demo-box" style="width: 300px">
+		<h3>Calendar without buttons</h3>
+		<Calendar value={new Date(2022, 2, 18)} buttons={false} />
+	</div>
+	<div class="demo-box" style="width: 300px; margin-top: 20px">
+		<h3>Calendar with Today button only</h3>
+		<Calendar value={new Date(2022, 2, 18)} buttons={["today"]} />
+	</div>
 </div>

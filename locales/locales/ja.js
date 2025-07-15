@@ -54,6 +54,8 @@ const core = {
 	cancel: "取り消す",
 	select: "選択",
 	"No data": "データが見つかりませんでした",
+	"Rows per page": "1ページあたりの行数",
+	"Total pages": "総ページ数",
 };
 
 const formats = {

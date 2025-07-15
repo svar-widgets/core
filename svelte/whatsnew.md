@@ -1,3 +1,24 @@
+## Version 2.2.0
+
+### Updates
+
+-   Calendar, DatePicker: ability to set "clear" and "today" buttons separately
+-   DateRange, DateRangePicker: ability to set "clear", "today" and "done" buttons separately
+-   Pager: disabling left/right buttons near data edges
+
+### Fixes
+
+-   Default locale is not applied to controls without wrapping them into Locale
+-   Pager labels are not localized
+-   Pager `onChange` event does not fire on `pageSize` changes
+-   Combo breakes if its options do not contain current value
+-   TwoState button styling in pressed state
+-   MultiCombo does not have visible focus
+
+### Breaking changes
+
+-   RangeCalendar, DateRangePicker: `done` property is removed in favour of the `buttons` array
+
 ## Version 2.1.1
 
 ### Fixes

@@ -9,19 +9,25 @@
 	let {
 		value,
 		current = $bindable(),
-		done = false,
 		part = "normal",
 		markers = null,
-		buttons = true,
+		buttons = ["clear", "today"],
 		onshift: shift,
 		onchange: change,
 	} = $props();
 
 	let type = $state("month");
+
+	let buttonList = $derived.by(() => {
+		if (Array.isArray(buttons)) return buttons;
+		return buttons ? ["clear", "today"] : [];
+	});
+
 	function selectDate(ev, date) {
 		ev.preventDefault();
 		change && change({ value: date });
 	}
+
 	function oncancel() {
 		if (type === "duodecade") type = "year";
 		else if (type === "year") type = "month";
@@ -30,7 +36,7 @@
 	function onshift(ev) {
 		const { diff } = ev;
 
-		if (diff == 0) {
+		if (diff === 0) {
 			if (type === "month") type = "year";
 			else if (type === "year") type = "duodecade";
 			return;
@@ -45,6 +51,12 @@
 	function onchange(value) {
 		type = "month";
 		change && change({ select: true, value });
+	}
+
+	function getButtonValue(btn) {
+		if (btn === "done") return -1;
+		if (btn === "clear") return null;
+		if (btn === "today") return new Date();
 	}
 
 	const SvelteComponent = $derived(configs[type].component);
@@ -65,25 +77,19 @@
 				{oncancel}
 				{onshift}
 			/>
-			{#if type === "month" && buttons}
+
+			{#if type === "month" && buttonList.length > 0}
 				<div class="wx-buttons">
-					{#if done}
+					{#each buttonList as btn}
 						<div class="wx-button-item">
-							<Button onclick={e => selectDate(e, -1)}>
-								{_("done")}
+							<Button
+								onclick={e =>
+									selectDate(e, getButtonValue(btn))}
+							>
+								{_(btn)}
 							</Button>
 						</div>
-					{/if}
-					<div class="wx-button-item">
-						<Button onclick={e => selectDate(e, null)}>
-							{_("clear")}
-						</Button>
-					</div>
-					<div class="wx-button-item">
-						<Button onclick={e => selectDate(e, new Date())}>
-							{_("today")}
-						</Button>
-					</div>
+					{/each}
 				</div>
 			{/if}
 		</div>
@@ -105,12 +111,10 @@
 	.wx-calendar.wx-part {
 		padding-bottom: 0;
 	}
-
 	.wx-wrap {
 		width: calc(var(--wx-calendar-cell-size) * 7);
 		margin: 0 auto;
 	}
-
 	.wx-buttons {
 		display: flex;
 		flex-wrap: nowrap;
@@ -118,7 +122,6 @@
 		justify-content: flex-end;
 		margin-top: calc(var(--wx-calendar-gap) * 2);
 	}
-
 	.wx-button-item + .wx-button-item {
 		margin-left: calc(var(--wx-calendar-gap) * 3);
 	}

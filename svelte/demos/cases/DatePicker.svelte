@@ -55,6 +55,15 @@
 			/>
 		{/snippet}
 	</Field>
+	<Field label="With Today button only">
+		{#snippet children({ id })}
+			<DatePicker
+				{id}
+				buttons={["today"]}
+				value={new Date(2022, 4, 10, 16, 0)}
+			/>
+		{/snippet}
+	</Field>
 	<Field label="Default format">
 		{#snippet children({ id })}
 			<DatePicker {id} value={date} />

@@ -82,6 +82,13 @@
 </div>
 
 <div class="demo-box">
+	<h3>Combo with a value that's not in options</h3>
+	<Field>
+		<Combo options={users} value={4} />
+	</Field>
+</div>
+
+<div class="demo-box">
 	<h3>Combo without options</h3>
 	<Field>
 		<Combo />

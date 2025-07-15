@@ -1,10 +1,10 @@
 <script>
 	import Locale from "../Locale.svelte";
-	import Layout from "./modal/Layout.svelte";
+	import Month from "./calendar/Month.svelte";
 
 	let { ...props } = $props();
 </script>
 
 <Locale>
-	<Layout {...props} />
+	<Month {...props} />
 </Locale>

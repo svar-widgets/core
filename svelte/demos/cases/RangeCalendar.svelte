@@ -14,6 +14,11 @@
 	<RangeCalendar buttons={false} />
 </div>
 
+<div class="demo-box" style="width: 300px">
+	<h3>Range Calendar with Done button</h3>
+	<RangeCalendar buttons={["done", "clear", "today"]} />
+</div>
+
 <div class="demo-box" style="width: 160px">
 	<h3>Single month</h3>
 	<RangeCalendar months={1} />

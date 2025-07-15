@@ -53,40 +53,20 @@
 </div>
 
 <div class="demo-box">
-	<h3>Inactive</h3>
+	<h3>Disabled</h3>
 	<p>
-		<TwoState
-			type="primary"
-			value={true}
-			onclick={ev => ev.preventDefault()}
-		>
-			Inactive
-		</TwoState>
-		<TwoState
-			type="primary"
-			value={true}
-			disabled
-			onclick={ev => ev.preventDefault()}
-		>
-			Inactive
-		</TwoState>
+		<TwoState type="primary" value={true} disabled>Primary On</TwoState>
+		<TwoState type="primary" disabled>Primary Off</TwoState>
 	</p>
 	<p>
 		<TwoState
 			title="disabled button"
 			type="secondary"
 			value={true}
-			onclick={ev => ev.preventDefault()}
-		>
-			Inactive
-		</TwoState>
-		<TwoState
-			type="secondary"
-			value={true}
 			disabled
-			onclick={ev => ev.preventDefault()}
 		>
-			Inactive
+			Secondary On
 		</TwoState>
+		<TwoState type="secondary" disabled>Secondary Off</TwoState>
 	</p>
 </div>

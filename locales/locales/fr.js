@@ -54,6 +54,8 @@ const core = {
 	cancel: "Annuler",
 	select: "Sélectionner",
 	"No data": "Pas de données",
+	"Rows per page": "Lignes par page",
+	"Total pages": "Nombre total de pages",
 };
 
 const formats = {

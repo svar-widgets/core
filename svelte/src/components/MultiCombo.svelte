@@ -30,7 +30,8 @@
 				)
 			: o;
 	});
-	let focus = false;
+	let focus = $state(false);
+	let inputElement = $state();
 
 	let navigate = null;
 	let keydown = null;
@@ -60,6 +61,8 @@
 
 			value = next;
 			change && change({ value });
+
+			inputElement.focus();
 		}
 	}
 
@@ -74,6 +77,13 @@
 		value && value.length
 			? filterOptions.findIndex(i => i.id === value[0])
 			: 0;
+
+	function onclick() {
+		if (!disabled) {
+			inputElement.focus();
+			navigate(index());
+		}
+	}
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -84,7 +94,7 @@
 	class:wx-disabled={disabled}
 	class:wx-not-empty={selected.length}
 	class:wx-focus={focus && !disabled}
-	onclick={() => !disabled && navigate(index())}
+	{onclick}
 	onkeydown={ev => keydown(ev, index())}
 >
 	<div class="wx-wrapper">
@@ -109,10 +119,13 @@
 			<input
 				{id}
 				type="text"
+				bind:this={inputElement}
 				bind:value={text}
 				oninput={input}
 				{placeholder}
 				{disabled}
+				onfocus={() => (focus = true)}
+				onblur={() => (focus = false)}
 			/>
 			<i class="wx-icon wxi-angle-down"></i>
 		</div>
