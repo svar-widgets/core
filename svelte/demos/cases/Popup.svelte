@@ -1,5 +1,6 @@
 <script>
 	import { Button, Popup, Slider } from "../../src/index";
+	import { env } from "wx-lib-dom";
 
 	let node = null;
 	let isOpen = $state(false);
@@ -16,10 +17,10 @@
 		mode = "bottom";
 		parent = node;
 	}
-	function showCenter() {
+	function showCenter(ev) {
 		isOpen = true;
 		mode = "center";
-		parent = document.body;
+		parent = env.getTopNode(ev.target);
 	}
 
 	function oncancel() {

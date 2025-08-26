@@ -1,5 +1,6 @@
 <script>
 	import { onMount, getContext, onDestroy } from "svelte";
+	import { env } from "wx-lib-dom";
 
 	let portal = null;
 
@@ -13,7 +14,8 @@
 	if (theme === "") theme = getContext("wx-theme");
 
 	function getParentRoot(p) {
-		while (p !== document.body && !p.getAttribute("data-wx-portal-root")) {
+		const root = env.getTopNode(p);
+		while (p !== root && !p.getAttribute("data-wx-portal-root")) {
 			p = p.parentNode;
 		}
 		return p;

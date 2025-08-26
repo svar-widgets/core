@@ -47,7 +47,7 @@ const calendar = {
 	am: ["am", "AM"],
 	pm: ["pm", "PM"],
 
-	weekStart: 7,
+	weekStart: 0,
 	clockFormat: 24,
 };
 

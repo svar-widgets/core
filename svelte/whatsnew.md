@@ -1,3 +1,10 @@
+## Version 2.2.1
+
+### Fixes
+
+-   Correct weekStart number in locales
+-   Adjust popups for Salesforce
+
 ## Version 2.2.0
 
 ### Updates

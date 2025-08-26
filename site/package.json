@@ -1,6 +1,6 @@
 {
 	"name": "wx-site-svelte-core",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"type": "module",
 	"scripts": {
 		"build": "vite build",
@@ -9,6 +9,6 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"wx-svelte-core": "2.2.0"
+		"wx-svelte-core": "2.2.1"
 	}
 }

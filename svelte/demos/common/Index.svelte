@@ -171,6 +171,7 @@
 			overflow: auto;
 
 			.page-content-header {
+				height: 70px;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
@@ -275,7 +276,7 @@
 
 	.wrapper-content {
 		flex: 1;
-
+		height: calc(100% - 70px);
 		.content {
 			width: 100%;
 			height: 100%;

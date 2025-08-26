@@ -1,5 +1,6 @@
 <script>
 	import { clickOutside } from "wx-lib-dom";
+	import { env } from "wx-lib-dom";
 
 	let {
 		position = "bottom",
@@ -14,7 +15,7 @@
 	$effect(() => {
 		if (autoFit) {
 			const nodeCoords = node.getBoundingClientRect();
-			const bodyCoords = document.body.getBoundingClientRect();
+			const bodyCoords = env.getTopNode(node).getBoundingClientRect();
 
 			if (nodeCoords.right >= bodyCoords.right) {
 				align = "end";
