@@ -3,7 +3,7 @@ import { resolve } from "path";
 import { existsSync } from "fs";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { visualizer } from "rollup-plugin-visualizer";
-import { waitChanges, waitOn } from "wx-vite-tools";
+import { waitChanges, waitOn } from "@svar-ui/vite-tools";
 import conditionalCompile from "vite-plugin-conditional-compile";
 import pkg from "./package.json" with { type: "json" };
 

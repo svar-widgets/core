@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from "svelte";
-	import { delegateClick, getDuodecade } from "wx-lib-dom";
+	import { delegateClick, getDuodecade } from "@svar-ui/lib-dom";
 	import Button from "./Button.svelte";
 	import { getPartValue } from "./helpers";
 

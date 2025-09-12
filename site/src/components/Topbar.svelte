@@ -1,5 +1,5 @@
 <script>
-	import { Slider, Combo, Button, TimePicker, Pager } from "wx-svelte-core";
+	import { Slider, Combo, Button, TimePicker, Pager } from "@svar-ui/svelte-core";
 
 	import CustomThemeSelect from "./CustomThemeSelect.svelte";
 

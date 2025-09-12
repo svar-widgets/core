@@ -1,5 +1,5 @@
 {
-	"name": "wx-svelte-core",
+	"name": "@svar-ui/svelte-core",
 	"version": "2.2.1",
 	"description": "SVAR Svelte Core - Svelte UI library of 20+ components and form controls",
 	"productTag": "core",
@@ -32,9 +32,9 @@
 	},
 	"homepage": "https://svar.dev/svelte/core/",
 	"dependencies": {
-		"wx-core-locales": "2.2.1",
-		"wx-lib-dom": "0.9.1",
-		"wx-lib-svelte": "0.5.1"
+		"@svar-ui/core-locales": "2.2.1",
+		"@svar-ui/lib-dom": "0.9.2",
+		"@svar-ui/lib-svelte": "0.5.2"
 	},
 	"files": [
 		"src",

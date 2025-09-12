@@ -1,5 +1,5 @@
 <script>
-	import { clickOutside } from "wx-lib-dom";
+	import { clickOutside } from "@svar-ui/lib-dom";
 	import { fly } from "svelte/transition";
 
 	let { position = "right", children, oncancel } = $props();

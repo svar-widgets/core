@@ -1,7 +1,7 @@
 <script>
 	import { getContext, setContext } from "svelte";
-	import { locale } from "wx-lib-dom";
-	import { en } from "wx-core-locales";
+	import { locale } from "@svar-ui/lib-dom";
+	import { en } from "@svar-ui/core-locales";
 
 	let { words = null, optional = false, children } = $props();
 

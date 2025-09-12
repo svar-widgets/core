@@ -1,6 +1,6 @@
 <script>
 	import { Month } from "../../src/index";
-	import { delegateClick } from "wx-lib-dom";
+	import { delegateClick } from "@svar-ui/lib-dom";
 	import { getContext } from "svelte";
 
 	const helpers = getContext("wx-helpers");

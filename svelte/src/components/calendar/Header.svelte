@@ -1,5 +1,5 @@
 <script>
-	import { dateToString, getDuodecade } from "wx-lib-dom";
+	import { dateToString, getDuodecade } from "@svar-ui/lib-dom";
 	import { getContext } from "svelte";
 
 	const { calendar, formats } = getContext("wx-i18n").getRaw();

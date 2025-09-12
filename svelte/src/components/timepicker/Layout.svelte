@@ -6,7 +6,7 @@
 	import TwoState from "../TwoState.svelte";
 
 	import { getContext } from "svelte";
-	import { dateToString, uid } from "wx-lib-dom";
+	import { dateToString, uid } from "@svar-ui/lib-dom";
 
 	const defValue = new Date(0, 0, 0, 0, 0);
 

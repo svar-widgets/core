@@ -4,7 +4,7 @@
 	import Notices from "./Notices.svelte";
 	import Modal from "./Modal.svelte";
 
-	import { uid } from "wx-lib-dom";
+	import { uid } from "@svar-ui/lib-dom";
 
 	let { children } = $props();
 

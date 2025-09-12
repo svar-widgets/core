@@ -1,5 +1,5 @@
 <script>
-	import { uid } from "wx-lib-dom";
+	import { uid } from "@svar-ui/lib-dom";
 	import Dropdown from "./Dropdown.svelte";
 
 	const defaultColors = [

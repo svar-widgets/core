@@ -1,5 +1,5 @@
 <script>
-	import { clickOutside, calculatePosition } from "wx-lib-dom";
+	import { clickOutside, calculatePosition } from "@svar-ui/lib-dom";
 	import { onMount } from "svelte";
 
 	let {

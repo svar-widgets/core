@@ -1,4 +1,4 @@
-import { locateID } from "wx-lib-dom";
+import { locateID } from "@svar-ui/lib-dom";
 
 export function getListHandlers() {
 	let navIndex = null;

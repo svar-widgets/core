@@ -12,9 +12,9 @@
 
 <div align="center">
 
-[![npm](https://img.shields.io/npm/v/wx-svelte-core.svg)](https://www.npmjs.com/package/wx-svelte-core)
+[![npm](https://img.shields.io/npm/v/@svar-ui/svelte-core.svg)](https://www.npmjs.com/package/@svar-ui/svelte-core)
 [![License](https://img.shields.io/github/license/svar-widgets/core)](https://github.com/svar-widgets/core/blob/main/license.txt)
-[![npm downloads](https://img.shields.io/npm/dm/wx-svelte-core.svg)](https://www.npmjs.com/package/wx-svelte-core)
+[![npm downloads](https://img.shields.io/npm/dm/@svar-ui/svelte-core.svg)](https://www.npmjs.com/package/@svar-ui/svelte-core)
 
 </div>
 
@@ -30,12 +30,12 @@ All components are lightweight, responsive, fast-performing, and available in li
 </br>
 SVAR Core library includes the following components:
 
-- buttons & form controls,
-- calendar (datepicker),
-- popups,
-- notifications,
-- sliding sidebar,
-- tabs, and more.
+-   buttons & form controls,
+-   calendar (datepicker),
+-   popups,
+-   notifications,
+-   sliding sidebar,
+-   tabs, and more.
 
 Additionally, you can use these SVAR Svelte components to build unified app interfaces:
 
@@ -51,7 +51,7 @@ To start using components from the **Core** package, simply import the package a
 
 ```svelte
 <script>
-	import { Button } from "wx-svelte-core";
+	import { Button } from "@svar-ui/svelte-core";
 </script>
 
 <Button>Click me</Button>

@@ -1,6 +1,6 @@
 <script>
 	import { Button, Popup, Slider } from "../../src/index";
-	import { env } from "wx-lib-dom";
+	import { env } from "@svar-ui/lib-dom";
 
 	let node = null;
 	let isOpen = $state(false);

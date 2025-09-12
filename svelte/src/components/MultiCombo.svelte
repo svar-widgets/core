@@ -1,5 +1,5 @@
 <script>
-	import { uid } from "wx-lib-dom";
+	import { uid } from "@svar-ui/lib-dom";
 	import List from "./helpers/SuggestDropdown.svelte";
 	import Checkbox from "./Checkbox.svelte";
 

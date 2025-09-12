@@ -12,9 +12,9 @@
 
 <div align="center">
 
-[![npm](https://img.shields.io/npm/v/wx-svelte-core.svg)](https://www.npmjs.com/package/wx-svelte-core)
+[![npm](https://img.shields.io/npm/v/@svar-ui/svelte-core.svg)](https://www.npmjs.com/package/@svar-ui/svelte-core)
 [![License](https://img.shields.io/github/license/svar-widgets/core)](https://github.com/svar-widgets/core/blob/main/license.txt)
-[![npm downloads](https://img.shields.io/npm/dm/wx-svelte-core.svg)](https://www.npmjs.com/package/wx-svelte-core)
+[![npm downloads](https://img.shields.io/npm/dm/@svar-ui/svelte-core.svg)](https://www.npmjs.com/package/@svar-ui/svelte-core)
 
 </div>
 
@@ -24,20 +24,20 @@
 
 SVAR Core library includes the following components:
 
-- buttons & form controls,
-- calendar (datepicker),
-- popups,
-- notifications,
-- sliding sidebar,
-- tabs, and more.
+-   buttons & form controls,
+-   calendar (datepicker),
+-   popups,
+-   notifications,
+-   sliding sidebar,
+-   tabs, and more.
 
 Additionally, you can use these SVAR Svelte components to build unified app interfaces:
 
--   [Menu](https://www.npmjs.com/package/wx-svelte-menu)
--   [Toolbar](https://www.npmjs.com/package/wx-svelte-toolbar)
--   [File uploader](https://www.npmjs.com/package/wx-svelte-uploader)
--   [Comments](https://www.npmjs.com/package/wx-svelte-comments)
--   [Tasklist](https://www.npmjs.com/package/wx-svelte-tasklist)
+-   [Menu](https://www.npmjs.com/package/@svar-ui/svelte-menu)
+-   [Toolbar](https://www.npmjs.com/package/@svar-ui/svelte-toolbar)
+-   [File uploader](https://www.npmjs.com/package/@svar-ui/svelte-uploader)
+-   [Comments](https://www.npmjs.com/package/@svar-ui/svelte-comments)
+-   [Tasklist](https://www.npmjs.com/package/@svar-ui/svelte-tasklist)
 
 ### :gear: Svelte 4 and Svelte 5 versions
 
@@ -46,7 +46,7 @@ There are two versions of the library: the 1.x version - designed to work with S
 To use the SVAR Core for Svelte 5, install it as follows:
 
 ```
-npm install wx-svelte-core
+npm install @svar-ui/svelte-core
 ```
 
 To use the SVAR Core for Svelte 4:
@@ -61,7 +61,7 @@ To use any of the Core components, simply import the package and include the des
 
 ```svelte
 <script>
-	import { Button } from "wx-svelte-core";
+	import { Button } from "@svar-ui/svelte-core";
 </script>
 
 <Button>Click me</Button>

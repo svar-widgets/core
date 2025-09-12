@@ -1,6 +1,6 @@
 <script>
-	import { clickOutside } from "wx-lib-dom";
-	import { env } from "wx-lib-dom";
+	import { clickOutside } from "@svar-ui/lib-dom";
+	import { env } from "@svar-ui/lib-dom";
 
 	let {
 		position = "bottom",

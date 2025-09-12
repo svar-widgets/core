@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from "svelte";
-	import { uid, dateToString } from "wx-lib-dom";
+	import { uid, dateToString } from "@svar-ui/lib-dom";
 
 	import Text from "../Text.svelte";
 	import Dropdown from "../Dropdown.svelte";

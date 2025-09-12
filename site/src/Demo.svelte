@@ -6,7 +6,7 @@
 		Material,
 		Locale,
 		popupContainer,
-	} from "wx-svelte-core";
+	} from "@svar-ui/svelte-core";
 	import ThemeSelect from "./ThemeSelect.svelte";
 	import Main from "./Main.svelte";
 

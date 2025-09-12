@@ -1,6 +1,6 @@
 <script>
 	import { Calendar, Segmented, Locale, Text } from "../../src/index";
-	import { en, cn, de, es, fr, it, ja, pt, ru } from "wx-core-locales";
+	import { en, cn, de, es, fr, it, ja, pt, ru } from "@svar-ui/core-locales";
 
 	let lang = $state("en");
 	let numValue = $state(1256790.567);

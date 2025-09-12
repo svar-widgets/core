@@ -1,6 +1,6 @@
 <script>
 	import { Calendar, Locale } from "../../src/index";
-	import { de, cn } from "wx-core-locales";
+	import { de, cn } from "@svar-ui/core-locales";
 
 	const markLine = v =>
 		v >= new Date(2022, 2, 13) && v <= new Date(2022, 2, 19)

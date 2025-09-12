@@ -40,13 +40,13 @@ export { default as Willow } from "./themes/Willow.svelte";
 export { default as WillowDark } from "./themes/WillowDark.svelte";
 
 export { default as Locale } from "./Locale.svelte";
-export { locale } from "wx-lib-dom";
+export { locale } from "@svar-ui/lib-dom";
 
 export { popupContainer } from "./components/helpers";
 export { default as SuggestDropdown } from "./components/helpers/SuggestDropdown.svelte";
 
-export { en } from "wx-core-locales";
+export { en } from "@svar-ui/core-locales";
 
-import { setEnv } from "wx-lib-dom";
-import { env } from "wx-lib-svelte";
+import { setEnv } from "@svar-ui/lib-dom";
+import { env } from "@svar-ui/lib-svelte";
 setEnv(env);

@@ -1,5 +1,5 @@
 <script>
-	import { Switch } from "wx-svelte-core";
+	import { Switch } from "@svar-ui/svelte-core";
 
 	let { value = $bindable() } = $props();
 

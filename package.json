@@ -1,6 +1,6 @@
 {
 	"private": true,
-	"name": "wx-core",
+	"name": "@svar-ui/core",
 	"workspaces": [
 		"svelte",
 		"locales",
@@ -23,7 +23,7 @@
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "4.0.0",
 		"@vitest/coverage-v8": "1.6.0",
-		"wx-vite-tools": "1.0.5",
+		"@svar-ui/vite-tools": "1.0.5",
 		"autoprefixer": "10.4.20",
 		"cypress": "13.6.4",
 		"eslint": "9.14.0",

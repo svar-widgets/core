@@ -1,6 +1,6 @@
 <script>
 	import { onMount, getContext, onDestroy } from "svelte";
-	import { env } from "wx-lib-dom";
+	import { env } from "@svar-ui/lib-dom";
 
 	let portal = null;
 

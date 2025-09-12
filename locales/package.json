@@ -1,5 +1,5 @@
 {
-	"name": "wx-core-locales",
+	"name": "@svar-ui/core-locales",
 	"version": "2.2.1",
 	"description": "Locales for WX Core widgets",
 	"type": "module",

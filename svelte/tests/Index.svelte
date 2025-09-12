@@ -12,7 +12,7 @@
 		Globals,
 		Locale,
 		popupContainer,
-	} from "wx-svelte-core";
+	} from "@svar-ui/svelte-core";
 
 	const defRoute = links[0][0].replace(/\/:skin$/, "/willow");
 	const routes = {

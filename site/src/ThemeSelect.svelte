@@ -1,5 +1,5 @@
 <script>
-	import { RichSelect } from "wx-svelte-core";
+	import { RichSelect } from "@svar-ui/svelte-core";
 	let { value = $bindable("willow") } = $props();
 
 	const skins = [

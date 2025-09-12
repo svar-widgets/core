@@ -1,6 +1,6 @@
 <script>
 	import { TimePicker, Field, Locale } from "../../src/index";
-	import { cn } from "wx-core-locales";
+	import { cn } from "@svar-ui/core-locales";
 
 	let value = $state(null);
 </script>

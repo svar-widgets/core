@@ -6,7 +6,7 @@
 		Segmented,
 		Field,
 		DatePicker,
-	} from "wx-svelte-core";
+	} from "@svar-ui/svelte-core";
 	import LockIcon from "./Icons/LockIcon.svelte";
 
 	import { getData } from "../data";

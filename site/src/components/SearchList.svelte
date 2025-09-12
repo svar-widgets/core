@@ -1,5 +1,5 @@
 <script>
-	import { Text } from "wx-svelte-core";
+	import { Text } from "@svar-ui/svelte-core";
 
 	import { getData } from "../data";
 

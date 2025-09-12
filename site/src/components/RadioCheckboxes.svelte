@@ -4,7 +4,7 @@
 		CheckboxGroup,
 		Select,
 		Text,
-	} from "wx-svelte-core";
+	} from "@svar-ui/svelte-core";
 
 	import { getData } from "../data";
 
