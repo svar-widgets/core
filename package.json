@@ -11,7 +11,7 @@
 		"build:site": "cd site && yarn build",
 		"build:tests": "cd svelte && yarn build:tests",
 		"build": "cd svelte && yarn build",
-		"lint": "yarn eslint ./svelte/src ./svelte/demos ./locales",
+		"lint": "yarn eslint ./svelte/src ./svelte/demos",
 		"prepare": "husky",
 		"start:demos": "cd svelte && yarn start",
 		"start:site": "cd site && yarn start",

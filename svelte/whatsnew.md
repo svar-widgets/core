@@ -1,3 +1,15 @@
+## 2.3.0
+
+### New features
+
+-   TypeScript definitions
+
+### Fixes
+
+-   Slider always has stable `previous` parameter and numeric `value` in the `onchange` event
+-   DateRangepicker allows to select start date only
+-   Segmented and Tabs set native tooltip only with option `title`
+
 ## Version 2.2.1
 
 ### Fixes

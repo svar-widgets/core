@@ -6,7 +6,7 @@
 		position = "bottom",
 		align = "start",
 		autoFit = true,
-		oncancel = null,
+		oncancel,
 		width = "100%",
 		children,
 	} = $props();

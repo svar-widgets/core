@@ -11,7 +11,7 @@
 		step = 1,
 		title = "",
 		disabled = false,
-		onchange: change,
+		onchange,
 	} = $props();
 
 	let bgStyle = $derived(() => {
@@ -22,17 +22,17 @@
 
 	let progress = $derived(((value - min) / (max - min)) * 100 + "%");
 
-	let previous = value;
+	let previousInput = value;
+	let previousValue = value;
 	function oninput({ target }) {
-		value = target.value || 0;
-		if (previous !== value) {
-			change && change({ value, previous, input: true });
-			previous = value;
-		}
-	}
-	function onchange({ target }) {
 		value = target.value * 1;
-		change && change({ value });
+		onchange && onchange({ value, previous: previousInput, input: true });
+		previousInput = value;
+	}
+	function change({ target }) {
+		value = target.value * 1;
+		onchange && onchange({ value, previous: previousValue });
+		previousValue = value;
 	}
 </script>
 
@@ -48,7 +48,7 @@
 			{disabled}
 			{value}
 			{oninput}
-			{onchange}
+			onchange={change}
 			style={bgStyle()}
 		/>
 	</div>

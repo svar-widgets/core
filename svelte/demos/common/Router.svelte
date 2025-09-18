@@ -3,12 +3,14 @@
 	import Router, { push } from "svelte-spa-router";
 	import { getRoutes, getLinks } from "./helpers";
 
-	let { skin = $bindable(), onnewpage } = $props();
+	let { skin = $bindable(), onnewpage, productTag } = $props();
 	let page = $state(),
 		title,
 		link;
 	const baseLink =
-		"https://github.com/svar-widgets/core/blob/main/svelte/demos/cases/";
+		"https://github.com/svar-widgets/" +
+		productTag +
+		"/blob/main/svelte/demos/cases/";
 
 	$effect(() => {
 		if (skin && page) {

@@ -17,7 +17,7 @@
 	{#each options as option (option.id)}
 		<button
 			css={option.css}
-			title={option.title || option.label}
+			title={option.title}
 			class:wx-selected={option.id == value}
 			onclick={() => handleClick(option.id)}
 		>

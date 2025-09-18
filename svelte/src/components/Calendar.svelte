@@ -1,6 +1,5 @@
 <script>
 	import Panel from "./calendar/Panel.svelte";
-
 	import Locale from "../Locale.svelte";
 
 	let {
@@ -8,7 +7,7 @@
 		current = $bindable(),
 		markers = null,
 		buttons = ["clear", "today"],
-		onchange: change,
+		onchange,
 	} = $props();
 
 	function fixCurrent(force) {
@@ -17,7 +16,7 @@
 	}
 	fixCurrent(value);
 
-	function onchange(v) {
+	function change(v) {
 		const x = v.value;
 		if (x) {
 			value = new Date(x);
@@ -26,10 +25,10 @@
 			value = null;
 		}
 
-		change && change({ value });
+		onchange && onchange({ value });
 	}
 </script>
 
 <Locale>
-	<Panel {value} bind:current {markers} {buttons} {onchange} />
+	<Panel {value} bind:current {markers} {buttons} onchange={change} />
 </Locale>

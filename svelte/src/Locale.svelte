@@ -6,11 +6,13 @@
 	let { words = null, optional = false, children } = $props();
 
 	let l = getContext("wx-i18n");
-	if (!l) {
-		l = locale(en);
+	if (!l || words !== null) {
+		if (!l) {
+			l = locale(en);
+		}
+		l = l.extend(words, optional);
+		setContext("wx-i18n", l);
 	}
-	l = l.extend(words, optional);
-	setContext("wx-i18n", l);
 </script>
 
 {@render children?.()}

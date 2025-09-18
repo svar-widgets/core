@@ -1,6 +1,7 @@
 <script>
 	import { getContext } from "svelte";
 	import { delegateClick } from "@svar-ui/lib-dom";
+	import { defaultLocale } from "../helpers/locale";
 
 	let {
 		value,
@@ -11,7 +12,7 @@
 		onchange,
 	} = $props();
 
-	const locale = getContext("wx-i18n").getRaw().calendar;
+	const locale = (getContext("wx-i18n") || defaultLocale()).getRaw().calendar;
 	const weekStart = (locale.weekStart || 7) % 7;
 	const weekdays = locale.dayShort
 		.slice(weekStart)

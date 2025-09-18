@@ -10,7 +10,6 @@
 		Willow,
 		WillowDark,
 		Globals,
-		Locale,
 		popupContainer,
 	} from "@svar-ui/svelte-core";
 
@@ -50,11 +49,9 @@
 <Material />
 
 <div class="wx-{skin}-theme content" use:popupContainer>
-	<Locale>
-		<Globals>
-			<Router {routes} />
-		</Globals>
-	</Locale>
+	<Globals>
+		<Router {routes} />
+	</Globals>
 </div>
 
 <style>

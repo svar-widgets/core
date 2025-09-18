@@ -15,9 +15,9 @@
 		inputStyle = "",
 		title = "",
 		css = "",
-		icon,
+		icon = "",
 		clear = false,
-		onchange: change,
+		onchange,
 	} = $props();
 
 	let cssString = $derived(
@@ -37,13 +37,13 @@
 		}, 1);
 	});
 
-	const oninput = () => change && change({ value, input: true });
-	const onchange = () => change && change({ value });
+	const oninput = () => onchange && onchange({ value, input: true });
+	const change = () => onchange && onchange({ value });
 
 	function clearValue(ev) {
 		ev.stopPropagation();
 		value = "";
-		change && change({ value });
+		onchange && onchange({ value });
 	}
 </script>
 
@@ -65,7 +65,7 @@
 			style={inputStyle}
 			{title}
 			{oninput}
-			{onchange}
+			onchange={change}
 		/>
 	{:else if type == "number"}
 		<input
@@ -79,7 +79,7 @@
 			style={inputStyle}
 			{title}
 			{oninput}
-			{onchange}
+			onchange={change}
 		/>
 	{:else}
 		<input
@@ -92,7 +92,7 @@
 			{title}
 			style={inputStyle}
 			{oninput}
-			{onchange}
+			onchange={change}
 		/>
 	{/if}
 

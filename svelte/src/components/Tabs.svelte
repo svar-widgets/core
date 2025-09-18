@@ -11,6 +11,7 @@
 	{#each options as option}
 		<button
 			class:wx-active={option.id == value}
+			title={option.title}
 			onclick={() => {
 				value = option.id;
 				onchange && onchange({ value });

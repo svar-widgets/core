@@ -14,7 +14,7 @@
 		disabled = false,
 		error = false,
 		checkboxes = false,
-		onchange: change,
+		onchange,
 		children,
 	} = $props();
 
@@ -60,7 +60,7 @@
 			}
 
 			value = next;
-			change && change({ value });
+			onchange && onchange({ value });
 
 			inputElement.focus();
 		}
@@ -70,7 +70,7 @@
 		if (ev) ev.stopPropagation();
 
 		value = value.filter(i => i !== id);
-		change && change({ value });
+		onchange && onchange({ value });
 	}
 
 	const index = () =>

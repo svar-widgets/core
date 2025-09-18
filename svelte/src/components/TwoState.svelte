@@ -4,9 +4,9 @@
 	let {
 		value = false,
 		type = "",
-		icon = null,
-		disabled = null,
-		iconActive = null,
+		icon = "",
+		disabled = false,
+		iconActive = "",
 		onclick,
 		title = "",
 		css = "",

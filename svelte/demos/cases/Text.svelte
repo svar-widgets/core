@@ -53,7 +53,7 @@
 	<h3>Number input with a side label</h3>
 	<Field label="Number" position="left">
 		{#snippet children({ id })}
-			<Text type="number" bind:value={password2} {id} />
+			<Text type="number" {id} />
 		{/snippet}
 	</Field>
 </div>

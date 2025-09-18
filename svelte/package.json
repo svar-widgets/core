@@ -1,6 +1,6 @@
 {
 	"name": "@svar-ui/svelte-core",
-	"version": "2.2.1",
+	"version": "2.3.0",
 	"description": "SVAR Svelte Core - Svelte UI library of 20+ components and form controls",
 	"productTag": "core",
 	"productTrial": false,
@@ -18,7 +18,8 @@
 	"svelte": "src/index.js",
 	"exports": {
 		".": {
-			"svelte": "./src/index.js"
+			"svelte": "./src/index.js",
+			"types": "./types/index.d.ts"
 		},
 		"./package.json": "./package.json"
 	},
@@ -32,7 +33,7 @@
 	},
 	"homepage": "https://svar.dev/svelte/core/",
 	"dependencies": {
-		"@svar-ui/core-locales": "2.2.1",
+		"@svar-ui/core-locales": "2.3.0",
 		"@svar-ui/lib-dom": "0.9.2",
 		"@svar-ui/lib-svelte": "0.5.2"
 	},

@@ -26,7 +26,7 @@ export { default as Counter } from "./components/Counter.svelte";
 export { default as Globals } from "./components/Globals.svelte";
 export { default as Field } from "./components/Field.svelte";
 export { default as Calendar } from "./components/Calendar.svelte";
-export { default as Month } from "./components/Month.svelte";
+export { default as Month } from "./components/calendar/Month.svelte";
 export { default as RangeCalendar } from "./components/RangeCalendar.svelte";
 export { default as TimePicker } from "./components/TimePicker.svelte";
 export { default as TwoState } from "./components/TwoState.svelte";
