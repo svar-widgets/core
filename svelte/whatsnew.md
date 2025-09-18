@@ -1,3 +1,9 @@
+## 2.3.1
+
+### Fixes
+
+-   Incorrect location of d.ts files
+
 ## 2.3.0
 
 ### New features
