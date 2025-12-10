@@ -1,10 +1,30 @@
-## 2.3.1
+## Version 2.4.0
+
+### New features
+
+-   Fullscreen component
+
+### Updates
+
+-   Enhanced syntax of Field component that ensures proper label-input association
+-   More options to precisely position and align Popup
+
+### Fixes
+
+-   Incorrect position of Popup in relatively positioned continer
+-   Incorrect position of Popup close to container edges
+
+### Breaking changes
+
+-   Popup `mount` property was removed
+
+## Version 2.3.1
 
 ### Fixes
 
 -   Incorrect location of d.ts files
 
-## 2.3.0
+## Version 2.3.0
 
 ### New features
 

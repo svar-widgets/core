@@ -23,24 +23,16 @@
 <div class="demo-box">
 	<h3>RadioButton with side label</h3>
 	<Field label="Radio 1" position="left" type="checkbox">
-		{#snippet children({ id })}
-			<RadioButton {id} name="a2" />
-		{/snippet}
+		<RadioButton name="a2" />
 	</Field>
 	<Field label="Radio 2" position="left" type="checkbox">
-		{#snippet children({ id })}
-			<RadioButton {id} name="a2" />
-		{/snippet}
+		<RadioButton name="a2" />
 	</Field>
 	<Field label="Disabled" position="left" type="checkbox">
-		{#snippet children({ id })}
-			<RadioButton label="Default" disabled {id} name="a2" />
-		{/snippet}
+		<RadioButton label="Default" disabled name="a2" />
 	</Field>
 	<Field label="Checked" position="left" type="checkbox">
-		{#snippet children({ id })}
-			<RadioButton label="Checked" value={true} {id} name="a2" />
-		{/snippet}
+		<RadioButton label="Checked" value={true} name="a2" />
 	</Field>
 </div>
 

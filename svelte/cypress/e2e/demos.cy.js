@@ -2,6 +2,7 @@ const cases = [
 	"/textarea/:skin",
 	"/button/:skin",
 	"/calendar/:skin",
+	"/fullscreen/:skin",
 	"/month/:skin",
 	"/checkbox/:skin",
 	"/colorpicker/:skin",

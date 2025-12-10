@@ -1,5 +1,5 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
 		value = $bindable(""),
@@ -10,9 +10,11 @@
 		error = false,
 		textField = "label",
 		clear = false,
-		id = uid(),
+		id,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	function unselect() {
 		value = "";
@@ -26,7 +28,7 @@
 
 <div class="wx-select">
 	<select
-		{id}
+		id={inputId}
 		bind:value
 		{disabled}
 		class:wx-error={error}

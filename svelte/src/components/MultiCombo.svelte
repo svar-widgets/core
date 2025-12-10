@@ -1,10 +1,10 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
 	import List from "./helpers/SuggestDropdown.svelte";
 	import Checkbox from "./Checkbox.svelte";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
-		id = uid(),
+		id,
 		value = $bindable([]),
 		options = [],
 		textOptions = null,
@@ -17,6 +17,8 @@
 		onchange,
 		children,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	let text = $state("");
 	let selected = $derived(
@@ -117,7 +119,7 @@
 		</div>
 		<div class="wx-select">
 			<input
-				{id}
+				id={inputId}
 				type="text"
 				bind:this={inputElement}
 				bind:value={text}

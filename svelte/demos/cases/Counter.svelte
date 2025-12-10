@@ -12,58 +12,40 @@
 
 <div class="demo-box">
 	<Field label="No initial value">
-		{#snippet children({ id })}
-			<Counter {id} />
-		{/snippet}
+		<Counter />
 	</Field>
 
 	<Field label="Initial value">
-		{#snippet children({ id })}
-			<Counter {id} bind:value={v1} />
-			<div>The value is: {v1}</div>
-		{/snippet}
+		<Counter bind:value={v1} />
+		<div>The value is: {v1}</div>
 	</Field>
 
 	<Field label="Custom step">
-		{#snippet children({ id })}
-			<Counter {id} bind:value={v2} step={3} />
-		{/snippet}
+		<Counter bind:value={v2} step={3} />
 	</Field>
 
 	<Field label="With negative numbers">
-		{#snippet children({ id })}
-			<Counter {id} min={-Infinity} />
-		{/snippet}
+		<Counter min={-Infinity} />
 	</Field>
 
 	<Field label="With custom min and max values (-30, 30)">
-		{#snippet children({ id })}
-			<Counter {id} min={-30} max={30} bind:value={v3} />
-		{/snippet}
+		<Counter min={-30} max={30} bind:value={v3} />
 	</Field>
 
 	<Field label="Handling change event">
-		{#snippet children({ id })}
-			<Counter {id} onchange={handleChange} />
-			<div>The value is: {v4}</div>
-		{/snippet}
+		<Counter onchange={handleChange} />
+		<div>The value is: {v4}</div>
 	</Field>
 
 	<Field label="Disabled">
-		{#snippet children({ id })}
-			<Counter {id} disabled />
-		{/snippet}
+		<Counter disabled />
 	</Field>
 
 	<Field label="Readonly">
-		{#snippet children({ id })}
-			<Counter {id} readonly />
-		{/snippet}
+		<Counter readonly />
 	</Field>
 
 	<Field label="Error">
-		{#snippet children({ id })}
-			<Counter {id} error />
-		{/snippet}
+		<Counter error />
 	</Field>
 </div>

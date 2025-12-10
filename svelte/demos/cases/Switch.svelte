@@ -15,13 +15,9 @@
 <div class="demo-box">
 	<h3>Switch Button with a side label</h3>
 	<Field label="Switch: {v2}" position="left" type="switch">
-		{#snippet children({ id })}
-			<Switch bind:value={v2} {id} />
-		{/snippet}
+		<Switch bind:value={v2} />
 	</Field>
 	<Field label="Disabled" position="left" type="switch">
-		{#snippet children({ id })}
-			<Switch disabled {id} />
-		{/snippet}
+		<Switch disabled />
 	</Field>
 </div>

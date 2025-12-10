@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from "svelte";
-	import { uid, dateToString } from "@svar-ui/lib-dom";
+	import { dateToString } from "@svar-ui/lib-dom";
 
 	import Text from "./Text.svelte";
 	import Dropdown from "./Dropdown.svelte";
@@ -9,7 +9,7 @@
 
 	let {
 		value = $bindable(),
-		id = uid(),
+		id,
 		disabled = false,
 		error = false,
 		width = "unset",

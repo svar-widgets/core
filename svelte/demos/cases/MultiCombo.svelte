@@ -32,25 +32,18 @@
 <div class="demo-box">
 	<h3>MultiCombo with a side label</h3>
 	<Field label="Owner" position="left">
-		{#snippet children({ id })}
-			<MultiCombo options={users} {id} value={[104]} />
-		{/snippet}
+		<MultiCombo options={users} value={[104]} />
 	</Field>
 	<Field label="Disabled" position="left">
-		{#snippet children({ id })}
-			<MultiCombo options={users} disabled {id} value={[104]} />
-		{/snippet}
+		<MultiCombo options={users} disabled value={[104]} />
 	</Field>
 	<Field label="Error" error position="left">
-		{#snippet children({ id })}
-			<MultiCombo
-				title="Invalid option"
-				options={users}
-				error
-				{id}
-				value={[104]}
-			/>
-		{/snippet}
+		<MultiCombo
+			title="Invalid option"
+			options={users}
+			error
+			value={[104]}
+		/>
 	</Field>
 </div>
 

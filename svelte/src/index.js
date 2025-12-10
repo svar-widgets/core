@@ -8,6 +8,7 @@ export { default as ColorPicker } from "./components/ColorPicker.svelte";
 export { default as Combo } from "./components/Combo.svelte";
 export { default as DatePicker } from "./components/DatePicker.svelte";
 export { default as DateRangePicker } from "./components/DateRangePicker.svelte";
+export { default as Fullscreen } from "./components/Fullscreen.svelte";
 export { default as Icon } from "./components/Icon.svelte";
 export { default as MultiCombo } from "./components/MultiCombo.svelte";
 export { default as Popup } from "./components/Popup.svelte";

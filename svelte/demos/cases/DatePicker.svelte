@@ -17,76 +17,42 @@
 <div class="demo-box">
 	<h3>Datepicker</h3>
 	<Field label="Wide">
-		{#snippet children({ id })}
-			<DatePicker width="100%" {id} onchange={showChanges} />
-		{/snippet}
+		<DatePicker width="100%" onchange={showChanges} />
 	</Field>
 	<Field label="Align auto">
-		{#snippet children({ id })}
-			<DatePicker {id} />
-		{/snippet}
+		<DatePicker />
 	</Field>
 	<Field label="Disabled">
-		{#snippet children({ id })}
-			<DatePicker disabled {id} />
-		{/snippet}
+		<DatePicker disabled />
 	</Field>
 	<Field label="Editable (new Date())">
-		{#snippet children({ id })}
-			<DatePicker editable {id} />
-		{/snippet}
+		<DatePicker editable />
 	</Field>
 	<Field label="Editable custom format (MMDDYYYY)">
-		{#snippet children({ id })}
-			<DatePicker editable={parseDate} {id} format={"%m%d%Y"} />
-		{/snippet}
+		<DatePicker editable={parseDate} format={"%m%d%Y"} />
 	</Field>
 	<Field label="Align center" error>
-		{#snippet children({ id })}
-			<DatePicker error {id} align="center" title="Invalid date" />
-		{/snippet}
+		<DatePicker error align="center" title="Invalid date" />
 	</Field>
 	<Field label="Without buttons">
-		{#snippet children({ id })}
-			<DatePicker
-				{id}
-				buttons={false}
-				value={new Date(2022, 4, 10, 16, 0)}
-			/>
-		{/snippet}
+		<DatePicker buttons={false} value={new Date(2022, 4, 10, 16, 0)} />
 	</Field>
 	<Field label="With Today button only">
-		{#snippet children({ id })}
-			<DatePicker
-				{id}
-				buttons={["today"]}
-				value={new Date(2022, 4, 10, 16, 0)}
-			/>
-		{/snippet}
+		<DatePicker buttons={["today"]} value={new Date(2022, 4, 10, 16, 0)} />
 	</Field>
 	<Field label="Default format">
-		{#snippet children({ id })}
-			<DatePicker {id} value={date} />
-		{/snippet}
+		<DatePicker value={date} />
 	</Field>
 	<Field label="Custom format">
-		{#snippet children({ id })}
-			<DatePicker {id} value={date} format="%d %F, %Y" />
-		{/snippet}
+		<DatePicker value={date} format="%d %F, %Y" />
 	</Field>
 	<Field label="Custom icon position">
-		{#snippet children({ id })}
-			<DatePicker {id} value={date} css="wx-icon-left" />
-		{/snippet}
+		<DatePicker value={date} css="wx-icon-left" />
 	</Field>
 	<Field label="With clear icon">
-		{#snippet children({ id })}
-			<DatePicker {id} value={date} clear />
-		{/snippet}
+		<DatePicker value={date} clear />
 	</Field>
 	<Field label="Custom clear icon position">
-		{#snippet children({ id })}
-			<DatePicker {id} value={date} css="wx-icon-left" clear />
-		{/snippet}
+		<DatePicker value={date} css="wx-icon-left" clear />
 	</Field>
 </div>

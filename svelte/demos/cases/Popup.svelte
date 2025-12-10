@@ -29,7 +29,7 @@
 </script>
 
 <div class="demo-box">
-	<h3>Popup</h3>
+	<h3>Popup (local)</h3>
 	<div class="toolbar">
 		<div>
 			<Button type="block" onclick={showAt}>Show at position</Button>

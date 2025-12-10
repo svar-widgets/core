@@ -50,9 +50,7 @@
 <div class="demo-box">
 	<h3>Combo with a side label</h3>
 	<Field label="Owner" position="left">
-		{#snippet children({ id })}
-			<Combo options={users} {id} value={104} />
-		{/snippet}
+		<Combo options={users} value={104} />
 	</Field>
 </div>
 

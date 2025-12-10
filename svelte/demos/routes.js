@@ -29,6 +29,7 @@ import Field from "./cases/Field.svelte";
 import Segmented from "./cases/Segmented.svelte";
 import Icon from "./cases/Icon.svelte";
 import SideArea from "./cases/SideArea.svelte";
+import Fullscreen from "./cases/Fullscreen.svelte";
 import ModalArea from "./cases/ModalArea.svelte";
 
 export const links = [
@@ -48,6 +49,7 @@ export const links = [
 		"DateRangePicker",
 	],
 	["/field/:skin", "Field", Field, "Field"],
+	["/fullscreen/:skin", "Fullscreen", Fullscreen, "Fullscreen"],
 	["/locales/:skin", "Locales", Locales, "Locales"],
 	["/messages/:skin", "Messages", Messages, "Messages"],
 	["/multicombo/:skin", "MultiCombo", MultiCombo, "MultiCombo"],

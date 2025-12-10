@@ -6,7 +6,8 @@
 	let { skin = $bindable(), onnewpage, productTag } = $props();
 	let page = $state(),
 		title,
-		link;
+		link,
+		name;
 	const baseLink =
 		"https://github.com/svar-widgets/" +
 		productTag +
@@ -29,8 +30,9 @@
 
 		const tPage = `/${page}/:skin`;
 		const matched = links.find(a => a[0] === tPage);
-		title = matched?.[3] ?? "";
-		link = `${baseLink}${title.replace(/\s+/g, "")}.svelte`;
+		title = matched?.[1] ?? "";
+		name = matched?.[3] ?? "";
+		link = `${baseLink}${name.replace(/\s+/g, "")}.svelte`;
 
 		onnewpage && onnewpage({ page, skin, title, link });
 	}

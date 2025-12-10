@@ -18,19 +18,13 @@
 <div class="demo-box">
 	<h3>TimePicker with a side label</h3>
 	<Field label="Time" position="left">
-		{#snippet children({ id })}
-			<TimePicker {value} {id} />
-		{/snippet}
+		<TimePicker {value} />
 	</Field>
 	<Field label="Disabled" position="left">
-		{#snippet children({ id })}
-			<TimePicker {value} disabled {id} />
-		{/snippet}
+		<TimePicker {value} disabled />
 	</Field>
 	<Field label="Error" position="left" error>
-		{#snippet children({ id })}
-			<TimePicker {value} error {id} title="Invalid option" />
-		{/snippet}
+		<TimePicker {value} error title="Invalid option" />
 	</Field>
 </div>
 

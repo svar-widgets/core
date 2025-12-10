@@ -23,63 +23,34 @@
 <div class="demo-box">
 	<h3>DateRangePicker</h3>
 	<Field label="Date range">
-		{#snippet children({ id })}
-			<DateRangePicker value={date} {id} onchange={showChanges} />
-		{/snippet}
+		<DateRangePicker value={date} onchange={showChanges} />
 	</Field>
 	<Field label="DateRangePicker with the Done button">
-		{#snippet children({ id })}
-			<DateRangePicker
-				value={date}
-				{id}
-				buttons={["done", "clear", "today"]}
-			/>
-		{/snippet}
+		<DateRangePicker value={date} buttons={["done", "clear", "today"]} />
 	</Field>
 	<Field label="Disabled">
-		{#snippet children({ id })}
-			<DateRangePicker disabled value={date} {id} />
-		{/snippet}
+		<DateRangePicker disabled value={date} />
 	</Field>
 	<Field label="Editable (new Date())">
-		{#snippet children({ id })}
-			<DateRangePicker editable value={date} {id} />
-		{/snippet}
+		<DateRangePicker editable value={date} />
 	</Field>
 	<Field label="Editable, custom format (MMDDYYYY - MMDDYYYY)">
-		{#snippet children({ id })}
-			<DateRangePicker
-				editable={parseDate}
-				value={date}
-				format={"%m%d%Y"}
-				{id}
-			/>
-		{/snippet}
+		<DateRangePicker editable={parseDate} value={date} format={"%m%d%Y"} />
 	</Field>
 	<Field label="Error" error>
-		{#snippet children({ id })}
-			<DateRangePicker error value={date} {id} title="Invalid date" />
-		{/snippet}
+		<DateRangePicker error value={date} title="Invalid date" />
 	</Field>
 
 	<Field label="Custom format">
-		{#snippet children({ id })}
-			<DateRangePicker format="%d %F, %Y" value={date} {id} />
-		{/snippet}
+		<DateRangePicker format="%d %F, %Y" value={date} />
 	</Field>
 	<Field label="Custom icon position">
-		{#snippet children({ id })}
-			<DateRangePicker {id} value={date} css="wx-icon-left" />
-		{/snippet}
+		<DateRangePicker value={date} css="wx-icon-left" />
 	</Field>
 	<Field label="Single month">
-		{#snippet children({ id })}
-			<DateRangePicker {id} months={1} />
-		{/snippet}
+		<DateRangePicker months={1} />
 	</Field>
 	<Field label="Clear button">
-		{#snippet children({ id })}
-			<DateRangePicker value={date} {id} clear />
-		{/snippet}
+		<DateRangePicker value={date} clear />
 	</Field>
 </div>

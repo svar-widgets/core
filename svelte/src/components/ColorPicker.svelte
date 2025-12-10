@@ -1,11 +1,11 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
 	import Dropdown from "./Dropdown.svelte";
 	import ColorBoard from "./ColorBoard.svelte";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
 		value = $bindable(""),
-		id = uid(),
+		id,
 		placeholder = "",
 		title = "",
 		disabled = false,
@@ -13,6 +13,8 @@
 		clear = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	let popup = $state(false);
 
@@ -43,7 +45,7 @@
 		{title}
 		{value}
 		readonly
-		{id}
+		id={inputId}
 		{placeholder}
 		{disabled}
 		class:wx-error={error}

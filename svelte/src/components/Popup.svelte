@@ -8,7 +8,6 @@
 		at = "bottom",
 		parent = null,
 		oncancel,
-		mount,
 		children,
 	} = $props();
 
@@ -28,8 +27,10 @@
 		}
 	}
 
-	if (mount) mount(updatePosition);
-	onMount(updatePosition);
+	onMount(() => {
+		updatePosition();
+		requestAnimationFrame(updatePosition);
+	});
 	$effect(() => {
 		updatePosition(parent);
 	});
@@ -43,7 +44,7 @@
 	use:clickOutside={down}
 	bind:this={self}
 	class="wx-popup"
-	style="position:fixed;top:{y}px;left:{x}px;width:{width};"
+	style="position:absolute;top:{y}px;left:{x}px;width:{width};"
 >
 	{@render children?.()}
 </div>

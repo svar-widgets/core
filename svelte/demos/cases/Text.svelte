@@ -8,115 +8,76 @@
 <div class="demo-box">
 	<h3>Text with a top label</h3>
 	<Field label="First name">
-		{#snippet children({ id })}
-			<Text bind:value={text2} {id} placeholder="Type here" />
-		{/snippet}
+		<Text bind:value={text2} placeholder="Type here" />
 	</Field>
 	<Field label="Last name">
-		{#snippet children({ id })}
-			<Text bind:value={text2} {id} placeholder="Type here" />
-		{/snippet}
+		<Text bind:value={text2} placeholder="Type here" />
 	</Field>
 	<Field label="Last name">
-		{#snippet children({ id })}
-			<Text bind:value={text2} {id} disabled placeholder="Type here" />
-		{/snippet}
+		<Text bind:value={text2} disabled placeholder="Type here" />
 	</Field>
 	<Field label="Last name" error>
-		{#snippet children({ id })}
-			<Text
-				bind:value={text2}
-				{id}
-				error
-				placeholder="Type here"
-				title="Invalid value"
-			/>
-		{/snippet}
+		<Text
+			bind:value={text2}
+			error
+			placeholder="Type here"
+			title="Invalid value"
+		/>
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Text with a side label</h3>
 	<Field label="First name" position="left">
-		{#snippet children({ id })}
-			<Text bind:value={text2} {id} />
-		{/snippet}
+		<Text bind:value={text2} />
 	</Field>
 	<Field label="Last name" position="left">
-		{#snippet children({ id })}
-			<Text bind:value={text2} {id} />
-		{/snippet}
+		<Text bind:value={text2} />
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Number input with a side label</h3>
 	<Field label="Number" position="left">
-		{#snippet children({ id })}
-			<Text type="number" {id} />
-		{/snippet}
+		<Text type="number" />
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Password input with a side label</h3>
 	<Field label="Password" position="left">
-		{#snippet children({ id })}
-			<Text type="password" bind:value={password2} {id} />
-		{/snippet}
+		<Text type="password" bind:value={password2} />
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Icon inside of the text control</h3>
 	<Field label="Start Date" position="top">
-		{#snippet children({ id })}
-			<Text {id} icon="wxi-calendar" css="wx-icon-left" />
-		{/snippet}
+		<Text icon="wxi-calendar" css="wx-icon-left" />
 	</Field>
 	<Field label="End Date" position="top">
-		{#snippet children({ id })}
-			<Text {id} icon="wxi-calendar" />
-		{/snippet}
+		<Text icon="wxi-calendar" />
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Text control with clear button</h3>
 	<Field label="First name" position="top">
-		{#snippet children({ id })}
-			<Text {id} placeholder="Type here" clear />
-		{/snippet}
+		<Text placeholder="Type here" clear />
 	</Field>
 	<Field label="Number" position="top">
-		{#snippet children({ id })}
-			<Text {id} type="number" clear />
-		{/snippet}
+		<Text type="number" clear />
 	</Field>
 	<Field label="Number and icon" position="top">
-		{#snippet children({ id })}
-			<Text {id} type="number" clear icon="wxi-calendar" />
-		{/snippet}
+		<Text type="number" clear icon="wxi-calendar" />
 	</Field>
 	<Field label="Number and icon left" position="top">
-		{#snippet children({ id })}
-			<Text
-				{id}
-				type="number"
-				clear
-				icon="wxi-calendar"
-				css="wx-icon-left"
-			/>
-		{/snippet}
+		<Text type="number" clear icon="wxi-calendar" css="wx-icon-left" />
 	</Field>
 	<Field label="End Date" position="top">
-		{#snippet children({ id })}
-			<Text {id} icon="wxi-calendar" clear />
-		{/snippet}
+		<Text icon="wxi-calendar" clear />
 	</Field>
 	<Field label="Start Date" position="top">
-		{#snippet children({ id })}
-			<Text {id} icon="wxi-calendar" css="wx-icon-left" clear />
-		{/snippet}
+		<Text icon="wxi-calendar" css="wx-icon-left" clear />
 	</Field>
 </div>

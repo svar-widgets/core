@@ -10,7 +10,8 @@
 	];
 
 	let v1 = $state(true),
-		v2 = $state(false);
+		v2 = $state(false),
+		v3 = $state(true);
 
 	let valueGroup1 = $state([1, 2]);
 	let valueGroup2 = $state([2, 3]);
@@ -38,19 +39,13 @@
 <div class="demo-box">
 	<h3>Checkbox with a side label</h3>
 	<Field label="Checkbox" type="checkbox" position="left">
-		{#snippet children({ id })}
-			<Checkbox {id} />
-		{/snippet}
+		<Checkbox />
 	</Field>
 	<Field label="Disabled" type="checkbox" position="left">
-		{#snippet children({ id })}
-			<Checkbox label="Default" disabled {id} />
-		{/snippet}
+		<Checkbox label="Default" disabled />
 	</Field>
 	<Field label="Disabled" type="checkbox" position="left">
-		{#snippet children({ id })}
-			<Checkbox label="Checked" disabled {id} />
-		{/snippet}
+		<Checkbox label="Checked" disabled bind:value={v3} />
 	</Field>
 </div>
 

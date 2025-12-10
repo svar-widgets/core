@@ -1,3 +1,4 @@
+import { TPosition } from "@svar-ui/lib-dom";
 import type { Component } from "svelte";
 import type { Snippet } from "svelte";
 
@@ -129,6 +130,12 @@ export declare const DateRangePicker: Component<{
 	}) => void;
 }>;
 
+export declare const Fullscreen: Component<{
+	toggleButton?: Snippet<[(ev: MouseEvent) => void, boolean]>;
+	children?: () => any;
+	hotkey?: string;
+}>;
+
 export declare const Icon: Component<{
 	css?: string;
 	title?: string;
@@ -154,9 +161,8 @@ export declare const MultiCombo: Component<{
 export declare const Popup: Component<{
 	left?: number;
 	top?: number;
-	at?: string;
+	at?: TPosition;
 	parent?: HTMLElement;
-	mount?: any;
 	children?: () => any;
 	oncancel?: (ev: MouseEvent) => void;
 }>;
@@ -435,5 +441,6 @@ export declare const SuggestDropdown: Component<{
 }>;
 
 export type { ILocale, Terms } from "@svar-ui/lib-dom";
+export type { TPosition } from "@svar-ui/lib-dom";
 
 export declare function popupContainer(node: HTMLElement): void;

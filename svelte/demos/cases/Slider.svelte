@@ -22,42 +22,26 @@
 <div class="demo-box">
 	<h3>Slider</h3>
 	<Field label="Updates from binding" position="left" type="slider">
-		{#snippet children({ id })}
-			<Slider {id} label="Progress: {valueA}%" bind:value={valueA} />
-		{/snippet}
+		<Slider label="Progress: {valueA}%" bind:value={valueA} />
 	</Field>
 	<Field
 		label="Updates from input `change` event"
 		position="left"
 		type="slider"
 	>
-		{#snippet children({ id })}
-			<Slider
-				{id}
-				label="Progress: {valueB}%"
-				value={valueB}
-				onchange={onInput}
-			/>
-		{/snippet}
+		<Slider label="Progress: {valueB}%" value={valueB} onchange={onInput} />
 	</Field>
 	<Field label="Updates from `change` event" position="left" type="slider">
-		{#snippet children({ id })}
-			<Slider
-				{id}
-				label="Progress: {valueC}%"
-				value={valueC}
-				onchange={onChange}
-			/>
-		{/snippet}
+		<Slider
+			label="Progress: {valueC}%"
+			value={valueC}
+			onchange={onChange}
+		/>
 	</Field>
 	<Field label="Disabled" position="left" type="slider">
-		{#snippet children({ id })}
-			<Slider disabled {id} value={20} />
-		{/snippet}
+		<Slider disabled value={20} />
 	</Field>
 	<Field label="Unset value" position="left" type="slider">
-		{#snippet children({ id })}
-			<Slider {id} title="Default slider's value is 0" />
-		{/snippet}
+		<Slider title="Default slider's value is 0" />
 	</Field>
 </div>

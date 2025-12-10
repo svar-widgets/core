@@ -1,7 +1,10 @@
 <script>
 	import Checkbox from "./Checkbox.svelte";
+	import { setContext } from "svelte";
 
 	let { options = [], value = $bindable([]), type = "", onchange } = $props();
+
+	setContext("wx-input-id", null);
 
 	function handleChange(obj) {
 		if (obj.value) value = [...value, obj.inputValue];

@@ -30,25 +30,13 @@
 <div class="demo-box">
 	<h3>RichSelect with a side label</h3>
 	<Field label="Owner" position="left">
-		{#snippet children({ id })}
-			<RichSelect options={users} {id} value={104} />
-		{/snippet}
+		<RichSelect options={users} value={104} />
 	</Field>
 	<Field label="Disabled" position="left">
-		{#snippet children({ id })}
-			<RichSelect options={users} {id} disabled value={104} />
-		{/snippet}
+		<RichSelect options={users} disabled value={104} />
 	</Field>
 	<Field label="Error" position="left" error>
-		{#snippet children({ id })}
-			<RichSelect
-				options={users}
-				{id}
-				error
-				value={104}
-				title="Invalid option"
-			/>
-		{/snippet}
+		<RichSelect options={users} error value={104} title="Invalid option" />
 	</Field>
 </div>
 

@@ -1,8 +1,8 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
-		id = uid(),
+		id,
 		value = $bindable(0),
 		step = 1,
 		min = 0,
@@ -12,6 +12,8 @@
 		readonly = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	function dec() {
 		if (readonly || value <= min) return;
@@ -58,7 +60,7 @@
 		</svg>
 	</button>
 	<input
-		{id}
+		id={inputId}
 		type="text"
 		class="wx-input"
 		{disabled}

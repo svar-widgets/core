@@ -1,10 +1,10 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
 	import { onMount } from "svelte";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
 		value = $bindable(""),
-		id = uid(),
+		id,
 		readonly = false,
 		focus = false,
 		select = false,
@@ -19,6 +19,8 @@
 		clear = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	let cssString = $derived(
 		icon && css.indexOf("wx-icon-left") === -1
@@ -57,7 +59,7 @@
 		<input
 			bind:value
 			bind:this={input}
-			{id}
+			id={inputId}
 			{readonly}
 			{disabled}
 			{placeholder}
@@ -71,7 +73,7 @@
 		<input
 			bind:value
 			bind:this={input}
-			{id}
+			id={inputId}
 			{readonly}
 			{disabled}
 			{placeholder}
@@ -85,7 +87,7 @@
 		<input
 			bind:value
 			bind:this={input}
-			{id}
+			id={inputId}
 			{readonly}
 			{disabled}
 			{placeholder}

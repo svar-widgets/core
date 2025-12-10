@@ -6,14 +6,15 @@
 	import TwoState from "./TwoState.svelte";
 
 	import { getContext } from "svelte";
-	import { dateToString, uid } from "@svar-ui/lib-dom";
+	import { dateToString } from "@svar-ui/lib-dom";
 	import { defaultLocale } from "./helpers/locale";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	const defValue = new Date(0, 0, 0, 0, 0);
 
 	let {
 		value = $bindable(defValue),
-		id = uid(),
+		id,
 		title = "",
 		css = "",
 		disabled = false,
@@ -21,6 +22,8 @@
 		format = "",
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	const { calendar: calendarLocale, formats } = (
 		getContext("wx-i18n") || defaultLocale()
@@ -123,7 +126,7 @@
 	onclick={click}
 >
 	<Text
-		{id}
+		id={inputId}
 		{css}
 		{title}
 		value={textValue}

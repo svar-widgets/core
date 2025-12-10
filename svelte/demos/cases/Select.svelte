@@ -9,27 +9,19 @@
 <div class="demo-box">
 	<h3>Select with a top label</h3>
 	<Field label="Details">
-		{#snippet children({ id })}
-			<Select bind:value={v1} {id} options={users} />
-		{/snippet}
+		<Select bind:value={v1} options={users} />
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Select with a side label</h3>
 	<Field label="Details" position="left">
-		{#snippet children({ id })}
-			<Select bind:value={v2} {id} options={users} />
-		{/snippet}
+		<Select bind:value={v2} options={users} />
 	</Field>
 	<Field label="Disabled" position="left">
-		{#snippet children({ id })}
-			<Select {id} disabled options={users} />
-		{/snippet}
+		<Select disabled options={users} />
 	</Field>
 	<Field label="Error" position="left" error>
-		{#snippet children({ id })}
-			<Select {id} error options={users} title="Invalid option" />
-		{/snippet}
+		<Select error options={users} title="Invalid option" />
 	</Field>
 </div>

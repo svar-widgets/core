@@ -19,33 +19,15 @@
 <div class="demo-box">
 	<h3>Custom color select forms:</h3>
 	<Field label="Your color" position="left">
-		{#snippet children({ id })}
-			<ColorPicker value="#5D59BA" {id} placeholder="Select a color..." />
-		{/snippet}
+		<ColorPicker value="#5D59BA" placeholder="Select a color..." />
 	</Field>
 	<Field label="Disabled" position="left">
-		{#snippet children({ id })}
-			<ColorPicker
-				{id}
-				placeholder="Select a color..."
-				disabled
-				value="#65D3B3"
-			/>
-		{/snippet}
+		<ColorPicker placeholder="Select a color..." disabled value="#65D3B3" />
 	</Field>
 	<Field label="Error" position="left" error>
-		{#snippet children({ id })}
-			<ColorPicker {id} placeholder="Select a color..." error />
-		{/snippet}
+		<ColorPicker placeholder="Select a color..." error />
 	</Field>
 	<Field label="Clear button" position="left">
-		{#snippet children({ id })}
-			<ColorPicker
-				{id}
-				value="#65D3B3"
-				placeholder="Select a color..."
-				clear
-			/>
-		{/snippet}
+		<ColorPicker value="#65D3B3" placeholder="Select a color..." clear />
 	</Field>
 </div>

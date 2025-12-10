@@ -1,12 +1,9 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
+	import { getInputId } from "./helpers/getInputId.js";
 
-	let {
-		id = uid(),
-		value = $bindable(false),
-		disabled = false,
-		onchange,
-	} = $props();
+	let { id, value = $bindable(false), disabled = false, onchange } = $props();
+
+	const inputId = $state(getInputId(id));
 
 	function onChange(event) {
 		value = event.target.checked;
@@ -20,7 +17,7 @@
 		checked={value}
 		onchange={onChange}
 		{disabled}
-		{id}
+		id={inputId}
 	/>
 	<span></span>
 </label>

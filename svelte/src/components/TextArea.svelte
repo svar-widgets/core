@@ -1,9 +1,9 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
 		value = $bindable(""),
-		id = uid(),
+		id,
 		placeholder = "",
 		title = "",
 		disabled = false,
@@ -11,13 +11,15 @@
 		readonly = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 </script>
 
 <textarea
 	class="wx-textarea"
 	class:wx-error={error}
 	bind:value
-	{id}
+	id={inputId}
 	{disabled}
 	{placeholder}
 	{readonly}

@@ -1,8 +1,8 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
-		id = uid(),
+		id,
 		label = "",
 		value = $bindable(""),
 		name = "",
@@ -10,6 +10,8 @@
 		disabled = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	function handlerChange(ev) {
 		value = ev.target.checked;
@@ -20,14 +22,14 @@
 <div class="wx-radio">
 	<input
 		type="radio"
-		{id}
+		id={inputId}
 		{disabled}
 		{name}
 		value={inputValue}
 		checked={value}
 		onchange={handlerChange}
 	/>
-	<label for={id}>
+	<label for={inputId}>
 		<span></span>
 		{#if label}<span>{label}</span>{/if}
 	</label>

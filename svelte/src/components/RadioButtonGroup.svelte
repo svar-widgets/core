@@ -1,6 +1,7 @@
 <script>
 	import { uid } from "@svar-ui/lib-dom";
 	import RadioButton from "./RadioButton.svelte";
+	import { setContext } from "svelte";
 
 	let {
 		options = [{}],
@@ -9,6 +10,7 @@
 		onchange,
 	} = $props();
 
+	setContext("wx-input-id", null);
 	const name = uid();
 
 	function handleChange(ev) {

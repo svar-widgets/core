@@ -1,8 +1,8 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
+	import { getInputId } from "./helpers/getInputId";
 
 	let {
-		id = uid(),
+		id,
 		label = "",
 		inputValue = "",
 		value = $bindable(false),
@@ -10,6 +10,8 @@
 		disabled = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	function handlerChange({ target }) {
 		value = target.checked;
@@ -20,13 +22,13 @@
 <div {style} class="wx-checkbox">
 	<input
 		type="checkbox"
-		{id}
+		id={inputId}
 		{disabled}
 		checked={value}
 		value={inputValue}
 		onchange={handlerChange}
 	/>
-	<label for={id}>
+	<label for={inputId}>
 		<span></span>
 		{#if label}<span>{label}</span>{/if}
 	</label>

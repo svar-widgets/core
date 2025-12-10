@@ -1,6 +1,6 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
 	import Dropdown from "./Dropdown.svelte";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	const defaultColors = [
 		"#00a037",
@@ -15,7 +15,7 @@
 	let {
 		colors = defaultColors,
 		value = $bindable(""),
-		id = uid(),
+		id,
 		clear = false,
 		placeholder = "",
 		title = "",
@@ -23,6 +23,8 @@
 		error = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	let popup = $state(false);
 
@@ -50,7 +52,7 @@
 		{title}
 		{value}
 		readonly
-		{id}
+		id={inputId}
 		{placeholder}
 		{disabled}
 		class:wx-error={error}

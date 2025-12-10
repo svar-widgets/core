@@ -7,38 +7,27 @@
 <div class="demo-box">
 	<h3>Area with a top label</h3>
 	<Field label="Details">
-		{#snippet children({ id })}
-			<TextArea bind:value={v1} {id} placeholder="Type here" />
-		{/snippet}
+		<TextArea bind:value={v1} placeholder="Type here" />
 	</Field>
 	<Field label="Disabled">
-		{#snippet children({ id })}
-			<TextArea bind:value={v1} {id} disabled placeholder="Type here" />
-		{/snippet}
+		<TextArea bind:value={v1} disabled placeholder="Type here" />
 	</Field>
 	<Field label="Readonly">
-		{#snippet children({ id })}
-			<TextArea bind:value={v1} {id} readonly placeholder="Type here" />
-		{/snippet}
+		<TextArea bind:value={v1} readonly placeholder="Type here" />
 	</Field>
 	<Field label="Error" error>
-		{#snippet children({ id })}
-			<TextArea
-				bind:value={v1}
-				{id}
-				error
-				placeholder="Type here"
-				title="It can't be empty"
-			/>
-		{/snippet}
+		<TextArea
+			bind:value={v1}
+			error
+			placeholder="Type here"
+			title="It can't be empty"
+		/>
 	</Field>
 </div>
 
 <div class="demo-box">
 	<h3>Area with a side label</h3>
 	<Field label="Details" position="left">
-		{#snippet children({ id })}
-			<TextArea bind:value={v2} {id} placeholder="Type here" />
-		{/snippet}
+		<TextArea bind:value={v2} placeholder="Type here" />
 	</Field>
 </div>

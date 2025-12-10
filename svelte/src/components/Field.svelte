@@ -1,6 +1,6 @@
 <script>
 	import { uid } from "@svar-ui/lib-dom";
-
+	import { setContext } from "svelte";
 	let {
 		label = "",
 		position = "",
@@ -11,7 +11,15 @@
 		children,
 	} = $props();
 
-	let id = uid();
+	let firstInputId = $state(null);
+
+	const registerInput = () => {
+		const id = uid();
+		if (!firstInputId) firstInputId = id;
+		return id;
+	};
+
+	setContext("wx-input-id", registerInput);
 </script>
 
 <div
@@ -20,9 +28,15 @@
 	class:wx-required={required}
 	style={width ? `width: ${width}` : ""}
 >
-	{#if label}<label for={id}>{label}</label>{/if}
+	{#if label}
+		{#if firstInputId}
+			<label class="wx-label" for={firstInputId}>{label}</label>
+		{:else}
+			<div class="wx-label">{label}</div>
+		{/if}
+	{/if}
 	<div class="wx-field-control wx-{type}">
-		{@render children?.({ id })}
+		{@render children?.()}
 	</div>
 </div>
 
@@ -37,7 +51,7 @@
 		flex-wrap: nowrap;
 		align-items: flex-start;
 	}
-	.wx-field.wx-left > label {
+	.wx-field.wx-left > .wx-label {
 		width: var(--wx-label-width);
 		flex-shrink: 0;
 		margin: 0 var(--wx-field-gutter) 0 0;
@@ -49,7 +63,7 @@
 	.wx-field.wx-left > .wx-field-control {
 		max-width: calc(100% - var(--wx-label-width) - var(--wx-field-gutter));
 	}
-	.wx-field.wx-error label {
+	.wx-field.wx-error .wx-label {
 		color: var(--wx-color-danger);
 	}
 
@@ -78,7 +92,7 @@
 		);
 	}
 
-	label {
+	.wx-label {
 		display: block;
 		margin: var(--wx-label-margin);
 		padding: var(--wx-label-padding);
@@ -89,7 +103,7 @@
 		color: var(--wx-label-font-color);
 	}
 
-	.wx-required label::after {
+	.wx-required .wx-label::after {
 		content: " *";
 		color: var(--wx-color-danger);
 	}

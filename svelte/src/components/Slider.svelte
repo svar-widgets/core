@@ -1,8 +1,8 @@
 <script>
-	import { uid } from "@svar-ui/lib-dom";
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
-		id = uid(),
+		id,
 		label = "",
 		width = "",
 		min = 0,
@@ -13,6 +13,8 @@
 		disabled = false,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	let bgStyle = $derived(() => {
 		return disabled
@@ -40,7 +42,7 @@
 	{#if label}<label for={id}>{label}</label>{/if}
 	<div>
 		<input
-			{id}
+			id={inputId}
 			type="range"
 			{min}
 			{max}

@@ -1,10 +1,11 @@
 <script>
 	import List from "./helpers/SuggestDropdown.svelte";
-	import { uid } from "@svar-ui/lib-dom";
+
+	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
 		value = $bindable(""),
-		id = uid(),
+		id,
 		options = [],
 		textOptions = null,
 		textField = "label",
@@ -16,6 +17,8 @@
 		children: kids,
 		onchange,
 	} = $props();
+
+	const inputId = $state(getInputId(id));
 
 	let filterActive = $state(false);
 	let textInput = $state("");
@@ -115,7 +118,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="wx-combo" {onclick} {onkeydown} {title}>
 	<input
-		{id}
+		id={inputId}
 		bind:this={inputElement}
 		value={text}
 		class:wx-error={error}
