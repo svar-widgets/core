@@ -1,6 +1,5 @@
 <script>
 	import { Month } from "../../src/index";
-	import { delegateClick } from "@svar-ui/lib-dom";
 	import { getContext } from "svelte";
 
 	const helpers = getContext("wx-helpers");
@@ -12,26 +11,24 @@
 		return next;
 	};
 
-	const handlers = {
-		click: id => {
-			helpers.showNotice({
-				text: "click on " + new Date(id).toString().substring(0, 15),
-			});
-		},
-	};
+	function onchange(date) {
+		helpers.showNotice({
+			text: "click on " + date.toString().substring(0, 15),
+		});
+	}
 </script>
 
 <div class="demo-box" style="width: 300px">
 	<h3>Month view</h3>
-	<div class="row" use:delegateClick={handlers}>
+	<div class="row">
 		<div class="cell">
-			<Month current={addMonth(value, 0)} />
+			<Month current={addMonth(value, 0)} {onchange} />
 		</div>
 		<div class="cell">
-			<Month current={addMonth(value, 1)} />
+			<Month current={addMonth(value, 1)} {onchange} />
 		</div>
 		<div class="cell">
-			<Month current={addMonth(value, 2)} />
+			<Month current={addMonth(value, 2)} {onchange} />
 		</div>
 	</div>
 </div>

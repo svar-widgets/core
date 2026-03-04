@@ -111,3 +111,15 @@
 		/>
 	</Field>
 </div>
+
+<div class="demo-box">
+	<h3>Combo with ids: '0', '000', '0E1'</h3>
+	<Field>
+		<Combo
+			options={["0", "000", "0E1"].map(id => ({
+				id,
+				label: `"${id}" option`,
+			}))}
+		/>
+	</Field>
+</div>

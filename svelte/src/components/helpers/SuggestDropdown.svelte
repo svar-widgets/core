@@ -3,6 +3,7 @@
 	import { getListHandlers } from "./listnav";
 	import Dropdown from "../Dropdown.svelte";
 	import { defaultLocale } from "./locale";
+	import { setID } from "@svar-ui/lib-dom";
 
 	let { items = [], children, onselect, onready } = $props();
 
@@ -41,7 +42,7 @@
 					<div
 						class="wx-item"
 						class:wx-focus={index === navIndex}
-						data-id={data.id}
+						data-id={setID(data.id)}
 					>
 						{#if children}{@render children({
 								option: data,

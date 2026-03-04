@@ -440,7 +440,6 @@ export declare const SuggestDropdown: Component<{
 	}) => void;
 }>;
 
-export type { ILocale, Terms } from "@svar-ui/lib-dom";
-export type { TPosition } from "@svar-ui/lib-dom";
+export type { ILocale, Terms, TPosition } from "@svar-ui/lib-dom";
 
 export declare function popupContainer(node: HTMLElement): void;

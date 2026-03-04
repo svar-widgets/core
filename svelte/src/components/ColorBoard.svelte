@@ -22,6 +22,7 @@
 	let hueColor = $state();
 	let colorLine = $state();
 	let lineLeft = $state();
+	let inputValue = $state(value);
 
 	let color = $derived(parseColor(value) || "#65D3B3");
 	let blockColor = $derived(colorTransformator.hvsToHex(hueColor, 1, 1));
@@ -56,7 +57,13 @@
 			_vValue = Math.ceil(Math.abs(blockTop / pxY - 100)) / 100;
 		}
 
-		value = colorTransformator.hvsToHex(hueColor, _sValue, _vValue);
+		const currentColor = colorTransformator.hvsToHex(
+			hueColor,
+			_sValue,
+			_vValue
+		);
+		value = currentColor;
+		inputValue = currentColor;
 		onchange && onchange({ value, input: true });
 	}
 
@@ -92,12 +99,13 @@
 		blockTop = Math.abs(height * (v - 1));
 	}
 
-	function handleChange({ target }) {
+	function handleInput({ target }) {
 		const newColor = parseColor(target.value);
 
-		value = newColor;
-		onchange && onchange({ value, input: true });
+		inputValue = target.value;
 		if (newColor) {
+			value = newColor;
+			onchange && onchange({ value, input: true });
 			setSlidersPosition();
 		}
 	}
@@ -187,7 +195,12 @@
 	</div>
 	<div class="wx-color-controls">
 		<div class="wx-color" style="background: {color}"></div>
-		<input type="text" class="wx-text" bind:value onchange={handleChange} />
+		<input
+			type="text"
+			class="wx-text"
+			value={inputValue}
+			oninput={handleInput}
+		/>
 	</div>
 	{#if button}
 		<Button onclick={handleSelect} type="secondary">{_("select")}</Button>

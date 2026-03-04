@@ -100,7 +100,6 @@
 		filterActive = true;
 
 		if (filteredOptions.length) navigate(0);
-		else navigate(null);
 	}
 
 	let inputElement, hasFocus;

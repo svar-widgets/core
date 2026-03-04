@@ -1,3 +1,11 @@
+## Version 2.4.1
+
+### Fixes
+
+-   String "0" id cannot be defined for Dropdown list items
+-   Combo: dropdown hides when there is no data
+-   Colorboard: sliders do not change their position on input change
+
 ## Version 2.4.0
 
 ### New features

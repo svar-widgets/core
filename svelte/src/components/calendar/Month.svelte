@@ -50,7 +50,7 @@
 
 	function selectDate(date, e) {
 		e.stopPropagation();
-		onchange && onchange(new Date(new Date(date)));
+		onchange && onchange(new Date(date));
 		oncancel && oncancel();
 	}
 

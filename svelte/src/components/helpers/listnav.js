@@ -41,9 +41,7 @@ export function getListHandlers() {
 
 	const move = ev => {
 		const id = locateID(ev);
-		// if we have id:"1", the locateID will return 1 as number
-		// so using non-strict comparison
-		const index = options.findIndex(a => a.id == id);
+		const index = options.findIndex(a => a.id === id);
 
 		if (index !== navIndex) {
 			setNav(index);
