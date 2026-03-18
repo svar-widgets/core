@@ -12,8 +12,7 @@
 
 <style>
 	.column {
-		border-radius: var(--wx-border-radius, 3px);
-		height: 100%;
+		border-radius: var(--wx-border-radius);
 		display: flex;
 		flex-direction: column;
 		width: 264px;
@@ -21,8 +20,6 @@
 	}
 	.column :global(.wx-calendar) {
 		padding: 0px;
-	}
-	.column {
 	}
 	.column :global(.wx-label) {
 		width: 100%;

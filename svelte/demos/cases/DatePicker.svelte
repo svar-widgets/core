@@ -17,7 +17,7 @@
 <div class="demo-box">
 	<h3>Datepicker</h3>
 	<Field label="Wide">
-		<DatePicker width="100%" onchange={showChanges} />
+		<DatePicker dropdown={{ width: "100%" }} onchange={showChanges} />
 	</Field>
 	<Field label="Align auto">
 		<DatePicker />

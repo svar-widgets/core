@@ -13,18 +13,18 @@
 			: "";
 </script>
 
-<div class="demo-box" style="width: 300px">
+<div class="demo-box">
 	<h3>Calendar</h3>
-	<div style="display: flex; flex-direction: row;">
+	<div class="calendars">
 		<Calendar value={new Date(2022, 2, 18)} />
 		<Calendar current={new Date(2022, 2, 18)} markers={markLine} />
 		<Calendar current={new Date(2022, 2, 18)} markers={markLine2} />
 	</div>
 </div>
 
-<div class="demo-box" style="width: 300px">
+<div class="demo-box">
 	<h3>Calendar with Locale and Format</h3>
-	<div style="display: flex; flex-direction: row;">
+	<div class="calendars">
 		<Locale words={de}>
 			<Calendar value={new Date(2022, 2, 18)} />
 		</Locale>
@@ -46,8 +46,8 @@
 	</div>
 </div>
 
-<div style="display: flex; flex-direction: row;">
-	<div class="demo-box" style="width: 300px">
+<div class="calendars">
+	<div class="demo-box">
 		<h3>Calendar without buttons</h3>
 		<Calendar value={new Date(2022, 2, 18)} buttons={false} />
 	</div>
@@ -56,3 +56,17 @@
 		<Calendar value={new Date(2022, 2, 18)} buttons={["today"]} />
 	</div>
 </div>
+
+<style>
+	.calendars {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		gap: 4px;
+		flex-wrap: wrap;
+	}
+
+	.calendars > :global(*) {
+		max-width: 300px;
+	}
+</style>

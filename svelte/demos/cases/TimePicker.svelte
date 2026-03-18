@@ -29,6 +29,13 @@
 </div>
 
 <div class="demo-box">
+	<h3>TimePicker with a dropdown that matches the input width</h3>
+	<Field label="Time" position="left">
+		<TimePicker dropdown={{ width: "100%" }} {value} />
+	</Field>
+</div>
+
+<div class="demo-box">
 	<h3>12-hour TimePicker</h3>
 	<Locale
 		words={{
@@ -36,13 +43,17 @@
 			calendar: { clockFormat: 12 },
 		}}
 	>
-		<TimePicker {value} />
+		<Field>
+			<TimePicker {value} />
+		</Field>
 	</Locale>
 </div>
 
 <div class="demo-box">
 	<h3>CN locale</h3>
 	<Locale words={cn}>
-		<TimePicker {value} />
+		<Field>
+			<TimePicker {value} />
+		</Field>
 	</Locale>
 </div>

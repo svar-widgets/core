@@ -7,7 +7,7 @@
 </script>
 
 {#if children}
-	<div class="wx-willow-dark-theme" style="height:100%">
+	<div class="wx-theme wx-willow-dark-theme" style="height:100%">
 		{@render children()}
 	</div>
 {/if}
@@ -239,7 +239,7 @@
 		/* end switch */
 
 		/* popup and dropdown */
-		--wx-popup-z-index: 100;
+		--wx-popup-z-index: 1001;
 		--wx-popup-background: var(--wx-background);
 		--wx-popup-shadow: var(--wx-shadow-light);
 		--wx-popup-border: 1px solid rgba(255, 255, 255, 0.26);
@@ -322,6 +322,7 @@
 		text-align: left;
 		color: var(--wx-color-font);
 		background: var(--wx-background);
+		color-scheme: dark;
 	}
 	:global(
 			.wx-willow-dark-theme *,

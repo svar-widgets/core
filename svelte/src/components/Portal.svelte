@@ -20,6 +20,7 @@
 		}
 		return p;
 	}
+
 	onMount(() => {
 		let currentTarget = target || getParentRoot(portal);
 		currentTarget.appendChild(portal);

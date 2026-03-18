@@ -87,7 +87,7 @@
 		setCurrentColor(true);
 	}
 
-	onMount(() => setSlidersPosition());
+	onMount(() => requestAnimationFrame(setSlidersPosition));
 
 	function setSlidersPosition() {
 		const [h, s, v] = colorTransformator.hexToHvs(color);

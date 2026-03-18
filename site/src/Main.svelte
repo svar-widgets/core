@@ -4,13 +4,11 @@
 	import CalendarUploader from "./components/CalendarUploader.svelte";
 	import RadioCheckboxes from "./components/RadioCheckboxes.svelte";
 	import Topbar from "./components/Topbar.svelte";
-
-	let { skin = $bindable() } = $props();
 </script>
 
-<div class="demo" style="padding: 20px;">
+<div class="demo">
 	<div class="wrapper">
-		<Topbar bind:skin />
+		<Topbar />
 		<div class="columns">
 			<CalendarUploader />
 			<SearchList />
@@ -25,21 +23,22 @@
 		--wx-checkbox-border-width: 1px;
 		width: 100%;
 		height: 100%;
+		overflow: auto;
 	}
 	.wrapper {
-		height: 100%;
-		max-width: 1180px;
+		max-width: 1232px;
 		overflow: hidden;
 		position: relative;
-		border: var(--wx-fm-grid-border);
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 26px;
+		padding: 26px;
+		margin: 0 auto;
 	}
 	.columns {
 		display: flex;
-		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: 20px;
-		height: 474px;
+		min-height: 474px;
 	}
 </style>

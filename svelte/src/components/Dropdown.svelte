@@ -1,126 +1,44 @@
 <script>
-	import { clickOutside, env } from "@svar-ui/lib-dom";
+	import { onMount } from "svelte";
+	import { Portal } from "../index.js";
+	import Popup from "./Popup.svelte";
+	import InlineDropdown from "./helpers/InlineDropdown.svelte";
 
 	let {
 		position = "bottom",
 		align = "start",
 		autoFit = true,
+		inline = false,
 		oncancel,
 		width = "100%",
-		children,
+		...props
 	} = $props();
 
-	let node;
-	$effect(() => {
-		if (autoFit) {
-			const nodeCoords = node.getBoundingClientRect();
-			const bodyCoords = env.getTopNode(node).getBoundingClientRect();
+	let target = $state();
+	let node = $state();
 
-			if (nodeCoords.right >= bodyCoords.right) {
-				align = "end";
-			}
+	const at = $derived(`${position}-${align}`);
 
-			if (nodeCoords.bottom >= bodyCoords.bottom) {
-				position = "top";
-			}
-			return `${position}-${align}`;
-		}
+	onMount(() => {
+		// get the parent element before
+		// the popup is moved to the portal
+		target = node.parentNode;
 	});
-
-	function down(e) {
-		oncancel && oncancel(e);
-	}
 </script>
 
-<div
-	use:clickOutside={down}
-	bind:this={node}
-	class="wx-dropdown {`wx-${position}-${align}`}"
-	style="width:{width}"
->
-	{@render children?.()}
-</div>
+{#if inline}
+	<InlineDropdown {oncancel} {position} {align} {autoFit} {width} {...props}
+	></InlineDropdown>
+{:else}
+	<Portal>
+		<Popup parent={target} {at} {oncancel} {width} {...props}></Popup>
+	</Portal>
+{/if}
+
+<span bind:this={node} class="wx-portal-node"></span>
 
 <style>
-	.wx-dropdown {
-		position: absolute;
-		z-index: 5;
-		background: var(--wx-popup-background);
-		box-shadow: var(--wx-popup-shadow);
-		border: var(--wx-popup-border);
-		border-radius: var(--wx-popup-border-radius);
-		overflow: hidden;
-	}
-
-	.wx-top-center {
-		top: 0;
-		left: 50%;
-		transform: translate(-50%, -100%) translateY(-2px);
-	}
-
-	.wx-top-start {
-		top: 0;
-		left: 0;
-		transform: translateY(-100%) translateY(-2px);
-	}
-
-	.wx-top-end {
-		top: 0;
-		right: 0;
-		transform: translateY(-100%) translateY(-2px);
-	}
-
-	.wx-bottom-center {
-		bottom: 0;
-		left: 50%;
-		transform: translate(-50%, 100%) translateY(2px);
-	}
-
-	.wx-bottom-start {
-		bottom: 0;
-		left: 0;
-		transform: translateY(100%) translateY(2px);
-	}
-
-	.wx-bottom-end {
-		bottom: 0;
-		right: 0;
-		transform: translateY(100%) translateY(2px);
-	}
-
-	.wx-left-center {
-		bottom: 50%;
-		left: 0;
-		transform: translate(-100%, 50%) translateX(-2px);
-	}
-
-	.wx-left-start {
-		top: 0;
-		left: 0;
-		transform: translateX(-100%) translateX(-2px);
-	}
-
-	.wx-left-end {
-		bottom: 0;
-		left: 0;
-		transform: translateX(-100%) translateX(-2px);
-	}
-
-	.wx-right-center {
-		bottom: 50%;
-		right: 0;
-		transform: translate(100%, 50%) translateX(2px);
-	}
-
-	.wx-right-start {
-		top: 0;
-		right: 0;
-		transform: translateX(100%) translateX(2px);
-	}
-
-	.wx-right-end {
-		bottom: 0;
-		right: 0;
-		transform: translateX(100%) translateX(2px);
+	.wx-portal-node {
+		display: none;
 	}
 </style>

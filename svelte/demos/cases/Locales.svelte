@@ -36,7 +36,11 @@
 </script>
 
 <div class="demo-box">
-	<Segmented {options} bind:value={lang} />
+	<div class="demo-hscroll">
+		<div>
+			<Segmented {options} bind:value={lang} />
+		</div>
+	</div>
 </div>
 
 <div class="demo-box" style="width: 300px">
@@ -57,8 +61,6 @@
 </div>
 
 <style>
-	.demo-box {
-	}
 	.calendar {
 		border: var(--wx-border);
 		border-radius: 3px;

@@ -1,17 +1,8 @@
 <script>
 	import { Slider, Combo, Button, TimePicker, Pager } from "@svar-ui/svelte-core";
-
-	import CustomThemeSelect from "./CustomThemeSelect.svelte";
-
 	import { getData } from "../data";
 
-	let { skin = $bindable() } = $props();
-
 	const { employees, countries } = getData();
-
-	function selectSkin(ev) {
-		skin = ev.selected.id;
-	}
 </script>
 
 <div class="topbar">
@@ -47,25 +38,24 @@
 		<div class="pager" style="width: 308px">
 			<Pager value={2} total={100} />
 		</div>
-		<div class="switch" style="width: 48px">
-			<CustomThemeSelect bind:value={skin} onchange={selectSkin} />
-		</div>
 	</div>
 </div>
 
 <style>
 	.topbar {
 		width: 100%;
-		border: var(--wx-fm-grid-border);
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
 	}
 	.block {
-		height: 32px;
+		min-height: 32px;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 8px;
+		flex-wrap: wrap;
+		/* width: 100%; */
 	}
 	.avatars {
 		height: 100%;

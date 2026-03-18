@@ -52,8 +52,7 @@
 
 <style>
 	.column {
-		border-radius: var(--wx-border-radius, 3px);
-		height: 100%;
+		border-radius: var(--wx-border-radius);
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;

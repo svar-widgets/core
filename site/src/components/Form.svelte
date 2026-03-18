@@ -7,7 +7,7 @@
 		Field,
 		DatePicker,
 	} from "@svar-ui/svelte-core";
-	import LockIcon from "./Icons/LockIcon.svelte";
+	import Lock from "./Lock.svelte";
 
 	import { getData } from "../data";
 
@@ -24,7 +24,7 @@
 					<i class="icon {option.icon}"></i>
 				{:else}
 					<span class="icon">
-						<LockIcon />
+						<Lock />
 					</span>
 				{/if}
 				<span class="bottom">{option.name}</span>
@@ -112,7 +112,6 @@
 <style>
 	.column {
 		border-radius: var(--wx-border-radius, 3px);
-		height: 100%;
 		display: flex;
 		flex-direction: column;
 		width: 354px;

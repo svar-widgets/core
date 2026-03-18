@@ -12,6 +12,7 @@
 		error = false,
 		clear = false,
 		onchange,
+		dropdown = {},
 	} = $props();
 
 	const inputId = $state(getInputId(id));
@@ -58,7 +59,7 @@
 	{/if}
 
 	{#if popup}
-		<Dropdown oncancel={() => (popup = false)}>
+		<Dropdown oncancel={() => (popup = false)} {...dropdown}>
 			<ColorBoard {value} button="true" onchange={selectColor} />
 		</Dropdown>
 	{/if}

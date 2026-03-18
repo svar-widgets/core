@@ -1,3 +1,14 @@
+## 2.5.0
+
+### New features
+
+-   Avatar Component
+-   Ability to virtualize dropdown lists in Combo, MultiCombo, Richselect
+
+### Fixes
+
+-   Dropdowns of select controls are cut off or change container size when there is not enough space
+
 ## Version 2.4.1
 
 ### Fixes

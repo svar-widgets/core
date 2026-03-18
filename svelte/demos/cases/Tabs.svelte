@@ -7,7 +7,6 @@
 	const tabs = [
 		{ id: 0, label: "Info", icon: "wxi-alert" },
 		{ id: 1, label: "About" },
-		{ id: 2, label: "Contact" },
 		{ id: 3, label: "", icon: "wxi-check" },
 	];
 
@@ -32,8 +31,6 @@
 			<div class="body">Info</div>
 		{:else if active === 1}
 			<div class="body">About</div>
-		{:else if active === 2}
-			<div class="body">Contact</div>
 		{:else}
 			<div class="body">Check</div>
 		{/if}

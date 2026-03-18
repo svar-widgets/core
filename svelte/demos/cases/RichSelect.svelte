@@ -1,6 +1,6 @@
 <script>
 	import { Field, RichSelect } from "../../src/index";
-	import { users } from "../data/userlist";
+	import { users, usersLarge } from "../data/userlist";
 
 	import UserOption from "../custom/UserOption.svelte";
 
@@ -96,5 +96,16 @@
 	<h3>RichSelect with hidden options</h3>
 	<Field>
 		<RichSelect textOptions={users} options={renderedUsers} value={87} />
+	</Field>
+</div>
+
+<div class="demo-box">
+	<h3>Perfomance on a large list</h3>
+	<Field>
+		<RichSelect
+			options={usersLarge}
+			value={1000}
+			dropdown={{ virtualized: true }}
+		/>
 	</Field>
 </div>

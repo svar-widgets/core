@@ -1,5 +1,5 @@
 <script>
-	import { clickOutside, calculatePosition } from "@svar-ui/lib-dom";
+	import { clickOutside, calculatePosition, getAbsParent } from "@svar-ui/lib-dom";
 	import { onMount } from "svelte";
 
 	let {
@@ -7,32 +7,60 @@
 		top = 0,
 		at = "bottom",
 		parent = null,
+		width = "auto",
+		css = "",
 		oncancel,
 		children,
+		trackScroll = false,
 	} = $props();
 
-	let self = null;
+	let self = $state(null);
 	let x = $state(0);
 	let y = $state(0);
-	let width = $state("auto");
+	let w = $state("auto");
+	let portal;
+
+	function getWidth(calcWidth) {
+		if (parent && (width + "").indexOf("%") > -1) {
+			return width.replace(/(\d+)%/, (match, value) => {
+				value = (value * parent.offsetWidth) / 100 + "px";
+				return width.replace(match, value);
+			});
+		}
+		return width && width !== "auto" ? width : calcWidth;
+	}
 
 	function updatePosition() {
 		if (!self) return;
-
 		const result = calculatePosition(self, parent, at, left, top);
 		if (result) {
 			x = result.x;
 			y = result.y;
-			width = result.width;
+			w = getWidth(result.width);
 		}
 	}
 
+	function onScroll(e) {
+		if (oncancel && e.target !== portal && !self.contains(e.target))
+			oncancel(e);
+	}
+
 	onMount(() => {
-		updatePosition();
-		requestAnimationFrame(updatePosition);
+		requestAnimationFrame(() => {
+			updatePosition();
+			if (trackScroll) {
+				portal = getAbsParent(self);
+				if (portal) portal.addEventListener("scroll", onScroll, true);
+			}
+		});
+		return () => {
+			if (trackScroll && portal)
+				portal.removeEventListener("scroll", onScroll, true);
+		};
 	});
+
 	$effect(() => {
-		updatePosition(parent);
+		updatePosition();
 	});
 
 	function down(e) {
@@ -43,8 +71,8 @@
 <div
 	use:clickOutside={down}
 	bind:this={self}
-	class="wx-popup"
-	style="position:absolute;top:{y}px;left:{x}px;width:{width};"
+	class="wx-popup {css}"
+	style="position:absolute;top:{y}px;left:{x}px;width:{w};"
 >
 	{@render children?.()}
 </div>

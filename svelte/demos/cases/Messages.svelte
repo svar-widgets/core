@@ -40,17 +40,19 @@
 
 <div class="demo-box">
 	<h3>Notice</h3>
-	<Button type="primary" onclick={() => notice("")}>Show Notice</Button>
-	<Button onclick={() => notice("info")}>Show Info</Button>
-	<Button onclick={() => notice("warning")}>Show Warning</Button>
-	<Button onclick={() => notice("success")}>Show Success</Button>
-	<Button onclick={() => notice("danger")}>Show Danger</Button>
-	<Button
-		onclick={() =>
-			notice("info", "very long text goes here to show word wrap")}
-	>
-		Show Long message
-	</Button>
+	<div class="demo-row">
+		<Button type="primary" onclick={() => notice("")}>Show Notice</Button>
+		<Button onclick={() => notice("info")}>Show Info</Button>
+		<Button onclick={() => notice("warning")}>Show Warning</Button>
+		<Button onclick={() => notice("success")}>Show Success</Button>
+		<Button onclick={() => notice("danger")}>Show Danger</Button>
+		<Button
+			onclick={() =>
+				notice("info", "very long text goes here to show word wrap")}
+		>
+			Show Long message
+		</Button>
+	</div>
 </div>
 
 <div class="demo-box">

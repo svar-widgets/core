@@ -1,3 +1,4 @@
+import Avatar from "./cases/Avatar.svelte";
 import Basic from "./cases/Basic.svelte";
 import TextArea from "./cases/TextArea.svelte";
 import Buttons from "./cases/Buttons.svelte";
@@ -31,8 +32,11 @@ import Icon from "./cases/Icon.svelte";
 import SideArea from "./cases/SideArea.svelte";
 import Fullscreen from "./cases/Fullscreen.svelte";
 import ModalArea from "./cases/ModalArea.svelte";
+import Dropdown from "./cases/Dropdown.svelte";
+import DropdownScroll from "./cases/DropdownScroll.svelte";
 
 export const links = [
+	["/avatar/:skin", "Avatar", Avatar, "Avatar"],
 	["/base/:skin", "Basic UI", Basic, "Basic"],
 	["/button/:skin", "Button", Buttons, "Buttons"],
 	["/calendar/:skin", "Calendar", Calendar, "Calendar"],
@@ -47,6 +51,13 @@ export const links = [
 		"DateRangePicker",
 		DateRangePicker,
 		"DateRangePicker",
+	],
+	["/dropdown/:skin", "Dropdown", Dropdown, "Dropdown"],
+	[
+		"/dropdown-scroll/:skin",
+		"Dropdown: track scroll",
+		DropdownScroll,
+		"DropdownScroll",
 	],
 	["/field/:skin", "Field", Field, "Field"],
 	["/fullscreen/:skin", "Fullscreen", Fullscreen, "Fullscreen"],

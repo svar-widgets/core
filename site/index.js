@@ -3,4 +3,8 @@ import { mount } from "svelte";
 
 mount(Demo, {
 	target: document.querySelector("#wx_demo_area") || document.body,
+	props: {
+		productLink: "core",
+		publicName: "Core",
+	},
 });

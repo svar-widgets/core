@@ -13,6 +13,7 @@
 		clear = false,
 		children: kids,
 		onchange,
+		dropdown = {},
 	} = $props();
 
 	let navigate;
@@ -73,7 +74,7 @@
 	{:else}<i class="wx-icon wxi-angle-down"></i>{/if}
 
 	{#if !disabled}
-		<List items={options} onready={ready} onselect={select}>
+		<List items={options} onready={ready} onselect={select} {...dropdown}>
 			{#snippet children({ option })}
 				{#if kids}{@render kids(option)}{:else}{option[textField]}{/if}
 			{/snippet}

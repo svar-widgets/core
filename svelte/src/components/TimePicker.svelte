@@ -9,6 +9,7 @@
 	import { dateToString } from "@svar-ui/lib-dom";
 	import { defaultLocale } from "./helpers/locale";
 	import { getInputId } from "./helpers/getInputId.js";
+	import { toDateDropdown } from "./helpers/dropdown.js";
 
 	const defValue = new Date(0, 0, 0, 0, 0);
 
@@ -21,6 +22,7 @@
 		error = false,
 		format = "",
 		onchange,
+		dropdown,
 	} = $props();
 
 	const inputId = $state(getInputId(id));
@@ -138,7 +140,7 @@
 	/>
 
 	{#if popup && !disabled}
-		<Dropdown {oncancel} width={"unset"}>
+		<Dropdown {oncancel} {...toDateDropdown(dropdown)}>
 			<div class="wx-wrapper">
 				<div class="wx-timer">
 					<input

@@ -16,6 +16,7 @@
 		clear = false,
 		children: kids,
 		onchange,
+		dropdown = {},
 	} = $props();
 
 	const inputId = $state(getInputId(id));
@@ -135,7 +136,12 @@
 	{:else}<i class="wx-icon wxi-angle-down"></i>{/if}
 
 	{#if !disabled}
-		<List items={filteredOptions} onready={ready} onselect={selectByEvent}>
+		<List
+			items={filteredOptions}
+			onready={ready}
+			onselect={selectByEvent}
+			{...dropdown}
+		>
 			{#snippet children({ option })}
 				{#if kids}{@render kids({ option })}{:else}{option[
 						textField

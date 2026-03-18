@@ -1,16 +1,18 @@
 <script>
 	import { link, location } from "svelte-spa-router";
 
-	let { data, skin } = $props();
+	let { data, skin, onclick: click } = $props();
 
-	let fullPath = $derived(data[0].replace(":skin", skin));
+	const fullPath = $derived(data[0].replace(":skin", skin));
+	const isActive = $derived($location.startsWith(fullPath));
 </script>
 
 <a
 	use:link={fullPath}
 	href="/"
 	class="demo"
-	class:active={$location.startsWith(fullPath)}
+	class:active={isActive}
+	onclick={() => isActive && click?.()}
 >
 	{data[1]}
 </a>
@@ -30,7 +32,7 @@
 	}
 
 	.demo.active {
-		border-left-color: #fc6519;
+		border-left-color: var(--demo-framework-color);
 	}
 
 	.demo.active,

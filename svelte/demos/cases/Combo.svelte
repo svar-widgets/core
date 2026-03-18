@@ -1,6 +1,6 @@
 <script>
 	import { Field, Combo, Button } from "../../src/index";
-	import { users } from "../data/userlist";
+	import { users, usersLarge } from "../data/userlist";
 
 	import UserOption from "../custom/UserOption.svelte";
 
@@ -113,6 +113,18 @@
 </div>
 
 <div class="demo-box">
+	<h3>Perfomance on a large list</h3>
+	<Field>
+		<Combo
+			options={usersLarge}
+			value={9000}
+			dropdown={{ virtualized: true }}
+		>
+			{#snippet children({ option })}
+				<UserOption data={option} />
+			{/snippet}
+		</Combo>
+	</Field>
 	<h3>Combo with ids: '0', '000', '0E1'</h3>
 	<Field>
 		<Combo

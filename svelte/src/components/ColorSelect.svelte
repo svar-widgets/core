@@ -22,8 +22,8 @@
 		disabled = false,
 		error = false,
 		onchange,
+		dropdown = {},
 	} = $props();
-
 	const inputId = $state(getInputId(id));
 
 	let popup = $state(false);
@@ -75,7 +75,7 @@
 	{/if}
 
 	{#if popup}
-		<Dropdown oncancel={() => (popup = false)}>
+		<Dropdown oncancel={() => (popup = false)} {...dropdown}>
 			<div class="wx-colors">
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_static_element_interactions -->

@@ -30,16 +30,12 @@
 
 <div class="demo-box">
 	<h3>Popup (local)</h3>
-	<div class="toolbar">
-		<div>
-			<Button type="block" onclick={showAt}>Show at position</Button>
-		</div>
+	<div class="demo-row">
+		<Button onclick={showAt}>Show at position</Button>
 		<div bind:this={node}>
-			<Button type="block" onclick={showNext}>Show next to button</Button>
+			<Button onclick={showNext}>Show next to button</Button>
 		</div>
-		<div>
-			<Button type="block" onclick={showCenter}>Show at center</Button>
-		</div>
+		<Button onclick={showCenter}>Show at center</Button>
 	</div>
 </div>
 
@@ -55,12 +51,6 @@
 {/if}
 
 <style>
-	.toolbar {
-		width: 130px;
-		display: flex;
-		gap: 20px;
-		width: auto;
-	}
 	.popup {
 		padding: 10px 30px;
 	}

@@ -1,6 +1,5 @@
 <script>
 	import List from "./helpers/SuggestDropdown.svelte";
-	import Checkbox from "./Checkbox.svelte";
 	import { getInputId } from "./helpers/getInputId.js";
 
 	let {
@@ -16,6 +15,7 @@
 		checkboxes = false,
 		onchange,
 		children,
+		dropdown = {},
 	} = $props();
 
 	const inputId = $state(getInputId(id));
@@ -48,22 +48,9 @@
 	}
 	function onselect(ev) {
 		const { id } = ev;
-
 		if (id) {
-			let next;
-			if (value) {
-				if (value.includes(id)) {
-					next = value.filter(i => i !== id);
-				} else {
-					next = [...value, id];
-				}
-			} else {
-				next = [id];
-			}
-
-			value = next;
-			onchange && onchange({ value });
-
+			value = id;
+			onchange && onchange({ value: id });
 			inputElement.focus();
 		}
 	}
@@ -134,15 +121,16 @@
 	</div>
 
 	{#if !disabled}
-		<List items={filterOptions} {onready} {onselect}>
+		<List
+			items={filterOptions}
+			multiselect={true}
+			{onready}
+			{onselect}
+			{checkboxes}
+			{value}
+			{...dropdown}
+		>
 			{#snippet children({ option })}
-				{#if checkboxes}
-					<Checkbox
-						style="margin-right: 8px; pointer-events: none;"
-						name={option.id}
-						value={value && value.includes(option.id)}
-					/>
-				{/if}
 				{#if children}{@render children({
 						option,
 					})}{:else}{option[textField]}{/if}

@@ -29,13 +29,6 @@
 	</Field>
 </div>
 <div class="demo-box">
-	<h3>Field with multiple inputs</h3>
-	<Field label="Text" position="left">
-		<Text bind:value={v1} placeholder="This gets associated label" /><br />
-		<Text bind:value={v1} placeholder="This one does not" />
-	</Field>
-</div>
-<div class="demo-box">
 	<h3>Nested Field controls</h3>
 	<Field label="Each control is associated with its closest Field label">
 		<Field label="First Name" position="left">

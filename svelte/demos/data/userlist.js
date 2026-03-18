@@ -75,3 +75,9 @@ export const users = [
 		avatar: "",
 	},
 ];
+
+export const usersLarge = Array.from({ length: 10000 }, (_, i) => ({
+	id: i,
+	label: `User ${i}`,
+	avatar: "https://cdn.svar.dev/demos/assets/avatar/005471511.jpg",
+}));

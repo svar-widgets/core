@@ -8,18 +8,12 @@
 		error = false,
 		type = "",
 		required = false,
+		id,
 		children,
 	} = $props();
 
-	let firstInputId = $state(null);
-
-	const registerInput = () => {
-		const id = uid();
-		if (!firstInputId) firstInputId = id;
-		return id;
-	};
-
-	setContext("wx-input-id", registerInput);
+	const inputId = id === undefined ? uid() : id;
+	setContext("wx-input-id", inputId);
 </script>
 
 <div
@@ -29,8 +23,8 @@
 	style={width ? `width: ${width}` : ""}
 >
 	{#if label}
-		{#if firstInputId}
-			<label class="wx-label" for={firstInputId}>{label}</label>
+		{#if inputId}
+			<label class="wx-label" for={inputId}>{label}</label>
 		{:else}
 			<div class="wx-label">{label}</div>
 		{/if}

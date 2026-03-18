@@ -3,13 +3,14 @@ import { locateID } from "@svar-ui/lib-dom";
 export function getListHandlers() {
 	let navIndex = null;
 	let isVisible = false;
-
+	let virtualized = false;
 	let list, options, navCallback, selectCallback;
-	const init = (l, o, n, c) => {
+	const init = (l, o, n, c, v) => {
 		list = l;
 		options = o;
 		navCallback = n;
 		selectCallback = c;
+		virtualized = v;
 	};
 
 	const setNav = index => {
@@ -30,7 +31,7 @@ export function getListHandlers() {
 	};
 
 	const scrollTo = (navIndex, ev) => {
-		if (navIndex !== null && list) {
+		if (!virtualized && navIndex !== null && list) {
 			const next = list.querySelectorAll(`.wx-list > .wx-item`)[navIndex];
 			if (next) {
 				next.scrollIntoView({ block: "nearest" });

@@ -103,6 +103,7 @@
 <style>
 	.wx-pager {
 		display: flex;
+		flex-wrap: wrap;
 		gap: var(--wx-padding);
 		align-items: center;
 		padding: var(--wx-padding);

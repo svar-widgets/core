@@ -6,14 +6,13 @@
 	import Dropdown from "./Dropdown.svelte";
 	import RangeCalendar from "./RangeCalendar.svelte";
 	import { defaultLocale } from "./helpers/locale";
+	import { toDateDropdown } from "./helpers/dropdown";
 
 	let {
 		value = $bindable(),
 		id,
 		disabled = false,
 		error = false,
-		width = "unset",
-		align = "start",
 		placeholder = "",
 		css = "",
 		title = "",
@@ -23,6 +22,7 @@
 		editable = false,
 		clear = false,
 		onchange,
+		dropdown,
 	} = $props();
 
 	const { calendar: calendarLocale, formats } = (
@@ -113,7 +113,7 @@
 	/>
 
 	{#if popup && !disabled}
-		<Dropdown {oncancel} {width} {align} autoFit={!!align}>
+		<Dropdown {oncancel} {...toDateDropdown(dropdown)}>
 			<RangeCalendar
 				{oncancel}
 				{buttons}

@@ -2,6 +2,29 @@ import { TPosition } from "@svar-ui/lib-dom";
 import type { Component } from "svelte";
 import type { Snippet } from "svelte";
 
+export interface DropdownOptions {
+	inline?: boolean;
+	position?: "top" | "right" | "bottom" | "left";
+	align?: "start" | "center" | "end";
+	css?: string;
+	width?: string | "unset" | "auto";
+	trackScroll?: boolean;
+	virtualized?: boolean;
+}
+
+export interface IUser {
+	id: string | number;
+	name?: string;
+	avatar?: string;
+	color?: string;
+}
+
+export declare const Avatar: Component<{
+	value: IUser | IUser[];
+	size?: number;
+	limit?: number;
+}>;
+
 export declare const TextArea: Component<{
 	value?: string;
 	id?: string | number;
@@ -75,6 +98,7 @@ export declare const ColorPicker: Component<{
 	disabled?: boolean;
 	error?: boolean;
 	clear?: boolean;
+	dropdown?: DropdownOptions;
 	onchange?: (ev: { value: string }) => void;
 }>;
 
@@ -89,6 +113,9 @@ export declare const Combo: Component<{
 	disabled?: boolean;
 	error?: boolean;
 	clear?: boolean;
+	dropdown?: DropdownOptions & {
+		virtualized?: boolean;
+	};
 	children?: () => any;
 	onchange?: (ev: { value: string | number }) => void;
 }>;
@@ -107,6 +134,7 @@ export declare const DatePicker: Component<{
 	title?: string;
 	editable?: boolean | ((value: string) => Date | null);
 	clear?: boolean;
+	dropdown?: DropdownOptions;
 	onchange?: (ev: { value: Date | null }) => void;
 }>;
 
@@ -125,6 +153,7 @@ export declare const DateRangePicker: Component<{
 	buttons?: boolean | ("clear" | "today" | "done")[];
 	editable?: boolean | ((value: string) => Date | null);
 	clear?: boolean;
+	dropdown?: DropdownOptions;
 	onchange?: (ev: {
 		value: { start: Date; end: Date | null } | null;
 	}) => void;
@@ -154,6 +183,9 @@ export declare const MultiCombo: Component<{
 	disabled?: boolean;
 	error?: boolean;
 	checkboxes?: boolean;
+	dropdown?: DropdownOptions & {
+		virtualized?: boolean;
+	};
 	children?: () => any;
 	onchange?: (ev: { value: (string | number)[] }) => void;
 }>;
@@ -167,14 +199,12 @@ export declare const Popup: Component<{
 	oncancel?: (ev: MouseEvent) => void;
 }>;
 
-export declare const Dropdown: Component<{
-	position?: string;
-	align?: "start" | "center" | "end";
-	autoFit?: boolean;
-	width?: string;
-	children?: () => any;
-	oncancel?: (ev: MouseEvent) => void;
-}>;
+export declare const Dropdown: Component<
+	DropdownOptions & {
+		children?: () => any;
+		oncancel?: (ev: MouseEvent) => void;
+	}
+>;
 
 export declare const Pager: Component<{
 	total?: number;
@@ -210,6 +240,9 @@ export declare const RichSelect: Component<{
 	title?: string;
 	textField?: string;
 	clear?: boolean;
+	dropdown?: DropdownOptions & {
+		virtualized?: boolean;
+	};
 	children?: () => any;
 	onchange?: (ev: { value: string | number }) => void;
 }>;
@@ -351,6 +384,7 @@ export declare const TimePicker: Component<{
 	disabled?: boolean;
 	error?: boolean;
 	format?: string | ((value: Date) => string);
+	dropdown?: DropdownOptions;
 	onchange?: (ev: { value: Date }) => void;
 }>;
 
@@ -429,16 +463,22 @@ export declare const Globals: Component<{
 	children?: () => any;
 }>;
 
-export declare const SuggestDropdown: Component<{
-	items?: { id: string | number; label: string }[];
-	children?: () => any;
-	onselect?: (ev: { id: string | number }) => void;
-	onready?: (ev: {
-		navigate?: (dir: number | null, ev?: KeyboardEvent) => void;
-		keydown?: (ev: KeyboardEvent, dir: number) => void;
-		move?: (ev: KeyboardEvent) => void;
-	}) => void;
-}>;
+export declare const SuggestDropdown: Component<
+	DropdownOptions & {
+		items?: { id: string | number; label: string }[];
+		children?: () => any;
+		onselect?: (ev: { id: string | number | (string | number)[] }) => void;
+		onready?: (ev: {
+			navigate?: (dir: number | null, ev?: KeyboardEvent) => void;
+			keydown?: (ev: KeyboardEvent, dir: number) => void;
+			move?: (ev: KeyboardEvent) => void;
+		}) => void;
+		multiselect?: boolean;
+		checkboxes?: boolean;
+		value?: string | number | (string | number)[];
+		virtualized?: boolean;
+	}
+>;
 
 export type { ILocale, Terms, TPosition } from "@svar-ui/lib-dom";
 

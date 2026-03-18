@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="demo-box" style="width: 300px">
+<div class="demo-box">
 	<h3>Month view</h3>
 	<div class="row">
 		<div class="cell">
@@ -33,21 +33,22 @@
 	</div>
 </div>
 
-<div class="demo-box custom_size">
-	<h3>Calendar with custom size</h3>
+<div class="demo-box custom">
+	<h3>Month view with custom styles</h3>
 	<Month current={new Date(2022, 2, 18)} />
 </div>
 
 <style>
-	.custom_size {
+	.custom {
 		--wx-calendar-cell-size: 64px;
+		--wx-color-font-disabled: transparent;
 	}
-	.custom_size :global(.days .day) {
+	.custom :global(.days .day) {
 		padding: 3px;
 		align-items: start;
 		justify-content: left;
 	}
-	.custom_size :global(.weekdays .weekday) {
+	.custom :global(.weekdays .weekday) {
 		padding: 3px;
 		text-align: left;
 	}
@@ -55,10 +56,13 @@
 	.row {
 		display: flex;
 		flex-direction: row;
-		--wx-color-font-disabled: transparent;
+		justify-content: flex-start;
+		gap: 4px;
+		flex-wrap: wrap;
 	}
+
 	.cell {
 		margin: 20px;
-		min-width: 220px;
+		width: 220px;
 	}
 </style>
