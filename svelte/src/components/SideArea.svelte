@@ -23,6 +23,7 @@
 		border-radius: var(--wx-modal-border-radius);
 		min-width: var(--wx-modal-width);
 		height: 100vh;
+		max-height: 100%;
 	}
 	.wx-sidearea.wx-pos-right {
 		right: 0;

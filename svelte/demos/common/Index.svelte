@@ -324,18 +324,19 @@
 		background: #ebebeb;
 	}
 
-	.sidebar.active {
+	.sidebar.active,
+	.sidebar-content {
 		width: 300px;
 	}
 
-	.narrow .sidebar.active {
+	.narrow .sidebar.active,
+	.narrow .sidebar-content {
 		width: 100%;
 	}
 
 	.sidebar-content {
 		display: flex;
 		flex-direction: column;
-		width: 100%;
 		gap: 16px;
 		height: 100%;
 		border-right: var(--wx-border);

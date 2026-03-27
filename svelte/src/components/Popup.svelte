@@ -41,7 +41,7 @@
 	}
 
 	function onScroll(e) {
-		if (oncancel && e.target !== portal && !self.contains(e.target))
+		if (oncancel && e.target !== portal && self && !self.contains(e.target))
 			oncancel(e);
 	}
 

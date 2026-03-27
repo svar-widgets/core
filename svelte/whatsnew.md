@@ -1,3 +1,10 @@
+## Version 2.5.1
+
+### Fixes
+
+-   SideArea: incorrect height in a relatively positioned container
+-   Popup: trackScroll error while scrolling
+
 ## 2.5.0
 
 ### New features
