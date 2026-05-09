@@ -52,6 +52,7 @@
 			value = id;
 			onchange && onchange({ value: id });
 			inputElement.focus();
+			text = "";
 		}
 	}
 
