@@ -12,7 +12,7 @@
 
 <style>
 	.wx-modal {
-		position: absolute;
+		position: fixed;
 		z-index: var(--wx-modal-z-index);
 		top: 0;
 		left: 0;

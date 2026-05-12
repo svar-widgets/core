@@ -12,7 +12,9 @@ export const getData = () => {
 			firstName: "Alice",
 			lastName: "Smith",
 			avatar: "",
+			name: "Alice",
 			position: 2,
+			color: "#00d19a",
 		},
 		{
 			id: 3,

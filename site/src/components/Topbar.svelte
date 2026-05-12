@@ -1,5 +1,12 @@
 <script>
-	import { Slider, Combo, Button, TimePicker, Pager } from "@svar-ui/svelte-core";
+	import {
+		Slider,
+		Combo,
+		Button,
+		TimePicker,
+		Pager,
+		Avatar,
+	} from "@svar-ui/svelte-core";
 	import { getData } from "../data";
 
 	const { employees, countries } = getData();
@@ -19,15 +26,8 @@
 				{/snippet}
 			</Combo>
 		</div>
-		<div class="avatars" style="width: 128px">
-			{#each employees.slice(0, 6) as employee (employee.id)}
-				{#if employee.avatar}
-					<div class="avatar">
-						<img src={employee.avatar} alt="avatar" />
-					</div>
-				{/if}
-			{/each}
-			<div class="avatar"><span>+3</span></div>
+		<div class="avatars" style="width: 134px">
+			<Avatar value={employees} limit={7} size={28} />
 		</div>
 		<div class="button" style="width: 131px">
 			<Button type={"primary"} icon={"wxi-cat"}>Button</Button>
@@ -58,32 +58,11 @@
 		/* width: 100%; */
 	}
 	.avatars {
-		height: 100%;
-		width: 100px;
 		display: flex;
 		align-items: center;
 	}
-	.block .avatars > .avatar {
-		height: 28px;
-		width: 28px;
-		border-radius: 50%;
-		color: var(--wx-background);
-	}
-	.block .avatars > .avatar:last-child {
-		background-color: #00d19a;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.block .avatars > .avatar + .avatar {
-		margin-left: -8px;
-	}
-	.block .avatars > .avatar img,
-	.card > .avatar img {
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-		border-radius: 50%;
+	.avatars :global(.wx-avatar-item) {
+		color: #fff !important;
 	}
 	.button :global(button) {
 		width: 100%;

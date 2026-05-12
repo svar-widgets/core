@@ -1,3 +1,10 @@
+## Version 2.5.3
+
+### Fixes
+
+-   ModalArea size is incorrect in a long scrollable container
+-   Week numbers are incorrect from locale-base `%w` helper
+
 ## Version 2.5.1
 
 ### Fixes
