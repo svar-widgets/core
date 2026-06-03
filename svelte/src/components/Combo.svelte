@@ -11,9 +11,11 @@
 		textField = "label",
 		placeholder = "",
 		title = "",
+		tooltip,
 		disabled = false,
 		error = false,
 		clear = false,
+		css = "",
 		children: kids,
 		onchange,
 		dropdown = {},
@@ -116,7 +118,13 @@
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="wx-combo" {onclick} {onkeydown} {title}>
+<div
+	class="wx-combo {css}"
+	{onclick}
+	{onkeydown}
+	{title}
+	data-tooltip-text={tooltip}
+>
 	<input
 		id={inputId}
 		bind:this={inputElement}

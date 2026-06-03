@@ -6,11 +6,13 @@
 		options = [],
 		placeholder = "",
 		title = "",
+		tooltip,
 		disabled = false,
 		error = false,
 		textField = "label",
 		clear = false,
 		id,
+		css = "",
 		onchange,
 	} = $props();
 
@@ -26,7 +28,7 @@
 	}
 </script>
 
-<div class="wx-select">
+<div class="wx-select {css}" data-tooltip-text={tooltip}>
 	<select
 		id={inputId}
 		bind:value

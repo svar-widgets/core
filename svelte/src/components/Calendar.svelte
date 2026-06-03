@@ -7,6 +7,7 @@
 		current = $bindable(),
 		markers = null,
 		buttons = ["clear", "today"],
+		css = "",
 		onchange,
 	} = $props();
 
@@ -30,5 +31,5 @@
 </script>
 
 <Locale>
-	<Panel {value} bind:current {markers} {buttons} onchange={change} />
+	<Panel {value} bind:current {markers} {buttons} {css} onchange={change} />
 </Locale>

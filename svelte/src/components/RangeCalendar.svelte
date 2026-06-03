@@ -10,6 +10,7 @@
 		months = 2,
 		markers = null,
 		buttons = ["clear", "today"],
+		css = "",
 		onchange,
 	} = $props();
 
@@ -90,11 +91,12 @@
 			bind:current={leftCurrent}
 			{markers}
 			{buttons}
+			{css}
 			part="both"
 			onchange={doChangeStart}
 		/>
 	{:else}
-		<div class="wx-rangecalendar">
+		<div class="wx-rangecalendar {css}">
 			<div class="wx-half">
 				<Panel
 					value={{ start, end }}

@@ -2,11 +2,11 @@
 	import { clickOutside } from "@svar-ui/lib-dom";
 	import { fly } from "svelte/transition";
 
-	let { position = "right", children, oncancel } = $props();
+	let { position = "right", css = "", children, oncancel } = $props();
 </script>
 
 <div
-	class="wx-sidearea wx-pos-{position}"
+	class="wx-sidearea wx-pos-{position} {css}"
 	use:clickOutside={() => oncancel && oncancel()}
 	transition:fly={{ x: 650, opacity: 1 }}
 >

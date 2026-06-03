@@ -666,15 +666,15 @@
   resolved "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.27.10.tgz#beefe675f1853f73676aecc915b2bd2ac98c4fc6"
   integrity sha512-MTBk/3jGLNB2tVxv6uLlFh1iu64iYOQ2PbdOSK3NW8JZsmlaOh2q6sdtKowBhfw8QFLmYNzTW4/oK4uATIi6ZA==
 
-"@svar-ui/lib-dom@0.12.2":
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/@svar-ui/lib-dom/-/lib-dom-0.12.2.tgz#cacc25163340fdeceed2b5416b3bf0a0239af548"
-  integrity sha512-tV9sJ7Xpedxf1dttTc8I190eqlP0UsassUw48uW3JuEQR0G3IRfmH53/X+mYEooc7bcpZDkzYukWEqJeEq9UlQ==
+"@svar-ui/lib-dom@0.13.1":
+  version "0.13.1"
+  resolved "https://registry.yarnpkg.com/@svar-ui/lib-dom/-/lib-dom-0.13.1.tgz#d0394f74e59672b185a06ce4659d6391c66bf2d2"
+  integrity sha512-e9+RIEkppVkAUJqfHEr7KmiVXi3uf+qddr513h5mhgSx3PNYtG9eHwtI8OQf4JMc6Hvuu3y0iv+fL6jqE340yw==
 
 "@svar-ui/lib-state@^1.9.6":
-  version "1.9.6"
-  resolved "https://registry.yarnpkg.com/@svar-ui/lib-state/-/lib-state-1.9.6.tgz#b2359f2a212565eaa72d6a15fc4d27aadd42a070"
-  integrity sha512-twoHa8wZvzdxtES68s6Wnp4Xi1WivScNaFFK6sJ6WDgqVYOzJw0ZhVVrdwHQgieLITTKl/DYh/U3nuqtMetKYw==
+  version "1.9.7"
+  resolved "https://registry.yarnpkg.com/@svar-ui/lib-state/-/lib-state-1.9.7.tgz#4f60647d3f4b8a56e4c41436db33a08fb0e0485c"
+  integrity sha512-nxRdk+54m1RJjGT2yDH7NjxAM5KECxA39kdTZezEIj1ixykyefssB9BrgxKy2jIseYxJMtd6lPZvQ3SZXuvn2g==
 
 "@svar-ui/lib-svelte@0.5.2":
   version "0.5.2"

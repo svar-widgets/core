@@ -6,6 +6,7 @@
 		total = 0,
 		pageSize = $bindable(20),
 		value = $bindable(1),
+		css = "",
 		onchange,
 	} = $props();
 
@@ -54,7 +55,7 @@
 	};
 </script>
 
-<div class="wx-pager">
+<div class="wx-pager {css}">
 	<div class="wx-left">
 		<span>{_("Rows per page")}: </span>
 		<input

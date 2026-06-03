@@ -152,6 +152,11 @@
 		);
 	});
 
+	$effect(() => {
+		items;
+		if (virtualized) scrollTop = 0;
+	});
+
 	onMount(() => {
 		onready &&
 			onready({
@@ -165,7 +170,7 @@
 {#snippet itemContent({ data })}
 	{#if checkboxes}
 		<Checkbox
-			style="margin-right: 8px; pointer-events: none;"
+			css="wx-list-checkbox"
 			name={data.id}
 			value={value && value.includes(data.id)}
 		/>

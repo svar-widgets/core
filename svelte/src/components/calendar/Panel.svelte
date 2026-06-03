@@ -12,6 +12,7 @@
 		part = "normal",
 		markers = null,
 		buttons = ["clear", "today"],
+		css = "",
 		onshift: shift,
 		onchange: change,
 	} = $props();
@@ -63,7 +64,9 @@
 </script>
 
 <div
-	class="wx-calendar {part !== 'normal' && part !== 'both' ? 'wx-part' : ''}"
+	class="wx-calendar {part !== 'normal' && part !== 'both'
+		? 'wx-part'
+		: ''} {css}"
 >
 	<div class="wx-wrap">
 		<Header date={current} {part} {type} {onshift} />

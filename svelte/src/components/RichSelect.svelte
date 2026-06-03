@@ -9,8 +9,10 @@
 		disabled = false,
 		error = false,
 		title = "",
+		tooltip,
 		textField = "label",
 		clear = false,
+		css = "",
 		children: kids,
 		onchange,
 		dropdown = {},
@@ -50,7 +52,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="wx-richselect"
+	class="wx-richselect {css}"
 	{title}
 	class:wx-error={error}
 	class:wx-disabled={disabled}
@@ -58,6 +60,7 @@
 	onclick={() => navigate?.(index())}
 	onkeydown={ev => keydown?.(ev, index())}
 	tabindex="0"
+	data-tooltip-text={tooltip}
 >
 	<div class="wx-label">
 		{#if selected}

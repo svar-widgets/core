@@ -8,6 +8,7 @@
 		current = $bindable(),
 		part = "",
 		markers = null,
+		css = "",
 		oncancel,
 		onchange,
 	} = $props();
@@ -103,7 +104,7 @@
 	});
 </script>
 
-<div>
+<div class="wx-month {css}">
 	<div class="wx-weekdays">
 		{#each weekdays as day}
 			<div class="wx-weekday">{day}</div>

@@ -1,3 +1,20 @@
+## Version 2.6.0
+
+### New features
+
+-   Tooltip component
+
+### Updates
+
+-   All controls receive `css` property to define custom CSS class name
+-   All controls can be tuned to show `tooltip` if wrapper in `Tooltip` component
+-   MultiCombo: `keepText` property to configure text input on option selection
+
+### Fixes
+
+-   MultiCombo dropdown is detached when input size changes
+-   SideArea closes on clicking inner controls dropdown
+
 ## Version 2.5.3
 
 ### Fixes

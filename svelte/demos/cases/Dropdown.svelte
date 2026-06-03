@@ -64,6 +64,6 @@
 		width: 250px;
 	}
 	:global(.my-dropdown) {
-		background: #f9f9f9 !important;
+		background: var(--wx-background-alt) !important;
 	}
 </style>

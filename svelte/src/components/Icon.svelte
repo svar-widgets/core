@@ -1,19 +1,25 @@
 <script>
-	let { css = "", title = "", children, onclick } = $props();
+	let { css = "", title = "", tooltip, children, onclick } = $props();
 </script>
 
 {#if children}
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<i {title} role="img" class="wx-icon {css}" {onclick}>
+	<i
+		{title}
+		role="img"
+		class="wx-icon {css}"
+		{onclick}
+		data-tooltip-text={tooltip}
+	>
 		{@render children()}
 	</i>
 {:else}
 	<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<i {title} class="wx-icon {css}" {onclick}></i>
+	<i {title} class="wx-icon {css}" {onclick} data-tooltip-text={tooltip}></i>
 {/if}
 
 <style>

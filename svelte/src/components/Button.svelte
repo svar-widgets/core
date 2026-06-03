@@ -5,6 +5,7 @@
 		icon = "",
 		disabled = false,
 		title = "",
+		tooltip,
 		text = "",
 		children,
 		onclick,
@@ -32,6 +33,7 @@
 	class:wx-icon={icon && !children}
 	{disabled}
 	onclick={handleClick}
+	data-tooltip-text={tooltip}
 >
 	{#if icon}<i class={icon}></i>{/if}
 	{#if children}{@render children()}{:else}{text}{/if}

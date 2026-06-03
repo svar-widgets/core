@@ -16,6 +16,7 @@
 		placeholder = "",
 		css = "",
 		title = "",
+		tooltip,
 		format = "",
 		months = 2,
 		buttons = ["clear", "today"],
@@ -98,8 +99,9 @@
 	onclick={() => (popup = true)}
 >
 	<Text
-		{css}
+		css={`wx-date-input ${css}`}
 		{title}
+		{tooltip}
 		value={formattedValue}
 		{id}
 		readonly={!editable}
@@ -108,7 +110,6 @@
 		{error}
 		onchange={doInputChange}
 		icon="wxi-calendar"
-		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);"
 		{clear}
 	/>
 

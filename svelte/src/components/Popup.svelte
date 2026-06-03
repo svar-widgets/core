@@ -46,16 +46,22 @@
 	}
 
 	onMount(() => {
+		let resizeObserver;
 		requestAnimationFrame(() => {
 			updatePosition();
 			if (trackScroll) {
 				portal = getAbsParent(self);
 				if (portal) portal.addEventListener("scroll", onScroll, true);
 			}
+			if (parent) {
+				resizeObserver = new ResizeObserver(updatePosition);
+				resizeObserver.observe(parent);
+			}
 		});
 		return () => {
 			if (trackScroll && portal)
 				portal.removeEventListener("scroll", onScroll, true);
+			if (resizeObserver) resizeObserver.disconnect();
 		};
 	});
 
@@ -69,7 +75,7 @@
 </script>
 
 <div
-	use:clickOutside={down}
+	use:clickOutside={{ callback: down, parent: () => parent }}
 	bind:this={self}
 	class="wx-popup {css}"
 	style="position:absolute;top:{y}px;left:{x}px;width:{w};"

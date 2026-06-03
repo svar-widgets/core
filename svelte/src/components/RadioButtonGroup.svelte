@@ -7,6 +7,7 @@
 		options = [{}],
 		value = $bindable(""),
 		type = "",
+		css = "",
 		onchange,
 	} = $props();
 
@@ -19,7 +20,7 @@
 	}
 </script>
 
-<div class="wx-radiogroup {type && `wx-${type}`}">
+<div class="wx-radiogroup {type && `wx-${type}`} {css}">
 	{#each options as option}
 		<div class="wx-item">
 			<RadioButton

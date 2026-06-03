@@ -8,6 +8,7 @@
 		name = "",
 		inputValue = "",
 		disabled = false,
+		css = "",
 		onchange,
 	} = $props();
 
@@ -19,7 +20,7 @@
 	}
 </script>
 
-<div class="wx-radio">
+<div class="wx-radio {css}">
 	<input
 		type="radio"
 		id={inputId}

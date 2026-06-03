@@ -31,6 +31,7 @@ export { default as Calendar } from "./components/Calendar.svelte";
 export { default as Month } from "./components/calendar/Month.svelte";
 export { default as RangeCalendar } from "./components/RangeCalendar.svelte";
 export { default as TimePicker } from "./components/TimePicker.svelte";
+export { default as Tooltip } from "./components/Tooltip.svelte";
 export { default as TwoState } from "./components/TwoState.svelte";
 export { default as Modal } from "./components/Modal.svelte";
 export { default as ModalArea } from "./components/ModalArea.svelte";

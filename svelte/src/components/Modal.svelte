@@ -12,6 +12,7 @@
 		header,
 		children,
 		footer,
+		css = "",
 		onconfirm,
 		oncancel,
 	} = $props();
@@ -48,7 +49,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
-	class="wx-modal"
+	class="wx-modal {css}"
 	bind:this={modal}
 	transition:fade={{ duration: 100 }}
 	tabindex="0"

@@ -3,11 +3,12 @@
 		options = [],
 		value = $bindable(""),
 		type = "top",
+		css = "",
 		onchange,
 	} = $props();
 </script>
 
-<div class="wx-tabs wx-{type}">
+<div class="wx-tabs wx-{type} {css}">
 	{#each options as option}
 		<button
 			class:wx-active={option.id == value}
@@ -16,6 +17,7 @@
 				value = option.id;
 				onchange && onchange({ value });
 			}}
+			data-tooltip-text={option.tooltip}
 		>
 			{#if option.icon}
 				<i

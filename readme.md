@@ -31,7 +31,7 @@ SVAR Svelte Core library includes the following components:
 
 -   buttons & form controls,
 -   calendar (datepicker),
--   popups,
+-   popups, tooltips,
 -   notifications,
 -   sliding sidebar,
 -   tabs, and more.

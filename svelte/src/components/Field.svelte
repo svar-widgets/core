@@ -9,6 +9,7 @@
 		type = "",
 		required = false,
 		id,
+		css = "",
 		children,
 	} = $props();
 
@@ -17,7 +18,7 @@
 </script>
 
 <div
-	class="wx-field wx-{position}"
+	class="wx-field wx-{position} {css}"
 	class:wx-error={error}
 	class:wx-required={required}
 	style={width ? `width: ${width}` : ""}

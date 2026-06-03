@@ -6,8 +6,8 @@
 		label = "",
 		inputValue = "",
 		value = $bindable(false),
-		style = "",
 		disabled = false,
+		css = "",
 		onchange,
 	} = $props();
 
@@ -19,7 +19,7 @@
 	}
 </script>
 
-<div {style} class="wx-checkbox">
+<div class="wx-checkbox {css}">
 	<input
 		type="checkbox"
 		id={inputId}
@@ -130,5 +130,10 @@
 	}
 	input[disabled] ~ label span:first-child:after {
 		border-color: var(--wx-input-background);
+	}
+
+	.wx-list-checkbox {
+		margin-right: 8px;
+		pointer-events: none;
 	}
 </style>

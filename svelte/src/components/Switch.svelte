@@ -1,7 +1,13 @@
 <script>
 	import { getInputId } from "./helpers/getInputId.js";
 
-	let { id, value = $bindable(false), disabled = false, onchange } = $props();
+	let {
+		id,
+		value = $bindable(false),
+		disabled = false,
+		css = "",
+		onchange,
+	} = $props();
 
 	const inputId = $state(getInputId(id));
 
@@ -11,7 +17,7 @@
 	}
 </script>
 
-<label class="wx-switch">
+<label class="wx-switch {css}">
 	<input
 		type="checkbox"
 		checked={value}

@@ -18,6 +18,7 @@
 		buttons = ["clear", "today"],
 		css = "",
 		title = "",
+		tooltip,
 		editable = false,
 		clear = false,
 		onchange,
@@ -82,8 +83,9 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="wx-datepicker" onclick={() => (popup = true)}>
 	<Text
-		{css}
+		css={`wx-date-input ${css}`}
 		{title}
+		{tooltip}
 		value={formattedValue}
 		{id}
 		readonly={!editable}
@@ -93,7 +95,6 @@
 		oninput={oncancel}
 		onchange={change}
 		icon="wxi-calendar"
-		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);"
 		{clear}
 	/>
 

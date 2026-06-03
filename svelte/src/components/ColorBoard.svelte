@@ -8,7 +8,12 @@
 	import { parseColor } from "./helpers/colorValidation.js";
 	import { defaultLocale } from "./helpers/locale";
 
-	let { value = $bindable("#65D3B3"), button = false, onchange } = $props();
+	let {
+		value = $bindable("#65D3B3"),
+		button = false,
+		css = "",
+		onchange,
+	} = $props();
 
 	let block;
 
@@ -161,7 +166,7 @@
 	}
 </script>
 
-<div class="wx-colorboard">
+<div class="wx-colorboard {css}">
 	<div
 		class="wx-color-block"
 		style="background: {blockColor};"

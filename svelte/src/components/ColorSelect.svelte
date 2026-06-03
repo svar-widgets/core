@@ -19,8 +19,10 @@
 		clear = false,
 		placeholder = "",
 		title = "",
+		tooltip,
 		disabled = false,
 		error = false,
+		css = "",
 		onchange,
 		dropdown = {},
 	} = $props();
@@ -47,7 +49,11 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="wx-colorselect" onclick={handlePopup}>
+<div
+	class="wx-colorselect {css}"
+	onclick={handlePopup}
+	data-tooltip-text={tooltip}
+>
 	<input
 		{title}
 		{value}

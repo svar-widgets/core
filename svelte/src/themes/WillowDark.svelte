@@ -75,7 +75,8 @@
 		/* end icons */
 
 		/* other */
-		--wx-border: 1px solid #384047;
+		--wx-border-color: #384047;
+		--wx-border: 1px solid var(--wx-border-color);
 		--wx-border-radius: 3px;
 		--wx-radius-major: 6px;
 
@@ -310,6 +311,18 @@
 		--wx-calendar-controls-font-weight: var(--wx-font-weight);
 		--wx-calendar-controls-font-color: var(--wx-color-font);
 		/* end calendar */
+
+		/* tooltip */
+		--wx-tooltip-font: var(--wx-font-weight) var(--wx-font-size)
+			var(--wx-font-family);
+		--wx-tooltip-font-color: #ffffff;
+		--wx-tooltip-background: #2c2f3c;
+		--wx-tooltip-border: var(--wx-border-color);
+		--wx-tooltip-padding: 4px 8px;
+		--wx-tooltip-point-offset: 14px;
+		--wx-tooltip-arrow-size: 6px;
+		--wx-tooltip-z-index: 1002;
+		/* end tooltip */
 	}
 
 	:global(.wx-willow-dark-theme) {

@@ -2,7 +2,13 @@
 	import Checkbox from "./Checkbox.svelte";
 	import { setContext } from "svelte";
 
-	let { options = [], value = $bindable([]), type = "", onchange } = $props();
+	let {
+		options = [],
+		value = $bindable([]),
+		type = "",
+		css = "",
+		onchange,
+	} = $props();
 
 	setContext("wx-input-id", null);
 
@@ -13,7 +19,7 @@
 	}
 </script>
 
-<div class="wx-checkboxgroup {type && `wx-${type}`}">
+<div class="wx-checkboxgroup {type && `wx-${type}`} {css}">
 	{#each options as option}
 		<div class="wx-item">
 			<Checkbox

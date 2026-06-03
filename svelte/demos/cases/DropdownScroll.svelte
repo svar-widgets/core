@@ -37,7 +37,7 @@
 		height: 100px;
 		position: relative;
 		overflow: hidden;
-		border: 1px solid #ddd;
+		border: var(--wx-border);
 		padding: 20px;
 	}
 </style>

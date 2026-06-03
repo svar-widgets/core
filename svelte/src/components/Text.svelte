@@ -12,8 +12,8 @@
 		placeholder = "",
 		disabled = false,
 		error = false,
-		inputStyle = "",
 		title = "",
+		tooltip,
 		css = "",
 		icon = "",
 		clear = false,
@@ -54,6 +54,7 @@
 	class:wx-error={error}
 	class:wx-disabled={disabled}
 	class:wx-clear={clear}
+	data-tooltip-text={tooltip}
 >
 	{#if type == "password"}
 		<input
@@ -64,7 +65,6 @@
 			{disabled}
 			{placeholder}
 			type="password"
-			style={inputStyle}
 			{title}
 			{oninput}
 			onchange={change}
@@ -78,7 +78,6 @@
 			{disabled}
 			{placeholder}
 			type="number"
-			style={inputStyle}
 			{title}
 			{oninput}
 			onchange={change}
@@ -92,7 +91,6 @@
 			{disabled}
 			{placeholder}
 			{title}
-			style={inputStyle}
 			{oninput}
 			onchange={change}
 		/>
@@ -203,5 +201,12 @@
 	.wx-error input {
 		border-color: var(--wx-color-danger);
 		color: var(--wx-color-danger);
+	}
+	.wx-date-input input {
+		cursor: pointer;
+		width: 100%;
+		padding-right: calc(
+			var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2
+		);
 	}
 </style>

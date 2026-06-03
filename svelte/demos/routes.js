@@ -34,6 +34,7 @@ import Fullscreen from "./cases/Fullscreen.svelte";
 import ModalArea from "./cases/ModalArea.svelte";
 import Dropdown from "./cases/Dropdown.svelte";
 import DropdownScroll from "./cases/DropdownScroll.svelte";
+import Tooltips from "./cases/Tooltips.svelte";
 
 export const links = [
 	["/avatar/:skin", "Avatar", Avatar, "Avatar"],
@@ -78,6 +79,7 @@ export const links = [
 	["/textarea/:skin", "TextArea", TextArea, "TextArea"],
 	["/counter/:skin", "Counter Input", Counter, "Counter"],
 	["/timepicker/:skin", "TimePicker", TimePicker, "TimePicker"],
+	["/tooltips/:skin", "Tooltips", Tooltips, "Tooltips"],
 	["/twostate/:skin", "Two State", TwoState, "TwoState"],
 	["/icon/:skin", "Icon", Icon, "Icon"],
 	["/sidearea/:skin", "Side Area", SideArea, "SideArea"],

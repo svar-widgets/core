@@ -20,6 +20,7 @@
 			title={option.title}
 			class:wx-selected={option.id == value}
 			onclick={() => handleClick(option.id)}
+			data-tooltip-text={option.tooltip}
 		>
 			{#if children}{@render children({ option })}{:else}
 				{#if option.icon}

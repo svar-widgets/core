@@ -10,7 +10,9 @@
 		value = $bindable(0),
 		step = 1,
 		title = "",
+		tooltip,
 		disabled = false,
+		css = "",
 		onchange,
 	} = $props();
 
@@ -38,7 +40,12 @@
 	}
 </script>
 
-<div class="wx-slider" style={width ? `width: ${width}` : ""} {title}>
+<div
+	class="wx-slider {css}"
+	style={width ? `width: ${width}` : ""}
+	{title}
+	data-tooltip-text={tooltip}
+>
 	{#if label}<label for={id}>{label}</label>{/if}
 	<div>
 		<input

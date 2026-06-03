@@ -20,15 +20,13 @@
 
 [SVAR Svelte Core library](https://svar.dev/svelte/core/) offers 30+ lightweight, fast-performing Svelte UI components with TypeScript support. Beautifully designed light and dark themes are included and fully customizable via CSS variables. A straightforward API and comprehensive documentation make it easy to start building feature-rich Svelte interfaces faster.
 
-
-
 <img src="https://svar.dev/images/github/github-core.png" alt="SVAR Core - Svelte UI Components Library" style="width: 752px;">
 
 SVAR Svelte Core library includes the following components:
 
 -   buttons & form controls,
 -   calendar (datepicker),
--   popups,
+-   popups, tooltips,
 -   notifications,
 -   sliding sidebar,
 -   tabs, and more.

@@ -10,6 +10,8 @@
 		error = false,
 		disabled = false,
 		readonly = false,
+		css = "",
+		tooltip,
 		onchange,
 	} = $props();
 
@@ -42,10 +44,11 @@
 </script>
 
 <div
-	class="wx-counter"
+	class="wx-counter {css}"
 	class:wx-disabled={disabled}
 	class:wx-readonly={readonly}
 	class:wx-error={error}
+	data-tooltip-text={tooltip}
 >
 	<button aria-label="-" class="wx-btn wx-btn-dec" {disabled} onclick={dec}>
 		<svg

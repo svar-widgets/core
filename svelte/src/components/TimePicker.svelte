@@ -17,6 +17,7 @@
 		value = $bindable(defValue),
 		id,
 		title = "",
+		tooltip,
 		css = "",
 		disabled = false,
 		error = false,
@@ -129,14 +130,14 @@
 >
 	<Text
 		id={inputId}
-		{css}
+		css={`wx-date-input ${css}`}
 		{title}
+		{tooltip}
 		value={textValue}
 		readonly={true}
 		{disabled}
 		{error}
 		icon="wxi-clock"
-		inputStyle="cursor: pointer; width: 100%; padding-right: calc(var(--wx-input-icon-size) + var(--wx-input-icon-indent) * 2);"
 	/>
 
 	{#if popup && !disabled}

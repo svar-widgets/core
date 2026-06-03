@@ -8,11 +8,14 @@
 		options = [],
 		textOptions = null,
 		textField = "label",
+		keepText = false,
 		placeholder = "",
 		title = "",
+		tooltip,
 		disabled = false,
 		error = false,
 		checkboxes = false,
+		css = "",
 		onchange,
 		children,
 		dropdown = {},
@@ -50,6 +53,7 @@
 		const { id } = ev;
 		if (id) {
 			value = id;
+			if (!keepText) text = "";
 			onchange && onchange({ value: id });
 			inputElement.focus();
 		}
@@ -78,13 +82,14 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div
 	{title}
-	class="wx-multicombo"
+	class="wx-multicombo {css}"
 	class:wx-error={error}
 	class:wx-disabled={disabled}
 	class:wx-not-empty={selected.length}
 	class:wx-focus={focus && !disabled}
 	{onclick}
 	onkeydown={ev => keydown(ev, index())}
+	data-tooltip-text={tooltip}
 >
 	<div class="wx-wrapper">
 		<div class="wx-tags">

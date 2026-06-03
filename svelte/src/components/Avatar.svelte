@@ -1,5 +1,5 @@
 <script>
-	let { value, size = 32, limit } = $props();
+	let { value, size = 32, limit, css = "" } = $props();
 
 	const DEFAULT_BG = "#dfe2e6";
 	const DEFAULT_FONT = "#2c2f3c";
@@ -81,7 +81,7 @@
 	}
 </script>
 
-<div class="wx-avatar-root" bind:this={containerEl}>
+<div class="wx-avatar-root {css}" bind:this={containerEl}>
 	{#if displayUsers.length > 0}
 		<div class="wx-avatar-stack">
 			{#each displayUsers as user, index (user.id)}

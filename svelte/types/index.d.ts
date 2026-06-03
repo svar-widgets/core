@@ -6,6 +6,7 @@ export interface DropdownOptions {
 	inline?: boolean;
 	position?: "top" | "right" | "bottom" | "left";
 	align?: "start" | "center" | "end";
+	autoFit?: boolean;
 	css?: string;
 	width?: string | "unset" | "auto";
 	trackScroll?: boolean;
@@ -23,6 +24,7 @@ export declare const Avatar: Component<{
 	value: IUser | IUser[];
 	size?: number;
 	limit?: number;
+	css?: string;
 }>;
 
 export declare const TextArea: Component<{
@@ -30,9 +32,11 @@ export declare const TextArea: Component<{
 	id?: string | number;
 	placeholder?: string;
 	title?: string;
+	tooltip?: string;
 	disabled?: boolean;
 	error?: boolean;
 	readonly?: boolean;
+	css?: string;
 	onchange?: (ev: { value: string; input?: boolean }) => void;
 }>;
 
@@ -50,6 +54,7 @@ export declare const Button: Component<{
 	icon?: string;
 	disabled?: boolean;
 	title?: string;
+	tooltip?: string;
 	text?: string;
 	children?: () => any;
 	onclick?: (ev: MouseEvent) => void;
@@ -60,8 +65,8 @@ export declare const Checkbox: Component<{
 	label?: string;
 	inputValue?: string | number;
 	value?: boolean;
-	style?: string;
 	disabled?: boolean;
+	css?: string;
 	onchange?: (ev: { value: boolean; inputValue: string | number }) => void;
 }>;
 
@@ -69,6 +74,7 @@ export declare const CheckboxGroup: Component<{
 	options?: { id: string | number; label: string }[];
 	value?: (string | number)[];
 	type?: "inline" | "grid";
+	css?: string;
 	onchange?: (ev: { value: (string | number)[] }) => void;
 }>;
 
@@ -79,14 +85,18 @@ export declare const ColorSelect: Component<{
 	clear?: boolean;
 	placeholder?: string;
 	title?: string;
+	tooltip?: string;
 	disabled?: boolean;
 	error?: boolean;
+	css?: string;
+	dropdown?: DropdownOptions;
 	onchange?: (ev: { value: string }) => void;
 }>;
 
 export declare const ColorBoard: Component<{
 	value?: string;
 	button?: boolean;
+	css?: string;
 	onchange?: (ev: { value: string; input?: boolean }) => void;
 }>;
 
@@ -95,9 +105,11 @@ export declare const ColorPicker: Component<{
 	id?: string | number;
 	placeholder?: string;
 	title?: string;
+	tooltip?: string;
 	disabled?: boolean;
 	error?: boolean;
 	clear?: boolean;
+	css?: string;
 	dropdown?: DropdownOptions;
 	onchange?: (ev: { value: string }) => void;
 }>;
@@ -110,9 +122,11 @@ export declare const Combo: Component<{
 	textField?: string;
 	placeholder?: string;
 	title?: string;
+	tooltip?: string;
 	disabled?: boolean;
 	error?: boolean;
 	clear?: boolean;
+	css?: string;
 	dropdown?: DropdownOptions & {
 		virtualized?: boolean;
 	};
@@ -125,13 +139,12 @@ export declare const DatePicker: Component<{
 	id?: string | number;
 	disabled?: boolean;
 	error?: boolean;
-	width?: string;
-	align?: "start" | "center" | "end";
 	placeholder?: string;
 	format?: string | ((value: Date) => string);
 	buttons?: boolean | ("clear" | "today")[];
 	css?: string;
 	title?: string;
+	tooltip?: string;
 	editable?: boolean | ((value: string) => Date | null);
 	clear?: boolean;
 	dropdown?: DropdownOptions;
@@ -143,11 +156,10 @@ export declare const DateRangePicker: Component<{
 	id?: string | number;
 	disabled?: boolean;
 	error?: boolean;
-	width?: string;
-	align?: "start" | "center" | "end";
 	placeholder?: string;
 	css?: string;
 	title?: string;
+	tooltip?: string;
 	format?: string | ((date: Date) => string);
 	months?: 1 | 2;
 	buttons?: boolean | ("clear" | "today" | "done")[];
@@ -168,6 +180,7 @@ export declare const Fullscreen: Component<{
 export declare const Icon: Component<{
 	css?: string;
 	title?: string;
+	tooltip?: string;
 	children?: () => any;
 	onclick?: (ev: MouseEvent) => void;
 }>;
@@ -178,11 +191,14 @@ export declare const MultiCombo: Component<{
 	options?: { id: string | number; label: string }[];
 	textOptions?: { id: string | number; label: string }[];
 	textField?: string;
+	keepText?: boolean;
 	placeholder?: string;
 	title?: string;
+	tooltip?: string;
 	disabled?: boolean;
 	error?: boolean;
 	checkboxes?: boolean;
+	css?: string;
 	dropdown?: DropdownOptions & {
 		virtualized?: boolean;
 	};
@@ -195,6 +211,9 @@ export declare const Popup: Component<{
 	top?: number;
 	at?: TPosition;
 	parent?: HTMLElement;
+	width?: string;
+	css?: string;
+	trackScroll?: boolean;
 	children?: () => any;
 	oncancel?: (ev: MouseEvent) => void;
 }>;
@@ -210,6 +229,7 @@ export declare const Pager: Component<{
 	total?: number;
 	pageSize?: number;
 	value?: number;
+	css?: string;
 	onchange?: (ev: { value: number; from: number; to: number }) => void;
 }>;
 
@@ -220,6 +240,7 @@ export declare const RadioButton: Component<{
 	name?: string;
 	inputValue?: string | number;
 	disabled?: boolean;
+	css?: string;
 	onchange?: (ev: { value: boolean; inputValue: string | number }) => void;
 }>;
 
@@ -227,6 +248,7 @@ export declare const RadioButtonGroup: Component<{
 	options?: { id: string | number; label: string }[];
 	value?: string | number;
 	type?: "inline" | "grid";
+	css?: string;
 	onchange?: (ev: { value: string | number }) => void;
 }>;
 
@@ -238,8 +260,10 @@ export declare const RichSelect: Component<{
 	disabled?: boolean;
 	error?: boolean;
 	title?: string;
+	tooltip?: string;
 	textField?: string;
 	clear?: boolean;
+	css?: string;
 	dropdown?: DropdownOptions & {
 		virtualized?: boolean;
 	};
@@ -253,6 +277,7 @@ export declare const Segmented: Component<{
 		label: string;
 		icon?: string;
 		title?: string;
+		tooltip?: string;
 	}[];
 	value?: string | number;
 	css?: string;
@@ -265,11 +290,13 @@ export declare const Select: Component<{
 	options?: { id: string | number; label: string }[];
 	placeholder?: string;
 	title?: string;
+	tooltip?: string;
 	disabled?: boolean;
 	error?: boolean;
 	textField?: string;
 	clear?: boolean;
 	id?: string | number;
+	css?: string;
 	onchange?: (ev: { value: string | number }) => void;
 }>;
 
@@ -282,7 +309,9 @@ export declare const Slider: Component<{
 	value?: number;
 	step?: number;
 	title?: string;
+	tooltip?: string;
 	disabled?: boolean;
+	css?: string;
 	onchange?: (ev: {
 		value: number;
 		previous: number;
@@ -294,6 +323,7 @@ export declare const Switch: Component<{
 	id?: string | number;
 	value?: boolean;
 	disabled?: boolean;
+	css?: string;
 	onchange?: (ev: { value: boolean }) => void;
 }>;
 
@@ -302,10 +332,12 @@ export declare const Tabs: Component<{
 		id: string | number;
 		label?: string;
 		title?: string;
+		tooltip?: string;
 		icon?: string;
 	}[];
 	value?: string | number;
 	type?: "top" | "bottom";
+	css?: string;
 	onchange?: (ev: { value: string | number }) => void;
 }>;
 
@@ -319,8 +351,8 @@ export declare const Text: Component<{
 	placeholder?: string;
 	disabled?: boolean;
 	error?: boolean;
-	inputStyle?: string;
 	title?: string;
+	tooltip?: string;
 	css?: string;
 	icon?: string;
 	clear?: boolean;
@@ -336,6 +368,8 @@ export declare const Counter: Component<{
 	error?: boolean;
 	disabled?: boolean;
 	readonly?: boolean;
+	css?: string;
+	tooltip?: string;
 	onchange?: (ev: { value: number; input?: boolean }) => void;
 }>;
 
@@ -346,6 +380,8 @@ export declare const Field: Component<{
 	error?: boolean;
 	type?: "checkbox" | "slider" | "switch";
 	required?: boolean;
+	id?: string | number;
+	css?: string;
 	children?: () => any;
 }>;
 
@@ -354,6 +390,7 @@ export declare const Calendar: Component<{
 	current?: Date;
 	markers?: (date: Date) => string;
 	buttons?: boolean | ("clear" | "today")[];
+	css?: string;
 	onchange?: (ev: { value: Date | null }) => void;
 }>;
 
@@ -373,6 +410,7 @@ export declare const RangeCalendar: Component<{
 	months?: 1 | 2;
 	markers?: (date: Date) => string;
 	buttons?: boolean | ("clear" | "today" | "done")[];
+	css?: string;
 	onchange?: (ev: { start: Date | null; end: Date | null }) => void;
 }>;
 
@@ -380,6 +418,7 @@ export declare const TimePicker: Component<{
 	value?: Date;
 	id?: string | number;
 	title?: string;
+	tooltip?: string;
 	css?: string;
 	disabled?: boolean;
 	error?: boolean;
@@ -403,6 +442,7 @@ export declare const TwoState: Component<{
 	disabled?: boolean;
 	iconActive?: string;
 	title?: string;
+	tooltip?: string;
 	css?: string;
 	text?: string;
 	textActive?: string;
@@ -417,6 +457,7 @@ export declare const Modal: Component<{
 	buttons?: boolean | string[];
 	header?: Snippet<[]>;
 	footer?: Snippet<[]>;
+	css?: string;
 	children?: () => any;
 	onconfirm?: (ev: { button?: string; event: MouseEvent }) => void;
 	oncancel?: (ev: { button?: string; event: MouseEvent }) => void;
@@ -428,6 +469,7 @@ export declare const ModalArea: Component<{
 
 export declare const SideArea: Component<{
 	position?: "right";
+	css?: string;
 	children?: () => any;
 	oncancel?: () => void;
 }>;
@@ -483,3 +525,25 @@ export declare const SuggestDropdown: Component<
 export type { ILocale, Terms, TPosition } from "@svar-ui/lib-dom";
 
 export declare function popupContainer(node: HTMLElement): void;
+
+export type TPositionNoFit = Exclude<
+	TPosition,
+	"bottom-fit" | "top-fit" | "center-fit"
+>;
+
+export type TooltipResolver = (
+	element: HTMLElement,
+	event: MouseEvent
+) => Record<string, any> | string | null;
+
+export declare const Tooltip: Component<{
+	at?: TPositionNoFit;
+	arrow?: boolean;
+	touch?: boolean;
+	overflow?: boolean;
+	delay?: number;
+	content?: Component<Record<string, any>> | null;
+	resolver?: TooltipResolver;
+	children?: () => any;
+	css?: string;
+}>;

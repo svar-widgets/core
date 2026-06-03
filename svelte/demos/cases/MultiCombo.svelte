@@ -91,6 +91,13 @@
 </div>
 
 <div class="demo-box">
+	<Field width="500px">
+		<h3>MultiCombo with keepText</h3>
+		<MultiCombo keepText options={users} value={[87]} />
+	</Field>
+</div>
+
+<div class="demo-box">
 	<h3>Perfomance on a large list</h3>
 	<MultiCombo
 		options={usersLarge}

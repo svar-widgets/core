@@ -9,6 +9,7 @@
 		iconActive = "",
 		onclick,
 		title = "",
+		tooltip,
 		css = "",
 		text = "",
 		textActive = "",
@@ -32,6 +33,7 @@
 {#if value && active}
 	<Button
 		{title}
+		{tooltip}
 		text={(value && textActive) || text}
 		{css}
 		type={typeStr}
@@ -44,6 +46,7 @@
 {:else if children}
 	<Button
 		{title}
+		{tooltip}
 		text={(value && textActive) || text}
 		{css}
 		type={typeStr}
@@ -56,6 +59,7 @@
 {:else}
 	<Button
 		{title}
+		{tooltip}
 		text={(value && textActive) || text}
 		{css}
 		type={typeStr}

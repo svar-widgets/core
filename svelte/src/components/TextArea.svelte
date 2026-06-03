@@ -6,9 +6,11 @@
 		id,
 		placeholder = "",
 		title = "",
+		tooltip,
 		disabled = false,
 		error = false,
 		readonly = false,
+		css = "",
 		onchange,
 	} = $props();
 
@@ -16,7 +18,7 @@
 </script>
 
 <textarea
-	class="wx-textarea"
+	class="wx-textarea {css}"
 	class:wx-error={error}
 	bind:value
 	id={inputId}
@@ -26,6 +28,7 @@
 	{title}
 	oninput={() => onchange && onchange({ value, input: true })}
 	onchange={() => onchange && onchange({ value })}
+	data-tooltip-text={tooltip}
 ></textarea>
 
 <style>
