@@ -1,5 +1,9 @@
 <script>
-	import { clickOutside, calculatePosition, getAbsParent } from "@svar-ui/lib-dom";
+	import {
+		clickOutside,
+		calculatePosition,
+		getAbsParent,
+	} from "@svar-ui/lib-dom";
 	import { onMount } from "svelte";
 
 	let {

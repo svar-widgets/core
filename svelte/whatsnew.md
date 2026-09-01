@@ -1,3 +1,10 @@
+## Version 2.6.1
+
+### Fixes
+
+-   RangeCalendar fails to render on server side
+-   Container scrollbar size is excluded from the available space
+
 ## Version 2.6.0
 
 ### New features

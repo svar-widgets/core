@@ -21,17 +21,19 @@
 		return r;
 	}
 
-	let leftCurrent = $state(),
-		rightCurrent = $state();
+	function initLeft(startVal, currentVal) {
+		const v = new Date(startVal || currentVal || new Date());
+		v.setDate(1);
+		return v;
+	}
+
+	const _initLeft = initLeft(start, current);
+	let leftCurrent = $state(_initLeft);
+	let rightCurrent = $state(addMonth(_initLeft, 1));
 
 	$effect.pre(() => {
-		start;
-		current;
-		untrack(() => {
-			if (!leftCurrent) {
-				onLeft(start ? new Date(start) : current || new Date());
-			}
-		});
+		start, current;
+		untrack(() => onLeft(start ? new Date(start) : current || new Date()));
 	});
 
 	function onLeft(v) {
