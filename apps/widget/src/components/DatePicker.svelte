@@ -1,0 +1,137 @@
+<script lang="ts">
+	import { getContext } from "svelte";
+	import { dateToString, type ILocale } from "@svar-ui/lib-dom";
+
+	import Text from "./Text.svelte";
+	import Dropdown from "./Dropdown.svelte";
+	import Calendar from "./Calendar.svelte";
+	import { defaultLocale } from "./helpers/locale";
+	import { toDateDropdown } from "./helpers/dropdown";
+	import type {
+		DropdownOptions,
+		ICoreTerms,
+		TCalendarButton,
+		TDateFormat,
+		TID,
+	} from "../types";
+
+	type Props = {
+		value?: Date | null;
+		id?: TID;
+		disabled?: boolean;
+		error?: boolean;
+		placeholder?: string;
+		format?: TDateFormat;
+		buttons?: boolean | TCalendarButton[];
+		css?: string;
+		title?: string;
+		tooltip?: string;
+		editable?: boolean | ((value: string) => Date | null);
+		clear?: boolean;
+		onchange?: (ev: { value: Date | null }) => void;
+		dropdown?: DropdownOptions;
+	};
+
+	let {
+		value = $bindable(),
+		id,
+		disabled = false,
+		error = false,
+		placeholder = "",
+		format = "",
+		buttons = ["clear", "today"],
+		css = "",
+		title = "",
+		tooltip,
+		editable = false,
+		clear = false,
+		onchange,
+		dropdown = {},
+	}: Props = $props();
+
+	const { calendar: calendarLocale, formats } = (
+		getContext<ILocale>("wx-i18n") || defaultLocale()
+	).getRaw() as unknown as ICoreTerms;
+	// svelte-ignore state_referenced_locally
+	const f = format || formats.dateFormat;
+	let dateFormat =
+		typeof f === "function" ? f : dateToString(f, calendarLocale);
+
+	let popup = $state<boolean>();
+
+	function oncancel() {
+		popup = false;
+	}
+
+	function doChange(v: Date | null) {
+		// skip "select" event if the same value
+		// or different objects with the same value
+		const skipEvent =
+			v === value ||
+			(v && value && v.valueOf() === value.valueOf()) ||
+			(!v && !value);
+
+		value = v;
+		if (!skipEvent) {
+			onchange?.({ value });
+		}
+
+		// fire after on-click finished
+		setTimeout(oncancel, 1);
+	}
+
+	const formattedValue = $derived(value ? dateFormat(value) : "");
+
+	function change({ value: v, input }: { value: TID; input?: boolean }) {
+		if (!editable && !clear) return;
+		if (input) return;
+
+		// convert to date, but ignore empty string input
+		let date =
+			typeof editable === "function"
+				? editable(v as string)
+				: v
+					? new Date(v)
+					: null;
+
+		// if date is invalid ( incorrect text input ) then use old value
+		// else use the entered date
+		// in any case fallback to null, to prevent undefined as value
+		date = isNaN(Number(date)) ? value || null : date || null;
+		doChange(date);
+	}
+</script>
+
+<svelte:window onscroll={oncancel} />
+
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div class="wx-datepicker" onclick={() => (popup = true)}>
+	<Text
+		css={`wx-date-input ${css}`}
+		{title}
+		{tooltip}
+		value={formattedValue}
+		{id}
+		readonly={!editable}
+		{disabled}
+		{error}
+		{placeholder}
+		onchange={change}
+		icon="wxi-calendar"
+		{clear}
+	/>
+
+	{#if popup && !disabled}
+		<Dropdown {oncancel} {...toDateDropdown(dropdown)}>
+			<Calendar {buttons} {value} onchange={e => doChange(e.value)} />
+		</Dropdown>
+	{/if}
+</div>
+
+<style>
+	.wx-datepicker {
+		position: relative;
+		width: var(--wx-input-width);
+	}
+</style>

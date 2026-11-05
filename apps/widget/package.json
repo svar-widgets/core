@@ -1,0 +1,63 @@
+{
+	"name": "@svar-ui/svelte-core",
+	"version": "2.6.2",
+	"description": "SVAR Svelte Core - Svelte UI library of 20+ components and form controls",
+	"keywords": [
+		"component-library",
+		"components library",
+		"svar widgets",
+		"svelte",
+		"svelte library",
+		"svelte ui components",
+		"svelte ui library",
+		"svelte-ui-library",
+		"ui components",
+		"ui library",
+		"ui-library"
+	],
+	"homepage": "https://svar.dev/svelte/core/",
+	"bugs": {
+		"url": "https://forum.svar.dev"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/svar-widgets/core.git"
+	},
+	"files": [
+		"dist",
+		"readme.md",
+		"whatsnew.md",
+		"license.txt"
+	],
+	"type": "module",
+	"types": "./dist/index.d.ts",
+	"svelte": "./dist/index.js",
+	"exports": {
+		".": {
+			"svelte": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"scripts": {
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"build": "svelte-package -i ./src",
+		"dev": "svelte-package -i ./src --watch"
+	},
+	"dependencies": {
+		"@svar-ui/core-locales": "workspace:*",
+		"@svar-ui/lib-dom": "catalog:",
+		"@svar-ui/lib-svelte": "catalog:"
+	},
+	"devDependencies": {
+		"@sveltejs/package": "catalog:",
+		"@sveltejs/vite-plugin-svelte": "catalog:",
+		"svelte": "catalog:",
+		"svelte-check": "catalog:"
+	},
+	"peerDependencies": {
+		"svelte": "^5.0.0"
+	},
+	"productTag": "core"
+}

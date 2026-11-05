@@ -1,0 +1,27 @@
+packages:
+  - apps/*
+  - packages/*
+
+catalog:
+  "@playwright/test": 1.60.0
+  "@sveltejs/package": ^2.5.7
+  "@sveltejs/vite-plugin-svelte": ^7.1.2
+  "@svar-ui/lib-dom": "0.14.2"
+  "@svar-ui/lib-svelte": "0.5.3"
+  glob: ^13.0.6
+  playwright: 1.60.0
+  svelte: 5.56.9
+  svelte-check: ^4.4.6
+  svelte-spa-router: 4.0.1
+  typescript: "^5.9.3"
+  vite: npm:@voidzero-dev/vite-plus-core@1.1.0
+  vite-plus: 1.1.0
+
+catalogMode: prefer
+overrides:
+  vite@*: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: "*"

@@ -1,0 +1,31 @@
+{
+	"name": "@svar-ui/svelte-core-demos",
+	"version": "2.6.2",
+	"private": true,
+	"homepage": "https://svar.dev/svelte/core/",
+	"bugs": {
+		"url": "https://forum.svar.dev"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/svar-widgets/core.git"
+	},
+	"type": "module",
+	"scripts": {
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"build": "vp build",
+		"start": "vp dev --open"
+	},
+	"dependencies": {
+		"@svar-ui/core-locales": "workspace:*",
+		"@svar-ui/lib-dom": "catalog:",
+		"@svar-ui/svelte-core": "workspace:*",
+		"svelte-spa-router": "catalog:"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "catalog:",
+		"svelte": "catalog:",
+		"svelte-check": "catalog:"
+	}
+}
