@@ -81,7 +81,7 @@
 	}
 
 	function selectByText(chunk: string) {
-		if (!options.length) return;
+		if (disabled || !options.length) return;
 		if (chunk === "" && clear) {
 			doUnselect();
 			return;
@@ -101,6 +101,8 @@
 	}
 
 	function doSelect(id: TID, effects: boolean) {
+		if (disabled) return;
+
 		if (id || id === 0) {
 			let selected = options.find(a => a.id === id);
 			filterActive = false;
