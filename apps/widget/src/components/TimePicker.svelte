@@ -63,6 +63,11 @@
 
 	let popup = $state<boolean | null>();
 
+	// Let the blur handlers see the disabled state before removing the popup.
+	$effect(() => {
+		if (disabled) popup = null;
+	});
+
 	const safeValue = $derived(value || defValue);
 	let h = $derived(update(safeValue.getHours(), maxH));
 	let m = $derived(update(safeValue.getMinutes(), maxM));
@@ -72,17 +77,20 @@
 	const mText = $derived(formatM(m));
 
 	function click() {
+		if (disabled) return;
 		popup = true;
 	}
 
 	function togglePM() {
+		if (disabled) return;
+
 		const next = new Date(safeValue);
 		next.setHours(next.getHours() + (pm ? -12 : 12));
 		value = next;
 		onchange?.({ value });
 	}
 	function setHours({ value: v }: { value: number }) {
-		if (safeValue.getHours() === v) return;
+		if (disabled || safeValue.getHours() === v) return;
 
 		const next = new Date(safeValue);
 		next.setHours(v);
@@ -90,7 +98,7 @@
 		onchange?.({ value });
 	}
 	function setMinutes({ value: v }: { value: number }) {
-		if (safeValue.getMinutes() === v) return;
+		if (disabled || safeValue.getMinutes() === v) return;
 
 		const next = new Date(safeValue);
 		next.setMinutes(v);
@@ -161,7 +169,7 @@
 		icon="wxi-clock"
 	/>
 
-	{#if popup && !disabled}
+	{#if popup}
 		<Dropdown {oncancel} {...toDateDropdown(dropdown)}>
 			<div class="wx-wrapper">
 				<div class="wx-timer">
