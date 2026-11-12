@@ -61,9 +61,14 @@
 		typeof f === "function" ? f : dateToString(f, calendarLocale);
 	let popup = $state<boolean>();
 
+	$effect(() => {
+		if (disabled) popup = false;
+	});
+
 	function oncancel() {
 		// popup was closed before full range selected
-		if (value && value.start && !value.end) onchange?.({ value });
+		if (!disabled && popup && value?.start && !value.end)
+			onchange?.({ value });
 		popup = false;
 	}
 
@@ -126,7 +131,9 @@
 	class="wx-daterangepicker"
 	class:wx-disabled={disabled}
 	class:wx-error={error}
-	onclick={() => (popup = true)}
+	onclick={() => {
+		if (!disabled) popup = true;
+	}}
 >
 	<Text
 		css={`wx-date-input ${css}`}
