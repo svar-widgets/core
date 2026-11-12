@@ -47,8 +47,14 @@
 
 	let popup = $state(false);
 
+	$effect(() => {
+		if (disabled) popup = false;
+	});
+
 	function selectColor(ev: MouseEvent, color: string) {
 		ev.stopPropagation();
+		if (disabled) return;
+
 		value = color;
 		popup = false;
 		onchange?.({ value });
