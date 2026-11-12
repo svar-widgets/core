@@ -59,11 +59,17 @@
 
 	let popup = $state<boolean>();
 
+	$effect(() => {
+		if (disabled) popup = false;
+	});
+
 	function oncancel() {
 		popup = false;
 	}
 
 	function doChange(v: Date | null) {
+		if (disabled) return;
+
 		// skip "select" event if the same value
 		// or different objects with the same value
 		const skipEvent =
@@ -83,7 +89,7 @@
 	const formattedValue = $derived(value ? dateFormat(value) : "");
 
 	function change({ value: v, input }: { value: TID; input?: boolean }) {
-		if (!editable && !clear) return;
+		if (disabled || (!editable && !clear)) return;
 		if (input) return;
 
 		// convert to date, but ignore empty string input
@@ -106,7 +112,12 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="wx-datepicker" onclick={() => (popup = true)}>
+<div
+	class="wx-datepicker"
+	onclick={() => {
+		if (!disabled) popup = true;
+	}}
+>
 	<Text
 		css={`wx-date-input ${css}`}
 		{title}
