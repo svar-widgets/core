@@ -37,13 +37,17 @@
 
 	let popup = $state(false);
 
+	$effect(() => {
+		if (disabled) popup = false;
+	});
+
 	function handlePopup() {
 		if (disabled) return false;
 		popup = true;
 	}
 
 	function selectColor(ev: { value: string; input?: boolean }) {
-		if (ev.input) return;
+		if (disabled || ev.input) return;
 
 		popup = false;
 		value = ev.value;
