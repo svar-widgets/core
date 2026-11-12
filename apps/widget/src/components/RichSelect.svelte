@@ -54,6 +54,8 @@
 	);
 
 	function select({ id }: { id: TID | TID[] }) {
+		if (disabled) return;
+
 		if (id || id === 0) {
 			value = id as TID;
 
@@ -79,9 +81,13 @@
 	class:wx-error={error}
 	class:wx-disabled={disabled}
 	class:wx-nowrap={!kids}
-	onclick={() => navigate?.(index())}
-	onkeydown={ev => keydown?.(ev, index())}
-	tabindex="0"
+	onclick={() => {
+		if (!disabled) navigate?.(index());
+	}}
+	onkeydown={ev => {
+		if (!disabled) keydown?.(ev, index());
+	}}
+	tabindex={disabled ? -1 : 0}
 	data-tooltip-text={tooltip}
 >
 	<div class="wx-label">
